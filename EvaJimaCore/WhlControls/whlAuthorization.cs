@@ -82,15 +82,15 @@ namespace EveJimaCore.WhlControls
 
         public void RefreshAuthorizationStatus()
         {
-            //if (Global.Settings.IsAuthorizationEnabled)
-            //{
-            //    lblAuthorizationInfo.Text = TextAuthorizationInfo;
-            //}
-            //else
-            //{
-            //    lblAuthorizationInfo.Text = TextErrorAuthorizationInfo;
-            //    btnLogInWithEveOnline.Visible = false;
-            //}
+            if (Global.Settings.IsAuthorizationEnabled)
+            {
+                lblAuthorizationInfo.Text = TextAuthorizationInfo;
+            }
+            else
+            {
+                lblAuthorizationInfo.Text = TextErrorAuthorizationInfo;
+                btnLogInWithEveOnline.Visible = false;
+            }
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Net;
 using EvaJimaCore;
 using log4net;
@@ -63,6 +64,8 @@ namespace EveJimaCore.BLL
 
             try
             {
+                if (Global.Pilots.Selected == null) return;
+
                 if (Location == null) Location = new StarSystemEntity();
 
                 dynamic locationInfo = CrestData.GetLocation(Id);

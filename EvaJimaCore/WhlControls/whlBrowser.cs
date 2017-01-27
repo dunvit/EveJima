@@ -41,8 +41,6 @@ namespace EveJimaCore.WhlControls
 
             Bookmarks = new Bookmarks();
 
-            //OnOpenWebBrowser = openWebBrowserFunction;
-
             #region ToolTips
             _toolTipForBookmarkButton.SetToolTip(cmdBookmark, "Add to bookmarks");
             _toolTipForHistoryBackButton.SetToolTip(BrowserCommandBack, "Click to go back, hold to see history");
@@ -53,9 +51,6 @@ namespace EveJimaCore.WhlControls
             #endregion
 
             cmdFavorits.ContextMenu = BuildContextMenuForFavorites();
-
-
-
         }
 
         public void BrowserUrlExecute(string url)
@@ -188,7 +183,7 @@ namespace EveJimaCore.WhlControls
 
                 if (control != null)
                 {
-                    Log.DebugFormat("[whlBrowser.AddTab] Dispose CefSharp browser address {0}", control.URL);
+                    Log.DebugFormat("[whlBrowser.AddTab] Dispose browser address {0}", control.URL);
                     control.Browser.Dispose();
                     control.Dispose();
                 }

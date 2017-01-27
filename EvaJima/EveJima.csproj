@@ -116,6 +116,10 @@
       <Project>{6ed83e00-e836-4395-9fbc-7a3878455274}</Project>
       <Name>EveJimaSettings</Name>
     </ProjectReference>
+    <ProjectReference Include="..\udater\updater.csproj">
+      <Project>{7f0ef32c-6f14-4111-8c1d-64e0f34c9c23}</Project>
+      <Name>updater</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Browser\dummy.txt">

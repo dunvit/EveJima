@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Reflection;
 using System.Windows.Forms;
+using DotNetBrowser;
+using DotNetBrowser.WinForms;
 using EvaJimaCore;
 //using CefSharp.WinForms;
 using log4net;
@@ -10,12 +13,14 @@ namespace EveJimaCore.WhlControls
     public partial class whlVersion : UserControl
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlVersion));
+        private DotNetBrowser.Browser browser;
+        private WinFormsBrowserView browserView;
 
         public whlVersion()
         {
             InitializeComponent();
 
-            //AddTab("https://github.com/dunvit/WHL/releases");
+            AddTab("https://github.com/dunvit/EveJima/releases");
 
             Activate();
         }
@@ -44,23 +49,38 @@ namespace EveJimaCore.WhlControls
 
         private void AddTab(string url)
         {
-            //try
-            //{
-            //    browserTabControl.SuspendLayout();
+            try
+            {
+                browserTabControl.SuspendLayout();
 
-            //    var browser = new ChromiumWebBrowser(url) { Dock = DockStyle.Fill };
+                var appPath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + @"\Browser";
 
-            //    browser.CreateControl();
+                var context = new BrowserContext(new BrowserContextParams(appPath));
 
-            //    browserTabControl.Controls.Add(browser);
+                browser = BrowserFactory.Create(context);
+                browserView = new WinFormsBrowserView(browser);
 
-            //    browserTabControl.ResumeLayout(true);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.ErrorFormat("[whlVersion.AddTab] Critical error. Exception {0}", ex);
-            //}
+                browser.LoadURL(url);
+
+                // Add it to the form and fill it to the form window.
+                browserView.Dock = DockStyle.Fill;
+
+                browserTabControl.Controls.Add(browserView);
+
+                browserTabControl.ResumeLayout(true);
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("[whlVersion.AddTab] Critical error. Exception {0}", ex);
+            }
         }
+
+        public void DisposeBrowser()
+        {
+            browser.Dispose();
+            browserTabControl.Dispose();
+        }
+
 
         private void Event_StartUpdateVersion(object sender, EventArgs e)
         {
@@ -87,7 +107,6 @@ namespace EveJimaCore.WhlControls
                 {
                     Log.ErrorFormat("[whlVersion.Event_StartUpdateVersion] Critical error. Exception {0}", ex1);
                 }
-
 
                 Application.Exit();
             }

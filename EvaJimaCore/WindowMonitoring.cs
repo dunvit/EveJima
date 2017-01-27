@@ -350,10 +350,10 @@ namespace EveJimaCore
 
             cmdLocation.BringToFront();
 
-            //if (Global.Pilots.Selected != null)
-            //{
-            //    ucContainreAuthorization.RefreshPilotInfo();
-            //}
+            if (Global.Pilots.Selected != null)
+            {
+                ucContainreAuthorization.RefreshPilotInfo();
+            }
 
             ResizeWindow();
 
@@ -510,22 +510,22 @@ namespace EveJimaCore
 
         private void RefreshTokenTimer_Tick(object sender, EventArgs e)
         {
-            //if (Global.Pilots.Count() > 0)
-            //{
-            //    foreach (var pilot in Global.Pilots)
-            //    {
-            //        Task.Run(() =>
-            //        {
-            //            Log.DebugFormat("[WindowMonitoring.RefreshTokenTimer_Tick] starting get location info for pilot = {0}", pilot.Name);
-            //            pilot.RefreshInfo();
-            //        });
-            //    }
+            if (Global.Pilots.Count() > 0)
+            {
+                foreach (var pilot in Global.Pilots)
+                {
+                    Task.Run(() =>
+                    {
+                        Log.DebugFormat("[WindowMonitoring.RefreshTokenTimer_Tick] starting get location info for pilot = {0}", pilot.Name);
+                        pilot.RefreshInfo();
+                    });
+                }
 
-            //    if (ucContainreSolarSystem.SolarSystem.System != Global.Pilots.Selected.Location.System)
-            //    {
-            //        RefreshSolarSystemInformation(Global.Pilots.Selected.Location);
-            //    }
-            //}
+                if (ucContainreSolarSystem.SolarSystem.System != Global.Pilots.Selected.Location.System)
+                {
+                    RefreshSolarSystemInformation(Global.Pilots.Selected.Location);
+                }
+            }
         }
 
         private void Event_WindowResizeEnd(object sender, EventArgs e)
@@ -678,6 +678,9 @@ namespace EveJimaCore
 
         private void WindowMonitoring_FormClosing(object sender, FormClosingEventArgs e)
         {
+            ucVersion.DisposeBrowser();
+            ucVersion = null;
+
             Global.InternalBrowser.Browser.DisposeBrowser();
             Global.InternalBrowser.Browser = null;
         }

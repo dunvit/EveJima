@@ -24,6 +24,8 @@ namespace EveJimaSettings
         public string Server_update_uri_version = "";
         public string Server_update_content_version = "";
 
+        public string Client_execution_file = "";
+
         public Settings()
         {
             Log.Debug("[Settings.LoadSettings] Start load settings");
@@ -34,13 +36,14 @@ namespace EveJimaSettings
                 {
                     dynamic data = JObject.Parse(reader.ReadToEnd());
 
-                    CCPSSO_AUTH_CLIENT_ID       = data.CCPSSO_AUTH_CLIENT_ID;
-                    CCPSSO_AUTH_CLIENT_SECRET   = data.CCPSSO_AUTH_CLIENT_SECRET;
-                    CCPSSO_AUTH_CLIENT_STATE    = data.CCPSSO_AUTH_CLIENT_STATE;
-                    CCPSSO_AUTH_PORT            = data.CCPSSO_AUTH_PORT;
-                    CCPSSO_AUTH_SCOPES          = data.CCPSSO_AUTH_SCOPES;
-                    Server_update_uri_version   = data.Server_update_uri_version;
-                    Server_update_content_version = data.Server_update_content_version;
+                    CCPSSO_AUTH_CLIENT_ID           = data.CCPSSO_AUTH_CLIENT_ID;
+                    CCPSSO_AUTH_CLIENT_SECRET       = data.CCPSSO_AUTH_CLIENT_SECRET;
+                    CCPSSO_AUTH_CLIENT_STATE        = data.CCPSSO_AUTH_CLIENT_STATE;
+                    CCPSSO_AUTH_PORT                = data.CCPSSO_AUTH_PORT;
+                    CCPSSO_AUTH_SCOPES              = data.CCPSSO_AUTH_SCOPES;
+                    Server_update_uri_version       = data.Server_update_uri_version;
+                    Server_update_content_version   = data.Server_update_content_version;
+                    Client_execution_file           = data.Client_execution_file;
                 }
 
                 CurrentVersion = File.ReadAllText(@"Version.txt");
@@ -50,7 +53,7 @@ namespace EveJimaSettings
                 using (var wc = new System.Net.WebClient())
                     Version = wc.DownloadString(Server_update_uri_version);
 
-                Log.DebugFormat("[Settings.LoadSettings] Read version. Last version is {0}", CurrentVersion);
+                Log.DebugFormat("[Settings.LoadSettings] Read version. Last version is {0}", Version);
 
             }
             catch (Exception ex)

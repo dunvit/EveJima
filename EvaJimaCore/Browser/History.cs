@@ -42,11 +42,20 @@ namespace EveJimaCore.Browser
 
         public void UpdateTitle(string title)
         {
-            var currentAddress = List[CurrentIndex];
+            try
+            {
+                if (List.Count <= 0) return;
 
-            currentAddress.Title = title;
+                var currentAddress = List[CurrentIndex];
 
-            WriteToFile();
+                currentAddress.Title = title;
+
+                WriteToFile();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("[Browser.History.UpdateTitle] Critical error in load bookmarks. Exception = " + ex);
+            }
         }
 
         public Address GetCurrentAddress()

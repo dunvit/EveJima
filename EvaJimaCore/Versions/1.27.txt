@@ -1,0 +1,44 @@
+﻿EveJima version 1.27 http://evejima.w-space.org/
+
+----------------------------------------------------------------------------------------------------
+
+Список изменений в обновлении 1.27
+
+Благодарю человека с никнеймом kweler за предаставление адреса для Еваджимы. http://evejima.w-space.org/
+
+Разделение на версии для х86 (стандартная) и х64 (файлы для скачивания каждой из версий внизу релиза. При самостоятельной компиляции проекта из исходников воспользуйтесь Configuration Manager в Visual Studio для создания х86 или х64 версий)
+
+Дополнения и изменения:
+
++ История путешествий в сигнатурах. Сохранение текущих сигнатур насканенных более 25% прогресса.
++ В заголовок окна добавлена информация о текущем классе системы и статиках.
++ Добавление во вкладке "Pilots" навигации на ресурс "Еverate"
++ Добавление файла конфигурации (settings.txt)
+
+Исправленные ошибки:
+
++ Исправлено падение программы если в момент запуска Git Repository (https://github.com/) находится в оффлайне.
++ Устранена проблема когда во вкладке "Pilots" двойной клик мыши по пустому "History" приводил к вылету аппликации.
++ Во вкладке "Browser" длина названия загруженной страницы уменьшена до 20 символов
+
+----------------------------------------------------------------------------------------------------
+
+Patch notes for 1.27 Release 
+
+Thank the person with the nickname kweler for providing an address for EvaJima http://evejima.w-space.org/
+
+Separation on version x86(standard EvaJima) and x64 
+
+
+Features & Changes:
+
++ Travel history in signatures. Save the current signature naskanennyh more than 25% progress
++ The window title adds information about the current class system and statics
++ Add new button in tab "Pilots" for navigation to resource "Everate"
++ Add configuration file (settings.txt) 
+
+Defect Fixes:
+
++ Fixed a crash program at the time of launch Git Repository (https://github.com/) is offline.
++ Fixed an issue where the tab "Pilots" double-click on an empty "History" led to the departure of application.
++ In the tab "Browser" page length of the loaded title is reduced to 20 characters
