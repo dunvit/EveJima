@@ -1,0 +1,10 @@
+{
+  "IsAuthorizationEnabled": true,
+  "CCPSSO_AUTH_CLIENT_ID": "30b47abc588f4731b0556e5280874f46",
+  "CCPSSO_AUTH_CLIENT_SECRET": "Omj4FvniATMIDgTSJr8mQbFkK1ukPcD1khTfeTrF",
+  "CCPSSO_AUTH_CLIENT_STATE": "evejimestate20170115",
+  "CCPSSO_AUTH_PORT": "80",
+  "CCPSSO_AUTH_SCOPES": "characterLocationRead%20characterNavigationWrite",
+  "Server_update_uri_version": "http://evejima.mikotaj.com/Version.txt",
+  "Server_update_content_version" : "http://evejima.mikotaj.com/VersionContent.txt"
+}

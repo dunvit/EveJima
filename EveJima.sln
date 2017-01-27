@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveJima", "EvaJima\EveJima.csproj", "{B1FFBC3C-F71C-40B7-A04B-BE708AA024CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveJimaCore", "EvaJimaCore\EveJimaCore.csproj", "{C1410D27-425C-4C35-89E3-1281F95183E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveJimaSettings", "EvaJimaSettings\EveJimaSettings.csproj", "{6ED83E00-E836-4395-9FBC-7A3878455274}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1FFBC3C-F71C-40B7-A04B-BE708AA024CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1FFBC3C-F71C-40B7-A04B-BE708AA024CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1FFBC3C-F71C-40B7-A04B-BE708AA024CC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B1FFBC3C-F71C-40B7-A04B-BE708AA024CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1FFBC3C-F71C-40B7-A04B-BE708AA024CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1FFBC3C-F71C-40B7-A04B-BE708AA024CC}.Release|x86.ActiveCfg = Release|Any CPU
+		{C1410D27-425C-4C35-89E3-1281F95183E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1410D27-425C-4C35-89E3-1281F95183E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1410D27-425C-4C35-89E3-1281F95183E2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C1410D27-425C-4C35-89E3-1281F95183E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1410D27-425C-4C35-89E3-1281F95183E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1410D27-425C-4C35-89E3-1281F95183E2}.Release|x86.ActiveCfg = Release|Any CPU
+		{6ED83E00-E836-4395-9FBC-7A3878455274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ED83E00-E836-4395-9FBC-7A3878455274}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ED83E00-E836-4395-9FBC-7A3878455274}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6ED83E00-E836-4395-9FBC-7A3878455274}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ED83E00-E836-4395-9FBC-7A3878455274}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ED83E00-E836-4395-9FBC-7A3878455274}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

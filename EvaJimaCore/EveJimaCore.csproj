@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C1410D27-425C-4C35-89E3-1281F95183E2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EveJimaCore</RootNamespace>
+    <AssemblyName>EveJimaCore</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>EvaJimaCore.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.2.16.3.0\lib\net45\CsvHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetBrowser">
+      <HintPath>..\..\..\Users\vitaly.sushilov\Downloads\dotnetbrowser-1.8.4\Library\DotNetBrowser.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.7.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.7\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\PilotEntity.cs" />
+    <Compile Include="BLL\PilotsEntity.cs" />
+    <Compile Include="BLL\SolarSystemEntity.cs" />
+    <Compile Include="BLL\SpaceEntity.cs" />
+    <Compile Include="Browser\Address.cs" />
+    <Compile Include="Browser\Bookmarks.cs" />
+    <Compile Include="Browser\History.cs" />
+    <Compile Include="Browser\InternalBrowser.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="Infrastructure\CcpXmlApi.cs" />
+    <Compile Include="Infrastructure\CrestApiListener.cs" />
+    <Compile Include="Infrastructure\CrestAuthorization.cs" />
+    <Compile Include="Infrastructure\EsiAuthorization.cs" />
+    <Compile Include="Infrastructure\Infrastructure.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="UiTools\Tools.cs" />
+    <Compile Include="UiTools\VsBorder.cs" />
+    <Compile Include="Ui\Tabs.cs" />
+    <Compile Include="WhlControls\controlsDelegates.cs" />
+    <Compile Include="WhlControls\whlAuthorization.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\whlAuthorization.Designer.cs">
+      <DependentUpon>whlAuthorization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WhlControls\whlBookmarks.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\whlBookmarks.Designer.cs">
+      <DependentUpon>whlBookmarks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WhlControls\whlBrowser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\whlBrowser.Designer.cs">
+      <DependentUpon>whlBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WhlControls\whlButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\whlButton.Designer.cs">
+      <DependentUpon>whlButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WhlControls\whlPilotInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\whlPilotInfo.Designer.cs">
+      <DependentUpon>whlPilotInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WhlControls\whlSolarSystem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\whlSolarSystem.Designer.cs">
+      <DependentUpon>whlSolarSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WhlControls\whlSolarSystemOffline.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\whlSolarSystemOffline.Designer.cs">
+      <DependentUpon>whlSolarSystemOffline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WhlControls\whlTravelHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\whlTravelHistory.Designer.cs">
+      <DependentUpon>whlTravelHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WhlControls\whlVersion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\whlVersion.Designer.cs">
+      <DependentUpon>whlVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="windowMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="windowMain.Designer.cs">
+      <DependentUpon>windowMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WindowMonitoring.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WindowMonitoring.Designer.cs">
+      <DependentUpon>WindowMonitoring.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\WSpaceSystemInfo - Basic Solar Systems.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\WSpaceSystemInfo - Systems.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\WSpaceSystemInfo - Wormholes.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EvaJimaCore.pfx" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\whlAuthorization.resx">
+      <DependentUpon>whlAuthorization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\whlBookmarks.resx">
+      <DependentUpon>whlBookmarks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\whlBrowser.resx">
+      <DependentUpon>whlBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\whlButton.resx">
+      <DependentUpon>whlButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\whlPilotInfo.resx">
+      <DependentUpon>whlPilotInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\whlSolarSystem.resx">
+      <DependentUpon>whlSolarSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\whlSolarSystemOffline.resx">
+      <DependentUpon>whlSolarSystemOffline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\whlTravelHistory.resx">
+      <DependentUpon>whlTravelHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\whlVersion.resx">
+      <DependentUpon>whlVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WindowMonitoring.resx">
+      <DependentUpon>WindowMonitoring.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\book-with-bookmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bookmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browser_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browser_execute.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browser_forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browser_refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EVE_SSO_Login_Buttons_Large_Black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minimize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new-document-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\not_bookmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\restore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tumblr_n8iuseEKSr1tg7xcdo1_500.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unpin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\url.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EvaJimaSettings\EveJimaSettings.csproj">
+      <Project>{6ed83e00-e836-4395-9fbc-7a3878455274}</Project>
+      <Name>EveJimaSettings</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="teamdev.licenses" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
