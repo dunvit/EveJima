@@ -142,6 +142,10 @@ namespace EveJimaCore.WhlControls
 
                             tabPage.Text = title;
 
+                            var address = ((WinFormsBrowserView)(tabControl1.SelectedTab.Controls[0])).URL;
+
+                            History.Add(address);
+
                             History.UpdateTitle(title);
 
                             BuildContextMenuFromHistory();

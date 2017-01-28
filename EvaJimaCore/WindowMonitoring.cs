@@ -322,6 +322,8 @@ namespace EveJimaCore
 
         private void OpenWebBrowserPanel()
         {
+            if (Global.InternalBrowser.Browser.Visible) return;
+
             Global.InternalBrowser.Browser.Visible = true;
 
             Global.InternalBrowser.Browser.Location = new Point(pnlContainer.Location.X, pnlContainer.Location.Y);
