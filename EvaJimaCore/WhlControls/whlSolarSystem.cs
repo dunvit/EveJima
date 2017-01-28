@@ -39,6 +39,8 @@ namespace EveJimaCore.WhlControls
 
         public void RefreshSolarSystem(StarSystemEntity location)
         {
+            if (location == null) return;
+
             SolarSystem = location.Clone() as StarSystemEntity;
 
             if (Global.Pilots.Selected.Location.System == "unknown") return;

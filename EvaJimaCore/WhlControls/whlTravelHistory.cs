@@ -28,6 +28,8 @@ namespace EveJimaCore.WhlControls
 
         public void RefreshSolarSystem(StarSystemEntity location)
         {
+            if (SolarSystem == null) return;
+
             if (SolarSystem == null || SolarSystem.System != location.System)
             {
                 LoadTravelHistorySignatures(location);

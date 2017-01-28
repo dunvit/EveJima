@@ -64,7 +64,7 @@ namespace EveJimaCore.BLL
 
             try
             {
-                if (Global.Pilots.Selected == null) return;
+                //if (Global.Pilots.Selected == null) return;
 
                 if (Location == null) Location = new StarSystemEntity();
 

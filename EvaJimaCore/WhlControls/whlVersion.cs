@@ -77,8 +77,16 @@ namespace EveJimaCore.WhlControls
 
         public void DisposeBrowser()
         {
-            browser.Dispose();
-            browserTabControl.Dispose();
+            try
+            {
+                browser.Dispose();
+                browserTabControl.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("[whlVersion.DisposeBrowser] Critical error. Exception {0}", ex);
+            }
+            
         }
 
 

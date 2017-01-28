@@ -20,10 +20,16 @@
 
 Patch notes for 1.28 Release 
 
-
-
 Features & Changes:
 
++ Change the address of the repository from https://github.com/dunvit/WHL/releases to https://github.com/dunvit/EveJima/releases
++ Added built-in browser cookies. Now you do not need to login to your sites every time you start EveJima
++ Added auto-update system software. You are not required to be updated to the latest version. When choosing updates antivirus can appear a message that the software download executable files. You can add the program as an exception, you can go to the release page and get new version, or continue to use the old version without the upgrade.
 
 Defect Fixes:
+
++ Resolves an issue with Windows  7 x64
++ Program no longer requires NET Framework 4.5.2 and it can use Framework 4.5
+
+
 

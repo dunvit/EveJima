@@ -112,10 +112,12 @@ namespace EveJimaCore
 
             HideAllContainers();
 
+            ucContainreAuthorization.RefreshAuthorizationStatus();
+
             if (IsNeedUpdateApplication() == false)
             {
                 OpenAuthorizationPanel();
-                ucContainreAuthorization.RefreshAuthorizationStatus();
+                
             }
             else
             {
@@ -259,7 +261,7 @@ namespace EveJimaCore
 
         private void DrawPilotPanel(PilotEntity pilot)
         {
-            if (pilot.Location.System != "unknown")
+            if (pilot.Location != null && pilot.Location.System != "unknown")
             {
                 cmdLocation.IsActive = true;
                 cmdLocation.Refresh();
