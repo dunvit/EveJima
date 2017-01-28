@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using DotNetBrowser;
-using DotNetBrowser.Events;
-using DotNetBrowser.WinForms;
 using log4net;
 using EveJimaCore.Browser;
 using ContextMenu = System.Windows.Forms.ContextMenu;
+using CefSharp;
+using CefSharp.WinForms;
+using CefSharp.WinForms.Internals;
 
 namespace EveJimaCore.WhlControls
 {
@@ -17,6 +18,8 @@ namespace EveJimaCore.WhlControls
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlBrowser));
 
         public OpenWebBrowser OnOpenWebBrowser;
+
+        private readonly string cache_dir = Application.StartupPath + "\\tmp";
 
         #region ToolTips
         private readonly ToolTip _toolTipForBookmarkButton = new ToolTip();
@@ -35,6 +38,20 @@ namespace EveJimaCore.WhlControls
         {
             InitializeComponent();
 
+
+            var settings = new CefSettings();
+            settings.UserAgent = "pipiscrew_browser_v" + Cef.CefSharpVersion;
+
+            //the location where cache data will be stored on disk. If empty an in-memory cache will be used
+            settings.CachePath = cache_dir; //Application.StartupPath;
+
+            //enable store cookies - method1
+            //To persist session cookies (cookies without an expiry date or validity interval)
+            settings.CefCommandLineArgs.Add("persist_session_cookies", "1");
+
+            Cef.Initialize(settings);
+
+
             AddTab("about:blank");
 
             History = new History();
@@ -52,6 +69,8 @@ namespace EveJimaCore.WhlControls
 
             cmdFavorits.ContextMenu = BuildContextMenuForFavorites();
         }
+
+        
 
         public void BrowserUrlExecute(string url)
         {
@@ -93,7 +112,7 @@ namespace EveJimaCore.WhlControls
         {
             try
             {
-                ((WinFormsBrowserView)(tabControl1.SelectedTab.Controls[0])).Browser.LoadURL(url);
+                ((ChromiumWebBrowser)(tabControl1.SelectedTab.Controls[0])).Load(url);
             }
             catch (Exception ex)
             {
@@ -105,55 +124,31 @@ namespace EveJimaCore.WhlControls
         {
             try
             {
+                
+
+
                 browserTabControl.SuspendLayout();
 
-                var appPath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + @"\Browser";
+                var browser = new ChromiumWebBrowser(url);
 
-                BrowserContextParams params1 = new BrowserContextParams(appPath);
-                BrowserContext context = new BrowserContext(params1);
-
-                var browser = BrowserFactory.Create(context); 
-                var browserView = new WinFormsBrowserView(browser);
-                
-                browser.LoadURL("about:blank");
+                browser.LoadingStateChanged += OnBrowserLoadingStateChanged;
+                browser.TitleChanged += OnBrowserTitleChanged;
 
                 // Add it to the form and fill it to the form window.
-                browserView.Dock = DockStyle.Fill;
+                browser.Dock = DockStyle.Fill;
 
                 var tabPage = new TabPage(url)
                 {
                     Dock = DockStyle.Fill
                 };
 
-                browserView.Tag = tabPage;
+                //This call isn't required for the sample to work. 
+                //It's sole purpose is to demonstrate that #553 has been resolved.
+                browser.CreateControl();
 
-                browser.TitleChangedEvent += delegate(object sender, TitleEventArgs e)
-                {
-                    if (InvokeRequired)
-                    {
-                        Invoke(new Action(() =>
-                        {
-                            var title = e.Title;
-                            
-                            if (e.Title.Length > 20)
-                            {
-                                title = e.Title.Substring(0, 20);
-                            }
+                browser.Tag = tabPage;
 
-                            tabPage.Text = title;
-
-                            var address = ((WinFormsBrowserView)(tabControl1.SelectedTab.Controls[0])).URL;
-
-                            History.Add(address);
-
-                            History.UpdateTitle(title);
-
-                            BuildContextMenuFromHistory();
-                        }));
-                    }
-                };
-
-                tabPage.Controls.Add(browserView);
+                tabPage.Controls.Add(browser);
 
                 if (insertIndex == null)
                 {
@@ -177,21 +172,82 @@ namespace EveJimaCore.WhlControls
             
         }
 
+        private void SetchromeBrowserVisible(bool b)
+        {
+            try
+            {
+                History.Add(((ChromiumWebBrowser)(tabControl1.SelectedTab.Controls[0])).Address);
+
+                ((ChromiumWebBrowser)(tabControl1.SelectedTab.Controls[0])).Visible = true;
+
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("[whlBrowser.SetchromeBrowserVisible] Critical error. Exception {0}", ex);
+            }
+
+
+        }
+
+        private void OnBrowserLoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
+        {
+            try
+            {
+                this.InvokeOnUiThreadIfRequired(() => SetchromeBrowserVisible(!args.CanReload));
+
+                this.InvokeOnUiThreadIfRequired(BuildContextMenuFromHistory);
+                this.InvokeOnUiThreadIfRequired(IsUrlInBookmarks);
+                BuildContextMenuFromHistory();
+
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("[whlBrowser.OnBrowserLoadingStateChanged] Critical error. Exception {0}", ex);
+            }
+
+        }
+
+        private void OnBrowserTitleChanged(object sender, TitleChangedEventArgs args)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => OnBrowserTitleChanged(sender, args)));
+                return;
+            }
+
+            try
+            {
+                var tab = (TabPage)((ChromiumWebBrowser)sender).Tag;
+
+                var title = args.Title.Substring(0, 20);
+
+                tab.Text = title;
+
+                History.UpdateTitle(args.Title);
+
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("[whlBrowser.InvokeOnUiThreadIfRequired] Critical error. Exception {0}", ex);
+            }
+        }
+
         public void DisposeBrowser()
         {
             var pages = tabControl1.TabPages;
             
             foreach (TabPage page in pages)
             {
-                var control = page.Controls[0] as WinFormsBrowserView;
+                var control = page.Controls[0] as ChromiumWebBrowser;
 
                 if (control != null)
                 {
-                    Log.DebugFormat("[whlBrowser.AddTab] Dispose browser address {0}", control.URL);
-                    control.Browser.Dispose();
+                    Log.DebugFormat("[whlBrowser.AddTab] Dispose browser address {0}", control.Address);
                     control.Dispose();
                 }
             }
+
+            Cef.Shutdown();
         }
 
         private void BrowserUrlRefresh(string url)
@@ -200,7 +256,7 @@ namespace EveJimaCore.WhlControls
             {
                 loadingGif.Visible = true;
 
-                if (((WinFormsBrowserView)(tabControl1.SelectedTab.Controls[0])).URL == null) return;
+                if (((ChromiumWebBrowser)(tabControl1.SelectedTab.Controls[0])).Address == null) return;
 
                 LoadUrl(url);
 
@@ -239,7 +295,7 @@ namespace EveJimaCore.WhlControls
             {
                 loadingGif.Visible = false;
 
-                if (((WinFormsBrowserView)(tabControl1.SelectedTab.Controls[0])).URL == null)
+                if (((ChromiumWebBrowser)(tabControl1.SelectedTab.Controls[0])).Address == null)
                 {
                     browserTabControl.Visible = false;
                 }
@@ -263,9 +319,9 @@ namespace EveJimaCore.WhlControls
         {
             try
             {
-                if (((WinFormsBrowserView)(tabControl1.SelectedTab.Controls[0])).URL == null) return true;
+                if (((ChromiumWebBrowser)(tabControl1.SelectedTab.Controls[0])).Address == null) return true;
 
-                if (url != ((WinFormsBrowserView)(tabControl1.SelectedTab.Controls[0])).URL) return true;
+                if (url != ((ChromiumWebBrowser)(tabControl1.SelectedTab.Controls[0])).Address) return true;
             }
             catch (Exception ex)
             {
@@ -291,7 +347,7 @@ namespace EveJimaCore.WhlControls
         {
             try
             {
-                if (((WinFormsBrowserView)(tabControl1.SelectedTab.Controls[0])).URL == null) return;
+                if (((ChromiumWebBrowser)(tabControl1.SelectedTab.Controls[0])).Address == null) return;
 
                 if (txtUrl.Text.StartsWith("http"))
                 {
@@ -429,9 +485,9 @@ namespace EveJimaCore.WhlControls
         {
             try
             {
-                if (((WinFormsBrowserView)(tabControl1.SelectedTab.Controls[0])).URL == null) return;
+                if (((ChromiumWebBrowser)(tabControl1.SelectedTab.Controls[0])).Address == null) return;
 
-                if (Bookmarks.IsExist(((WinFormsBrowserView)(tabControl1.SelectedTab.Controls[0])).URL) == false)
+                if (Bookmarks.IsExist(((ChromiumWebBrowser)(tabControl1.SelectedTab.Controls[0])).Address) == false)
                 {
                     cmdBookmark.Image = Properties.Resources.not_bookmark;
                     _toolTipForBookmarkButton.SetToolTip(cmdBookmark, "Add to bookmarks");
@@ -479,7 +535,7 @@ namespace EveJimaCore.WhlControls
         {
             try
             {
-                txtUrl.Text = ((WinFormsBrowserView)(tabControl1.SelectedTab.Controls[0])).URL;
+                txtUrl.Text = ((ChromiumWebBrowser)(tabControl1.SelectedTab.Controls[0])).Address;
             }
             catch (Exception ex)
             {

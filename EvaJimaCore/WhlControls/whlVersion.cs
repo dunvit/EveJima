@@ -2,10 +2,8 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
-using DotNetBrowser;
-using DotNetBrowser.WinForms;
 using EvaJimaCore;
-//using CefSharp.WinForms;
+using CefSharp.WinForms;
 using log4net;
 
 namespace EveJimaCore.WhlControls
@@ -13,8 +11,7 @@ namespace EveJimaCore.WhlControls
     public partial class whlVersion : UserControl
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlVersion));
-        private DotNetBrowser.Browser browser;
-        private WinFormsBrowserView browserView;
+
 
         public whlVersion()
         {
@@ -53,19 +50,23 @@ namespace EveJimaCore.WhlControls
             {
                 browserTabControl.SuspendLayout();
 
-                var appPath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + @"\Browser";
-
-                var context = new BrowserContext(new BrowserContextParams(appPath));
-
-                browser = BrowserFactory.Create(context);
-                browserView = new WinFormsBrowserView(browser);
-
-                browser.LoadURL(url);
+                var browser = new ChromiumWebBrowser(url);
 
                 // Add it to the form and fill it to the form window.
-                browserView.Dock = DockStyle.Fill;
+                browser.Dock = DockStyle.Fill;
 
-                browserTabControl.Controls.Add(browserView);
+                var tabPage = new TabPage(url)
+                {
+                    Dock = DockStyle.Fill
+                };
+
+                //This call isn't required for the sample to work. 
+                //It's sole purpose is to demonstrate that #553 has been resolved.
+                browser.CreateControl();
+
+                browser.Tag = tabPage;
+
+                browserTabControl.Controls.Add(browser);
 
                 browserTabControl.ResumeLayout(true);
             }
@@ -79,7 +80,6 @@ namespace EveJimaCore.WhlControls
         {
             try
             {
-                browser.Dispose();
                 browserTabControl.Dispose();
             }
             catch (Exception ex)
