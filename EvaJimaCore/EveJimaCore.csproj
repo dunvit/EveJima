@@ -105,6 +105,12 @@
     <Compile Include="UiTools\VsBorder.cs" />
     <Compile Include="Ui\Tabs.cs" />
     <Compile Include="WhlControls\controlsDelegates.cs" />
+    <Compile Include="WhlControls\ucRichBrowser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\ucRichBrowser.Designer.cs">
+      <DependentUpon>ucRichBrowser.cs</DependentUpon>
+    </Compile>
     <Compile Include="WhlControls\whlAuthorization.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -191,6 +197,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\ucRichBrowser.resx">
+      <DependentUpon>ucRichBrowser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\whlAuthorization.resx">
       <DependentUpon>whlAuthorization.cs</DependentUpon>
     </EmbeddedResource>
@@ -275,10 +284,15 @@
       <Project>{6ed83e00-e836-4395-9fbc-7a3878455274}</Project>
       <Name>EveJimaSettings</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EveJimaBrowser\EveJimaBrowser.csproj">
+      <Project>{FC30A198-4213-404F-8526-D7BE5D49E57D}</Project>
+      <Name>EveJimaBrowser</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="teamdev.licenses" />
     <Content Include="Versions\1.27.txt" />
+    <Content Include="Versions\1.29.txt" />
     <Content Include="Versions\1.28.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

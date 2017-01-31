@@ -11,7 +11,8 @@ namespace EveJimaCore
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(InternalBrowser));
 
-        public whlBrowser Browser;
+        //public whlBrowser Browser;
+        public ucRichBrowser Browser;
 
         private readonly string cache_dir = Application.StartupPath + "\\tmp";
 
@@ -24,7 +25,8 @@ namespace EveJimaCore
         {
             try
             {
-                Browser= new whlBrowser();
+                //Browser= new whlBrowser();
+                Browser = new ucRichBrowser();
                 Directory.CreateDirectory(cache_dir);
 
                 var settings = new CefSettings();

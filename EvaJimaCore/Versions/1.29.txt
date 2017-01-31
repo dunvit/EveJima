@@ -1,0 +1,27 @@
+﻿EveJima version 1.29 https://github.com/dunvit/EveJima/releases
+
+----------------------------------------------------------------------------------------------------
+
+Список изменений в обновлении 1.29
+
+
+Дополнения и изменения:
+
++ Полностью переработан встроенный браузер. Теперь возможно добавление линков на страницы прямо на панель браузера.
+
+Исправленные ошибки:
+
+
+----------------------------------------------------------------------------------------------------
+
+Patch notes for 1.28 Release 
+
+Features & Changes:
+
++ Completely redesigned built-in browser. It is now possible to add links to the pages directly on the browser panel.
+
+Defect Fixes:
+
+
+
+

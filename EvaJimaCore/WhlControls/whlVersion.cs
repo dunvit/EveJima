@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using EvaJimaCore;
@@ -95,6 +96,10 @@ namespace EveJimaCore.WhlControls
             try
             {
                 Log.Debug("[whlVersion.Event_StartUpdateVersion] Start update");
+
+                string text = File.ReadAllText("settings.txt");
+                text = text.Replace("VersionContent.txt", "VersionContent_" + Global.Settings.CurrentVersion.Replace(".","") + ".txt");
+                File.WriteAllText("settings.txt", text);
 
                 try
                 {

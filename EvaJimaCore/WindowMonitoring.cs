@@ -125,6 +125,23 @@ namespace EveJimaCore
 
                 ShowVersionTab();
             }
+
+            //RequestData();
+
+            SendRequest("http://www.evajima-storage.somee.com/api/version/%22" + Global.Settings.CurrentVersion.Replace(".",",")  + "%22");
+        }
+
+        public static Task<string> SendRequest(string url)
+        {
+            return (new WebClient()).DownloadStringTaskAsync(new Uri(url));
+        }
+
+        private async void RequestData()
+        {
+            using (var client = new WebClient())
+            {
+                await client.DownloadStringTaskAsync("http://www.evajima-storage.somee.com/api/version/%221,27%22");
+            }
         }
 
         private void ChangeSolarSystemInfo(string info)
