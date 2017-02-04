@@ -44,12 +44,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lnlSystemText = new System.Windows.Forms.Label();
-            this.cmdTravelHistory = new whlButton();
-            this.cmdTripwire = new whlButton();
-            this.cmdDotlan = new whlButton();
-            this.cmdEllatha = new whlButton();
-            this.cmdSuperpute = new whlButton();
-            this.cmdZkillboard = new whlButton();
+            this.cmdTravelHistory = new EveJimaCore.whlButton();
+            this.cmdTripwire = new EveJimaCore.whlButton();
+            this.cmdDotlan = new EveJimaCore.whlButton();
+            this.cmdEllatha = new EveJimaCore.whlButton();
+            this.cmdSuperpute = new EveJimaCore.whlButton();
+            this.cmdZkillboard = new EveJimaCore.whlButton();
+            this.cmdPasta = new EveJimaCore.whlButton();
             this.SuspendLayout();
             // 
             // txtSolarSystemConstellation
@@ -303,12 +304,26 @@
             this.cmdZkillboard.Value = "Zkillboard";
             this.cmdZkillboard.Click += new System.EventHandler(this.Event_ShowZkillboard);
             // 
+            // cmdPasta
+            // 
+            this.cmdPasta.BackColor = System.Drawing.Color.Black;
+            this.cmdPasta.ForeColor = System.Drawing.Color.LightGray;
+            this.cmdPasta.IsActive = true;
+            this.cmdPasta.IsTabControlButton = false;
+            this.cmdPasta.Location = new System.Drawing.Point(377, 157);
+            this.cmdPasta.Name = "cmdPasta";
+            this.cmdPasta.Size = new System.Drawing.Size(148, 26);
+            this.cmdPasta.TabIndex = 74;
+            this.cmdPasta.Value = "Pasta.gg";
+            this.cmdPasta.Click += new System.EventHandler(this.Event_PastaShow);
+            // 
             // whlSolarSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.cmdPasta);
             this.Controls.Add(this.cmdTravelHistory);
             this.Controls.Add(this.cmdTripwire);
             this.Controls.Add(this.cmdDotlan);
@@ -361,5 +376,6 @@
         private whlButton cmdDotlan;
         private whlButton cmdTripwire;
         private whlButton cmdTravelHistory;
+        private whlButton cmdPasta;
     }
 }

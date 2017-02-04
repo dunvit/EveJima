@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows.Forms;
 using EvaJimaCore;
 using EvaJimaCore.UiTools;
@@ -193,6 +192,13 @@ namespace EveJimaCore.WhlControls
         private void Event_ShowWormholePvE(object sender, EventArgs e)
         {
             Global.InternalBrowser.Browser.BrowserUrlExecute("https://docs.google.com/spreadsheets/d/17cNu8hxqJKqkkPnhDlIuJY-IT6ps7kTNCd3BEz0Bvqs/pubhtml#");
+        }
+
+        private void Event_PastaShow(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtSolarSystem.Text)) return;
+
+            Global.InternalBrowser.Browser.BrowserUrlExecute("http://wh.pasta.gg/" + txtSolarSystem.Text.Trim() + "");
         }
     }
 }

@@ -290,8 +290,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\minimize1.png" />
+    <None Include="Resources\minimize2.png" />
     <Content Include="teamdev.licenses" />
     <Content Include="Versions\1.27.txt" />
+    <Content Include="Versions\1.30.txt" />
     <Content Include="Versions\1.29.txt" />
     <Content Include="Versions\1.28.txt" />
   </ItemGroup>

@@ -45,12 +45,13 @@
             this.lnlSystemText = new System.Windows.Forms.Label();
             this.txtSolarSystem = new System.Windows.Forms.TextBox();
             this.cmdAnalizeSolarSystem = new System.Windows.Forms.PictureBox();
-            this.cmdTripwire = new whlButton();
-            this.cmdDotlan = new whlButton();
-            this.cmdEllatha = new whlButton();
-            this.cmdSuperpute = new whlButton();
-            this.cmdZkillboard = new whlButton();
-            this.cmdWormholePvE = new whlButton();
+            this.cmdTripwire = new EveJimaCore.whlButton();
+            this.cmdDotlan = new EveJimaCore.whlButton();
+            this.cmdEllatha = new EveJimaCore.whlButton();
+            this.cmdSuperpute = new EveJimaCore.whlButton();
+            this.cmdZkillboard = new EveJimaCore.whlButton();
+            this.cmdWormholePvE = new EveJimaCore.whlButton();
+            this.cmdPasta = new EveJimaCore.whlButton();
             ((System.ComponentModel.ISupportInitialize)(this.cmdAnalizeSolarSystem)).BeginInit();
             this.SuspendLayout();
             // 
@@ -307,12 +308,25 @@
             this.cmdWormholePvE.ForeColor = System.Drawing.Color.LightGray;
             this.cmdWormholePvE.IsActive = true;
             this.cmdWormholePvE.IsTabControlButton = false;
-            this.cmdWormholePvE.Location = new System.Drawing.Point(377, 180);
+            this.cmdWormholePvE.Location = new System.Drawing.Point(32, 186);
             this.cmdWormholePvE.Name = "cmdWormholePvE";
             this.cmdWormholePvE.Size = new System.Drawing.Size(148, 26);
             this.cmdWormholePvE.TabIndex = 74;
             this.cmdWormholePvE.Value = "Wormhole PvE";
             this.cmdWormholePvE.Click += new System.EventHandler(this.Event_ShowWormholePvE);
+            // 
+            // cmdPasta
+            // 
+            this.cmdPasta.BackColor = System.Drawing.Color.Black;
+            this.cmdPasta.ForeColor = System.Drawing.Color.LightGray;
+            this.cmdPasta.IsActive = true;
+            this.cmdPasta.IsTabControlButton = false;
+            this.cmdPasta.Location = new System.Drawing.Point(377, 160);
+            this.cmdPasta.Name = "cmdPasta";
+            this.cmdPasta.Size = new System.Drawing.Size(148, 26);
+            this.cmdPasta.TabIndex = 75;
+            this.cmdPasta.Value = "Pasta.gg";
+            this.cmdPasta.Click += new System.EventHandler(this.Event_PastaShow);
             // 
             // whlSolarSystemOffline
             // 
@@ -320,6 +334,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.cmdPasta);
             this.Controls.Add(this.cmdWormholePvE);
             this.Controls.Add(this.cmdAnalizeSolarSystem);
             this.Controls.Add(this.txtSolarSystem);
@@ -376,5 +391,6 @@
         private System.Windows.Forms.TextBox txtSolarSystem;
         private System.Windows.Forms.PictureBox cmdAnalizeSolarSystem;
         private whlButton cmdWormholePvE;
+        private whlButton cmdPasta;
     }
 }

@@ -11,6 +11,8 @@ using CefSharp.WinForms;
 
 namespace WBrowser
 {
+    
+
     public partial class WBrowser : Form
     {
         public static String favXml = @"Browser\favorits.xml", linksXml = @"Browser\links.xml";
@@ -46,7 +48,10 @@ namespace WBrowser
             getCurrentBrowser().Load(address);
         }
 
-        
+        public void OpenNewTab(string address)
+        {
+            addNewTab(address);
+        }
 
         #region Form load/Closing/Closed
        
@@ -672,6 +677,9 @@ namespace WBrowser
             getCurrentBrowser().Refresh();
         }
         //stop
+
+        public bool IsMaximazed = false;
+
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
             getCurrentBrowser().Stop();

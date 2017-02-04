@@ -95,6 +95,7 @@ namespace EveJimaCore
             Controls.Add(ucContainreAuthorization);
 
             Global.InternalBrowser.Browser.OnOpenWebBrowser += OpenWebBrowserPanel;
+            Global.InternalBrowser.Browser.ChangeViewMode += ChangeViewMode;
 
             Controls.Add(Global.InternalBrowser.Browser);
 
@@ -129,6 +130,32 @@ namespace EveJimaCore
             //RequestData();
 
             SendRequest("http://www.evajima-storage.somee.com/api/version/%22" + Global.Settings.CurrentVersion.Replace(".",",")  + "%22");
+        }
+
+        private bool isBrowserModeMazimazed = false;
+
+        private void ChangeViewMode(bool ismax)
+        {
+            isBrowserModeMazimazed = ismax;
+
+            Global.InternalBrowser.Browser.isMaxMode = ismax;
+
+            if (ismax)
+            {
+                Global.InternalBrowser.Browser.Location = new Point(-148, -63);
+                Global.InternalBrowser.Browser.ResizeWebBrowser(Width, Height);
+                btnOpenBrowserAndStartUrl.Visible = false;
+                Global.InternalBrowser.Browser.BringToFront();
+                TitleBar.BringToFront();
+            }
+            else
+            {
+                Global.InternalBrowser.Browser.Location = new Point(11, 63);
+                Global.InternalBrowser.Browser.ResizeWebBrowser(Width, Height);
+                btnOpenBrowserAndStartUrl.Visible = true;
+            }
+
+            ResizeButtonsPanelLocation();
         }
 
         public static Task<string> SendRequest(string url)
@@ -423,11 +450,38 @@ namespace EveJimaCore
 
             if (ContainerTabs.Active().Name == "WebBrowser")
             {
-                if (_windowIsMinimaze == false)
+                if (isBrowserModeMazimazed == false)
                 {
-                    Global.InternalBrowser.Browser.ResizeWebBrowser(Width, Height);
-                    ContainerTabs.Active().Size = new Size(Width, Height);
+                    btnOpenBrowserAndStartUrl.Visible = false;
+                    btnBrowserMin.Location = btnOpenBrowserAndStartUrl.Location;
+                    btnBrowserMin.Visible = false;
+                    btnBrowserMax.Location = btnOpenBrowserAndStartUrl.Location;
+                    btnBrowserMax.Visible = true;
                 }
+                else
+                {
+                    btnOpenBrowserAndStartUrl.Visible = false;
+                    btnBrowserMax.Location = btnOpenBrowserAndStartUrl.Location;
+                    btnBrowserMax.Visible = false;
+                    btnBrowserMin.Location = btnOpenBrowserAndStartUrl.Location;
+                    btnBrowserMin.Visible = true;
+                }
+                //btnOpenBrowserAndStartUrl
+
+                //if (isBrowserModeMazimazed == false)
+                //{
+                    if (_windowIsMinimaze == false)
+                    {
+                        Global.InternalBrowser.Browser.ResizeWebBrowser(Width, Height);
+                        ContainerTabs.Active().Size = new Size(Width, Height);
+                    }
+                //}
+
+            }
+            else
+            {
+                btnBrowserMax.Visible = false;
+                btnOpenBrowserAndStartUrl.Visible = true;
             }
 
             if (_windowIsMinimaze == false)
@@ -726,6 +780,16 @@ namespace EveJimaCore
             cmdVersion.IsTabControlButton = true;
             cmdVersion.BringToFront();
             cmdVersion.Refresh();
+        }
+
+        private void btnBrowserMax_Click(object sender, EventArgs e)
+        {
+            ChangeViewMode(true);
+        }
+
+        private void btnBrowserMin_Click(object sender, EventArgs e)
+        {
+            ChangeViewMode(false);
         }
     }
 }

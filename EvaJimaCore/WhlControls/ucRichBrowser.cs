@@ -5,8 +5,11 @@ using log4net;
 
 namespace EveJimaCore.WhlControls
 {
+    public delegate void DelegateChangeBrowserMode(bool isMax);
+
     public partial class ucRichBrowser : UserControl
     {
+        public DelegateChangeBrowserMode ChangeViewMode;
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(ucRichBrowser));
 
@@ -23,9 +26,12 @@ namespace EveJimaCore.WhlControls
             richBrowser.FormBorderStyle = FormBorderStyle.None;
             richBrowser.Visible = true;
             richBrowser.Dock = DockStyle.Fill;
+
+
             Controls.Add(richBrowser);
         }
 
+        public bool isMaxMode = false;
 
         public void BrowserUrlExecute(string url)
         {
@@ -41,14 +47,25 @@ namespace EveJimaCore.WhlControls
                 }
             }
 
-            richBrowser.Navigate(url);
+            richBrowser.OpenNewTab(url);
         }
 
         public void ResizeWebBrowser(int width, int height)
         {
-            Width = width - 24;
+            if (isMaxMode)
+            {
+                Width = width + 144;// - 24;
 
-            Height = height - 110;
+                Height = height + 58;// - 110;
+            }
+            else
+            {
+                Width = width - 24;
+
+                Height = height - 110;  
+            }
+
+            
 
         }
 

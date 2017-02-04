@@ -154,5 +154,12 @@ namespace EveJimaCore.WhlControls
         {
             _showTravelHistory();
         }
+
+        private void Event_PastaShow(object sender, EventArgs e)
+        {
+            if (SolarSystem != null && SolarSystem.System != "unknown")
+                Global.InternalBrowser.Browser.BrowserUrlExecute("http://wh.pasta.gg/" + SolarSystem.System + "");
+
+        }
     }
 }
