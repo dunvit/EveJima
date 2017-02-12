@@ -22,11 +22,35 @@ namespace EveJimaCore.BLL
 
         private DateTime _lastTokenUpdate;
 
+        public string RefreshToken { get; set; }
+
+        public void ReInitialization(string id, string refreshToken)
+        {
+            Log.DebugFormat("[Pilot.ReInitialization] starting for id = {0} refreshToken = {1}", id, refreshToken);
+
+            CrestData = new CrestAuthorization(refreshToken, Global.Settings.CCPSSO_AUTH_CLIENT_ID, Global.Settings.CCPSSO_AUTH_CLIENT_SECRET);
+
+            CrestData.Refresh(refreshToken);
+
+            dynamic data = CrestData.ObtainingCharacterData();
+
+            Id = data.CharacterID;
+            Name = data.CharacterName;
+
+            LoadLocationInfo();
+
+            LoadCharacterInfo();
+
+            _lastTokenUpdate = DateTime.Now;
+        }
+
         public void Initialization(string token)
         {
             Log.DebugFormat("[Pilot.Initialization] starting for token = {0}", token);
 
-            CrestData = new CrestAuthorization(token);
+            CrestData = new CrestAuthorization(token, Global.Settings.CCPSSO_AUTH_CLIENT_ID, Global.Settings.CCPSSO_AUTH_CLIENT_SECRET);
+
+            RefreshToken = CrestData.RefreshToken;
 
             dynamic data = CrestData.ObtainingCharacterData();
 

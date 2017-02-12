@@ -16,10 +16,14 @@ namespace EvaJimaCore
 
         public static InternalBrowser InternalBrowser;
 
+        public static MetricsWriter Metrics;
+
         public static void Initialization()
         {
 
             Settings = new Settings();
+
+            Metrics = new MetricsWriter();
 
             Pilots = new PilotsEntity();
 

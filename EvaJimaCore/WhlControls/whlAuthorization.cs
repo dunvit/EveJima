@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using EvaJimaCore;
 using EveJimaCore.BLL;
@@ -10,6 +14,9 @@ namespace EveJimaCore.WhlControls
 {
     public partial class whlAuthorization : UserControl
     {
+
+        public DelegateChangeSelectedPilot OnChangeSelectedPilot { get; set; }
+
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlAuthorization));
 
         private const string TextAuthorizationInfo =
@@ -20,11 +27,60 @@ namespace EveJimaCore.WhlControls
 
         private const string TextErrorAuthorizationInfo = "It has failed to create a local server. Log in CCP SSO (single sign-on) site is not possible.";
 
+        private const string TextPleaseWaitLoadingPilots = "Loading data from the pilots cache. Please wait. It may take a few seconds.";
+
         public whlAuthorization()
         {
             InitializeComponent();
 
-            
+            Task.Run(() =>
+            {
+                try
+                {
+                    LoadAllPilotesFromStorage();
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorFormat("[whlAuthorization.LoadAllPilotesFromStorage] Critical error. Exception {0}", ex);
+                }
+                
+            });
+        }
+
+        List<PilotEntity> Pilotes { get; set; }
+
+        private bool _isLoadedPilotesFromStorage;
+
+        public void LoadAllPilotesFromStorage()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => LoadAllPilotesFromStorage()));
+            }
+
+            Pilotes = new List<PilotEntity>();
+
+
+
+            string[] allLines = Global.Pilots.GetPilotsStorageContent();
+
+
+            foreach (var allLine in allLines)
+            {
+                if(allLine.Trim() == String.Empty) continue;
+
+                var pilotDetails = allLine.Split(',');
+
+                var _currentPilot = new PilotEntity();
+
+                _currentPilot.ReInitialization( pilotDetails[1], pilotDetails[2] );
+
+                Pilotes.Add(_currentPilot);
+            }
+
+            ShowPilots();
+
+            _isLoadedPilotesFromStorage = true;
         }
 
         private void Event_GoToCCPSSO(object sender, EventArgs e)
@@ -42,10 +98,12 @@ namespace EveJimaCore.WhlControls
 
             _currentPilot.Initialization(code);
 
-
+            Global.Metrics.PublishOnPilotInitialization(_currentPilot.Id);
 
             if (Global.Pilots.IsExist(_currentPilot.Id) == false)
             {
+                AddPilotToStorage(_currentPilot);
+
                 Global.Pilots.Add(_currentPilot);
 
                 cmbPilots.Items.Add(_currentPilot.Name.Trim());
@@ -58,26 +116,91 @@ namespace EveJimaCore.WhlControls
 
         }
 
+        private void AddPilotToStorage(PilotEntity currentPilot)
+        {
+            var isNeedAddPilotToStorage = true;
+
+            var file = @"Data/Pilots.csv";
+
+            string[] allLines = Global.Pilots.GetPilotsStorageContent();
+
+            foreach (var allLine in allLines)
+            {
+                if (allLine.Trim() == String.Empty) continue;
+
+                var pilotDetails = allLine.Split(',');
+
+                if (pilotDetails[1] == currentPilot.Id.ToString())
+                {
+                    isNeedAddPilotToStorage = false;
+                }
+            }
+
+            if (isNeedAddPilotToStorage)
+            {
+                var newPilotDetails = Environment.NewLine + "" + currentPilot.Name + "," + currentPilot.Id + "," + currentPilot.CrestData.RefreshToken;
+                //TODO: move to Pilots Entity
+                File.AppendAllText(file, newPilotDetails);
+            }
+        }
+
         public void RefreshPilotInfo()
         {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => RefreshPilotInfo()));
+            }
+
             crlPilotPortrait.Image = Global.Pilots.Selected.Portrait;
             crlPilotPortrait.Refresh();
 
             crlPilotPortrait.Visible = true;
 
             lblAuthorizationInfo.Text = TextAfterAuthorizationInfo + Environment.NewLine + Environment.NewLine + TextAuthorizationInfo;
+
+            if (OnChangeSelectedPilot != null) OnChangeSelectedPilot();
         }
+
+
+        private void ShowPilots()
+        {
+            if (Pilotes.Count <= 0) return;
+
+            foreach (var pilotEntity in Pilotes)
+            {
+                Global.Pilots.Add(pilotEntity);
+
+                cmbPilots.Items.Add(pilotEntity.Name.Trim());
+                cmbPilots.Text = pilotEntity.Name.Trim();
+
+                Global.Pilots.Selected = pilotEntity;
+            }
+
+            if (cmbPilots.InvokeRequired)
+            {
+                cmbPilots.Invoke(new MethodInvoker(delegate
+                {
+                    btnLogInWithEveOnline.Visible = true;
+                    cmbPilots.Visible = true;
+                    crlPilotPortrait.Image = Global.Pilots.Selected.Portrait;
+                    crlPilotPortrait.Refresh();
+                    crlPilotPortrait.Visible = true;
+                    if (OnChangeSelectedPilot != null) OnChangeSelectedPilot();
+                    lblAuthorizationInfo.Text = TextAfterAuthorizationInfo + Environment.NewLine + Environment.NewLine + TextAuthorizationInfo;
+                }));
+            }
+        }
+
 
         private void cmbPilots_TextChanged(object sender, EventArgs e)
         {
-            Global.Pilots.Activate(cmbPilots.Text);
+            if (_isLoadedPilotesFromStorage)
+            {
 
-            RefreshPilotInfo();
-        }
+                Global.Pilots.Activate(cmbPilots.Text);
 
-        private void Event_FormLoad(object sender, EventArgs e)
-        {
-            
+                RefreshPilotInfo();
+            }
         }
 
         public void RefreshAuthorizationStatus()
@@ -91,6 +214,16 @@ namespace EveJimaCore.WhlControls
                 lblAuthorizationInfo.Text = TextErrorAuthorizationInfo;
                 btnLogInWithEveOnline.Visible = false;
             }
+
+            string[] allLines = Global.Pilots.GetPilotsStorageContent();
+
+            if (allLines.Count() > 0)
+            {
+                lblAuthorizationInfo.Text = TextPleaseWaitLoadingPilots + Environment.NewLine + Environment.NewLine;
+                btnLogInWithEveOnline.Visible = false;
+            }
+
+            
         }
 
 

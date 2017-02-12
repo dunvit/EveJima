@@ -81,6 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\MetricsWriter.cs" />
     <Compile Include="BLL\PilotEntity.cs" />
     <Compile Include="BLL\PilotsEntity.cs" />
     <Compile Include="BLL\SolarSystemEntity.cs" />
@@ -292,8 +293,10 @@
   <ItemGroup>
     <None Include="Resources\minimize1.png" />
     <None Include="Resources\minimize2.png" />
+    <None Include="Resources\hide1.png" />
     <Content Include="teamdev.licenses" />
     <Content Include="Versions\1.27.txt" />
+    <Content Include="Versions\1.31.txt" />
     <Content Include="Versions\1.30.txt" />
     <Content Include="Versions\1.29.txt" />
     <Content Include="Versions\1.28.txt" />

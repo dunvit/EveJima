@@ -37,7 +37,7 @@ namespace EveJimaCore.BLL
 
                     foreach (var record in records)
                     {
-                        BasicSolarSystems.Add(record.Name.Trim(), record.Id.Trim());
+                        BasicSolarSystems.Add(record.Name.Trim().ToUpper(), record.Id.Trim());
                     }
                 }
             }

@@ -18,9 +18,10 @@ namespace EveJimaCore
 {
     public partial class WindowMonitoring : Form
     {
+
         #region private variables
 
-        private static readonly ILog Log = LogManager.GetLogger(typeof(CrestApiListener));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(WindowMonitoring));
 
         private bool _windowIsPinned;
         private bool _windowIsMinimaze;
@@ -86,6 +87,8 @@ namespace EveJimaCore
 
             ucContainreAuthorization = new whlAuthorization();
 
+            ucContainreAuthorization.OnChangeSelectedPilot += Event_ChangeSelectedPilot;
+
             Controls.Add(ucContainerPilotInfo);
             Controls.Add(ucContainerBookmarks);
             Controls.Add(ucContainreSolarSystem);
@@ -127,9 +130,25 @@ namespace EveJimaCore
                 ShowVersionTab();
             }
 
-            //RequestData();
+            Global.Metrics.PublishOnApplicationStart(Global.Settings.CurrentVersion);
+        }
 
-            SendRequest("http://www.evajima-storage.somee.com/api/version/%22" + Global.Settings.CurrentVersion.Replace(".",",")  + "%22");
+        private void Event_ChangeSelectedPilot()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => Event_ChangeSelectedPilot()));
+            }
+
+            if (Global.Pilots.Selected.Location.Id != null)
+            {
+                cmdLocation.IsActive = true;
+                RefreshSolarSystemInformation(Global.Pilots.Selected.Location);
+            }
+            else
+            {
+                cmdLocation.IsActive = false;
+            }
         }
 
         private bool isBrowserModeMazimazed = false;
@@ -158,22 +177,20 @@ namespace EveJimaCore
             ResizeButtonsPanelLocation();
         }
 
-        public static Task<string> SendRequest(string url)
-        {
-            return (new WebClient()).DownloadStringTaskAsync(new Uri(url));
-        }
-
-        private async void RequestData()
-        {
-            using (var client = new WebClient())
-            {
-                await client.DownloadStringTaskAsync("http://www.evajima-storage.somee.com/api/version/%221,27%22");
-            }
-        }
+        
 
         private void ChangeSolarSystemInfo(string info)
         {
             lblSolarSystemName.Text = info;
+
+            if (Visible == false)
+            {
+                crlNotificay.BalloonTipTitle = @"EvJima";
+                crlNotificay.BalloonTipText = @"Active pilot enter to new location. " + info;
+
+                crlNotificay.Visible = true;
+                crlNotificay.ShowBalloonTip(500);
+            }
         }
 
 
@@ -182,7 +199,6 @@ namespace EveJimaCore
             if (Global.Pilots.Count() == 0 || Global.Pilots.Selected == null || Global.Pilots.Selected.Location == null || Global.Pilots.Selected.Location.System == "unknown") return;
 
             HideAllContainers();
-            
 
             ContainerTabs.Activate("Location");
 
@@ -227,7 +243,6 @@ namespace EveJimaCore
 
         private bool IsNeedUpdateApplication()
         {
-          
             try
             {
                 if (Global.Settings.Version != Global.Settings.CurrentVersion.Trim())
@@ -323,6 +338,16 @@ namespace EveJimaCore
             };
 
             toolTipUrlButton.SetToolTip(btnOpenBrowserAndStartUrl, "Open WHL brouser and start url");
+
+            var toolTipHideButton = new ToolTip
+            {
+                AutoPopDelay = 5000,
+                InitialDelay = 1000,
+                ReshowDelay = 500,
+                ShowAlways = true
+            };
+
+            toolTipHideButton.SetToolTip(cmdHide, "Hide");
         }
 
         public void StartPilotAuthorizeFlow(string value)
@@ -506,18 +531,6 @@ namespace EveJimaCore
             ucContainreAuthorization.Visible = false;
 
             Global.InternalBrowser.Browser.Visible = false;
-
-            cmdLocation.IsTabControlButton = false;
-            cmdLocation.Refresh();
-
-            cmdShowContainerPilots.IsTabControlButton = false;
-            cmdShowContainerPilots.Refresh();
-
-            cmdAuthirizationPanel.IsTabControlButton = false;
-            cmdAuthirizationPanel.Refresh();
-
-            cmdOpenWebBrowser.IsTabControlButton = false;
-            cmdOpenWebBrowser.Refresh();
         }
 
         #region GUI
@@ -570,14 +583,6 @@ namespace EveJimaCore
             ResizeButtonsPanelLocation();
         }
 
-        private void WindowMonitoring_MouseDown(object sender, MouseEventArgs e)
-        {
-            //if (e.Button == MouseButtons.Left)
-            //{
-            //    ReleaseCapture();
-            //    SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            //}
-        }
 
         #endregion
 
@@ -594,7 +599,7 @@ namespace EveJimaCore
                     });
                 }
 
-                if (ucContainreSolarSystem.SolarSystem.System != Global.Pilots.Selected.Location.System)
+                if (ucContainreSolarSystem.SolarSystem != null && ucContainreSolarSystem.SolarSystem.System != Global.Pilots.Selected.Location.System)
                 {
                     RefreshSolarSystemInformation(Global.Pilots.Selected.Location);
                 }
@@ -791,5 +796,22 @@ namespace EveJimaCore
         {
             ChangeViewMode(false);
         }
+
+        private void crlNotificay_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+        }
+
+        private void Event_Hide(object sender, EventArgs e)
+        {
+            crlNotificay.BalloonTipTitle = "EvJima";
+            crlNotificay.BalloonTipText = "EveJima wait actions in tray.";
+
+            crlNotificay.Visible = true;
+            crlNotificay.ShowBalloonTip(500);
+            Hide();
+        }
+
     }
 }

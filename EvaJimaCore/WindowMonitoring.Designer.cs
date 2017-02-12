@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WindowMonitoring));
             this.lblSolarSystemName = new System.Windows.Forms.Label();
             this.pnlContainer = new System.Windows.Forms.Panel();
             this.RefreshTokenTimer = new System.Windows.Forms.Timer(this.components);
@@ -37,14 +38,16 @@
             this.label20 = new System.Windows.Forms.Label();
             this.lblVersionID = new System.Windows.Forms.Label();
             this.TitleBar = new System.Windows.Forms.Panel();
-            this.VersionBar = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.cmdHide = new System.Windows.Forms.Button();
             this.btnBrowserMin = new System.Windows.Forms.Button();
             this.btnBrowserMax = new System.Windows.Forms.Button();
             this.cmdPin = new System.Windows.Forms.Button();
             this.btnOpenBrowserAndStartUrl = new System.Windows.Forms.Button();
             this.cmdClose = new System.Windows.Forms.Button();
             this.cmdMinimazeRestore = new System.Windows.Forms.Button();
+            this.VersionBar = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.crlNotificay = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmdVersion = new EveJimaCore.whlButton();
             this.cmdShowContainerSolarSystem = new EveJimaCore.whlButton();
             this.cmdOpenWebBrowser = new EveJimaCore.whlButton();
@@ -133,6 +136,7 @@
             // 
             this.TitleBar.BackColor = System.Drawing.Color.Black;
             this.TitleBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TitleBar.Controls.Add(this.cmdHide);
             this.TitleBar.Controls.Add(this.btnBrowserMin);
             this.TitleBar.Controls.Add(this.btnBrowserMax);
             this.TitleBar.Controls.Add(this.cmdPin);
@@ -147,31 +151,19 @@
             this.TitleBar.DoubleClick += new System.EventHandler(this.Event_TitleBarDoubleClick);
             this.TitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Event_TitleBarMouseDown);
             // 
-            // VersionBar
+            // cmdHide
             // 
-            this.VersionBar.BackColor = System.Drawing.Color.Transparent;
-            this.VersionBar.Controls.Add(this.label1);
-            this.VersionBar.Controls.Add(this.label18);
-            this.VersionBar.Controls.Add(this.label19);
-            this.VersionBar.Controls.Add(this.label20);
-            this.VersionBar.Controls.Add(this.lblVersionID);
-            this.VersionBar.Location = new System.Drawing.Point(10, 330);
-            this.VersionBar.Name = "VersionBar";
-            this.VersionBar.Size = new System.Drawing.Size(540, 28);
-            this.VersionBar.TabIndex = 48;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DarkOrange;
-            this.label1.Location = new System.Drawing.Point(8, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 17);
-            this.label1.TabIndex = 46;
-            this.label1.Text = "EveJima";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cmdHide.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdHide.BackColor = System.Drawing.Color.Black;
+            this.cmdHide.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmdHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmdHide.Image = global::EveJimaCore.Properties.Resources.hide;
+            this.cmdHide.Location = new System.Drawing.Point(732, 1);
+            this.cmdHide.Name = "cmdHide";
+            this.cmdHide.Size = new System.Drawing.Size(22, 22);
+            this.cmdHide.TabIndex = 49;
+            this.cmdHide.UseVisualStyleBackColor = false;
+            this.cmdHide.Click += new System.EventHandler(this.Event_Hide);
             // 
             // btnBrowserMin
             // 
@@ -210,7 +202,7 @@
             this.cmdPin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmdPin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdPin.Image = global::EveJimaCore.Properties.Resources.pin;
-            this.cmdPin.Location = new System.Drawing.Point(703, 1);
+            this.cmdPin.Location = new System.Drawing.Point(690, 1);
             this.cmdPin.Name = "cmdPin";
             this.cmdPin.Size = new System.Drawing.Size(22, 22);
             this.cmdPin.TabIndex = 3;
@@ -224,7 +216,7 @@
             this.btnOpenBrowserAndStartUrl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnOpenBrowserAndStartUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpenBrowserAndStartUrl.Image = global::EveJimaCore.Properties.Resources.url;
-            this.btnOpenBrowserAndStartUrl.Location = new System.Drawing.Point(727, 1);
+            this.btnOpenBrowserAndStartUrl.Location = new System.Drawing.Point(712, 1);
             this.btnOpenBrowserAndStartUrl.Name = "btnOpenBrowserAndStartUrl";
             this.btnOpenBrowserAndStartUrl.Size = new System.Drawing.Size(22, 22);
             this.btnOpenBrowserAndStartUrl.TabIndex = 46;
@@ -252,12 +244,45 @@
             this.cmdMinimazeRestore.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmdMinimazeRestore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdMinimazeRestore.Image = global::EveJimaCore.Properties.Resources.minimize;
-            this.cmdMinimazeRestore.Location = new System.Drawing.Point(750, 1);
+            this.cmdMinimazeRestore.Location = new System.Drawing.Point(752, 1);
             this.cmdMinimazeRestore.Name = "cmdMinimazeRestore";
             this.cmdMinimazeRestore.Size = new System.Drawing.Size(22, 22);
             this.cmdMinimazeRestore.TabIndex = 2;
             this.cmdMinimazeRestore.UseVisualStyleBackColor = false;
             this.cmdMinimazeRestore.Click += new System.EventHandler(this.cmdMinimazeRestore_Click);
+            // 
+            // VersionBar
+            // 
+            this.VersionBar.BackColor = System.Drawing.Color.Transparent;
+            this.VersionBar.Controls.Add(this.label1);
+            this.VersionBar.Controls.Add(this.label18);
+            this.VersionBar.Controls.Add(this.label19);
+            this.VersionBar.Controls.Add(this.label20);
+            this.VersionBar.Controls.Add(this.lblVersionID);
+            this.VersionBar.Location = new System.Drawing.Point(10, 330);
+            this.VersionBar.Name = "VersionBar";
+            this.VersionBar.Size = new System.Drawing.Size(540, 28);
+            this.VersionBar.TabIndex = 48;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DarkOrange;
+            this.label1.Location = new System.Drawing.Point(8, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 17);
+            this.label1.TabIndex = 46;
+            this.label1.Text = "EveJima";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // crlNotificay
+            // 
+            this.crlNotificay.Icon = ((System.Drawing.Icon)(resources.GetObject("crlNotificay.Icon")));
+            this.crlNotificay.Text = "Eve JIma";
+            this.crlNotificay.Visible = true;
+            this.crlNotificay.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.crlNotificay_MouseDoubleClick);
             // 
             // cmdVersion
             // 
@@ -375,7 +400,6 @@
             this.Load += new System.EventHandler(this.WindowMonitoring_Load);
             this.ResizeEnd += new System.EventHandler(this.Event_WindowResizeEnd);
             this.DoubleClick += new System.EventHandler(this.Event_WindowDoubleClick);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WindowMonitoring_MouseDown);
             this.Resize += new System.EventHandler(this.WindowMonitoring_Resize);
             this.TitleBar.ResumeLayout(false);
             this.VersionBar.ResumeLayout(false);
@@ -410,6 +434,8 @@
         private whlButton cmdVersion;
         private System.Windows.Forms.Button btnBrowserMax;
         private System.Windows.Forms.Button btnBrowserMin;
+        private System.Windows.Forms.NotifyIcon crlNotificay;
+        private System.Windows.Forms.Button cmdHide;
 
 
 

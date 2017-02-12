@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using CsvHelper;
 using EvaJimaCore;
 using Newtonsoft.Json.Linq;
@@ -11,6 +13,11 @@ namespace EveJimaCore
     public class Infrastructure
     {
         public CcpXmlApi EveXmlApi = new CcpXmlApi();
+
+        public Infrastructure()
+        {
+            
+        }
 
         public static void GetSolarSystems()
         {

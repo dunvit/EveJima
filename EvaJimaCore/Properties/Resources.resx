@@ -154,6 +154,9 @@
   <data name="EVE_SSO_Login_Buttons_Large_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EVE_SSO_Login_Buttons_Large_Black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="minimize2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minimize2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -169,7 +172,7 @@
   <data name="new-document-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\new-document-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="minimize2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\minimize2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="hide" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hide1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

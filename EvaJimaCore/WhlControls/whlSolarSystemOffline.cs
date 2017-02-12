@@ -88,7 +88,9 @@ namespace EveJimaCore.WhlControls
         {
             if (string.IsNullOrEmpty(txtSolarSystem.Text)) return;
 
-            Global.InternalBrowser.Browser.BrowserUrlExecute("https://zkillboard.com/system/" + Global.Space.BasicSolarSystems[txtSolarSystem.Text.Trim()] + "/");
+            
+
+            Global.InternalBrowser.Browser.BrowserUrlExecute("https://zkillboard.com/system/" + Global.Space.BasicSolarSystems[txtSolarSystem.Text.Trim().ToUpper()] + "/");
         }
 
         private void Event_ShowSuperpute(object sender, EventArgs e)
@@ -153,7 +155,7 @@ namespace EveJimaCore.WhlControls
 
                     if (SolarSystem != null)
                     {
-                        SolarSystem.Id = Global.Space.BasicSolarSystems[solarSystemName];
+                        SolarSystem.Id = Global.Space.BasicSolarSystems[solarSystemName.ToUpper()];
                     }
                 }
                 else
@@ -165,7 +167,7 @@ namespace EveJimaCore.WhlControls
                     SolarSystem.Static2 = "";
                     SolarSystem.Static = "";
 
-                    SolarSystem.Id = Global.Space.BasicSolarSystems[solarSystemName];
+                    SolarSystem.Id = Global.Space.BasicSolarSystems[solarSystemName.ToUpper()];
 
                     SolarSystem.System = solarSystemName;
 

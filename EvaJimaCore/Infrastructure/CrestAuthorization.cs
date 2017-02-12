@@ -23,8 +23,15 @@ namespace EveJimaCore
 
         public int ExpiresIn { get; set; }
 
-        public CrestAuthorization(string token)
+        private string CCPSSO_AUTH_CLIENT_ID = "";
+        
+        private string CCPSSO_AUTH_CLIENT_SECRET = "";
+
+        public CrestAuthorization(string token, string clientID, string clientSecret)
         {
+            CCPSSO_AUTH_CLIENT_ID = clientID;
+            CCPSSO_AUTH_CLIENT_SECRET = clientSecret;
+
             Log.DebugFormat("[CrestAuthorization.CrestAuthorization] started for token = {0}", token);
 
             VerifyAuthorizationCode(token);
@@ -42,7 +49,7 @@ namespace EveJimaCore
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
 
-            var encoded = Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(Global.Settings.CCPSSO_AUTH_CLIENT_ID + ":" + Global.Settings.CCPSSO_AUTH_CLIENT_SECRET));
+            var encoded = Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(CCPSSO_AUTH_CLIENT_ID + ":" + CCPSSO_AUTH_CLIENT_SECRET));
 
             Log.DebugFormat("[CrestAuthorization.VerifyAuthorizationCode] encoded is {0}", encoded);
 
@@ -82,6 +89,12 @@ namespace EveJimaCore
 
         }
 
+        public void Refresh(string refreshToken)
+        {
+            RefreshToken = refreshToken;
+            Refresh();
+        }
+
         public void Refresh()
         {
             Log.DebugFormat("[CrestAuthorization.Refresh] started for refresh_token = {0}", RefreshToken);
@@ -94,7 +107,7 @@ namespace EveJimaCore
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
 
-                var encoded = Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(Global.Settings.CCPSSO_AUTH_CLIENT_ID + ":" + Global.Settings.CCPSSO_AUTH_CLIENT_SECRET));
+                var encoded = Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(CCPSSO_AUTH_CLIENT_ID + ":" + CCPSSO_AUTH_CLIENT_SECRET));
                 httpWebRequest.Headers.Add("Authorization", "Basic " + encoded);
                 httpWebRequest.Host = "login.eveonline.com";
 
