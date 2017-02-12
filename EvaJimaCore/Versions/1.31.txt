@@ -20,10 +20,12 @@ Patch notes for 1.31 Release
 
 Features & Changes:
 
-+ 
++ Now you have to do unnecessary login every time you start the program. All your characters will be automatically logged in.
++ Added the ability to clean up the program to tray. When pilot change solar system location tray will display a message with the static and the system number.
 
 Defect Fixes:
 
++ Fixed a bug when entering the program in the tab "Solar System" the solar system name in the wrong case.
 
 
 
