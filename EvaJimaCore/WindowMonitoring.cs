@@ -68,7 +68,7 @@ namespace EveJimaCore
                 ContainerTabs.AddTab("SolarSystem", TabSize.Small, cmdShowContainerSolarSystem, _containerSolarSystemOffline);
                 ContainerTabs.AddTab("Pilots", TabSize.Small, cmdShowContainerPilots, _containerPilotInfo);
                 ContainerTabs.AddTab("Bookmarks", TabSize.Small, cmdShowContainerBookmarks, _containerBookmarks);
-                ContainerTabs.AddTab("Signatures", TabSize.Small, cmdShowContainerSolarSystem, _containerTravelHistory);
+                ContainerTabs.AddTab("Signatures", TabSize.Small, null, _containerTravelHistory);
                 ContainerTabs.AddTab("WebBrowser", TabSize.Large, cmdOpenWebBrowser, _containerBrowser);
                 ContainerTabs.AddTab("Version", TabSize.Large, cmdVersion, _containerVersion);
 
@@ -176,7 +176,7 @@ namespace EveJimaCore
             }
 
             Size = ContainerTabs.Active().Size;
-            //Global.Metrics.PublishOnApplicationStart(Global.Settings.CurrentVersion);
+            Global.Metrics.PublishOnApplicationStart(Global.Settings.CurrentVersion);
         }
 
         private void Event_BrowserNavigate(string address)

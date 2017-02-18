@@ -31,12 +31,18 @@ namespace EvaJimaCore.Ui
                     sizeTab = new Size(896, 602);
                     break;
             }
-
-            button.Click += Event_ShowContainer;
-            button.Tag = name;
+            if (button != null)
+            {
+                button.Click += Event_ShowContainer;
+                button.Tag = name;
+            }
+            
 
             container.Hide();
-            button.IsTabControlButton = true;
+            if (button != null)
+            {
+                button.IsTabControlButton = true;
+            }
 
             _list.Add(name, new Tab() { Name = name, Size = sizeTab , Button = button, Container = container});
         }
