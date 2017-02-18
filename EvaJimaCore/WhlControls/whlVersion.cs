@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
 using EvaJimaCore;
 using CefSharp.WinForms;
@@ -9,7 +8,7 @@ using log4net;
 
 namespace EveJimaCore.WhlControls
 {
-    public partial class whlVersion : UserControl
+    public partial class whlVersion : baseContainer
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlVersion));
 

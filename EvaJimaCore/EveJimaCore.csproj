@@ -102,9 +102,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="UiTools\Tools.cs" />
+    <Compile Include="Infrastructure\Tools.cs" />
     <Compile Include="UiTools\VsBorder.cs" />
+    <Compile Include="Ui\Tab.cs" />
     <Compile Include="Ui\Tabs.cs" />
+    <Compile Include="Ui\TabSize.cs" />
+    <Compile Include="WhlControls\baseContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WhlControls\controlsDelegates.cs" />
     <Compile Include="WhlControls\ucRichBrowser.cs">
       <SubType>UserControl</SubType>
@@ -197,6 +202,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\baseContainer.resx">
+      <DependentUpon>baseContainer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\ucRichBrowser.resx">
       <DependentUpon>ucRichBrowser.cs</DependentUpon>
@@ -291,10 +299,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Versions\1.32.txt" />
     <None Include="Resources\minimize1.png" />
     <None Include="Resources\minimize2.png" />
     <None Include="Resources\hide1.png" />
-    <Content Include="teamdev.licenses" />
     <Content Include="Versions\1.27.txt" />
     <Content Include="Versions\1.31.txt" />
     <Content Include="Versions\1.30.txt" />

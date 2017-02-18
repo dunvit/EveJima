@@ -1,47 +1,102 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Drawing;
 using System.Linq;
+using EveJimaCore;
+using EveJimaCore.Ui;
+using EveJimaCore.WhlControls;
 
 namespace EvaJimaCore.Ui
 {
     public class Tabs
     {
-        private Hashtable List { get; set; }
+        public DelegateOnChangeTab OnChangeTab;
 
-        public Tabs()
+        private Tab activeTab;
+
+        public WindowMonitoring Parent { get; set; }
+
+        private readonly Hashtable _list = new Hashtable();
+
+        public void AddTab(string name, TabSize size, whlButton button, baseContainer container)
         {
-            List = new Hashtable();
+            var sizeTab = new Size(564, 325);
 
-            var smallSize = new Size(564, 325);
-            var mediumSize = new Size(896, 640);
-            var versionSize = new Size(896, 602);
+            switch (size)
+            {
+                case TabSize.Medium:
+                    sizeTab = new Size(896, 640);
+                    break;
+                case TabSize.Large:
+                    sizeTab = new Size(896, 602);
+                    break;
+            }
 
-            List.Add("Authorization", new Tab() { Name = "Authorization" , Size = smallSize});
-            List.Add("Location", new Tab() { Name = "Location", Size = smallSize });
-            List.Add("SolarSystem", new Tab() { Name = "SolarSystem", Size = smallSize });
-            List.Add("Pilots", new Tab() { Name = "Pilots", Size = smallSize });
-            List.Add("Bookmarks", new Tab() { Name = "Bookmarks", Size = smallSize });
-            List.Add("Signatures", new Tab() { Name = "Signatures", Size = smallSize });
-            List.Add("WebBrowser", new Tab() { Name = "WebBrowser", Size = mediumSize });
-            List.Add("Version", new Tab() { Name = "Version", Size = versionSize });
+            button.Click += Event_ShowContainer;
+            button.Tag = name;
 
-            Activate("Authorization");
+            container.Hide();
+            button.IsTabControlButton = true;
+
+            _list.Add(name, new Tab() { Name = name, Size = sizeTab , Button = button, Container = container});
         }
 
+        private void Event_ShowContainer(object sender, EventArgs e)
+        {
+            var button = sender as whlButton;
+
+            Activate(button.Tag.ToString());
+        }
 
         public void Activate(string tabName)
         {
-            foreach (Tab tab in List.Values)
+            if (activeTab != null)
             {
-                tab.IsActive = false;
+                if (activeTab.Name != tabName)
+                {
+                    activeTab.IsActive = false;
+                    activeTab.Container.Hide();
+                }
             }
 
-            GetTab(tabName).IsActive = true;
+            activeTab = GetTab(tabName);
+
+            activeTab.IsActive = true;
+            Parent.pnlContainer.BringToFront();
+
+            if (Parent.IsWebBrowserMaximize == false)
+            {
+                activeTab.Button.BringToFront();
+            }
+
+            activeTab.Container.BringToFront();
+            activeTab.Container.Show();
+
+            if (OnChangeTab != null) OnChangeTab(tabName);
+
+            
+            if (Parent.IsWebBrowserMaximize == false)
+            {
+                Resize();
+            }
+        }
+
+        public void Resize()
+        {
+            if (Parent == null) return;
+
+            Parent.Size = Active().Size;
+
+            Parent.pnlContainer.Size = new Size(Active().Size.Width - 26, Active().Size.Height - 95);
+
+            activeTab.Container.Size = new Size(Active().Size.Width - 26, Active().Size.Height - 95);
+
+            Parent.Refresh();
         }
 
         public Tab Active()
         {
-            foreach (Tab tab in List.Values)
+            foreach (Tab tab in _list.Values)
             {
                 if (tab.IsActive)
                 {
@@ -54,20 +109,9 @@ namespace EvaJimaCore.Ui
 
         private Tab GetTab(string name)
         {
-            return List.Values.Cast<Tab>().FirstOrDefault(tab => tab.Name == name);
+            return _list.Values.Cast<Tab>().FirstOrDefault(tab => tab.Name == name);
         }
     }
 
-    public class Tab
-    {
-        public string Name { get; set; }
-
-        public Size Size { get; set; }
-
-        public Size CompactSize = new Size(300, 29);
-
-        public bool IsMinimized { get; set; }
-
-        public bool IsActive { get; set; }
-    }
+    
 }

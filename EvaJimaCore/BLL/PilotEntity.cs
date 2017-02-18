@@ -69,6 +69,8 @@ namespace EveJimaCore.BLL
         {
             Log.DebugFormat("[Pilot.LoadCharacterInfo] starting for Id = {0}", Id);
 
+            
+
             dynamic characterInfo = CrestData.GetCharacterInfo(Id);
 
             var portraitAddress = characterInfo.SelectToken("portrait.64x64.href").Value;

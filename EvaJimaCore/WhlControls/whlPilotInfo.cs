@@ -5,8 +5,10 @@ using EvaJimaCore;
 
 namespace EveJimaCore.WhlControls
 {
-    public partial class whlPilotInfo : UserControl
+    public partial class whlPilotInfo : baseContainer
     {
+        public BrowserNavigate OnBrowserNavigate;
+
         public whlPilotInfo()
         {
             InitializeComponent();
@@ -82,7 +84,7 @@ namespace EveJimaCore.WhlControls
                 crlPilotsHistory.Items.Add(txtSelectedPilotName.Text.Trim());
             }
 
-            Global.InternalBrowser.Browser.BrowserUrlExecute("https://zkillboard.com/character/" + characterId + "/");
+            OnBrowserNavigate("https://zkillboard.com/character/" + characterId + "/");
         }
 
         private void cmdShowEveHunt_Click(object sender, EventArgs e)
@@ -92,7 +94,7 @@ namespace EveJimaCore.WhlControls
                 crlPilotsHistory.Items.Add(txtSelectedPilotName.Text.Trim());
             }
 
-            Global.InternalBrowser.Browser.BrowserUrlExecute("http://eve-hunt.net/hunt/" + txtSelectedPilotName.Text.Trim() + "/");
+            OnBrowserNavigate("http://eve-hunt.net/hunt/" + txtSelectedPilotName.Text.Trim() + "/");
         }
 
         private void cmdClearHistory_Click(object sender, EventArgs e)
@@ -117,7 +119,7 @@ namespace EveJimaCore.WhlControls
                 crlPilotsHistory.Items.Add(txtSelectedPilotName.Text.Trim());
             }
 
-            Global.InternalBrowser.Browser.BrowserUrlExecute("http://everate.ru/userinfo.php?name=" + txtSelectedPilotName.Text.Trim().Replace(" ", "+") + "");
+            OnBrowserNavigate("http://everate.ru/userinfo.php?name=" + txtSelectedPilotName.Text.Trim().Replace(" ", "+") + "");
         }
     }
 }

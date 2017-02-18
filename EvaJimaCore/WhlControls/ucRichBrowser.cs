@@ -7,8 +7,9 @@ namespace EveJimaCore.WhlControls
 {
     public delegate void DelegateChangeBrowserMode(bool isMax);
 
-    public partial class ucRichBrowser : UserControl
+    public partial class ucRichBrowser : baseContainer
     {
+        
         public DelegateChangeBrowserMode ChangeViewMode;
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(ucRichBrowser));
@@ -50,31 +51,21 @@ namespace EveJimaCore.WhlControls
             richBrowser.OpenNewTab(url);
         }
 
-        public void ResizeWebBrowser(int width, int height)
+        public bool IsShowFavorites
         {
-            if (isMaxMode)
+            get 
             {
-                Width = width + 144;// - 24;
-
-                Height = height + 58;// - 110;
+                return richBrowser.IsShowFavorites;
             }
-            else
-            {
-                Width = width - 24;
-
-                Height = height - 110;  
-            }
-
-            
-
         }
 
-        public void BrowserOpen()
+        public void FixSize(bool ismax)
         {
 
+            richBrowser.Size = new Size(Width,Height);
+
+            richBrowser.FixSize(ismax);
         }
-
-
 
         public void DisposeBrowser()
         {

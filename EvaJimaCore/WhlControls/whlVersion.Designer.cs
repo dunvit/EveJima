@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.browserTabControl = new System.Windows.Forms.Panel();
-            this.cmdPasteCosmicSifnatures = new whlButton();
+            this.cmdPasteCosmicSifnatures = new EveJimaCore.whlButton();
             this.SuspendLayout();
             // 
             // browserTabControl
             // 
             this.browserTabControl.BackColor = System.Drawing.Color.LightGray;
-            this.browserTabControl.Location = new System.Drawing.Point(11, 6);
+            this.browserTabControl.Location = new System.Drawing.Point(7, 6);
             this.browserTabControl.Name = "browserTabControl";
-            this.browserTabControl.Size = new System.Drawing.Size(857, 450);
+            this.browserTabControl.Size = new System.Drawing.Size(855, 450);
             this.browserTabControl.TabIndex = 61;
             // 
             // cmdPasteCosmicSifnatures

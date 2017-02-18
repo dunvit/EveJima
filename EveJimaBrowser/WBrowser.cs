@@ -22,22 +22,11 @@ namespace WBrowser
         XmlDocument settings = new XmlDocument();
         CultureInfo currentCulture;
 
-        private readonly string cache_dir = Application.StartupPath + "\\tmp";
 
         public WBrowser()
         {
             InitializeComponent();
             currentCulture = CultureInfo.CurrentCulture;
-
-            var cefSettings = new CefSettings
-            {
-                UserAgent = "pipiscrew_browser_v" + Cef.CefSharpVersion,
-                CachePath = cache_dir
-            };
-
-            cefSettings.CefCommandLineArgs.Add("persist_session_cookies", "1");
-
-            Cef.Initialize(cefSettings);
         }
 
         public void Navigate(string address)
@@ -52,6 +41,29 @@ namespace WBrowser
         {
             addNewTab(address);
         }
+
+
+        public void FixSize(bool ismax)
+        {
+            
+            if (ismax == true)
+            {
+                if (IsShowFavorites)
+                {
+                    
+                }
+                else
+                {
+                    
+                }
+            }
+            else
+            {
+                
+            }
+
+        }
+
 
         #region Form load/Closing/Closed
        
@@ -737,10 +749,15 @@ namespace WBrowser
 
         string adress, name;
 
+        public bool IsShowFavorites = true;
+
         //favorits button
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
             favoritesPanel.Visible = !favoritesPanel.Visible;
+
+            IsShowFavorites = !IsShowFavorites;
+
             settings.DocumentElement.ChildNodes[3].Attributes[0].Value = favoritesPanel.Visible.ToString();
         }
         //add to favorits bar button

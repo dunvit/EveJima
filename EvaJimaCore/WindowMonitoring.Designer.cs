@@ -55,6 +55,7 @@
             this.cmdLocation = new EveJimaCore.whlButton();
             this.cmdShowContainerBookmarks = new EveJimaCore.whlButton();
             this.cmdShowContainerPilots = new EveJimaCore.whlButton();
+            this.RefreshActivePilot = new System.Windows.Forms.Timer(this.components);
             this.TitleBar.SuspendLayout();
             this.VersionBar.SuspendLayout();
             this.SuspendLayout();
@@ -73,10 +74,10 @@
             // 
             // pnlContainer
             // 
-            this.pnlContainer.BackColor = System.Drawing.Color.Black;
+            this.pnlContainer.BackColor = System.Drawing.Color.DimGray;
             this.pnlContainer.Location = new System.Drawing.Point(11, 63);
             this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(542, 224);
+            this.pnlContainer.Size = new System.Drawing.Size(542, 261);
             this.pnlContainer.TabIndex = 8;
             // 
             // RefreshTokenTimer
@@ -295,7 +296,6 @@
             this.cmdVersion.Size = new System.Drawing.Size(68, 26);
             this.cmdVersion.TabIndex = 56;
             this.cmdVersion.Value = "Version";
-            this.cmdVersion.Click += new System.EventHandler(this.Event_ShowVersion);
             // 
             // cmdShowContainerSolarSystem
             // 
@@ -308,7 +308,6 @@
             this.cmdShowContainerSolarSystem.Size = new System.Drawing.Size(92, 26);
             this.cmdShowContainerSolarSystem.TabIndex = 55;
             this.cmdShowContainerSolarSystem.Value = "Solar System";
-            this.cmdShowContainerSolarSystem.Click += new System.EventHandler(this.Event_ShowContainerSolarSystem);
             // 
             // cmdOpenWebBrowser
             // 
@@ -321,7 +320,6 @@
             this.cmdOpenWebBrowser.Size = new System.Drawing.Size(93, 26);
             this.cmdOpenWebBrowser.TabIndex = 54;
             this.cmdOpenWebBrowser.Value = "Web Browser";
-            this.cmdOpenWebBrowser.Click += new System.EventHandler(this.Event_OpenBrowserContainer);
             // 
             // cmdAuthirizationPanel
             // 
@@ -334,7 +332,6 @@
             this.cmdAuthirizationPanel.Size = new System.Drawing.Size(91, 26);
             this.cmdAuthirizationPanel.TabIndex = 53;
             this.cmdAuthirizationPanel.Value = "Authorization";
-            this.cmdAuthirizationPanel.Click += new System.EventHandler(this.cmdAuthirizationPanel_Click);
             // 
             // cmdLocation
             // 
@@ -347,7 +344,6 @@
             this.cmdLocation.Size = new System.Drawing.Size(66, 26);
             this.cmdLocation.TabIndex = 52;
             this.cmdLocation.Value = "Location";
-            this.cmdLocation.Click += new System.EventHandler(this.Event_ShowContainerSolarSystemInfo);
             // 
             // cmdShowContainerBookmarks
             // 
@@ -360,7 +356,6 @@
             this.cmdShowContainerBookmarks.Size = new System.Drawing.Size(85, 26);
             this.cmdShowContainerBookmarks.TabIndex = 51;
             this.cmdShowContainerBookmarks.Value = "Bookmarks";
-            this.cmdShowContainerBookmarks.Click += new System.EventHandler(this.Event_ShowContainerCoordinates);
             // 
             // cmdShowContainerPilots
             // 
@@ -373,7 +368,12 @@
             this.cmdShowContainerPilots.Size = new System.Drawing.Size(49, 26);
             this.cmdShowContainerPilots.TabIndex = 50;
             this.cmdShowContainerPilots.Value = "Pilots";
-            this.cmdShowContainerPilots.Click += new System.EventHandler(this.Event_ShowContainerPilots);
+            // 
+            // RefreshActivePilot
+            // 
+            this.RefreshActivePilot.Enabled = true;
+            this.RefreshActivePilot.Interval = 1000;
+            this.RefreshActivePilot.Tick += new System.EventHandler(this.Event_RefreshActivePilot);
             // 
             // WindowMonitoring
             // 
@@ -393,6 +393,7 @@
             this.Controls.Add(this.pnlContainer);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WindowMonitoring";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EveJima";
@@ -400,7 +401,7 @@
             this.Load += new System.EventHandler(this.WindowMonitoring_Load);
             this.ResizeEnd += new System.EventHandler(this.Event_WindowResizeEnd);
             this.DoubleClick += new System.EventHandler(this.Event_WindowDoubleClick);
-            this.Resize += new System.EventHandler(this.WindowMonitoring_Resize);
+            this.Resize += new System.EventHandler(this.Event_WindowResize);
             this.TitleBar.ResumeLayout(false);
             this.VersionBar.ResumeLayout(false);
             this.VersionBar.PerformLayout();
@@ -436,6 +437,7 @@
         private System.Windows.Forms.Button btnBrowserMin;
         private System.Windows.Forms.NotifyIcon crlNotificay;
         private System.Windows.Forms.Button cmdHide;
+        private System.Windows.Forms.Timer RefreshActivePilot;
 
 
 

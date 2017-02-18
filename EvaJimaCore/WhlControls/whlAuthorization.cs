@@ -12,7 +12,7 @@ using log4net;
 
 namespace EveJimaCore.WhlControls
 {
-    public partial class whlAuthorization : UserControl
+    public partial class whlAuthorization : baseContainer
     {
 
         public DelegateChangeSelectedPilot OnChangeSelectedPilot { get; set; }
@@ -60,22 +60,27 @@ namespace EveJimaCore.WhlControls
 
             Pilotes = new List<PilotEntity>();
 
-
-
             string[] allLines = Global.Pilots.GetPilotsStorageContent();
-
 
             foreach (var allLine in allLines)
             {
-                if(allLine.Trim() == String.Empty) continue;
+                try
+                {
+                    if (allLine.Trim() == String.Empty) continue;
 
-                var pilotDetails = allLine.Split(',');
+                    var pilotDetails = allLine.Split(',');
 
-                var _currentPilot = new PilotEntity();
+                    var _currentPilot = new PilotEntity();
 
-                _currentPilot.ReInitialization( pilotDetails[1], pilotDetails[2] );
+                    _currentPilot.ReInitialization(pilotDetails[1], pilotDetails[2]);
 
-                Pilotes.Add(_currentPilot);
+                    Pilotes.Add(_currentPilot);
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorFormat("[whlAuthorization.LoadAllPilotesFromStorage] Critical error. Exception {0}", ex);
+                }
+                
             }
 
             ShowPilots();
@@ -142,6 +147,13 @@ namespace EveJimaCore.WhlControls
                 //TODO: move to Pilots Entity
                 File.AppendAllText(file, newPilotDetails);
             }
+        }
+
+        public void SelectPilot(string pilot)
+        {
+            cmbPilots.SelectedIndex = cmbPilots.FindString(pilot);
+            Log.DebugFormat("[whlAuthorization.SelectPilot] cmbPilots.SelectedIndex {0}", cmbPilots.FindString(pilot).ToString());
+            RefreshPilotInfo();
         }
 
         public void RefreshPilotInfo()

@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Windows.Forms;
 using EvaJimaCore;
-using EvaJimaCore.UiTools;
 using EveJimaCore.BLL;
 using log4net;
 
 namespace EveJimaCore.WhlControls
 {
-    public partial class whlSolarSystem : UserControl
+    public partial class whlSolarSystem : baseContainer
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlSolarSystem));
+
+        public BrowserNavigate OnBrowserNavigate;
 
         public StarSystemEntity SolarSystem { get; set; }
 
@@ -115,13 +116,13 @@ namespace EveJimaCore.WhlControls
         private void Event_ShowZkillboard(object sender, EventArgs e)
         {
             if (SolarSystem != null && SolarSystem.System != "unknown")
-                Global.InternalBrowser.Browser.BrowserUrlExecute("https://zkillboard.com/system/" + Global.Pilots.Selected.Location.Id.Replace("J", "") + "/");
+                OnBrowserNavigate("https://zkillboard.com/system/" + Global.Pilots.Selected.Location.Id.Replace("J", "") + "/");
         }
 
         private void Event_ShowSuperpute(object sender, EventArgs e)
         {
             if (SolarSystem != null && SolarSystem.System != "unknown")
-                Global.InternalBrowser.Browser.BrowserUrlExecute("http://superpute.com/system/" + Global.Pilots.Selected.Location.System + "");
+                OnBrowserNavigate("http://superpute.com/system/" + Global.Pilots.Selected.Location.System + "");
         }
 
         private void Event_ShowEllatha(object sender, EventArgs e)
@@ -134,20 +135,20 @@ namespace EveJimaCore.WhlControls
                     return;
                 }
 
-                Global.InternalBrowser.Browser.BrowserUrlExecute("http://www.ellatha.com/eve/WormholeSystemview.asp?key=" + Global.Pilots.Selected.Location.System.Replace("J", "") + "");
+                OnBrowserNavigate("http://www.ellatha.com/eve/WormholeSystemview.asp?key=" + Global.Pilots.Selected.Location.System.Replace("J", "") + "");
             }
         }
 
         private void Event_ShowDotlan(object sender, EventArgs e)
         {
             if (SolarSystem != null && SolarSystem.System != "unknown")
-                Global.InternalBrowser.Browser.BrowserUrlExecute("http://evemaps.dotlan.net/system/" + Global.Pilots.Selected.Location.System + "");
+                OnBrowserNavigate("http://evemaps.dotlan.net/system/" + Global.Pilots.Selected.Location.System + "");
         }
 
         private void Event_TripwireShow(object sender, EventArgs e)
         {
             if (SolarSystem != null && SolarSystem.System != "unknown")
-                Global.InternalBrowser.Browser.BrowserUrlExecute("https://tripwire.eve-apps.com/?system=" + SolarSystem.System + "");
+                OnBrowserNavigate("https://tripwire.eve-apps.com/?system=" + SolarSystem.System + "");
         }
 
         private void Event_ShowTravelHistory(object sender, EventArgs e)
@@ -158,7 +159,7 @@ namespace EveJimaCore.WhlControls
         private void Event_PastaShow(object sender, EventArgs e)
         {
             if (SolarSystem != null && SolarSystem.System != "unknown")
-                Global.InternalBrowser.Browser.BrowserUrlExecute("http://wh.pasta.gg/" + SolarSystem.System + "");
+                OnBrowserNavigate("http://wh.pasta.gg/" + SolarSystem.System + "");
 
         }
     }

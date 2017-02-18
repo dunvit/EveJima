@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using log4net;
 
 namespace EveJimaCore.BLL
 {
     public class PilotsEntity : IEnumerable<PilotEntity>
     {
         private Object _lock = new Object();
-
+        private static readonly ILog Log = LogManager.GetLogger(typeof(PilotsEntity));
         readonly List<PilotEntity> _pilots = new List<PilotEntity>();
 
         public string[] GetPilotsStorageContent()
@@ -38,6 +39,7 @@ namespace EveJimaCore.BLL
         {
             foreach (var pilot in _pilots.Where(pilot => pilot.Name.Trim() == pilotName.Trim()))
             {
+                Log.DebugFormat("[PilotsEntity.Activate] pilot.Name {0}", pilot.Name);
                 Selected = pilot;
             }
         }

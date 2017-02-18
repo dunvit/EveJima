@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +10,7 @@ using EvaJimaCore;
 using EvaJimaCore.Ui;
 using EveJimaCore.BLL;
 using EveJimaCore.Properties;
+using EveJimaCore.Ui;
 using EveJimaCore.WhlControls;
 using log4net;
 
@@ -20,28 +20,28 @@ namespace EveJimaCore
     {
 
         #region private variables
-
         private static readonly ILog Log = LogManager.GetLogger(typeof(WindowMonitoring));
-
         private bool _windowIsPinned;
         private bool _windowIsMinimaze;
-
         #endregion
 
         public Tabs ContainerTabs { get; set; }
 
-        public whlPilotInfo ucContainerPilotInfo = new whlPilotInfo();
-        public whlBookmarks ucContainerBookmarks;
-        public whlSolarSystem ucContainreSolarSystem;
-        public whlTravelHistory ucTravelHistory;
-        public whlAuthorization ucContainreAuthorization;
-        public whlSolarSystemOffline ucContainerlSolarSystemOffline;
-        public whlVersion ucVersion;
+        private readonly whlPilotInfo _containerPilotInfo = new whlPilotInfo();
+        private whlBookmarks _containerBookmarks;
+        private whlSolarSystem _containerSolarSystem;
+        private whlTravelHistory _containerTravelHistory;
+        private whlAuthorization _containerAuthorization;
+        private whlSolarSystemOffline _containerSolarSystemOffline;
+        private whlVersion _containerVersion;
+        private ucRichBrowser _containerBrowser;
 
         #region WinAPI
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
+
+        public bool IsWebBrowserMaximize = false; 
 
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
@@ -57,7 +57,22 @@ namespace EveJimaCore
             {
                 InitializeComponent();
 
-                ContainerTabs = new Tabs();
+                ContainersInitialization();
+
+                ContainerTabs = new Tabs { Parent = this };
+
+                ContainerTabs.OnChangeTab += Event_OnChangeActiveTab;
+
+                ContainerTabs.AddTab("Authorization", TabSize.Small, cmdAuthirizationPanel, _containerAuthorization);
+                ContainerTabs.AddTab("Location", TabSize.Small, cmdLocation, _containerSolarSystem);
+                ContainerTabs.AddTab("SolarSystem", TabSize.Small, cmdShowContainerSolarSystem, _containerSolarSystemOffline);
+                ContainerTabs.AddTab("Pilots", TabSize.Small, cmdShowContainerPilots, _containerPilotInfo);
+                ContainerTabs.AddTab("Bookmarks", TabSize.Small, cmdShowContainerBookmarks, _containerBookmarks);
+                ContainerTabs.AddTab("Signatures", TabSize.Small, cmdShowContainerSolarSystem, _containerTravelHistory);
+                ContainerTabs.AddTab("WebBrowser", TabSize.Large, cmdOpenWebBrowser, _containerBrowser);
+                ContainerTabs.AddTab("Version", TabSize.Large, cmdVersion, _containerVersion);
+
+                ContainerTabs.Activate("Authorization");
 
                 Size = ContainerTabs.Active().Size;
             }
@@ -67,45 +82,79 @@ namespace EveJimaCore
             }
         }
 
-        private void WindowMonitoring_Load(object sender, EventArgs e)
+        private void Event_OnChangeActiveTab(string tabName)
         {
-            lblVersionID.Text = Global.Settings.CurrentVersion;
+            if (tabName == "WebBrowser")
+            {
+                if (_containerBrowser.isMaxMode == false)
+                {
+                    btnOpenBrowserAndStartUrl.Visible = false;
+                    btnBrowserMin.Location = btnOpenBrowserAndStartUrl.Location;
+                    btnBrowserMin.Visible = false;
+                    btnBrowserMax.Location = btnOpenBrowserAndStartUrl.Location;
+                    btnBrowserMax.Visible = true;
+                }
+                else
+                {
+                    btnOpenBrowserAndStartUrl.Visible = false;
+                    btnBrowserMax.Location = btnOpenBrowserAndStartUrl.Location;
+                    btnBrowserMax.Visible = false;
+                    btnBrowserMin.Location = btnOpenBrowserAndStartUrl.Location;
+                    btnBrowserMin.Visible = true;
+                }
+            }
+            else
+            {
+                btnBrowserMax.Visible = false;
+                btnOpenBrowserAndStartUrl.Visible = true;
+            }
+        }
 
+        private void ContainersInitialization()
+        {
             DelegateShowTravelHistory showTravelHistory = ShowContainer_TravelHistory;
             DelegateShowLocation showLocation = ShowContainer_Location;
             DelegateChangeSolarSystemInfo changeSolarSystemInfo = ChangeSolarSystemInfo;
 
-            ucContainreSolarSystem = new whlSolarSystem(showTravelHistory, changeSolarSystemInfo);
+            _containerSolarSystem = new whlSolarSystem(showTravelHistory, changeSolarSystemInfo);
 
-            ucTravelHistory = new whlTravelHistory(showLocation);
+            _containerTravelHistory = new whlTravelHistory(showLocation);
 
-            ucContainerlSolarSystemOffline = new whlSolarSystemOffline();
+            _containerBrowser = new ucRichBrowser();
 
-            ucVersion = new whlVersion();
-            
-            ucContainerBookmarks = new whlBookmarks();
+            _containerSolarSystemOffline = new whlSolarSystemOffline();
 
-            ucContainreAuthorization = new whlAuthorization();
+            _containerVersion = new whlVersion();
 
-            ucContainreAuthorization.OnChangeSelectedPilot += Event_ChangeSelectedPilot;
+            _containerBookmarks = new whlBookmarks();
 
-            Controls.Add(ucContainerPilotInfo);
-            Controls.Add(ucContainerBookmarks);
-            Controls.Add(ucContainreSolarSystem);
-            Controls.Add(ucTravelHistory);
-            Controls.Add(ucContainerlSolarSystemOffline);
-            Controls.Add(ucVersion);
-            Controls.Add(ucContainreAuthorization);
+            _containerAuthorization = new whlAuthorization();
 
-            Global.InternalBrowser.Browser.OnOpenWebBrowser += OpenWebBrowserPanel;
-            Global.InternalBrowser.Browser.ChangeViewMode += ChangeViewMode;
+            _containerAuthorization.OnChangeSelectedPilot += Event_ChangeSelectedPilot;
 
-            Controls.Add(Global.InternalBrowser.Browser);
+            pnlContainer.Controls.Add(_containerPilotInfo);
+            pnlContainer.Controls.Add(_containerBookmarks);
+            pnlContainer.Controls.Add(_containerSolarSystem);
+            pnlContainer.Controls.Add(_containerTravelHistory);
+            pnlContainer.Controls.Add(_containerSolarSystemOffline);
+            pnlContainer.Controls.Add(_containerVersion);
+            pnlContainer.Controls.Add(_containerAuthorization);
+
+            _containerBrowser.ChangeViewMode += ChangeViewMode;
+
+            pnlContainer.Controls.Add(_containerBrowser);
+
+            _containerSolarSystem.OnBrowserNavigate += Event_BrowserNavigate;
+            _containerPilotInfo.OnBrowserNavigate += Event_BrowserNavigate;
+            _containerSolarSystemOffline.OnBrowserNavigate += Event_BrowserNavigate;
+        }
+
+        private void WindowMonitoring_Load(object sender, EventArgs e)
+        {
+            lblVersionID.Text = Global.Settings.CurrentVersion;
 
             Log.DebugFormat("[WindowMonitoring] Version: {0}", lblVersionID.Text);
-
-            Size = ContainerTabs.Active().Size;
-            ResizeWindow();
+            
             CreateTooltipsForStatics();
 
             DelegateStartProcess startProcessFunction = StartPilotAuthorizeFlow;
@@ -114,23 +163,25 @@ namespace EveJimaCore
 
             SetStyle(ControlStyles.ResizeRedraw, true);
 
-            HideAllContainers();
-
-            ucContainreAuthorization.RefreshAuthorizationStatus();
+            _containerAuthorization.RefreshAuthorizationStatus();
 
             if (IsNeedUpdateApplication() == false)
             {
+                ContainerTabs.Activate("Authorization");
                 OpenAuthorizationPanel();
-                
             }
             else
             {
                 ContainerTabs.Activate("Version");
-
-                ShowVersionTab();
             }
 
-            Global.Metrics.PublishOnApplicationStart(Global.Settings.CurrentVersion);
+            Size = ContainerTabs.Active().Size;
+            //Global.Metrics.PublishOnApplicationStart(Global.Settings.CurrentVersion);
+        }
+
+        private void Event_BrowserNavigate(string address)
+        {
+            _containerBrowser.BrowserUrlExecute(address);
         }
 
         private void Event_ChangeSelectedPilot()
@@ -139,45 +190,71 @@ namespace EveJimaCore
             {
                 Invoke(new Action(() => Event_ChangeSelectedPilot()));
             }
-
-            if (Global.Pilots.Selected.Location.Id != null)
+            try
             {
-                cmdLocation.IsActive = true;
-                RefreshSolarSystemInformation(Global.Pilots.Selected.Location);
+                Log.DebugFormat("[WindowMonitoring.Event_ChangeSelectedPilot] Global.Pilots.Selected.Location.Id {0}", Global.Pilots.Selected.Location.Id);
+                if (Global.Pilots.Selected.Location.Id != null)
+                {
+                    cmdLocation.IsActive = true;
+                    RefreshSolarSystemInformation(Global.Pilots.Selected.Location);
+                }
+                else
+                {
+                    cmdLocation.IsActive = false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                cmdLocation.IsActive = false;
+                Log.ErrorFormat("[WindowMonitoring.Event_ChangeSelectedPilot] Critical error. Exception {0}", ex);
             }
+            
         }
 
-        private bool isBrowserModeMazimazed = false;
 
         private void ChangeViewMode(bool ismax)
         {
-            isBrowserModeMazimazed = ismax;
+            IsWebBrowserMaximize = ismax;
 
-            Global.InternalBrowser.Browser.isMaxMode = ismax;
+            _containerBrowser.isMaxMode = ismax;
 
             if (ismax)
             {
-                Global.InternalBrowser.Browser.Location = new Point(-148, -63);
-                Global.InternalBrowser.Browser.ResizeWebBrowser(Width, Height);
-                btnOpenBrowserAndStartUrl.Visible = false;
-                Global.InternalBrowser.Browser.BringToFront();
-                TitleBar.BringToFront();
+                FixBrowserSize();
             }
             else
             {
-                Global.InternalBrowser.Browser.Location = new Point(11, 63);
-                Global.InternalBrowser.Browser.ResizeWebBrowser(Width, Height);
+                pnlContainer.Location = new Point(11, 63);
+
                 btnOpenBrowserAndStartUrl.Visible = true;
             }
 
-            ResizeButtonsPanelLocation();
+            ContainerTabs.Activate("WebBrowser");
+
+            TitleBar.BringToFront();
         }
 
-        
+        private void FixBrowserSize()
+        {
+            var positionLeft = 5;
+
+            if (_containerBrowser.IsShowFavorites)
+            {
+                pnlContainer.Location = new Point(positionLeft - 148, -57);
+                pnlContainer.Width = Width + 140;
+                pnlContainer.Height = Height + 54;
+            }
+            else
+            {
+                pnlContainer.Location = new Point(positionLeft, -57);
+                pnlContainer.Width = Width - 8;
+                pnlContainer.Height = Height + 54;
+            }
+
+            _containerBrowser.Size = pnlContainer.Size;
+            _containerBrowser.FixSize(true);
+
+            pnlContainer.BringToFront();
+        }
 
         private void ChangeSolarSystemInfo(string info)
         {
@@ -198,47 +275,15 @@ namespace EveJimaCore
         {
             if (Global.Pilots.Count() == 0 || Global.Pilots.Selected == null || Global.Pilots.Selected.Location == null || Global.Pilots.Selected.Location.System == "unknown") return;
 
-            HideAllContainers();
-
-            ContainerTabs.Activate("Location");
-
-            pnlContainer.BringToFront();
-
-            ResizeWindow();
-
-            ucTravelHistory.BackColor = Color.Black;
-            ucTravelHistory.Location = new Point(pnlContainer.Location.X, pnlContainer.Location.Y);
-            ucTravelHistory.BringToFront();
-
-            ucTravelHistory.Visible = true;
-
-            cmdLocation.IsTabControlButton = true;
-            cmdLocation.BringToFront();
-            cmdLocation.Refresh();
+            ContainerTabs.Activate("Signatures");
         }
 
 
         private void ShowContainer_Location()
         {
             if (Global.Pilots.Count() == 0 || Global.Pilots.Selected == null || Global.Pilots.Selected.Location == null || Global.Pilots.Selected.Location.System == "unknown") return;
-
-            HideAllContainers();
-
+            
             ContainerTabs.Activate("Location");
-
-            pnlContainer.BringToFront();
-
-            ResizeWindow();
-
-            ucContainreSolarSystem.BackColor = Color.Black;
-            ucContainreSolarSystem.Location = new Point(pnlContainer.Location.X, pnlContainer.Location.Y);
-            ucContainreSolarSystem.BringToFront();
-
-            ucContainreSolarSystem.Visible = true;
-
-            cmdLocation.IsTabControlButton = true;
-            cmdLocation.BringToFront();
-            cmdLocation.Refresh();
         }
 
         private bool IsNeedUpdateApplication()
@@ -263,7 +308,7 @@ namespace EveJimaCore
 
         protected override void WndProc(ref Message m)
         {
-            if (ContainerTabs == null) return;
+            if (ContainerTabs == null || ContainerTabs.Active() == null) return;
 
             if (ContainerTabs.Active().Name != "WebBrowser")
             {
@@ -360,7 +405,7 @@ namespace EveJimaCore
 
             Log.DebugFormat("[WindowMonitoring.StartPilotAuthorizeFlow] get value: {0}", value);
 
-            ucContainreAuthorization.PilotAuthorizeFlow(value);
+            _containerAuthorization.PilotAuthorizeFlow(value);
 
             BringApplicationToFront();
 
@@ -389,149 +434,35 @@ namespace EveJimaCore
             }
         }
 
-        private void OpenWebBrowserPanel()
-        {
-            Global.InternalBrowser.Browser.Visible = true;
-
-            Global.InternalBrowser.Browser.Location = new Point(pnlContainer.Location.X, pnlContainer.Location.Y);
-
-            HideAllContainers();
-            Global.InternalBrowser.Browser.Visible = true;
-
-            pnlContainer.BringToFront();
-
-            Global.InternalBrowser.Browser.BringToFront();
-
-            ContainerTabs.Activate("WebBrowser");
-
-            ResizeWindow();
-
-            cmdOpenWebBrowser.IsTabControlButton = true;
-            cmdOpenWebBrowser.BringToFront();
-            cmdOpenWebBrowser.Refresh();
-        }
 
         private void OpenAuthorizationPanel()
         {
             ContainerTabs.Activate("Authorization");
 
-            HideAllContainers();
-
-            pnlContainer.BringToFront();
-
-            cmdLocation.BringToFront();
-
             if (Global.Pilots.Selected != null)
             {
-                ucContainreAuthorization.RefreshPilotInfo();
+                _containerAuthorization.RefreshPilotInfo();
             }
-
-            ResizeWindow();
-
-            ucContainreAuthorization.BackColor = Color.Black;
-            ucContainreAuthorization.Location = new Point(pnlContainer.Location.X, pnlContainer.Location.Y);
-            ucContainreAuthorization.BringToFront();
-
-            ucContainreAuthorization.Visible = true;
-
-            cmdAuthirizationPanel.IsTabControlButton = true;
-            cmdAuthirizationPanel.BringToFront();
-            cmdAuthirizationPanel.Refresh();
         }
 
         private void Event_OpenBrowserContainer(object sender, EventArgs e)
         {
             ContainerTabs.Activate("WebBrowser");
 
-            OpenWebBrowserPanel();
-
             var urlFromClipboard = Clipboard.GetText();
 
             if (urlFromClipboard.StartsWith("http"))
             {
-                Global.InternalBrowser.Browser.BrowserUrlExecute(urlFromClipboard);
-            }
-            else
-            {
-                Global.InternalBrowser.Browser.BrowserOpen();
+                _containerBrowser.BrowserUrlExecute(urlFromClipboard);
             }
 
             _windowIsMinimaze = false;
             cmdMinimazeRestore.Image = Resources.minimize;
         }
 
-        private void ResizeWindow()
-        {
-            Size = ContainerTabs.Active().Size;
 
-            ResizeButtonsPanelLocation();
+        
 
-            Refresh();
-        }
-
-        private void ResizeButtonsPanelLocation()
-        {
-            TitleBar.Width = Width;
-
-            if (ContainerTabs.Active().Name == "WebBrowser")
-            {
-                if (isBrowserModeMazimazed == false)
-                {
-                    btnOpenBrowserAndStartUrl.Visible = false;
-                    btnBrowserMin.Location = btnOpenBrowserAndStartUrl.Location;
-                    btnBrowserMin.Visible = false;
-                    btnBrowserMax.Location = btnOpenBrowserAndStartUrl.Location;
-                    btnBrowserMax.Visible = true;
-                }
-                else
-                {
-                    btnOpenBrowserAndStartUrl.Visible = false;
-                    btnBrowserMax.Location = btnOpenBrowserAndStartUrl.Location;
-                    btnBrowserMax.Visible = false;
-                    btnBrowserMin.Location = btnOpenBrowserAndStartUrl.Location;
-                    btnBrowserMin.Visible = true;
-                }
-                //btnOpenBrowserAndStartUrl
-
-                //if (isBrowserModeMazimazed == false)
-                //{
-                    if (_windowIsMinimaze == false)
-                    {
-                        Global.InternalBrowser.Browser.ResizeWebBrowser(Width, Height);
-                        ContainerTabs.Active().Size = new Size(Width, Height);
-                    }
-                //}
-
-            }
-            else
-            {
-                btnBrowserMax.Visible = false;
-                btnOpenBrowserAndStartUrl.Visible = true;
-            }
-
-            if (_windowIsMinimaze == false)
-            {
-                VersionBar.Width = Width;
-                VersionBar.Location = new Point(0, Height - 32);
-            }
-
-            pnlContainer.Visible = false;
-
-            Refresh();
-        }
-
-        private void HideAllContainers()
-        {
-            ucContainerBookmarks.Visible = false;
-            ucContainerPilotInfo.Visible = false;
-            ucContainreSolarSystem.Visible = false;
-            ucTravelHistory.Visible = false;
-            ucContainerlSolarSystemOffline.Visible = false;
-            ucVersion.Visible = false;
-            ucContainreAuthorization.Visible = false;
-
-            Global.InternalBrowser.Browser.Visible = false;
-        }
 
         #region GUI
 
@@ -580,47 +511,16 @@ namespace EveJimaCore
                 Size = ContainerTabs.Active().CompactSize;
             }
 
-            ResizeButtonsPanelLocation();
         }
 
 
         #endregion
 
-        private void RefreshTokenTimer_Tick(object sender, EventArgs e)
-        {
-            if (Global.Pilots.Count() > 0)
-            {
-                foreach (var pilot in Global.Pilots)
-                {
-                    Task.Run(() =>
-                    {
-                        Log.DebugFormat("[WindowMonitoring.RefreshTokenTimer_Tick] starting get location info for pilot = {0}", pilot.Name);
-                        pilot.RefreshInfo();
-                    });
-                }
 
-                if (ucContainreSolarSystem.SolarSystem != null && ucContainreSolarSystem.SolarSystem.System != Global.Pilots.Selected.Location.System)
-                {
-                    RefreshSolarSystemInformation(Global.Pilots.Selected.Location);
-                }
-            }
-        }
 
         private void Event_WindowResizeEnd(object sender, EventArgs e)
         {
-            if (_windowIsMinimaze) return;
-
-            if (ContainerTabs.Active().Name == "WebBrowser")
-            {
-                Global.InternalBrowser.Browser.ResizeWebBrowser(Width, Height);
-                ContainerTabs.Active().Size = new Size(Width, Height);
-            }
-            else
-            {
-                ResizeWindow();
-            }
-
-            ResizeButtonsPanelLocation();
+            
         }
 
         private void Event_WindowDoubleClick(object sender, EventArgs e)
@@ -638,12 +538,6 @@ namespace EveJimaCore
                 Size = new Size( ContainerTabs.Active().CompactSize.Width, ContainerTabs.Active().CompactSize.Height);
             }
 
-            ResizeButtonsPanelLocation();
-        }
-
-        private void WindowMonitoring_Resize(object sender, EventArgs e)
-        {
-            ResizeButtonsPanelLocation();
         }
 
         private void Event_TitleBarDoubleClick(object sender, EventArgs e)
@@ -660,8 +554,6 @@ namespace EveJimaCore
                 cmdMinimazeRestore.Image = Resources.restore;
                 Size = ContainerTabs.Active().CompactSize;
             }
-
-            ResizeButtonsPanelLocation();
         }
 
         private void Event_TitleBarMouseDown(object sender, MouseEventArgs e)
@@ -673,44 +565,6 @@ namespace EveJimaCore
             }
         }
 
-        private void Event_ShowContainerPilots(object sender, EventArgs e)
-        {
-            ContainerTabs.Activate("Pilots");
-
-            HideAllContainers();
-
-            ResizeWindow();
-
-            ucContainerPilotInfo.BackColor = Color.Black;
-            ucContainerPilotInfo.Location = new Point(pnlContainer.Location.X, pnlContainer.Location.Y);
-            ucContainerPilotInfo.BringToFront();
-
-            ucContainerPilotInfo.Visible = true;
-
-            cmdShowContainerPilots.IsTabControlButton = true;
-            cmdShowContainerPilots.BringToFront();
-            cmdShowContainerPilots.Refresh();
-        }
-
-        private void Event_ShowContainerCoordinates(object sender, EventArgs e)
-        {
-            ContainerTabs.Activate("Bookmarks");
-
-            HideAllContainers();
-
-            ResizeWindow();
-
-            ucContainerBookmarks.BackColor = Color.Black;
-            ucContainerBookmarks.Location = new Point(pnlContainer.Location.X, pnlContainer.Location.Y);
-            ucContainerBookmarks.BringToFront();
-
-            ucContainerBookmarks.Visible = true;
-
-            cmdShowContainerBookmarks.IsTabControlButton = true;
-            cmdShowContainerBookmarks.BringToFront();
-            cmdShowContainerBookmarks.Refresh();
-        }
-
         private void RefreshSolarSystemInformation(StarSystemEntity location)
         {
             if (InvokeRequired)
@@ -720,71 +574,18 @@ namespace EveJimaCore
 
             if (Global.Pilots.Count() > 0)
             {
-                ucContainreSolarSystem.RefreshSolarSystem(location);
-                ucTravelHistory.RefreshSolarSystem(location);
+                _containerSolarSystem.RefreshSolarSystem(location);
+                _containerTravelHistory.RefreshSolarSystem(location);
             }
-        }
-
-        private void Event_ShowContainerSolarSystemInfo(object sender, EventArgs e)
-        {
-            ShowContainer_Location();
-        }
-
-        private void cmdAuthirizationPanel_Click(object sender, EventArgs e)
-        {
-            OpenAuthorizationPanel();
-        }
-
-        private void Event_ShowContainerSolarSystem(object sender, EventArgs e)
-        {
-            ContainerTabs.Activate("SolarSystem");
-
-            HideAllContainers();
-
-            ResizeWindow();
-
-            ucContainerlSolarSystemOffline.BackColor = Color.Black;
-            ucContainerlSolarSystemOffline.Location = new Point(pnlContainer.Location.X, pnlContainer.Location.Y);
-            ucContainerlSolarSystemOffline.BringToFront();
-
-            ucContainerlSolarSystemOffline.Visible = true;
-
-            cmdShowContainerSolarSystem.IsTabControlButton = true;
-            cmdShowContainerSolarSystem.BringToFront();
-            cmdShowContainerSolarSystem.Refresh();
         }
 
         private void WindowMonitoring_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ucVersion.DisposeBrowser();
-            ucVersion = null;
+            _containerVersion.DisposeBrowser();
+            _containerVersion = null;
 
-            Global.InternalBrowser.Browser.DisposeBrowser();
-            Global.InternalBrowser.Browser = null;
-        }
-
-        private void Event_ShowVersion(object sender, EventArgs e)
-        {
-            ShowVersionTab();
-        }
-
-        private void ShowVersionTab()
-        {
-            ContainerTabs.Activate("Version");
-
-            HideAllContainers();
-
-            ResizeWindow();
-
-            ucVersion.BackColor = Color.Black;
-            ucVersion.Location = new Point(pnlContainer.Location.X, pnlContainer.Location.Y);
-            ucVersion.BringToFront();
-
-            ucVersion.Visible = true;
-
-            cmdVersion.IsTabControlButton = true;
-            cmdVersion.BringToFront();
-            cmdVersion.Refresh();
+            _containerBrowser.DisposeBrowser();
+            _containerBrowser = null;
         }
 
         private void btnBrowserMax_Click(object sender, EventArgs e)
@@ -805,13 +606,90 @@ namespace EveJimaCore
 
         private void Event_Hide(object sender, EventArgs e)
         {
-            crlNotificay.BalloonTipTitle = "EvJima";
-            crlNotificay.BalloonTipText = "EveJima wait actions in tray.";
+            crlNotificay.BalloonTipTitle = "EveJima";
+            crlNotificay.BalloonTipText = @"EveJima waits actions in tray.";
 
             crlNotificay.Visible = true;
             crlNotificay.ShowBalloonTip(500);
             Hide();
         }
+
+        private void Event_WindowResize(object sender, EventArgs e)
+        {
+            if (_windowIsMinimaze) return;
+
+            TitleBar.Width = Width;
+
+            VersionBar.Width = Width;
+            VersionBar.Location = new Point(0, Height - 32);
+
+            if (ContainerTabs.Active().Name == "WebBrowser")
+            {
+                if (IsWebBrowserMaximize)
+                {
+                    FixBrowserSize();
+                    ContainerTabs.Activate("WebBrowser");
+                    ContainerTabs.Active().Size = new Size(Width, Height);
+                    TitleBar.BringToFront();
+                }
+                else
+                {
+                    ContainerTabs.Active().Size = new Size(Width, Height);
+                    ContainerTabs.Resize();
+                }
+            }
+        }
+
+        private void RefreshTokenTimer_Tick(object sender, EventArgs e)
+        {
+            if (Global.Pilots.Count() > 0)
+            {
+                foreach (var pilot in Global.Pilots)
+                {
+                    Task.Run(() =>
+                    {
+                        Log.DebugFormat("[WindowMonitoring.RefreshTokenTimer_Tick] starting get location info for pilot = {0}", pilot.Name);
+                        pilot.RefreshInfo();
+                    });
+                }
+
+                if (_containerSolarSystem.SolarSystem != null && _containerSolarSystem.SolarSystem.System != Global.Pilots.Selected.Location.System)
+                {
+                    RefreshSolarSystemInformation(Global.Pilots.Selected.Location);
+                }
+            }
+        }
+
+        private void Event_RefreshActivePilot(object sender, EventArgs e)
+        {
+            if (Global.Pilots.Count() > 0)
+            {
+                try
+                {
+                    var activeProgramName = Tools.GetActiveWindowTitle();
+
+                    Log.DebugFormat("[WindowMonitoring.Event_RefreshActivePilot] Active title {0}", activeProgramName);
+
+                    if (!activeProgramName.StartsWith("EVE - ")) return;
+
+                    var pilotName = activeProgramName.Replace("EVE - ", "") + "";
+
+                    Log.DebugFormat("[WindowMonitoring.Event_RefreshActivePilot] pilotName {0}", pilotName);
+                    Log.DebugFormat("[WindowMonitoring.Event_RefreshActivePilot] Global.Pilots.Selected.Name {0}", Global.Pilots.Selected.Name);
+
+                    if (pilotName == Global.Pilots.Selected.Name) return;
+
+                    Global.Pilots.Activate(pilotName);
+
+                    _containerAuthorization.SelectPilot(pilotName);
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorFormat("[WindowMonitoring.Event_RefreshActivePilot] Critical error. Exception {0}", ex);
+                }
+            }
+        }
+
 
     }
 }
