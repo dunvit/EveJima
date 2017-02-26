@@ -6,6 +6,8 @@ namespace EvaJimaCore
 {
     public static class Global
     {
+        public static WorkEnvironment WorkEnvironment;
+
         public static Settings Settings;
 
         public static PilotsEntity Pilots;
@@ -22,6 +24,8 @@ namespace EvaJimaCore
         {
 
             Settings = new Settings();
+
+            WorkEnvironment = new WorkEnvironment();
 
             Metrics = new MetricsWriter();
 

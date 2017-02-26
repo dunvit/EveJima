@@ -30,10 +30,10 @@
         {
             this.listCosmicSifnatures = new System.Windows.Forms.ListBox();
             this.listLocationBookmarks = new System.Windows.Forms.ListBox();
-            this.cmdPasteCosmicSifnatures = new whlButton();
-            this.cmdPasteLocationBookmarks = new whlButton();
-            this.cmdClear = new whlButton();
-            this.cmdClearLists = new whlButton();
+            this.cmdPasteCosmicSifnatures = new EveJimaCore.whlButton();
+            this.cmdPasteLocationBookmarks = new EveJimaCore.whlButton();
+            this.cmdClear = new EveJimaCore.whlButton();
+            this.cmdClearLists = new EveJimaCore.whlButton();
             this.SuspendLayout();
             // 
             // listCosmicSifnatures
@@ -70,7 +70,7 @@
             this.cmdPasteCosmicSifnatures.Name = "cmdPasteCosmicSifnatures";
             this.cmdPasteCosmicSifnatures.Size = new System.Drawing.Size(182, 26);
             this.cmdPasteCosmicSifnatures.TabIndex = 59;
-            this.cmdPasteCosmicSifnatures.Value = "Paste Cosmic Sifnatures";
+            this.cmdPasteCosmicSifnatures.Value = "Paste Cosmic Signatures";
             this.cmdPasteCosmicSifnatures.Click += new System.EventHandler(this.Event_PasteSignatures);
             // 
             // cmdPasteLocationBookmarks

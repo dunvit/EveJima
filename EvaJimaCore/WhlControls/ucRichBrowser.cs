@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using EvaJimaCore;
 using log4net;
 
 namespace EveJimaCore.WhlControls
@@ -9,7 +10,8 @@ namespace EveJimaCore.WhlControls
 
     public partial class ucRichBrowser : baseContainer
     {
-        
+        public Form ParentWindow;
+
         public DelegateChangeBrowserMode ChangeViewMode;
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(ucRichBrowser));
@@ -28,8 +30,36 @@ namespace EveJimaCore.WhlControls
             richBrowser.Visible = true;
             richBrowser.Dock = DockStyle.Fill;
 
+            richBrowser.OnChangeShowFavorites += Event_ShowFavoritesChange;
+            richBrowser.OnBrowserAfterShowDialog += Event_BrowserAfterBeforeShowDialog;
+            richBrowser.OnBrowserBeforeShowDialog += Event_BrowserBeforeShowDialog;
+
+            if (Global.WorkEnvironment.IsShowFavorites == false)
+            {
+                richBrowser.HideFavorites();
+            }
 
             Controls.Add(richBrowser);
+        }
+
+        private bool parentIsTopMost = false;
+
+        private void Event_BrowserBeforeShowDialog()
+        {
+            parentIsTopMost = ParentWindow.TopMost;
+
+            ParentWindow.TopMost = false;
+        }
+
+        private void Event_BrowserAfterBeforeShowDialog()
+        {
+            ParentWindow.TopMost = parentIsTopMost;
+        }
+
+        private void Event_ShowFavoritesChange(bool isShowFavorites)
+        {
+            Global.WorkEnvironment.IsShowFavorites = isShowFavorites;
+            Global.WorkEnvironment.SaveChanges();
         }
 
         public bool isMaxMode = false;

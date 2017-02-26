@@ -293,6 +293,7 @@
             this.browserTabControl.Size = new System.Drawing.Size(647, 494);
             this.browserTabControl.TabIndex = 1;
             this.browserTabControl.SelectedIndexChanged += new System.EventHandler(this.browserTabControl_SelectedIndexChanged);
+            this.browserTabControl.TabIndexChanged += new System.EventHandler(this.browserTabControl_TabIndexChanged);
             // 
             // closeTabContext
             // 

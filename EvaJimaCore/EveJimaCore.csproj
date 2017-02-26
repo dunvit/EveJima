@@ -90,6 +90,7 @@
     <Compile Include="Browser\Bookmarks.cs" />
     <Compile Include="Browser\History.cs" />
     <Compile Include="Browser\InternalBrowser.cs" />
+    <Compile Include="WorkEnvironment.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Infrastructure\CcpXmlApi.cs" />
     <Compile Include="Infrastructure\CrestApiListener.cs" />
@@ -103,6 +104,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Infrastructure\Tools.cs" />
+    <Compile Include="UiTools\LabelWithOptionalCopyTextOnDoubleClick.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UiTools\VsBorder.cs" />
     <Compile Include="Ui\Tab.cs" />
     <Compile Include="Ui\Tabs.cs" />
@@ -299,6 +303,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Versions\1.33.txt" />
     <Content Include="Versions\1.32.txt" />
     <None Include="Resources\minimize1.png" />
     <None Include="Resources\minimize2.png" />

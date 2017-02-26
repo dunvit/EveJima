@@ -12,9 +12,19 @@ using CefSharp.WinForms;
 namespace WBrowser
 {
     
+    public delegate void BrowserChangeShowFavorites(bool isShowFavorites);
+
+    public delegate void BrowserBeforeShowDialog();
+
+    public delegate void BrowserAfterBeforeShowDialog();
 
     public partial class WBrowser : Form
     {
+
+        public BrowserChangeShowFavorites OnChangeShowFavorites;
+        public BrowserBeforeShowDialog OnBrowserBeforeShowDialog;
+        public BrowserAfterBeforeShowDialog OnBrowserAfterShowDialog;
+
         public static String favXml = @"Browser\favorits.xml", linksXml = @"Browser\links.xml";
         String settingsXml=@"Browser\settings.xml", historyXml=@"Browser\history.xml";
         List<String> urls = new List<String>();
@@ -43,26 +53,7 @@ namespace WBrowser
         }
 
 
-        public void FixSize(bool ismax)
-        {
-            
-            if (ismax == true)
-            {
-                if (IsShowFavorites)
-                {
-                    
-                }
-                else
-                {
-                    
-                }
-            }
-            else
-            {
-                
-            }
-
-        }
+        public void FixSize(bool ismax){}
 
 
         #region Form load/Closing/Closed
@@ -131,8 +122,11 @@ namespace WBrowser
             else while (linkBar.Items.Count > 3) linkBar.Items[linkBar.Items.Count - 1].Dispose();
 
             showFavorites();
+
+            browserTabControl.MouseClick += Event_TabMouseClick;
         }
-        
+
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DisposeBrowser();
@@ -263,6 +257,8 @@ namespace WBrowser
         //renameLink method
         private void renameLink()
         {
+            OnBrowserBeforeShowDialog();
+
             RenameLink rl = new RenameLink(name);
             if (rl.ShowDialog() == DialogResult.OK)
             {
@@ -283,6 +279,8 @@ namespace WBrowser
                 myXml.Save(linksXml);
             }
             rl.Close();
+
+            OnBrowserAfterShowDialog();
         }
         //delete favorit method
         private void deleteFavorit()
@@ -307,6 +305,8 @@ namespace WBrowser
         //renameFavorit method
         private void renameFavorit()
         {
+            OnBrowserBeforeShowDialog();
+
             RenameLink rl = new RenameLink(name);
             if (rl.ShowDialog() == DialogResult.OK)
             {
@@ -324,6 +324,8 @@ namespace WBrowser
                 myXml.Save(favXml);
             }
             rl.Close();
+
+            OnBrowserAfterShowDialog();
         }
 
         //addHistory method
@@ -400,6 +402,8 @@ namespace WBrowser
 
             browser.Tag = tabPage;
 
+            
+
             tabPage.Controls.Add(browser);
 
             browserTabControl.TabPages.Insert(browserTabControl.TabCount - 1, tabPage);
@@ -411,6 +415,64 @@ namespace WBrowser
             browser.LoadingStateChanged += OnBrowserLoadingStateChanged;
             browser.TitleChanged += OnBrowserTitleChanged;
             
+        }
+
+        public bool OnBeforePopup(IWebBrowser browser, string url, ref int x, ref int y, ref int width, ref int height)
+        {
+            Invoke((Action)(() =>
+            {
+                var tabPage = new TabPage(url)
+                {
+                    Dock = DockStyle.Fill
+                };
+                browserTabControl.Controls.Add(tabPage);
+                browserTabControl.SelectedTab = tabPage;
+            }));
+
+            return true;
+        }
+
+        private void Event_TabMouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+            {
+                var tc = sender as TabControl;
+
+                if (e.Y <= tc.ItemSize.Height)
+                {
+                    var tabIndex = e.X / tc.ItemSize.Width;
+                    if (tabIndex < tc.TabPages.Count )
+                    {
+                        CloseTab(tabIndex);
+                    }
+                }
+            }
+        }
+
+        private void CloseTab(int index)
+        {
+
+            var control = browserTabControl.TabPages[index].Controls[0] as ChromiumWebBrowser;
+
+            if (control != null)
+            {
+                try
+                {
+                    //control.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    var a = ex;
+                }
+            }
+
+            //browserTabControl.TabPages.RemoveAt(index);
+            browserTabControl.TabPages[index].Dispose();
+        }
+
+        private void browserTabControl_TabIndexChanged(object sender, EventArgs e)
+        {
+            var a = browserTabControl.SelectedTab;
         }
 
 
@@ -505,7 +567,7 @@ namespace WBrowser
                 //    }
                 //}
 
-                browserTabControl.TabPages.RemoveAt(browserTabControl.SelectedIndex);
+                CloseTab(browserTabControl.SelectedIndex);
             }
 
         }
@@ -707,6 +769,8 @@ namespace WBrowser
         {
             if (getCurrentBrowser().Address != "")
             {
+                OnBrowserBeforeShowDialog();
+
                 AddFavorites dlg = new AddFavorites(getCurrentBrowser().Address);
                 DialogResult res = dlg.ShowDialog();
 
@@ -717,6 +781,8 @@ namespace WBrowser
                     else addLink(getCurrentBrowser().Address, dlg.favName);
                 }
                 dlg.Close();
+
+                OnBrowserAfterShowDialog();
             }
 
         }
@@ -759,7 +825,19 @@ namespace WBrowser
             IsShowFavorites = !IsShowFavorites;
 
             settings.DocumentElement.ChildNodes[3].Attributes[0].Value = favoritesPanel.Visible.ToString();
+
+            if (OnChangeShowFavorites != null)
+            {
+                OnChangeShowFavorites(favoritesPanel.Visible);
+            }
         }
+
+        public void HideFavorites()
+        {
+            favoritesPanel.Visible = false;
+        }
+
+
         //add to favorits bar button
         private void toolStripButton9_Click(object sender, EventArgs e)
         {
@@ -939,6 +1017,8 @@ namespace WBrowser
 
 
         #endregion
+
+        
 
 
     }

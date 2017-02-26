@@ -80,7 +80,7 @@ namespace EveJimaCore.WhlControls
                 txtSolarSystemStaticIData.Text = wormholeI.LeadsTo;
                 txtSolarSystemStaticIData.Visible = true;
 
-                toolTip1.SetToolTip(txtSolarSystemStaticI, "Max Stable Mass=" + wormholeI.TotalMass + "\r\nMax Jump  Mass=" + wormholeI.SingleMass);
+                toolTip1.SetToolTip(txtSolarSystemStaticI, "Max Stable Mass=" + wormholeI.TotalMass + "\r\nMax Jump  Mass=" + wormholeI.SingleMass + "\r\nMax Life time =" + wormholeI.Lifetime);
 
                 title = title + " " + wormholeI.Name + "[" + wormholeI.LeadsTo + "]";
             }

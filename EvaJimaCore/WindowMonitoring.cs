@@ -11,6 +11,7 @@ using EvaJimaCore.Ui;
 using EveJimaCore.BLL;
 using EveJimaCore.Properties;
 using EveJimaCore.Ui;
+using EveJimaCore.UiTools;
 using EveJimaCore.WhlControls;
 using log4net;
 
@@ -36,6 +37,8 @@ namespace EveJimaCore
         private whlVersion _containerVersion;
         private ucRichBrowser _containerBrowser;
 
+        private bool isLoaded = false;
+
         #region WinAPI
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -50,6 +53,8 @@ namespace EveJimaCore
         public static extern bool ReleaseCapture();
 
         #endregion
+
+        public LabelWithOptionalCopyTextOnDoubleClick lblSolarSystemName;
 
         public WindowMonitoring()
         {
@@ -75,6 +80,28 @@ namespace EveJimaCore
                 ContainerTabs.Activate("Authorization");
 
                 Size = ContainerTabs.Active().Size;
+
+                lblSolarSystemName = new LabelWithOptionalCopyTextOnDoubleClick
+                {
+                    BackColor = Color.Transparent,
+                    Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
+                    ForeColor = Color.LightGray,
+                    Location = new Point(6, 5),
+                    Name = "lblSolarSystemName",
+                    Size = new Size(252, 18),
+                    TabIndex = 5
+                };
+
+                lblSolarSystemName.MouseDown += Event_TitleBarMouseDown;
+
+                lblSolarSystemName.DoubleClick += Event_TitleBarDoubleClick;
+
+                TitleBar.Controls.Add(lblSolarSystemName);
+
+
+
+
+                
             }
             catch (Exception ex)
             {
@@ -147,6 +174,8 @@ namespace EveJimaCore
             _containerSolarSystem.OnBrowserNavigate += Event_BrowserNavigate;
             _containerPilotInfo.OnBrowserNavigate += Event_BrowserNavigate;
             _containerSolarSystemOffline.OnBrowserNavigate += Event_BrowserNavigate;
+
+            _containerBrowser.ParentWindow = this;
         }
 
         private void WindowMonitoring_Load(object sender, EventArgs e)
@@ -176,12 +205,15 @@ namespace EveJimaCore
             }
 
             Size = ContainerTabs.Active().Size;
+            
+            //TODO: Recomment before create version!!!
             Global.Metrics.PublishOnApplicationStart(Global.Settings.CurrentVersion);
         }
 
         private void Event_BrowserNavigate(string address)
         {
             _containerBrowser.BrowserUrlExecute(address);
+            ContainerTabs.Activate("WebBrowser");
         }
 
         private void Event_ChangeSelectedPilot()
@@ -306,7 +338,8 @@ namespace EveJimaCore
             return false;
         }
 
-        protected override void WndProc(ref Message m)
+        //protected override void WndProc(ref Message m)
+        protected void WndProc1(ref Message m)
         {
             if (ContainerTabs == null || ContainerTabs.Active() == null) return;
 
@@ -482,18 +515,27 @@ namespace EveJimaCore
 
         private void cmdPin_Click(object sender, EventArgs e)
         {
+            _windowIsPinned = !_windowIsPinned;
+            SetPinned();
+
+            
+            
+        }
+
+        private void SetPinned()
+        {
             if (_windowIsPinned)
             {
-                _windowIsPinned = false;
                 cmdPin.Image = Resources.pin;
-                TopMost = false;
+                TopMost = true;
             }
             else
             {
-                _windowIsPinned = true;
                 cmdPin.Image = Resources.unpin;
-                TopMost = true;
+                TopMost = false;
             }
+
+            Global.WorkEnvironment.IsPinned = _windowIsPinned;
         }
 
         private void cmdMinimazeRestore_Click(object sender, EventArgs e)
@@ -510,6 +552,8 @@ namespace EveJimaCore
                 cmdMinimazeRestore.Image = Resources.restore;
                 Size = ContainerTabs.Active().CompactSize;
             }
+
+            TitleBar.Width = Width;
 
         }
 
@@ -547,14 +591,17 @@ namespace EveJimaCore
                 _windowIsMinimaze = false;
                 cmdMinimazeRestore.Image = Resources.minimize;
                 Size = ContainerTabs.Active().Size;
+                TitleBar.Width = Width;
             }
             else
             {
                 _windowIsMinimaze = true;
                 cmdMinimazeRestore.Image = Resources.restore;
                 Size = ContainerTabs.Active().CompactSize;
+                TitleBar.Width = Width;
             }
         }
+
 
         private void Event_TitleBarMouseDown(object sender, MouseEventArgs e)
         {
@@ -586,6 +633,8 @@ namespace EveJimaCore
 
             _containerBrowser.DisposeBrowser();
             _containerBrowser = null;
+
+            Global.WorkEnvironment.SaveChanges();
         }
 
         private void btnBrowserMax_Click(object sender, EventArgs e)
@@ -687,6 +736,28 @@ namespace EveJimaCore
                 {
                     Log.ErrorFormat("[WindowMonitoring.Event_RefreshActivePilot] Critical error. Exception {0}", ex);
                 }
+            }
+        }
+
+
+        private void Event_LocationChange(object sender, EventArgs e)
+        {
+            if (isLoaded == false) return;
+
+            Global.WorkEnvironment.LocationMaximizeX = Location.X;
+            Global.WorkEnvironment.LocationMaximizeY = Location.Y;
+        }
+
+        private void WindowMonitoring_Activated(object sender, EventArgs e)
+        {
+            if (isLoaded == false)
+            {
+                Location = new Point(Global.WorkEnvironment.LocationMaximizeX, Global.WorkEnvironment.LocationMaximizeY);
+                isLoaded = true;
+
+                _windowIsPinned = Global.WorkEnvironment.IsPinned;
+
+                SetPinned();
             }
         }
 

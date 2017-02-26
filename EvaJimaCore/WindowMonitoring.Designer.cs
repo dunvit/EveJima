@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WindowMonitoring));
-            this.lblSolarSystemName = new System.Windows.Forms.Label();
             this.pnlContainer = new System.Windows.Forms.Panel();
             this.RefreshTokenTimer = new System.Windows.Forms.Timer(this.components);
             this.label18 = new System.Windows.Forms.Label();
@@ -48,6 +47,7 @@
             this.VersionBar = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.crlNotificay = new System.Windows.Forms.NotifyIcon(this.components);
+            this.RefreshActivePilot = new System.Windows.Forms.Timer(this.components);
             this.cmdVersion = new EveJimaCore.whlButton();
             this.cmdShowContainerSolarSystem = new EveJimaCore.whlButton();
             this.cmdOpenWebBrowser = new EveJimaCore.whlButton();
@@ -55,22 +55,9 @@
             this.cmdLocation = new EveJimaCore.whlButton();
             this.cmdShowContainerBookmarks = new EveJimaCore.whlButton();
             this.cmdShowContainerPilots = new EveJimaCore.whlButton();
-            this.RefreshActivePilot = new System.Windows.Forms.Timer(this.components);
             this.TitleBar.SuspendLayout();
             this.VersionBar.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lblSolarSystemName
-            // 
-            this.lblSolarSystemName.BackColor = System.Drawing.Color.Transparent;
-            this.lblSolarSystemName.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSolarSystemName.ForeColor = System.Drawing.Color.LightGray;
-            this.lblSolarSystemName.Location = new System.Drawing.Point(5, 5);
-            this.lblSolarSystemName.Name = "lblSolarSystemName";
-            this.lblSolarSystemName.Size = new System.Drawing.Size(252, 18);
-            this.lblSolarSystemName.TabIndex = 5;
-            this.lblSolarSystemName.DoubleClick += new System.EventHandler(this.Event_TitleBarDoubleClick);
-            this.lblSolarSystemName.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Event_TitleBarMouseDown);
             // 
             // pnlContainer
             // 
@@ -144,12 +131,10 @@
             this.TitleBar.Controls.Add(this.btnOpenBrowserAndStartUrl);
             this.TitleBar.Controls.Add(this.cmdClose);
             this.TitleBar.Controls.Add(this.cmdMinimazeRestore);
-            this.TitleBar.Controls.Add(this.lblSolarSystemName);
             this.TitleBar.Location = new System.Drawing.Point(0, 0);
             this.TitleBar.Name = "TitleBar";
             this.TitleBar.Size = new System.Drawing.Size(800, 28);
             this.TitleBar.TabIndex = 47;
-            this.TitleBar.DoubleClick += new System.EventHandler(this.Event_TitleBarDoubleClick);
             this.TitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Event_TitleBarMouseDown);
             // 
             // cmdHide
@@ -285,6 +270,12 @@
             this.crlNotificay.Visible = true;
             this.crlNotificay.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.crlNotificay_MouseDoubleClick);
             // 
+            // RefreshActivePilot
+            // 
+            this.RefreshActivePilot.Enabled = true;
+            this.RefreshActivePilot.Interval = 1000;
+            this.RefreshActivePilot.Tick += new System.EventHandler(this.Event_RefreshActivePilot);
+            // 
             // cmdVersion
             // 
             this.cmdVersion.BackColor = System.Drawing.Color.Black;
@@ -369,12 +360,6 @@
             this.cmdShowContainerPilots.TabIndex = 50;
             this.cmdShowContainerPilots.Value = "Pilots";
             // 
-            // RefreshActivePilot
-            // 
-            this.RefreshActivePilot.Enabled = true;
-            this.RefreshActivePilot.Interval = 1000;
-            this.RefreshActivePilot.Tick += new System.EventHandler(this.Event_RefreshActivePilot);
-            // 
             // WindowMonitoring
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -397,9 +382,11 @@
             this.Name = "WindowMonitoring";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EveJima";
+            this.Activated += new System.EventHandler(this.WindowMonitoring_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WindowMonitoring_FormClosing);
             this.Load += new System.EventHandler(this.WindowMonitoring_Load);
             this.ResizeEnd += new System.EventHandler(this.Event_WindowResizeEnd);
+            this.LocationChanged += new System.EventHandler(this.Event_LocationChange);
             this.DoubleClick += new System.EventHandler(this.Event_WindowDoubleClick);
             this.Resize += new System.EventHandler(this.Event_WindowResize);
             this.TitleBar.ResumeLayout(false);
@@ -414,7 +401,7 @@
         private System.Windows.Forms.Button cmdClose;
         private System.Windows.Forms.Button cmdMinimazeRestore;
         private System.Windows.Forms.Button cmdPin;
-        private System.Windows.Forms.Label lblSolarSystemName;
+        //private System.Windows.Forms.Label lblSolarSystemName;
         public System.Windows.Forms.Panel pnlContainer;
         private System.Windows.Forms.Timer RefreshTokenTimer;
         private System.Windows.Forms.Label label18;

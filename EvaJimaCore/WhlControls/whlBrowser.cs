@@ -68,6 +68,8 @@ namespace EveJimaCore.WhlControls
             #endregion
 
             cmdFavorits.ContextMenu = BuildContextMenuForFavorites();
+
+
         }
 
         
@@ -133,6 +135,8 @@ namespace EveJimaCore.WhlControls
 
                 browser.LoadingStateChanged += OnBrowserLoadingStateChanged;
                 browser.TitleChanged += OnBrowserTitleChanged;
+
+                
 
                 // Add it to the form and fill it to the form window.
                 browser.Dock = DockStyle.Fill;

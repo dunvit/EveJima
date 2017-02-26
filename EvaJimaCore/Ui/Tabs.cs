@@ -72,7 +72,7 @@ namespace EvaJimaCore.Ui
 
             if (Parent.IsWebBrowserMaximize == false)
             {
-                activeTab.Button.BringToFront();
+                if (activeTab.Button != null) activeTab.Button.BringToFront();
             }
 
             activeTab.Container.BringToFront();

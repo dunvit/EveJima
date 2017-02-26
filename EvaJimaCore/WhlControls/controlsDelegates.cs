@@ -9,5 +9,7 @@ namespace EveJimaCore
     public delegate void OpenWebBrowser();
 
     public delegate void BrowserNavigate(string address);
+
+    
     
 }
