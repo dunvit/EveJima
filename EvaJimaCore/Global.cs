@@ -1,5 +1,6 @@
 ﻿using EveJimaCore;
 using EveJimaCore.BLL;
+using EveJimaCore.BLL.LostAndFound;
 using EveJimaSettings;
 
 namespace EvaJimaCore
@@ -20,6 +21,8 @@ namespace EvaJimaCore
 
         public static MetricsWriter Metrics;
 
+        public static LostSolarSystems LostAndFoundOffice;
+
         public static void Initialization()
         {
 
@@ -36,6 +39,8 @@ namespace EvaJimaCore
             Space = new SpaceEntity();
 
             InternalBrowser = new InternalBrowser();
+
+            LostAndFoundOffice = new LostSolarSystems();
         }
     }
 }

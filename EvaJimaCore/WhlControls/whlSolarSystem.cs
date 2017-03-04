@@ -10,6 +10,8 @@ namespace EveJimaCore.WhlControls
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlSolarSystem));
 
+        public DelegateShowLostAndFoundOffice OnShowLostAndFoundOffice;
+
         public BrowserNavigate OnBrowserNavigate;
 
         public StarSystemEntity SolarSystem { get; set; }
@@ -96,7 +98,7 @@ namespace EveJimaCore.WhlControls
                 txtSolarSystemStaticIIData.Text = wormholeII.LeadsTo;
                 txtSolarSystemStaticIIData.Visible = true;
 
-                toolTip2.SetToolTip(txtSolarSystemStaticII, "Max Stable Mass=" + wormholeII.TotalMass + "\r\nMax Jump  Mass=" + wormholeII.SingleMass);
+                toolTip2.SetToolTip(txtSolarSystemStaticII, "Max Stable Mass=" + wormholeII.TotalMass + "\r\nMax Jump  Mass=" + wormholeII.SingleMass + "\r\nMax Life time =" + wormholeII.Lifetime);
 
                 title = title + " " + wormholeII.Name + "[" + wormholeII.LeadsTo + "]";
             }
@@ -161,6 +163,11 @@ namespace EveJimaCore.WhlControls
             if (SolarSystem != null && SolarSystem.System != "unknown")
                 OnBrowserNavigate("http://wh.pasta.gg/" + SolarSystem.System + "");
 
+        }
+
+        private void Event_OpenLostAndFoundOffice(object sender, EventArgs e)
+        {
+            OnShowLostAndFoundOffice();
         }
     }
 }

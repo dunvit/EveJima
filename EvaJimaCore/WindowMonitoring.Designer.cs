@@ -135,6 +135,7 @@
             this.TitleBar.Name = "TitleBar";
             this.TitleBar.Size = new System.Drawing.Size(800, 28);
             this.TitleBar.TabIndex = 47;
+            this.TitleBar.DoubleClick += new System.EventHandler(this.Event_TitleBarDoubleClick);
             this.TitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Event_TitleBarMouseDown);
             // 
             // cmdHide

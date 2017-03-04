@@ -51,6 +51,7 @@
             this.cmdSuperpute = new EveJimaCore.whlButton();
             this.cmdZkillboard = new EveJimaCore.whlButton();
             this.cmdPasta = new EveJimaCore.whlButton();
+            this.cmdLostAndFoundOffice = new EveJimaCore.whlButton();
             this.SuspendLayout();
             // 
             // txtSolarSystemConstellation
@@ -317,12 +318,26 @@
             this.cmdPasta.Value = "Pasta.gg";
             this.cmdPasta.Click += new System.EventHandler(this.Event_PastaShow);
             // 
+            // cmdLostAndFoundOffice
+            // 
+            this.cmdLostAndFoundOffice.BackColor = System.Drawing.Color.Black;
+            this.cmdLostAndFoundOffice.ForeColor = System.Drawing.Color.LightGray;
+            this.cmdLostAndFoundOffice.IsActive = true;
+            this.cmdLostAndFoundOffice.IsTabControlButton = false;
+            this.cmdLostAndFoundOffice.Location = new System.Drawing.Point(167, 182);
+            this.cmdLostAndFoundOffice.Name = "cmdLostAndFoundOffice";
+            this.cmdLostAndFoundOffice.Size = new System.Drawing.Size(148, 26);
+            this.cmdLostAndFoundOffice.TabIndex = 77;
+            this.cmdLostAndFoundOffice.Value = "Lost and found office";
+            this.cmdLostAndFoundOffice.Click += new System.EventHandler(this.Event_OpenLostAndFoundOffice);
+            // 
             // whlSolarSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.cmdLostAndFoundOffice);
             this.Controls.Add(this.cmdPasta);
             this.Controls.Add(this.cmdTravelHistory);
             this.Controls.Add(this.cmdTripwire);
@@ -377,5 +392,6 @@
         private whlButton cmdTripwire;
         private whlButton cmdTravelHistory;
         private whlButton cmdPasta;
+        private whlButton cmdLostAndFoundOffice;
     }
 }

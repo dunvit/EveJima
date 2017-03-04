@@ -36,6 +36,8 @@ namespace EveJimaCore
         private whlSolarSystemOffline _containerSolarSystemOffline;
         private whlVersion _containerVersion;
         private ucRichBrowser _containerBrowser;
+        private whlLostAndFoundOffice _containerLostAndFoundOffice;
+
 
         private bool isLoaded = false;
 
@@ -76,6 +78,7 @@ namespace EveJimaCore
                 ContainerTabs.AddTab("Signatures", TabSize.Small, null, _containerTravelHistory);
                 ContainerTabs.AddTab("WebBrowser", TabSize.Large, cmdOpenWebBrowser, _containerBrowser);
                 ContainerTabs.AddTab("Version", TabSize.Large, cmdVersion, _containerVersion);
+                ContainerTabs.AddTab("LostAndFoundOffice", TabSize.Small, null, _containerLostAndFoundOffice);
 
                 ContainerTabs.Activate("Authorization");
 
@@ -107,6 +110,65 @@ namespace EveJimaCore
             {
                 Log.ErrorFormat("[WindowMonitoring.WindowMonitoring] Critical error {0}", ex);
             }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (ContainerTabs == null || ContainerTabs.Active() == null) return;
+
+            if (ContainerTabs.Active().Name != "WebBrowser")
+            {
+                base.WndProc(ref m);
+                return;
+            }
+
+            // Resize form 
+
+            const UInt32 WM_NCHITTEST = 0x0084;
+            const UInt32 WM_MOUSEMOVE = 0x0200;
+
+            const UInt32 HTLEFT = 10;
+            const UInt32 HTRIGHT = 11;
+            const UInt32 HTBOTTOMRIGHT = 17;
+            const UInt32 HTBOTTOM = 15;
+            const UInt32 HTBOTTOMLEFT = 16;
+            const UInt32 HTTOP = 12;
+            const UInt32 HTTOPLEFT = 13;
+            const UInt32 HTTOPRIGHT = 14;
+
+            const int RESIZE_HANDLE_SIZE = 10;
+            bool handled = false;
+            if (m.Msg == WM_NCHITTEST || m.Msg == WM_MOUSEMOVE)
+            {
+                Size formSize = this.Size;
+                Point screenPoint = new Point(m.LParam.ToInt32());
+                Point clientPoint = this.PointToClient(screenPoint);
+
+                Dictionary<UInt32, Rectangle> boxes = new Dictionary<UInt32, Rectangle>() {
+                    {HTBOTTOMLEFT, new Rectangle(0, formSize.Height - RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE)},
+                    {HTBOTTOM, new Rectangle(RESIZE_HANDLE_SIZE, formSize.Height - RESIZE_HANDLE_SIZE, formSize.Width - 2*RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE)},
+                    {HTBOTTOMRIGHT, new Rectangle(formSize.Width - RESIZE_HANDLE_SIZE, formSize.Height - RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE)},
+                    {HTRIGHT, new Rectangle(formSize.Width - RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE, formSize.Height - 2*RESIZE_HANDLE_SIZE)},
+                    {HTTOPRIGHT, new Rectangle(formSize.Width - RESIZE_HANDLE_SIZE, 0, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE) },
+                    {HTTOP, new Rectangle(RESIZE_HANDLE_SIZE, 0, formSize.Width - 2*RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE) },
+                    {HTTOPLEFT, new Rectangle(0, 0, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE) },
+                    {HTLEFT, new Rectangle(0, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE, formSize.Height - 2*RESIZE_HANDLE_SIZE) }
+                };
+
+                foreach (KeyValuePair<UInt32, Rectangle> hitBox in boxes)
+                {
+                    if (hitBox.Value.Contains(clientPoint))
+                    {
+                        m.Result = (IntPtr)hitBox.Key;
+                        handled = true;
+                        break;
+                    }
+                }
+
+            }
+
+            if (!handled)
+                base.WndProc(ref m);
         }
 
         private void Event_OnChangeActiveTab(string tabName)
@@ -144,12 +206,14 @@ namespace EveJimaCore
             DelegateChangeSolarSystemInfo changeSolarSystemInfo = ChangeSolarSystemInfo;
 
             _containerSolarSystem = new whlSolarSystem(showTravelHistory, changeSolarSystemInfo);
+            _containerSolarSystem.OnShowLostAndFoundOffice += Event_LostAndFoundOffice; 
 
             _containerTravelHistory = new whlTravelHistory(showLocation);
 
             _containerBrowser = new ucRichBrowser();
 
             _containerSolarSystemOffline = new whlSolarSystemOffline();
+            
 
             _containerVersion = new whlVersion();
 
@@ -159,6 +223,9 @@ namespace EveJimaCore
 
             _containerAuthorization.OnChangeSelectedPilot += Event_ChangeSelectedPilot;
 
+            _containerLostAndFoundOffice = new whlLostAndFoundOffice();
+            _containerLostAndFoundOffice.OnShowSolarSystem += Event_ShowSolarSystem;
+
             pnlContainer.Controls.Add(_containerPilotInfo);
             pnlContainer.Controls.Add(_containerBookmarks);
             pnlContainer.Controls.Add(_containerSolarSystem);
@@ -166,6 +233,7 @@ namespace EveJimaCore
             pnlContainer.Controls.Add(_containerSolarSystemOffline);
             pnlContainer.Controls.Add(_containerVersion);
             pnlContainer.Controls.Add(_containerAuthorization);
+            pnlContainer.Controls.Add(_containerLostAndFoundOffice);
 
             _containerBrowser.ChangeViewMode += ChangeViewMode;
 
@@ -176,6 +244,17 @@ namespace EveJimaCore
             _containerSolarSystemOffline.OnBrowserNavigate += Event_BrowserNavigate;
 
             _containerBrowser.ParentWindow = this;
+        }
+
+        private void Event_LostAndFoundOffice()
+        {
+            _containerLostAndFoundOffice.Refresh(Global.Pilots.Selected);
+            ContainerTabs.Activate("LostAndFoundOffice");
+        }
+
+        private void Event_ShowSolarSystem()
+        {
+            ContainerTabs.Activate("Location");
         }
 
         private void WindowMonitoring_Load(object sender, EventArgs e)
@@ -294,7 +373,7 @@ namespace EveJimaCore
 
             if (Visible == false)
             {
-                crlNotificay.BalloonTipTitle = @"EvJima";
+                crlNotificay.BalloonTipTitle = @"EveJima";
                 crlNotificay.BalloonTipText = @"Active pilot enter to new location. " + info;
 
                 crlNotificay.Visible = true;
@@ -338,63 +417,6 @@ namespace EveJimaCore
             return false;
         }
 
-        //protected override void WndProc(ref Message m)
-        protected void WndProc1(ref Message m)
-        {
-            if (ContainerTabs == null || ContainerTabs.Active() == null) return;
-
-            if (ContainerTabs.Active().Name != "WebBrowser")
-            {
-                base.WndProc(ref m);
-                return;
-            }
-
-            const UInt32 WM_NCHITTEST = 0x0084;
-            const UInt32 WM_MOUSEMOVE = 0x0200;
-
-            const UInt32 HTLEFT = 10;
-            const UInt32 HTRIGHT = 11;
-            const UInt32 HTBOTTOMRIGHT = 17;
-            const UInt32 HTBOTTOM = 15;
-            const UInt32 HTBOTTOMLEFT = 16;
-            const UInt32 HTTOP = 12;
-            const UInt32 HTTOPLEFT = 13;
-            const UInt32 HTTOPRIGHT = 14;
-
-            const int RESIZE_HANDLE_SIZE = 10;
-            bool handled = false;
-            if (m.Msg == WM_NCHITTEST || m.Msg == WM_MOUSEMOVE)
-            {
-                Size formSize = this.Size;
-                Point screenPoint = new Point(m.LParam.ToInt32());
-                Point clientPoint = this.PointToClient(screenPoint);
-
-                Dictionary<UInt32, Rectangle> boxes = new Dictionary<UInt32, Rectangle>() {
-                    {HTBOTTOMLEFT, new Rectangle(0, formSize.Height - RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE)},
-                    {HTBOTTOM, new Rectangle(RESIZE_HANDLE_SIZE, formSize.Height - RESIZE_HANDLE_SIZE, formSize.Width - 2*RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE)},
-                    {HTBOTTOMRIGHT, new Rectangle(formSize.Width - RESIZE_HANDLE_SIZE, formSize.Height - RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE)},
-                    {HTRIGHT, new Rectangle(formSize.Width - RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE, formSize.Height - 2*RESIZE_HANDLE_SIZE)},
-                    {HTTOPRIGHT, new Rectangle(formSize.Width - RESIZE_HANDLE_SIZE, 0, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE) },
-                    {HTTOP, new Rectangle(RESIZE_HANDLE_SIZE, 0, formSize.Width - 2*RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE) },
-                    {HTTOPLEFT, new Rectangle(0, 0, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE) },
-                    {HTLEFT, new Rectangle(0, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE, formSize.Height - 2*RESIZE_HANDLE_SIZE) }
-                };
-
-                foreach (KeyValuePair<UInt32, Rectangle> hitBox in boxes)
-                {
-                    if (hitBox.Value.Contains(clientPoint))
-                    {
-                        m.Result = (IntPtr)hitBox.Key;
-                        handled = true;
-                        break;
-                    }
-                }
-
-            }
-
-            if (!handled)
-                base.WndProc(ref m);
-        }
 
         private void DrawPilotPanel(PilotEntity pilot)
         {
@@ -569,6 +591,11 @@ namespace EveJimaCore
 
         private void Event_WindowDoubleClick(object sender, EventArgs e)
         {
+            MinMaxFormResize();
+        }
+
+        private void MinMaxFormResize()
+        {
             if (_windowIsMinimaze)
             {
                 _windowIsMinimaze = false;
@@ -579,9 +606,8 @@ namespace EveJimaCore
             {
                 _windowIsMinimaze = true;
                 cmdMinimazeRestore.Image = Resources.restore;
-                Size = new Size( ContainerTabs.Active().CompactSize.Width, ContainerTabs.Active().CompactSize.Height);
+                Size = new Size(ContainerTabs.Active().CompactSize.Width, ContainerTabs.Active().CompactSize.Height);
             }
-
         }
 
         private void Event_TitleBarDoubleClick(object sender, EventArgs e)
@@ -623,6 +649,30 @@ namespace EveJimaCore
             {
                 _containerSolarSystem.RefreshSolarSystem(location);
                 _containerTravelHistory.RefreshSolarSystem(location);
+                try
+                {
+                    var wormhole = Global.LostAndFoundOffice.WormholeInspection(location.System);
+
+                    if (wormhole != null)
+                    {
+                        if (Visible == false)
+                        {
+                            Show();
+                            WindowState = FormWindowState.Normal;
+                        }
+
+                        _containerLostAndFoundOffice.ShowMessage("Good news, Commander. Pilot " + wormhole.Publisher + " search this solar system (" +
+                                                                 wormhole.Name + ") and pay reward " + wormhole.Reward +
+                                                                 " . Name of this pilot already in your clipboard.");
+                        Clipboard.SetText(wormhole.Publisher);
+                        ContainerTabs.Activate("LostAndFoundOffice");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorFormat("[WindowMonitoring.RefreshSolarSystemInformation] Critical error. Exception {0}", ex);
+                }
+                
             }
         }
 
@@ -659,7 +709,7 @@ namespace EveJimaCore
             crlNotificay.BalloonTipText = @"EveJima waits actions in tray.";
 
             crlNotificay.Visible = true;
-            crlNotificay.ShowBalloonTip(500);
+            crlNotificay.ShowBalloonTip(200);
             Hide();
         }
 

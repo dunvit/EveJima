@@ -28,14 +28,7 @@ namespace EveJimaCore.WhlControls
 
         public void RefreshSolarSystem(StarSystemEntity location)
         {
-            if (SolarSystem == null) return;
-
-            if (SolarSystem == null || SolarSystem.System != location.System)
-            {
-                LoadTravelHistorySignatures(location);
-            }
-
-            SolarSystem = location.Clone() as StarSystemEntity;
+            LoadTravelHistorySignatures(location);
         }
 
         private void LoadTravelHistorySignatures(StarSystemEntity location)
@@ -43,9 +36,13 @@ namespace EveJimaCore.WhlControls
             listHistorySignatures.Items.Clear();
             listCosmicSifnatures.Items.Clear();
 
+            var fileName = @"Data/TravelHistory/" + location.System + ".csv";
+
             try
             {
-                using (var sr = new StreamReader(@"Data/TravelHistory/" + location.System + ".csv"))
+                if (File.Exists(fileName) == false) return;
+
+                using (var sr = new StreamReader(fileName))
                 {
                     var records = new CsvReader(sr).GetRecords<BasicCosmicSignature>();
 
@@ -126,14 +123,29 @@ namespace EveJimaCore.WhlControls
 
             }
 
-            using (var sw = new StreamWriter(@"Data/TravelHistory/" + Global.Pilots.Selected.Location.System + ".csv"))
+            try
             {
-                var writer = new CsvWriter(sw);
+                var filename = @"Data/TravelHistory/" + Global.Pilots.Selected.Location.System + ".csv";
 
-                IEnumerable records = signatures.ToList();
+                if (File.Exists(@"Data/TravelHistory/") == false)
+                {
+                    Directory.CreateDirectory(@"Data/TravelHistory/");
+                }
 
-                writer.WriteRecords(records);
+                using (var sw = new StreamWriter(filename))
+                {
+                    var writer = new CsvWriter(sw);
+
+                    IEnumerable records = signatures.ToList();
+
+                    writer.WriteRecords(records);
+                }
             }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("[whlTravelHistory.Event_UpdateTravelHistory] Critical error. Exception {0}", ex);
+            }
+            
         }
 
         private void Event_Analize(object sender, EventArgs e)

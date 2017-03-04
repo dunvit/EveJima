@@ -16,5 +16,6 @@ namespace EveJimaCore.WhlControls
             Size = new Size(564, 325);
         }
 
+
     }
 }

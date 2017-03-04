@@ -10,6 +10,8 @@ namespace EveJimaCore.WhlControls
     {
         public BrowserNavigate OnBrowserNavigate;
 
+        
+
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlSolarSystemOffline));
 
         public StarSystemEntity SolarSystem { get; set; }
@@ -201,5 +203,6 @@ namespace EveJimaCore.WhlControls
 
             OnBrowserNavigate("http://wh.pasta.gg/" + txtSolarSystem.Text.Trim() + "");
         }
+
     }
 }
