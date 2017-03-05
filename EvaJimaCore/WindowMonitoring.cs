@@ -46,7 +46,7 @@ namespace EveJimaCore
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
-        public bool IsWebBrowserMaximize = false; 
+        public bool IsWebBrowserMaximize = false;
 
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
@@ -104,7 +104,7 @@ namespace EveJimaCore
 
 
 
-                
+
             }
             catch (Exception ex)
             {
@@ -122,7 +122,7 @@ namespace EveJimaCore
                 return;
             }
 
-            // Resize form 
+            // Resize form
 
             const UInt32 WM_NCHITTEST = 0x0084;
             const UInt32 WM_MOUSEMOVE = 0x0200;
@@ -206,14 +206,14 @@ namespace EveJimaCore
             DelegateChangeSolarSystemInfo changeSolarSystemInfo = ChangeSolarSystemInfo;
 
             _containerSolarSystem = new whlSolarSystem(showTravelHistory, changeSolarSystemInfo);
-            _containerSolarSystem.OnShowLostAndFoundOffice += Event_LostAndFoundOffice; 
+            _containerSolarSystem.OnShowLostAndFoundOffice += Event_LostAndFoundOffice;
 
             _containerTravelHistory = new whlTravelHistory(showLocation);
 
             _containerBrowser = new ucRichBrowser();
 
             _containerSolarSystemOffline = new whlSolarSystemOffline();
-            
+
 
             _containerVersion = new whlVersion();
 
@@ -262,7 +262,7 @@ namespace EveJimaCore
             lblVersionID.Text = Global.Settings.CurrentVersion;
 
             Log.DebugFormat("[WindowMonitoring] Version: {0}", lblVersionID.Text);
-            
+
             CreateTooltipsForStatics();
 
             DelegateStartProcess startProcessFunction = StartPilotAuthorizeFlow;
@@ -284,7 +284,7 @@ namespace EveJimaCore
             }
 
             Size = ContainerTabs.Active().Size;
-            
+
             //TODO: Recomment before create version!!!
             Global.Metrics.PublishOnApplicationStart(Global.Settings.CurrentVersion);
         }
@@ -318,7 +318,7 @@ namespace EveJimaCore
             {
                 Log.ErrorFormat("[WindowMonitoring.Event_ChangeSelectedPilot] Critical error. Exception {0}", ex);
             }
-            
+
         }
 
 
@@ -393,7 +393,7 @@ namespace EveJimaCore
         private void ShowContainer_Location()
         {
             if (Global.Pilots.Count() == 0 || Global.Pilots.Selected == null || Global.Pilots.Selected.Location == null || Global.Pilots.Selected.Location.System == "unknown") return;
-            
+
             ContainerTabs.Activate("Location");
         }
 
@@ -516,7 +516,7 @@ namespace EveJimaCore
         }
 
 
-        
+
 
 
         #region GUI
@@ -540,8 +540,8 @@ namespace EveJimaCore
             _windowIsPinned = !_windowIsPinned;
             SetPinned();
 
-            
-            
+
+
         }
 
         private void SetPinned()
@@ -586,7 +586,7 @@ namespace EveJimaCore
 
         private void Event_WindowResizeEnd(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Event_WindowDoubleClick(object sender, EventArgs e)
@@ -661,9 +661,9 @@ namespace EveJimaCore
                             WindowState = FormWindowState.Normal;
                         }
 
-                        _containerLostAndFoundOffice.ShowMessage("Good news, Commander. Pilot " + wormhole.Publisher + " search this solar system (" +
-                                                                 wormhole.Name + ") and pay reward " + wormhole.Reward +
-                                                                 " . Name of this pilot already in your clipboard.");
+                        _containerLostAndFoundOffice.ShowMessage("Good news, Commander! Pilot " + wormhole.Publisher + " is looking for this solar system (" +
+                                                                 wormhole.Name + ") and will pay a reward of " + wormhole.Reward +
+                                                                 " . The name of this pilot is already in your clipboard.");
                         Clipboard.SetText(wormhole.Publisher);
                         ContainerTabs.Activate("LostAndFoundOffice");
                     }
@@ -672,7 +672,7 @@ namespace EveJimaCore
                 {
                     Log.ErrorFormat("[WindowMonitoring.RefreshSolarSystemInformation] Critical error. Exception {0}", ex);
                 }
-                
+
             }
         }
 
