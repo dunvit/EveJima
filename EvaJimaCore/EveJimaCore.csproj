@@ -87,6 +87,8 @@
     <Compile Include="BLL\MetricsWriter.cs" />
     <Compile Include="BLL\PilotEntity.cs" />
     <Compile Include="BLL\PilotsEntity.cs" />
+    <Compile Include="BLL\Router\Waypoint.cs" />
+    <Compile Include="BLL\Router\Waypoints.cs" />
     <Compile Include="BLL\SolarSystemEntity.cs" />
     <Compile Include="BLL\SpaceEntity.cs" />
     <Compile Include="Browser\Address.cs" />
@@ -98,6 +100,12 @@
     </Compile>
     <Compile Include="WhlControls\whlLostAndFoundOffice.Designer.cs">
       <DependentUpon>whlLostAndFoundOffice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WhlControls\whlRouter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\whlRouter.Designer.cs">
+      <DependentUpon>whlRouter.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkEnvironment.cs" />
     <Compile Include="Global.cs" />
@@ -198,6 +206,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Data\Waypoints.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\WSpaceSystemInfo - Basic Solar Systems.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -239,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\whlPilotInfo.resx">
       <DependentUpon>whlPilotInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\whlRouter.resx">
+      <DependentUpon>whlRouter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\whlSolarSystem.resx">
       <DependentUpon>whlSolarSystem.cs</DependentUpon>
@@ -315,6 +329,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Versions\1.35.txt" />
     <Content Include="Versions\1.34.txt" />
     <Content Include="Versions\1.33.txt" />
     <Content Include="Versions\1.32.txt" />

@@ -12,6 +12,6 @@ namespace EveJimaCore
 
     public delegate void BrowserNavigate(string address);
 
-    
+    public delegate void DelegateContainerActivate(string name);
     
 }

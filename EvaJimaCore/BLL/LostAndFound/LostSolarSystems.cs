@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 
@@ -15,13 +16,21 @@ namespace EveJimaCore.BLL.LostAndFound
         private const string DeleteWormholeAddress = "{0}/api/LostAndFound?action={1}&publisher={2}&wormholeName={3}";
         private const string GetWormholesAddress = "{0}/api/LostAndFound";
 
+        public bool IsLoaded { get; set; }
+
         public Dictionary<string, LostSolarSystem> List { get; set; }
 
         public Dictionary<string, LostSolarSystem> Visited { get; set; } 
 
         public LostSolarSystems()
         {
-            List = GetDataFromServer();
+            IsLoaded = false;
+
+            Task.Run(() =>
+            {
+                List = GetDataFromServer();
+                IsLoaded = true;
+            });
 
             Visited = new Dictionary<string, LostSolarSystem>();
         }

@@ -11,6 +11,8 @@ namespace EveJimaCore.WhlControls
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlSolarSystem));
 
         public DelegateShowLostAndFoundOffice OnShowLostAndFoundOffice;
+        public DelegateShowTravelHistory OnShowTravelHistory;
+        public DelegateChangeSolarSystemInfo OnChangeSolarSystemInfo;
 
         public BrowserNavigate OnBrowserNavigate;
 
@@ -19,10 +21,9 @@ namespace EveJimaCore.WhlControls
         private ToolTip toolTip1 = new ToolTip();
         private ToolTip toolTip2 = new ToolTip();
 
-        private DelegateShowTravelHistory _showTravelHistory;
-        private DelegateChangeSolarSystemInfo _changeSolarSystemInfo;
+        
 
-        public whlSolarSystem(DelegateShowTravelHistory showTravelHistory, DelegateChangeSolarSystemInfo changeSolarSystemInfo)
+        public whlSolarSystem()
         {
             InitializeComponent();
 
@@ -36,8 +37,17 @@ namespace EveJimaCore.WhlControls
             toolTip2.ReshowDelay = 500;
             toolTip2.ShowAlways = true;
 
-            _showTravelHistory = showTravelHistory;
-            _changeSolarSystemInfo = changeSolarSystemInfo;
+            cmbServices.Items.Add("Zkillboard");
+            cmbServices.Items.Add("Superpute");
+            cmbServices.Items.Add("Ellatha");
+            cmbServices.Items.Add("Dotlan");
+            cmbServices.Items.Add("Tripwire");
+            cmbServices.Items.Add("Pasta.gg");
+
+            cmbServices.SelectedIndex = cmbServices.FindString("Zkillboard");
+
+            cmbServices.Visible = true;
+
         }
 
         public void RefreshSolarSystem(StarSystemEntity location)
@@ -103,11 +113,11 @@ namespace EveJimaCore.WhlControls
                 title = title + " " + wormholeII.Name + "[" + wormholeII.LeadsTo + "]";
             }
 
-            if (_changeSolarSystemInfo == null) return;
+            if (OnChangeSolarSystemInfo == null) return;
 
             try
             {
-                _changeSolarSystemInfo(title);
+                OnChangeSolarSystemInfo(title);
             }
             catch (Exception ex)
             {
@@ -115,59 +125,61 @@ namespace EveJimaCore.WhlControls
             }
         }
 
-        private void Event_ShowZkillboard(object sender, EventArgs e)
-        {
-            if (SolarSystem != null && SolarSystem.System != "unknown")
-                OnBrowserNavigate("https://zkillboard.com/system/" + Global.Pilots.Selected.Location.Id.Replace("J", "") + "/");
-        }
-
-        private void Event_ShowSuperpute(object sender, EventArgs e)
-        {
-            if (SolarSystem != null && SolarSystem.System != "unknown")
-                OnBrowserNavigate("http://superpute.com/system/" + Global.Pilots.Selected.Location.System + "");
-        }
-
-        private void Event_ShowEllatha(object sender, EventArgs e)
-        {
-            if (SolarSystem != null && SolarSystem.System != "unknown")
-            {
-                if (Global.Pilots.Selected.Location.System.Contains("J") == false)
-                {
-                    MessageBox.Show(@"Ellatha only for W-Space systems");
-                    return;
-                }
-
-                OnBrowserNavigate("http://www.ellatha.com/eve/WormholeSystemview.asp?key=" + Global.Pilots.Selected.Location.System.Replace("J", "") + "");
-            }
-        }
-
-        private void Event_ShowDotlan(object sender, EventArgs e)
-        {
-            if (SolarSystem != null && SolarSystem.System != "unknown")
-                OnBrowserNavigate("http://evemaps.dotlan.net/system/" + Global.Pilots.Selected.Location.System + "");
-        }
-
-        private void Event_TripwireShow(object sender, EventArgs e)
-        {
-            if (SolarSystem != null && SolarSystem.System != "unknown")
-                OnBrowserNavigate("https://tripwire.eve-apps.com/?system=" + SolarSystem.System + "");
-        }
-
         private void Event_ShowTravelHistory(object sender, EventArgs e)
         {
-            _showTravelHistory();
-        }
-
-        private void Event_PastaShow(object sender, EventArgs e)
-        {
-            if (SolarSystem != null && SolarSystem.System != "unknown")
-                OnBrowserNavigate("http://wh.pasta.gg/" + SolarSystem.System + "");
-
+            OnShowTravelHistory();
         }
 
         private void Event_OpenLostAndFoundOffice(object sender, EventArgs e)
         {
+            //Global.Pilots.Selected.CrestData.SetWaypoint(Global.Pilots.Selected.Id);
+
             OnShowLostAndFoundOffice();
+        }
+
+        private void Event_ServiceShow(object sender, EventArgs e)
+        {
+            switch (cmbServices.Text)
+            {
+                case "Zkillboard":
+                    if (SolarSystem != null && SolarSystem.System != "unknown")
+                        OnBrowserNavigate("https://zkillboard.com/system/" + Global.Pilots.Selected.Location.Id.Replace("J", "") + "/");
+                    break;
+                case "Superpute":
+                    if (SolarSystem != null && SolarSystem.System != "unknown")
+                        OnBrowserNavigate("http://superpute.com/system/" + Global.Pilots.Selected.Location.System + "");
+                    break;
+                case "Ellatha":
+                    if (SolarSystem != null && SolarSystem.System != "unknown")
+                    {
+                        if (Global.Pilots.Selected.Location.System.Contains("J") == false)
+                        {
+                            MessageBox.Show(@"Ellatha only for W-Space systems");
+                            return;
+                        }
+
+                        OnBrowserNavigate("http://www.ellatha.com/eve/WormholeSystemview.asp?key=" + Global.Pilots.Selected.Location.System.Replace("J", "") + "");
+                    }
+                    break;
+                case "Dotlan":
+                    if (SolarSystem != null && SolarSystem.System != "unknown")
+                        OnBrowserNavigate("http://evemaps.dotlan.net/system/" + Global.Pilots.Selected.Location.System + "");
+                    break;
+                case "Tripwire":
+                    if (SolarSystem != null && SolarSystem.System != "unknown")
+                        OnBrowserNavigate("https://tripwire.eve-apps.com/?system=" + SolarSystem.System + "");
+                    break;
+                case "Pasta.gg":
+                    if (SolarSystem != null && SolarSystem.System != "unknown")
+                        OnBrowserNavigate("http://wh.pasta.gg/" + SolarSystem.System + "");
+                    break;
+
+            }
+        }
+
+        private void Event_SelectService(object sender, EventArgs e)
+        {
+            cmdShow.Value = cmbServices.Text + @" Show"; 
         }
     }
 }

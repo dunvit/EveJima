@@ -17,13 +17,11 @@ namespace EveJimaCore.WhlControls
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlTravelHistory));
         public StarSystemEntity SolarSystem { get; set; }
 
-        private DelegateShowLocation _delegateShowLocation;
+        public DelegateShowLocation OnShowLocation;
 
-        public whlTravelHistory(DelegateShowLocation delegateShowLocation)
+        public whlTravelHistory()
         {
             InitializeComponent();
-
-            _delegateShowLocation = delegateShowLocation;
         }
 
         public void RefreshSolarSystem(StarSystemEntity location)
@@ -62,7 +60,7 @@ namespace EveJimaCore.WhlControls
 
         private void Event_ReturnToSolarSystem(object sender, EventArgs e)
         {
-            _delegateShowLocation();
+            OnShowLocation();
         }
 
         private void Event_PasteCosmicSignatures(object sender, EventArgs e)

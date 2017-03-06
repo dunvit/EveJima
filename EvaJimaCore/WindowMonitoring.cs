@@ -37,7 +37,7 @@ namespace EveJimaCore
         private whlVersion _containerVersion;
         private ucRichBrowser _containerBrowser;
         private whlLostAndFoundOffice _containerLostAndFoundOffice;
-
+        private whlRouter _containerRouter;
 
         private bool isLoaded = false;
 
@@ -79,6 +79,8 @@ namespace EveJimaCore
                 ContainerTabs.AddTab("WebBrowser", TabSize.Large, cmdOpenWebBrowser, _containerBrowser);
                 ContainerTabs.AddTab("Version", TabSize.Large, cmdVersion, _containerVersion);
                 ContainerTabs.AddTab("LostAndFoundOffice", TabSize.Small, null, _containerLostAndFoundOffice);
+                ContainerTabs.AddTab("Router", TabSize.Small, null, _containerRouter);
+                
 
                 ContainerTabs.Activate("Authorization");
 
@@ -100,11 +102,6 @@ namespace EveJimaCore
                 lblSolarSystemName.DoubleClick += Event_TitleBarDoubleClick;
 
                 TitleBar.Controls.Add(lblSolarSystemName);
-
-
-
-
-                
             }
             catch (Exception ex)
             {
@@ -201,30 +198,44 @@ namespace EveJimaCore
 
         private void ContainersInitialization()
         {
-            DelegateShowTravelHistory showTravelHistory = ShowContainer_TravelHistory;
-            DelegateShowLocation showLocation = ShowContainer_Location;
-            DelegateChangeSolarSystemInfo changeSolarSystemInfo = ChangeSolarSystemInfo;
+            _containerSolarSystem = new whlSolarSystem();
+            #region Events
+            _containerSolarSystem.OnChangeSolarSystemInfo += ContainerEvent_ChangeSolarSystemInfo;
+            _containerSolarSystem.OnShowTravelHistory += ContainerEvent_ShowTravelHistory;
+            _containerSolarSystem.OnShowLostAndFoundOffice += ContainerEvent_ShowLostAndFoundOffice;
+            _containerSolarSystem.OnBrowserNavigate += Event_BrowserNavigate;
+            #endregion
 
-            _containerSolarSystem = new whlSolarSystem(showTravelHistory, changeSolarSystemInfo);
-            _containerSolarSystem.OnShowLostAndFoundOffice += Event_LostAndFoundOffice; 
-
-            _containerTravelHistory = new whlTravelHistory(showLocation);
+            _containerTravelHistory = new whlTravelHistory();
+            #region Events
+            _containerTravelHistory.OnShowLocation += ContainerEvent_ShowLocation;
+            #endregion
 
             _containerBrowser = new ucRichBrowser();
-
+            #region Events
             _containerSolarSystemOffline = new whlSolarSystemOffline();
-            
+            _containerSolarSystemOffline.OnContainerActivate += ContainerEvent_Activate;
+            _containerSolarSystemOffline.OnBrowserNavigate += Event_BrowserNavigate;
+            #endregion
 
             _containerVersion = new whlVersion();
 
             _containerBookmarks = new whlBookmarks();
 
             _containerAuthorization = new whlAuthorization();
-
-            _containerAuthorization.OnChangeSelectedPilot += Event_ChangeSelectedPilot;
+            #region Events
+            _containerAuthorization.OnChangeSelectedPilot += ContainerEvent_ChangeSelectedPilot;
+            #endregion
 
             _containerLostAndFoundOffice = new whlLostAndFoundOffice();
-            _containerLostAndFoundOffice.OnShowSolarSystem += Event_ShowSolarSystem;
+            #region Events
+            _containerLostAndFoundOffice.OnShowSolarSystem += ContainerEvent_ShowSolarSystem;
+            #endregion
+
+            _containerRouter = new whlRouter();
+            #region Events
+            _containerRouter.OnContainerActivate += ContainerEvent_Activate;
+            #endregion
 
             pnlContainer.Controls.Add(_containerPilotInfo);
             pnlContainer.Controls.Add(_containerBookmarks);
@@ -234,25 +245,29 @@ namespace EveJimaCore
             pnlContainer.Controls.Add(_containerVersion);
             pnlContainer.Controls.Add(_containerAuthorization);
             pnlContainer.Controls.Add(_containerLostAndFoundOffice);
+            pnlContainer.Controls.Add(_containerRouter);
 
             _containerBrowser.ChangeViewMode += ChangeViewMode;
 
             pnlContainer.Controls.Add(_containerBrowser);
-
-            _containerSolarSystem.OnBrowserNavigate += Event_BrowserNavigate;
+            
             _containerPilotInfo.OnBrowserNavigate += Event_BrowserNavigate;
-            _containerSolarSystemOffline.OnBrowserNavigate += Event_BrowserNavigate;
 
             _containerBrowser.ParentWindow = this;
         }
 
-        private void Event_LostAndFoundOffice()
+        private void ContainerEvent_Activate(string name)
+        {
+            ContainerTabs.Activate(name);
+        }
+
+        private void ContainerEvent_ShowLostAndFoundOffice()
         {
             _containerLostAndFoundOffice.Refresh(Global.Pilots.Selected);
             ContainerTabs.Activate("LostAndFoundOffice");
         }
 
-        private void Event_ShowSolarSystem()
+        private void ContainerEvent_ShowSolarSystem()
         {
             ContainerTabs.Activate("Location");
         }
@@ -286,7 +301,7 @@ namespace EveJimaCore
             Size = ContainerTabs.Active().Size;
             
             //TODO: Recomment before create version!!!
-            Global.Metrics.PublishOnApplicationStart(Global.Settings.CurrentVersion);
+            //Global.Metrics.PublishOnApplicationStart(Global.Settings.CurrentVersion);
         }
 
         private void Event_BrowserNavigate(string address)
@@ -295,11 +310,11 @@ namespace EveJimaCore
             ContainerTabs.Activate("WebBrowser");
         }
 
-        private void Event_ChangeSelectedPilot()
+        private void ContainerEvent_ChangeSelectedPilot()
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(() => Event_ChangeSelectedPilot()));
+                Invoke(new Action(() => ContainerEvent_ChangeSelectedPilot()));
             }
             try
             {
@@ -367,7 +382,7 @@ namespace EveJimaCore
             pnlContainer.BringToFront();
         }
 
-        private void ChangeSolarSystemInfo(string info)
+        private void ContainerEvent_ChangeSolarSystemInfo(string info)
         {
             lblSolarSystemName.Text = info;
 
@@ -382,7 +397,7 @@ namespace EveJimaCore
         }
 
 
-        private void ShowContainer_TravelHistory()
+        private void ContainerEvent_ShowTravelHistory()
         {
             if (Global.Pilots.Count() == 0 || Global.Pilots.Selected == null || Global.Pilots.Selected.Location == null || Global.Pilots.Selected.Location.System == "unknown") return;
 
@@ -390,7 +405,7 @@ namespace EveJimaCore
         }
 
 
-        private void ShowContainer_Location()
+        private void ContainerEvent_ShowLocation()
         {
             if (Global.Pilots.Count() == 0 || Global.Pilots.Selected == null || Global.Pilots.Selected.Location == null || Global.Pilots.Selected.Location.System == "unknown") return;
             
@@ -489,7 +504,6 @@ namespace EveJimaCore
             }
         }
 
-
         private void OpenAuthorizationPanel()
         {
             ContainerTabs.Activate("Authorization");
@@ -515,10 +529,6 @@ namespace EveJimaCore
             cmdMinimazeRestore.Image = Resources.minimize;
         }
 
-
-        
-
-
         #region GUI
 
         protected override void OnPaint(PaintEventArgs e)
@@ -539,9 +549,6 @@ namespace EveJimaCore
         {
             _windowIsPinned = !_windowIsPinned;
             SetPinned();
-
-            
-            
         }
 
         private void SetPinned()
@@ -578,16 +585,7 @@ namespace EveJimaCore
             TitleBar.Width = Width;
 
         }
-
-
         #endregion
-
-
-
-        private void Event_WindowResizeEnd(object sender, EventArgs e)
-        {
-            
-        }
 
         private void Event_WindowDoubleClick(object sender, EventArgs e)
         {
@@ -661,9 +659,9 @@ namespace EveJimaCore
                             WindowState = FormWindowState.Normal;
                         }
 
-                        _containerLostAndFoundOffice.ShowMessage("Good news, Commander. Pilot " + wormhole.Publisher + " search this solar system (" +
-                                                                 wormhole.Name + ") and pay reward " + wormhole.Reward +
-                                                                 " . Name of this pilot already in your clipboard.");
+                        _containerLostAndFoundOffice.ShowMessage("Good news, Commander! Pilot " + wormhole.Publisher + " is looking for this solar system (" +
+                                                                 wormhole.Name + ") and will pay a reward of " + wormhole.Reward +
+                                                                 " . The name of this pilot is already in your clipboard.");
                         Clipboard.SetText(wormhole.Publisher);
                         ContainerTabs.Activate("LostAndFoundOffice");
                     }

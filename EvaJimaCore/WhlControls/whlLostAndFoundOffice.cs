@@ -68,6 +68,7 @@ namespace EveJimaCore.WhlControls
 
         private void ShowDataContainer()
         {
+            if (Global.LostAndFoundOffice.IsLoaded == false) return;
             containerMessage.Visible = false;
             containerPublish.Visible = false;
             containerRemove.Visible = false;

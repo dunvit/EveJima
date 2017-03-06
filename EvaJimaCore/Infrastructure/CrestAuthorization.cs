@@ -215,6 +215,48 @@ namespace EveJimaCore
             }
         }
 
+        
+
+        public void SetWaypoint(long pilotId, string clearOtherWaypoints, string solarSystemId)
+        {
+            Log.DebugFormat("[CrestAuthorization.SetWaypointRefresh] started for refresh_token = {0}", RefreshToken);
+
+            var url = "https://crest-tq.eveonline.com//characters/" + pilotId + "/ui/autopilot/waypoints/";
+
+            try
+            {
+                
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+                httpWebRequest.Headers.Add("Authorization", "Bearer " + AccessToken);
+                httpWebRequest.Host = "crest-tq.eveonline.com";
+
+                IDisposable disposableResponse = httpWebRequest as IDisposable;
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    string json = "{\"clearOtherWaypoints\": " + clearOtherWaypoints + ",\"first\": " + clearOtherWaypoints + ",\"solarSystem\": {\"href\": \"https://crest-tq.eveonline.com/solarsystems/" + solarSystemId + "/\",\"id\": " + solarSystemId + "}}";
+
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+
+                    using (HttpWebResponse objResponse = (HttpWebResponse)httpWebRequest.GetResponse())
+                    {
+                        // do something...
+                    }
+                }
+
+                httpWebRequest = null;
+
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Critical error in [CrestAuthorization.SetWaypointRefresh] Exception is {0}", ex);
+            }
+
+        }
+
 
     }
 }

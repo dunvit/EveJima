@@ -386,7 +386,6 @@
             this.Activated += new System.EventHandler(this.WindowMonitoring_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WindowMonitoring_FormClosing);
             this.Load += new System.EventHandler(this.WindowMonitoring_Load);
-            this.ResizeEnd += new System.EventHandler(this.Event_WindowResizeEnd);
             this.LocationChanged += new System.EventHandler(this.Event_LocationChange);
             this.DoubleClick += new System.EventHandler(this.Event_WindowDoubleClick);
             this.Resize += new System.EventHandler(this.Event_WindowResize);

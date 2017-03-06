@@ -132,7 +132,7 @@
             // 
             this.containerMessage.Controls.Add(this.lblMessage);
             this.containerMessage.Controls.Add(this.whlButton1);
-            this.containerMessage.Location = new System.Drawing.Point(354, 63);
+            this.containerMessage.Location = new System.Drawing.Point(224, 60);
             this.containerMessage.Name = "containerMessage";
             this.containerMessage.Size = new System.Drawing.Size(446, 203);
             this.containerMessage.TabIndex = 3;
@@ -174,7 +174,7 @@
             this.containerPublish.Controls.Add(this.label3);
             this.containerPublish.Controls.Add(this.label2);
             this.containerPublish.Controls.Add(this.label1);
-            this.containerPublish.Location = new System.Drawing.Point(395, 18);
+            this.containerPublish.Location = new System.Drawing.Point(373, 23);
             this.containerPublish.Name = "containerPublish";
             this.containerPublish.Size = new System.Drawing.Size(446, 203);
             this.containerPublish.TabIndex = 1;

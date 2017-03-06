@@ -24,8 +24,11 @@ Patch notes for 1.34 Release
 
 Features & Changes:
 
-+ 
++ Added tab "Lost and found Office" available from the "Location". You can post a request for the missing Wormhole exposed reward. Each pilot went down in such a system will receive a message stating that you are looking for this wormhole.
++ Added icon for the program that is displayed when pin the program to the taskbar.
 
 Defect Fixes:
 
-+ 
++ Fixed a bug due to which it was impossible to change the size of the window in the "Browser" tab
++ Fixed a bug due to which the signature of the visits of the solar system is not loaded in the tab "Travel History"
++ Fixed a bug where the life cycle of the wormhole when the mouse is shown only for the first static.

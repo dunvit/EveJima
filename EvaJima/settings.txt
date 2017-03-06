@@ -4,7 +4,7 @@
   "CCPSSO_AUTH_CLIENT_SECRET": "GZyvG71OxmfHzcDrTMreHw6CV7sDUwiBMiPSpbPn",
   "CCPSSO_AUTH_CLIENT_STATE": "75c68f04aec80589a157fd13",
   "CCPSSO_AUTH_PORT": "8080",
-  "CCPSSO_AUTH_SCOPES": "characterLocationRead",
+  "CCPSSO_AUTH_SCOPES": "characterLocationRead characterNavigationWrite",
   "Server_update_uri_version": "http://evejima.mikotaj.com/Version.txt",
   "Server_update_content_version" : "http://evejima.mikotaj.com/VersionContent.txt",
   "Client_execution_file" : "EveJima.exe"
