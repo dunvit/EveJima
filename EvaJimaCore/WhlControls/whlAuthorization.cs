@@ -114,11 +114,70 @@ namespace EveJimaCore.WhlControls
                 cmbPilots.Items.Add(_currentPilot.Name.Trim());
                 cmbPilots.Text = _currentPilot.Name.Trim();
             }
+            else
+            {
+                // Update token
+                UpdatePilotToStorage(_currentPilot);
+            }
 
             cmbPilots.Visible = true;
 
             Global.Pilots.Selected = _currentPilot;
 
+        }
+
+        private void UpdatePilotToStorage(PilotEntity currentPilot)
+        {
+            try
+            {
+                var allLines = Global.Pilots.GetPilotsStorageContent();
+
+                var isNeedAddPilotToStorage = true;
+
+                const string file = @"Data/Pilots.csv";
+
+                if (File.Exists(file)) File.Delete(file);
+
+                using (var fs = new FileStream(file, FileMode.CreateNew))
+                {
+                    using (var sw = new StreamWriter(fs))
+                    {
+                        foreach (var allLine in allLines)
+                        {
+                            try
+                            {
+                                if (allLine.Trim() == String.Empty) continue;
+
+                                var pilotDetails = allLine.Split(',');
+
+                                if (pilotDetails[1] == currentPilot.Id.ToString())
+                                {
+                                    pilotDetails[2] = currentPilot.CrestData.RefreshToken;
+                                }
+
+                                sw.WriteLine("{0},{1},{2}", pilotDetails[0], pilotDetails[1], pilotDetails[2]);
+                            }
+                            catch (Exception ex1)
+                            {
+                                Log.ErrorFormat("[whlAuthorization.UpdatePilotToStorage] Critical error. Exception {0}", ex1);
+                            }
+
+                            
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("[whlAuthorization.UpdatePilotToStorage] Critical error. Exception {0}", ex);
+            }
+
+            
+
+            
+
+           
         }
 
         private void AddPilotToStorage(PilotEntity currentPilot)
