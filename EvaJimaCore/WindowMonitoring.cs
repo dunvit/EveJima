@@ -365,8 +365,8 @@ namespace EveJimaCore
 
             if (_containerBrowser.IsShowFavorites)
             {
-                pnlContainer.Location = new Point(positionLeft - 148, -57);
-                pnlContainer.Width = Width + 140;
+                pnlContainer.Location = new Point(positionLeft - 0, -57);
+                pnlContainer.Width = Width - 10;
                 pnlContainer.Height = Height + 54;
             }
             else
