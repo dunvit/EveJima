@@ -13,8 +13,6 @@ namespace EveJimaCore
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(CrestAuthorization));
 
-        
-
         public string AccessToken { get; set; }
 
         public string TokenType { get; set; }
@@ -43,7 +41,7 @@ namespace EveJimaCore
         {
             Log.DebugFormat("[CrestAuthorization.VerifyAuthorizationCode] started for token = {0}", token);
 
-            var url = "https://login.eveonline.com/oauth/token";
+            const string url = "https://login.eveonline.com/oauth/token";
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
             httpWebRequest.ContentType = "application/json";
@@ -99,7 +97,7 @@ namespace EveJimaCore
         {
             Log.DebugFormat("[CrestAuthorization.Refresh] started for refresh_token = {0}", RefreshToken);
 
-            var url = "https://login.eveonline.com/oauth/token";
+            const string url = "https://login.eveonline.com/oauth/token";
 
             try
             {
@@ -107,13 +105,13 @@ namespace EveJimaCore
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
 
-                var encoded = Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(CCPSSO_AUTH_CLIENT_ID + ":" + CCPSSO_AUTH_CLIENT_SECRET));
+                var encoded = Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(CCPSSO_AUTH_CLIENT_ID + ":" + CCPSSO_AUTH_CLIENT_SECRET));
                 httpWebRequest.Headers.Add("Authorization", "Basic " + encoded);
                 httpWebRequest.Host = "login.eveonline.com";
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
-                    string json = "{\"grant_type\":\"refresh_token\",\"refresh_token\":\"" + RefreshToken + "\"}";
+                    var json = "{\"grant_type\":\"refresh_token\",\"refresh_token\":\"" + RefreshToken + "\"}";
 
                     streamWriter.Write(json);
                     streamWriter.Flush();
@@ -145,7 +143,7 @@ namespace EveJimaCore
         {
             Log.DebugFormat("[CrestAuthorization.ObtainingCharacterData] AccessToken = {0}", AccessToken);
 
-            var url = "https://login.eveonline.com/oauth/verify";
+            const string url = "https://login.eveonline.com/oauth/verify";
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
             httpWebRequest.Method = "GET";
@@ -211,51 +209,12 @@ namespace EveJimaCore
                 Log.DebugFormat("[CrestAuthorization.GetCharacterInfo] result = {0}", result);
 
                 return JObject.Parse(result);
-
             }
         }
 
         
 
-        public void SetWaypoint(long pilotId, string clearOtherWaypoints, string solarSystemId)
-        {
-            Log.DebugFormat("[CrestAuthorization.SetWaypointRefresh] started for refresh_token = {0}", RefreshToken);
-
-            var url = "https://crest-tq.eveonline.com//characters/" + pilotId + "/ui/autopilot/waypoints/";
-
-            try
-            {
-                
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-                httpWebRequest.ContentType = "application/json";
-                httpWebRequest.Method = "POST";
-                httpWebRequest.Headers.Add("Authorization", "Bearer " + AccessToken);
-                httpWebRequest.Host = "crest-tq.eveonline.com";
-
-                IDisposable disposableResponse = httpWebRequest as IDisposable;
-
-                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-                {
-                    string json = "{\"clearOtherWaypoints\": " + clearOtherWaypoints + ",\"first\": " + clearOtherWaypoints + ",\"solarSystem\": {\"href\": \"https://crest-tq.eveonline.com/solarsystems/" + solarSystemId + "/\",\"id\": " + solarSystemId + "}}";
-
-                    streamWriter.Write(json);
-                    streamWriter.Flush();
-
-                    using (HttpWebResponse objResponse = (HttpWebResponse)httpWebRequest.GetResponse())
-                    {
-                        // do something...
-                    }
-                }
-
-                httpWebRequest = null;
-
-            }
-            catch (Exception ex)
-            {
-                Log.ErrorFormat("Critical error in [CrestAuthorization.SetWaypointRefresh] Exception is {0}", ex);
-            }
-
-        }
+        
 
 
     }

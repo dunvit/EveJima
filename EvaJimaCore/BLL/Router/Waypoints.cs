@@ -84,7 +84,7 @@ namespace EveJimaCore.BLL.Router
 
             if (File.Exists(@"Data/Routes/" + selectedRoute) == false) return systemsCount;
 
-            pilot.CrestData.SetWaypoint(pilot.Id, "true", Global.Space.BasicSolarSystems["KF1-DU"]);
+            CrestApiFunctions.SetWaypoint(pilot, "true", Global.Space.BasicSolarSystems["KF1-DU"]);
 
             foreach (string line in File.ReadLines(@"Data/Routes/" + selectedRoute))
             {
@@ -96,7 +96,7 @@ namespace EveJimaCore.BLL.Router
 
                     var systemId = Global.Space.BasicSolarSystems[line.ToUpper()];
 
-                    pilot.CrestData.SetWaypoint(pilot.Id, clearOtherWaypoints, systemId);
+                    CrestApiFunctions.SetWaypoint(pilot, clearOtherWaypoints, systemId);
 
                     Thread.Sleep(1000);
                 }

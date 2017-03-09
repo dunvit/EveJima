@@ -13,12 +13,7 @@ namespace EveJimaCore
     public class Infrastructure
     {
         public CcpXmlApi EveXmlApi = new CcpXmlApi();
-
-        public Infrastructure()
-        {
-            
-        }
-
+ 
         public static void GetSolarSystems()
         {
             const string url = "https://crest-tq.eveonline.com/solarsystems/";

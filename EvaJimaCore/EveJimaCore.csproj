@@ -95,6 +95,7 @@
     <Compile Include="Browser\Bookmarks.cs" />
     <Compile Include="Browser\History.cs" />
     <Compile Include="Browser\InternalBrowser.cs" />
+    <Compile Include="Infrastructure\CrestApiFunctions.cs" />
     <Compile Include="WhlControls\whlLostAndFoundOffice.cs">
       <SubType>UserControl</SubType>
     </Compile>
