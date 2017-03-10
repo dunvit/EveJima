@@ -204,6 +204,7 @@ namespace EveJimaCore
             _containerSolarSystem.OnShowTravelHistory += ContainerEvent_ShowTravelHistory;
             _containerSolarSystem.OnShowLostAndFoundOffice += ContainerEvent_ShowLostAndFoundOffice;
             _containerSolarSystem.OnBrowserNavigate += Event_BrowserNavigate;
+            _containerSolarSystem.OnContainerActivate += ContainerEvent_Activate;
             #endregion
 
             _containerTravelHistory = new whlTravelHistory();
@@ -214,7 +215,7 @@ namespace EveJimaCore
             _containerBrowser = new ucRichBrowser();
             #region Events
             _containerSolarSystemOffline = new whlSolarSystemOffline();
-            _containerSolarSystemOffline.OnContainerActivate += ContainerEvent_Activate;
+            
             _containerSolarSystemOffline.OnBrowserNavigate += Event_BrowserNavigate;
             #endregion
 

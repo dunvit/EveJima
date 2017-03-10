@@ -48,6 +48,7 @@
             this.cmdLostAndFoundOffice = new EveJimaCore.whlButton();
             this.cmbServices = new System.Windows.Forms.ComboBox();
             this.cmdShow = new EveJimaCore.whlButton();
+            this.cmdRouter = new EveJimaCore.whlButton();
             this.SuspendLayout();
             // 
             // txtSolarSystemConstellation
@@ -277,12 +278,26 @@
             this.cmdShow.Value = "Show";
             this.cmdShow.Click += new System.EventHandler(this.Event_ServiceShow);
             // 
+            // cmdRouter
+            // 
+            this.cmdRouter.BackColor = System.Drawing.Color.Black;
+            this.cmdRouter.ForeColor = System.Drawing.Color.LightGray;
+            this.cmdRouter.IsActive = true;
+            this.cmdRouter.IsTabControlButton = false;
+            this.cmdRouter.Location = new System.Drawing.Point(380, 107);
+            this.cmdRouter.Name = "cmdRouter";
+            this.cmdRouter.Size = new System.Drawing.Size(148, 26);
+            this.cmdRouter.TabIndex = 80;
+            this.cmdRouter.Value = "Router";
+            this.cmdRouter.Click += new System.EventHandler(this.Event_ShowRouter);
+            // 
             // whlSolarSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.cmdRouter);
             this.Controls.Add(this.cmdShow);
             this.Controls.Add(this.cmbServices);
             this.Controls.Add(this.cmdLostAndFoundOffice);
@@ -331,5 +346,6 @@
         private whlButton cmdLostAndFoundOffice;
         private System.Windows.Forms.ComboBox cmbServices;
         private whlButton cmdShow;
+        private whlButton cmdRouter;
     }
 }

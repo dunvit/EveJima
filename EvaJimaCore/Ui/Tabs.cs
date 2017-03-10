@@ -51,6 +51,19 @@ namespace EvaJimaCore.Ui
         {
             var button = sender as whlButton;
 
+            if (button.Tag.ToString() == "Location")
+            {
+                if (Global.Pilots.Selected.Location.System == "unknown")
+                {
+                    button.IsActive = false;
+                    return;
+                }
+                else
+                {
+                    button.IsActive = true;
+                }
+            }
+
             Activate(button.Tag.ToString());
         }
 

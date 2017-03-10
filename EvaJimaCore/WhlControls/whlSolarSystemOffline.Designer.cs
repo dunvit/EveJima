@@ -52,7 +52,6 @@
             this.cmdZkillboard = new EveJimaCore.whlButton();
             this.cmdWormholePvE = new EveJimaCore.whlButton();
             this.cmdPasta = new EveJimaCore.whlButton();
-            this.cmdRouter = new EveJimaCore.whlButton();
             ((System.ComponentModel.ISupportInitialize)(this.cmdAnalizeSolarSystem)).BeginInit();
             this.SuspendLayout();
             // 
@@ -329,26 +328,12 @@
             this.cmdPasta.Value = "Pasta.gg";
             this.cmdPasta.Click += new System.EventHandler(this.Event_PastaShow);
             // 
-            // cmdRouter
-            // 
-            this.cmdRouter.BackColor = System.Drawing.Color.Black;
-            this.cmdRouter.ForeColor = System.Drawing.Color.LightGray;
-            this.cmdRouter.IsActive = true;
-            this.cmdRouter.IsTabControlButton = false;
-            this.cmdRouter.Location = new System.Drawing.Point(200, 186);
-            this.cmdRouter.Name = "cmdRouter";
-            this.cmdRouter.Size = new System.Drawing.Size(148, 26);
-            this.cmdRouter.TabIndex = 76;
-            this.cmdRouter.Value = "Router";
-            this.cmdRouter.Click += new System.EventHandler(this.Event_ShowRouterContainer);
-            // 
             // whlSolarSystemOffline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.cmdRouter);
             this.Controls.Add(this.cmdPasta);
             this.Controls.Add(this.cmdWormholePvE);
             this.Controls.Add(this.cmdAnalizeSolarSystem);
@@ -407,6 +392,5 @@
         private System.Windows.Forms.PictureBox cmdAnalizeSolarSystem;
         private whlButton cmdWormholePvE;
         private whlButton cmdPasta;
-        private whlButton cmdRouter;
     }
 }

@@ -10,7 +10,7 @@ namespace EveJimaCore.WhlControls
     {
         public BrowserNavigate OnBrowserNavigate;
 
-        public DelegateContainerActivate OnContainerActivate;
+        
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlSolarSystemOffline));
 
@@ -202,11 +202,6 @@ namespace EveJimaCore.WhlControls
             if (string.IsNullOrEmpty(txtSolarSystem.Text)) return;
 
             OnBrowserNavigate("http://wh.pasta.gg/" + txtSolarSystem.Text.Trim() + "");
-        }
-
-        private void Event_ShowRouterContainer(object sender, EventArgs e)
-        {
-            OnContainerActivate("Router");
         }
 
     }

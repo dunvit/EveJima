@@ -13,6 +13,7 @@ namespace EveJimaCore.WhlControls
         public DelegateShowLostAndFoundOffice OnShowLostAndFoundOffice;
         public DelegateShowTravelHistory OnShowTravelHistory;
         public DelegateChangeSolarSystemInfo OnChangeSolarSystemInfo;
+        public DelegateContainerActivate OnContainerActivate;
 
         public BrowserNavigate OnBrowserNavigate;
 
@@ -180,6 +181,11 @@ namespace EveJimaCore.WhlControls
         private void Event_SelectService(object sender, EventArgs e)
         {
             cmdShow.Value = cmbServices.Text + @" Show"; 
+        }
+
+        private void Event_ShowRouter(object sender, EventArgs e)
+        {
+            OnContainerActivate("Router");
         }
     }
 }

@@ -95,7 +95,7 @@ namespace EveJimaCore.WhlControls
 
         private void Event_Return(object sender, EventArgs e)
         {
-            OnContainerActivate("SolarSystem");
+            OnContainerActivate("Location");
         }
 
         private void Event_ShowAllRoutes(object sender, EventArgs e)
