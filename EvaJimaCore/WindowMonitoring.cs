@@ -80,7 +80,7 @@ namespace EveJimaCore
                 ContainerTabs.AddTab("Version", TabSize.Large, cmdVersion, _containerVersion);
                 ContainerTabs.AddTab("LostAndFoundOffice", TabSize.Small, null, _containerLostAndFoundOffice);
                 ContainerTabs.AddTab("Router", TabSize.Small, null, _containerRouter);
-                
+
 
                 ContainerTabs.Activate("Authorization");
 
@@ -251,7 +251,7 @@ namespace EveJimaCore
             _containerBrowser.ChangeViewMode += ChangeViewMode;
 
             pnlContainer.Controls.Add(_containerBrowser);
-            
+
             _containerPilotInfo.OnBrowserNavigate += Event_BrowserNavigate;
 
             _containerBrowser.ParentWindow = this;
@@ -302,7 +302,7 @@ namespace EveJimaCore
             Size = ContainerTabs.Active().Size;
             
             //TODO: Recomment before create version!!!
-            //Global.Metrics.PublishOnApplicationStart(Global.Settings.CurrentVersion);
+            Global.Metrics.PublishOnApplicationStart(Global.Settings.CurrentVersion);
         }
 
         private void Event_BrowserNavigate(string address)
@@ -391,13 +391,13 @@ namespace EveJimaCore
             {
                 if (Tools.IsWSpaceSystem(Global.Pilots.Selected.Location.System))
                 {
-                    crlNotificay.BalloonTipTitle = @"EveJima";
-                    crlNotificay.BalloonTipText = @"Active pilot enter to new location. " + info;
+                crlNotificay.BalloonTipTitle = @"EveJima";
+                crlNotificay.BalloonTipText = @"Active pilot enter to new location. " + info;
 
-                    crlNotificay.Visible = true;
-                    crlNotificay.ShowBalloonTip(500);
-                }
+                crlNotificay.Visible = true;
+                crlNotificay.ShowBalloonTip(500);
             }
+        }
         }
 
 
