@@ -389,11 +389,14 @@ namespace EveJimaCore
 
             if (Visible == false)
             {
-                crlNotificay.BalloonTipTitle = @"EveJima";
-                crlNotificay.BalloonTipText = @"Active pilot enter to new location. " + info;
+                if (Tools.IsWSpaceSystem(Global.Pilots.Selected.Location.System))
+                {
+                    crlNotificay.BalloonTipTitle = @"EveJima";
+                    crlNotificay.BalloonTipText = @"Active pilot enter to new location. " + info;
 
-                crlNotificay.Visible = true;
-                crlNotificay.ShowBalloonTip(500);
+                    crlNotificay.Visible = true;
+                    crlNotificay.ShowBalloonTip(500);
+                }
             }
         }
 

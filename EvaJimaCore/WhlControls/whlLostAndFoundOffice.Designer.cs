@@ -132,7 +132,7 @@
             // 
             this.containerMessage.Controls.Add(this.lblMessage);
             this.containerMessage.Controls.Add(this.whlButton1);
-            this.containerMessage.Location = new System.Drawing.Point(224, 60);
+            this.containerMessage.Location = new System.Drawing.Point(4, 7);
             this.containerMessage.Name = "containerMessage";
             this.containerMessage.Size = new System.Drawing.Size(446, 203);
             this.containerMessage.TabIndex = 3;

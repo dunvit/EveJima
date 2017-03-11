@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using log4net;
 
 namespace EveJimaCore
@@ -73,5 +74,13 @@ namespace EveJimaCore
             return Color.Bisque;
         }
 
+        public static bool IsWSpaceSystem(string systemName)
+        {
+            var numbersInSystemName = Regex.Match(systemName, @"\d+").Value;
+
+            if (numbersInSystemName == "") return false;
+
+            return systemName.Replace(numbersInSystemName, "") == "J";
+        }
     }
 }
