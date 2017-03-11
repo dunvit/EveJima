@@ -53,6 +53,12 @@ namespace EvaJimaCore.Ui
 
             if (button.Tag.ToString() == "Location")
             {
+                if (Global.Pilots.Selected == null)
+                {
+                    button.IsActive = false;
+                    return;
+                }
+
                 if (Global.Pilots.Selected.Location.System == "unknown")
                 {
                     button.IsActive = false;

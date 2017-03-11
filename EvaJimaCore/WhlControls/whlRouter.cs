@@ -110,7 +110,7 @@ namespace EveJimaCore.WhlControls
                 whlButton1.IsActive = false;
                 int count = _waypoints.SetDestinationByRoute(gridAllRoutes.CurrentCell.Value.ToString(), Global.Pilots.Selected);
                 whlButton1.IsActive = true;
-                MessageBox.Show(String.Format("Route added to pilot {0}  with {1}  waypoints.", Global.Pilots.Selected.Name, count.ToString()));
+                MessageBox.Show(String.Format("Route added to pilot {0}  with {1} waypoints.", Global.Pilots.Selected.Name, count));
                 ShowContainerAllRoutes();
             }
         }
