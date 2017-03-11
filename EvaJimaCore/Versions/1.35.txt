@@ -9,7 +9,7 @@
 
 Дополнения и изменения:
 
-+ Добавление системы маршрутизации во вкладке "Routers"
++ Добавление системы маршрутизации (включения автопилота) во вкладке "Routers"
 + При минимизированной в трей ЕваДжиме при проходе в другую систему появляется сообщение только если эта система находится в W-Space
 
 Исправленные ошибки:
@@ -18,14 +18,17 @@
 + Добавлено обновление токена при повторной авторизации пилота на сайте ССР
 
 
+
 ----------------------------------------------------------------------------------------------------
 
 Patch notes for 1.34 Release 
 
 Features & Changes:
 
-+ 
++ Adding a routing system (autopilot on) in the "Routers" tab
++ When minimized in tray EvaJim and pilot going to another system, a message appears only if this system is in W-Space
 
 Defect Fixes:
 
-+ 
++ Fixed a bug where when the browser was opened in the "Full size" mode when the "Favorites" column was hidden, the browser was in an incorrect position hiding part of the window.
++ Added update of the token upon reauthorization of the pilot on the SSR website
