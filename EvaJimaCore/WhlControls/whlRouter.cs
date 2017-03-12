@@ -15,9 +15,7 @@ namespace EveJimaCore.WhlControls
 
         public DelegateContainerActivate OnContainerActivate;
 
-        private Waypoints _waypoints = new Waypoints();
-
-        private string selectedRoute = "";
+        private readonly Waypoints _waypoints = new Waypoints();
 
         public whlRouter()
         {
@@ -117,15 +115,21 @@ namespace EveJimaCore.WhlControls
 
         private void Event_ShowRoute(object sender, EventArgs e)
         {
-            txtRouteName.Text = gridAllRoutes.CurrentCell.Value.ToString();
-            ShowContainerRoute(gridAllRoutes.CurrentCell.Value.ToString());
+            if (string.IsNullOrEmpty(gridAllRoutes.CurrentCell.Value.ToString()) == false)
+            {
+                txtRouteName.Text = gridAllRoutes.CurrentCell.Value.ToString();
+                ShowContainerRoute(gridAllRoutes.CurrentCell.Value.ToString());
+            }
         }
 
         private void Event_DeleteRoute(object sender, EventArgs e)
         {
-            _waypoints.Delete(gridAllRoutes.CurrentCell.Value.ToString());
+            if (string.IsNullOrEmpty(gridAllRoutes.CurrentCell.Value.ToString()) == false)
+            {
+                _waypoints.Delete(gridAllRoutes.CurrentCell.Value.ToString());
 
-            ShowContainerAllRoutes();
+                ShowContainerAllRoutes();
+            }
         }
 
         private void Event_SelectCell(object sender, DataGridViewCellEventArgs e)
@@ -143,16 +147,12 @@ namespace EveJimaCore.WhlControls
                         cmdSetDesination.IsActive = true;
                         cmdDeleteRoute.IsActive = true;
                         cmdShowRoute.IsActive = true;
-
-                        selectedRoute = value;
                     }
                     else
                     {
                         cmdSetDesination.IsActive = false;
                         cmdDeleteRoute.IsActive = false;
                         cmdShowRoute.IsActive = false;
-
-                        selectedRoute = "";
                     }
                 }
                 else
@@ -160,8 +160,6 @@ namespace EveJimaCore.WhlControls
                     cmdSetDesination.IsActive = false;
                     cmdDeleteRoute.IsActive = false;
                     cmdShowRoute.IsActive = false;
-
-                    selectedRoute = "";
                 }
             }
             catch (Exception ex)
