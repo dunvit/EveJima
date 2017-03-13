@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmdReturn = new EveJimaCore.whlButton();
             this.containerShowAllRoutes = new System.Windows.Forms.Panel();
             this.gridAllRoutes = new System.Windows.Forms.DataGridView();
@@ -64,7 +64,7 @@
             this.cmdReturn.IsTabControlButton = false;
             this.cmdReturn.Location = new System.Drawing.Point(6, 195);
             this.cmdReturn.Name = "cmdReturn";
-            this.cmdReturn.Size = new System.Drawing.Size(111, 26);
+            this.cmdReturn.Size = new System.Drawing.Size(117, 26);
             this.cmdReturn.TabIndex = 78;
             this.cmdReturn.Value = "Return";
             this.cmdReturn.Click += new System.EventHandler(this.Event_Return);
@@ -93,12 +93,12 @@
             this.gridAllRoutes.Name = "gridAllRoutes";
             this.gridAllRoutes.ReadOnly = true;
             this.gridAllRoutes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.SlateGray;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.gridAllRoutes.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SlateGray;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            this.gridAllRoutes.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.gridAllRoutes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridAllRoutes.Size = new System.Drawing.Size(384, 154);
             this.gridAllRoutes.TabIndex = 85;
@@ -141,7 +141,7 @@
             this.cmdSetDesination.Size = new System.Drawing.Size(111, 26);
             this.cmdSetDesination.TabIndex = 82;
             this.cmdSetDesination.Value = "Set Destination";
-            this.cmdSetDesination.Click += new System.EventHandler(this.EventSetDesination);
+            this.cmdSetDesination.Click += new System.EventHandler(this.EventSetDestination);
             // 
             // cmdShowAllRoutes
             // 
@@ -151,7 +151,7 @@
             this.cmdShowAllRoutes.IsTabControlButton = false;
             this.cmdShowAllRoutes.Location = new System.Drawing.Point(6, 6);
             this.cmdShowAllRoutes.Name = "cmdShowAllRoutes";
-            this.cmdShowAllRoutes.Size = new System.Drawing.Size(111, 26);
+            this.cmdShowAllRoutes.Size = new System.Drawing.Size(117, 26);
             this.cmdShowAllRoutes.TabIndex = 80;
             this.cmdShowAllRoutes.Value = "Show Routes";
             this.cmdShowAllRoutes.Click += new System.EventHandler(this.Event_ShowAllRoutes);
@@ -162,9 +162,9 @@
             this.cmdCreateNewRoute.ForeColor = System.Drawing.Color.LightGray;
             this.cmdCreateNewRoute.IsActive = true;
             this.cmdCreateNewRoute.IsTabControlButton = false;
-            this.cmdCreateNewRoute.Location = new System.Drawing.Point(6, 38);
+            this.cmdCreateNewRoute.Location = new System.Drawing.Point(6, 37);
             this.cmdCreateNewRoute.Name = "cmdCreateNewRoute";
-            this.cmdCreateNewRoute.Size = new System.Drawing.Size(111, 26);
+            this.cmdCreateNewRoute.Size = new System.Drawing.Size(117, 26);
             this.cmdCreateNewRoute.TabIndex = 81;
             this.cmdCreateNewRoute.Value = "Create New";
             this.cmdCreateNewRoute.Click += new System.EventHandler(this.Event_ContainerShowCreateRoute);
@@ -194,7 +194,6 @@
             this.gridWaypoints.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridWaypoints.Size = new System.Drawing.Size(359, 139);
             this.gridWaypoints.TabIndex = 87;
-            this.gridWaypoints.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.Event_CellEndEdit);
             this.gridWaypoints.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.Event_CellValidating);
             // 
             // clmSolarSystemName
@@ -244,7 +243,7 @@
             this.containerRoute.Controls.Add(this.txtRouteName);
             this.containerRoute.Controls.Add(this.label1);
             this.containerRoute.Controls.Add(this.whlButton1);
-            this.containerRoute.Location = new System.Drawing.Point(396, 15);
+            this.containerRoute.Location = new System.Drawing.Point(130, 6);
             this.containerRoute.Name = "containerRoute";
             this.containerRoute.Size = new System.Drawing.Size(407, 215);
             this.containerRoute.TabIndex = 83;
@@ -301,15 +300,15 @@
             this.whlButton1.Size = new System.Drawing.Size(261, 26);
             this.whlButton1.TabIndex = 84;
             this.whlButton1.Value = "Set destination";
-            this.whlButton1.Click += new System.EventHandler(this.Event_SetDesinationForCurrentRoute);
+            this.whlButton1.Click += new System.EventHandler(this.Event_SetDestinationForCurrentRoute);
             // 
             // whlRouter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.Controls.Add(this.cmdCreateNewRoute);
             this.Controls.Add(this.cmdShowAllRoutes);
+            this.Controls.Add(this.cmdCreateNewRoute);
             this.Controls.Add(this.containerShowAllRoutes);
             this.Controls.Add(this.cmdReturn);
             this.Controls.Add(this.containerCreateRoute);

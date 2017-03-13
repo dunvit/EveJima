@@ -96,6 +96,7 @@
     <Compile Include="Browser\History.cs" />
     <Compile Include="Browser\InternalBrowser.cs" />
     <Compile Include="Infrastructure\CrestApiFunctions.cs" />
+    <Compile Include="UiTools\MessageBoxLoader.cs" />
     <Compile Include="WhlControls\whlLostAndFoundOffice.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -107,6 +108,12 @@
     </Compile>
     <Compile Include="WhlControls\whlRouter.Designer.cs">
       <DependentUpon>whlRouter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WhlControls\windowMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WhlControls\windowMessage.Designer.cs">
+      <DependentUpon>windowMessage.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkEnvironment.cs" />
     <Compile Include="Global.cs" />
@@ -266,6 +273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\whlVersion.resx">
       <DependentUpon>whlVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\windowMessage.resx">
+      <DependentUpon>windowMessage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WindowMonitoring.resx">
       <DependentUpon>WindowMonitoring.cs</DependentUpon>

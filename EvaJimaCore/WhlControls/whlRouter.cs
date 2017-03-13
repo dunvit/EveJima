@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using EvaJimaCore;
 using EveJimaCore.BLL.Router;
+using EveJimaCore.UiTools;
 using log4net;
 
 namespace EveJimaCore.WhlControls
@@ -111,11 +112,11 @@ namespace EveJimaCore.WhlControls
             ShowContainerAllRoutes();
         }
 
-        private void EventSetDesination(object sender, EventArgs e)
+        private void EventSetDestination(object sender, EventArgs e)
         {
             if (gridAllRoutes.CurrentCell == null)
             {
-                MessageBox.Show(@"Please select route.");
+                MessageBoxLoader.Show("Please select route.", this);
                 return;
             }
 
@@ -133,7 +134,7 @@ namespace EveJimaCore.WhlControls
         {
             if (gridAllRoutes.CurrentCell == null)
             {
-                MessageBox.Show(@"Please select route.");
+                MessageBoxLoader.Show(@"Please select route.", this);
                 return;
             }
 
@@ -148,7 +149,7 @@ namespace EveJimaCore.WhlControls
         {
             if (gridAllRoutes.CurrentCell == null)
             {
-                MessageBox.Show(@"Please select route.");
+                MessageBoxLoader.Show(@"Please select route.", this);
                 return;
             }
 
@@ -202,14 +203,14 @@ namespace EveJimaCore.WhlControls
         {
             if (txtRemoveWormholeName.Text.Trim() == string.Empty)
             {
-                MessageBox.Show(@"You need set name for route.");
+                MessageBoxLoader.Show(@"You need set name for route.", this);
                 txtRemoveWormholeName.Focus();
                 return;
             }
 
             if (gridWaypoints.Rows.Count < 1)
             {
-                MessageBox.Show(@"Add waypoints to route.");
+                MessageBoxLoader.Show(@"Add waypoints to route.", this);
                 return;
             }
 
@@ -233,11 +234,6 @@ namespace EveJimaCore.WhlControls
             ShowContainerCreateRoute();
         }
 
-        private void Event_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
         private void Event_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             var solarSystemName = (string)e.FormattedValue;
@@ -247,16 +243,16 @@ namespace EveJimaCore.WhlControls
             if (Global.Space.BasicSolarSystems.ContainsKey(solarSystemName.ToUpper()) == false)
             {
                 e.Cancel = true;
-                MessageBox.Show(string.Format("Solar system with name \"" + solarSystemName + "\" is not exist."));
+                MessageBoxLoader.Show(string.Format("Solar system with name \"" + solarSystemName + "\" is not exist."), this);
             }
         }
 
-        private void Event_SetDesinationForCurrentRoute(object sender, EventArgs e)
+        private void Event_SetDestinationForCurrentRoute(object sender, EventArgs e)
         {
             whlButton1.IsActive = false;
             int count = _waypoints.SetDestinationByRoute(txtRouteName.Text, Global.Pilots.Selected);
             whlButton1.IsActive = true;
-            MessageBox.Show(String.Format("Route added to pilot {0}  with {1}  waypoints.", Global.Pilots.Selected.Name, count.ToString()));
+            MessageBoxLoader.Show(String.Format("Route added to pilot {0}  with {1}  waypoints.", Global.Pilots.Selected.Name, count), this);
 
         }
 
