@@ -16,6 +16,10 @@ namespace EveJimaCore.WhlControls
             Size = new Size(564, 325);
         }
 
+        public virtual void ActivateContainer()
+        {
+            var a = "a";
+        }
 
     }
 }

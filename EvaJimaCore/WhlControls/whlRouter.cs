@@ -28,6 +28,13 @@ namespace EveJimaCore.WhlControls
             gridSelectedRoute.RowsDefaultCellStyle = gridAllRoutes.RowsDefaultCellStyle;
             gridWaypoints.RowsDefaultCellStyle = gridAllRoutes.RowsDefaultCellStyle;
 
+            cmdShowAllRoutes.Focus();
+
+            
+        }
+
+        public override void ActivateContainer()
+        {
             ShowContainerAllRoutes();
         }
 
@@ -45,7 +52,7 @@ namespace EveJimaCore.WhlControls
             gridAllRoutes.DataSource = _waypoints.List.Select(x => new { Route = x }).ToList();
             gridAllRoutes.Refresh();
 
-            gridAllRoutes.Columns[0].Width = 362;
+            gridAllRoutes.Columns[0].Width = 332;
 
             gridAllRoutes.ClearSelection();
             gridAllRoutes.CurrentCell = null;
@@ -67,12 +74,15 @@ namespace EveJimaCore.WhlControls
             gridSelectedRoute.DataSource = _waypoints.GetWaypointsForRoute(selectedRoute).Select(x => new { Waypoint = x }).ToList();
             gridSelectedRoute.Refresh();
 
-            gridSelectedRoute.Columns[0].Width = 348;
+            gridSelectedRoute.Columns[0].Width = 328;
 
             if (Global.Pilots.Selected != null)
             {
                 whlButton1.Text = @"Set destination for " + Global.Pilots.Selected.Name;
             }
+
+            gridSelectedRoute.RowsDefaultCellStyle.SelectionBackColor = Color.Transparent;
+            gridSelectedRoute.ClearSelection();
         }
 
         private void ShowContainerCreateRoute()
@@ -85,7 +95,7 @@ namespace EveJimaCore.WhlControls
             gridWaypoints.Rows.Clear();
             gridWaypoints.Refresh();
 
-            gridWaypoints.Columns[0].Width = 348;
+            gridWaypoints.Columns[0].Width = 328;
 
             containerCreateRoute.Location = new Point(123, 6);
             containerCreateRoute.Visible = true;
@@ -103,6 +113,12 @@ namespace EveJimaCore.WhlControls
 
         private void EventSetDesination(object sender, EventArgs e)
         {
+            if (gridAllRoutes.CurrentCell == null)
+            {
+                MessageBox.Show(@"Please select route.");
+                return;
+            }
+
             if (string.IsNullOrEmpty(gridAllRoutes.CurrentCell.Value.ToString()) == false)
             {
                 whlButton1.IsActive = false;
@@ -115,6 +131,12 @@ namespace EveJimaCore.WhlControls
 
         private void Event_ShowRoute(object sender, EventArgs e)
         {
+            if (gridAllRoutes.CurrentCell == null)
+            {
+                MessageBox.Show(@"Please select route.");
+                return;
+            }
+
             if (string.IsNullOrEmpty(gridAllRoutes.CurrentCell.Value.ToString()) == false)
             {
                 txtRouteName.Text = gridAllRoutes.CurrentCell.Value.ToString();
@@ -124,6 +146,12 @@ namespace EveJimaCore.WhlControls
 
         private void Event_DeleteRoute(object sender, EventArgs e)
         {
+            if (gridAllRoutes.CurrentCell == null)
+            {
+                MessageBox.Show(@"Please select route.");
+                return;
+            }
+
             if (string.IsNullOrEmpty(gridAllRoutes.CurrentCell.Value.ToString()) == false)
             {
                 _waypoints.Delete(gridAllRoutes.CurrentCell.Value.ToString());

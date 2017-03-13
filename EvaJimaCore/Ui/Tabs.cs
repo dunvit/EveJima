@@ -97,6 +97,8 @@ namespace EvaJimaCore.Ui
             activeTab.Container.BringToFront();
             activeTab.Container.Show();
 
+            activeTab.Container.ActivateContainer();
+
             if (OnChangeTab != null) OnChangeTab(tabName);
 
             
