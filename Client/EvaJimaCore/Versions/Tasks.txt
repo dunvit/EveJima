@@ -1,0 +1,35 @@
+﻿- Update token in new storage (ApplicationSettings) UpdatePilotToStorage(_currentPilot);
+- Add separated task for using (var client = new WebClient())
+
+
+Map:
+
+- Add select Solar system and right mouse button (for relocate operation)
+- Rebuild connection after update and hide not connected to map solar systems
+
+
+Before release:
+
+- Disable click event in inactive button "Location"
+
+
+
+
+
+
+Migration files:
+
+EveJima.exe
+EveJima.exe.config
+EveJima.vshost.exe
+EveJima.vshost.exe.config
+EveJima.vshost.exe.manifest
+EveJimaCore.dll
+EveJimaEnvironment.txt
+EveJimaServerMap.dll
+EveJimaSettings.dll
+EveJimaSettings.txt
+EveJimaUniverse.dll
+settings.txt
+Version.txt
+WBrowser.exe

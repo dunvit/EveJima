@@ -1,0 +1,18 @@
+{
+	"Version": "1.35",
+	"CurrentVersion": "1.35",
+	"Authorization_ClientId": "8f1e2ac9d4aa467c88b12674926dc5e6",
+	"Authorization_ClientSecret": "GZyvG71OxmfHzcDrTMreHw6CV7sDUwiBMiPSpbPn",
+	"Authorization_ClientState": "75c68f04aec80589a157fd13",
+	"Authorization_Port": "8080",
+	"Authorization_Scopes": "characterLocationRead characterNavigationWrite",
+	"Server_update_uri_version": "http://evejima.mikotaj.com/Version.txt",
+	"Server_update_content_version": "http://evejima.mikotaj.com/VersionContent.txt",
+	"Client_execution_file": "EveJima.exe",
+	"Browser_IsShowFavorites": false,
+	"Browser_IsPinned": false,
+	"Browser_LocationMaximizeX": 0,
+	"Browser_LocationMaximizeY": 0,
+	"Pilots": [],
+	"Server_MapAddress": "http://www.evajima-maps.somee.com"
+}
