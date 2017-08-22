@@ -54,13 +54,34 @@ namespace EvaJimaCore.Ui
             _list.Add(name, new Tab() { Name = name, Size = sizeTab , Button = button, Container = container});
         }
 
-        private void SetActivePanel(string panelName)
+        private void SetColorsForTabs(string panelName)
         {
             foreach (Tab tab in _list.Values)
             {
                 if (tab.Button == null) continue;
 
-                tab.Button.ForeColor = Color.Silver;
+                if(tab.Name == "Map")
+                {
+                    if(Global.Pilots.Selected == null)
+                    {
+                        tab.Button.ForeColor = Color.DimGray;
+                        continue;
+                    }
+
+                    if(Global.Pilots.Selected.Location.Id == null)
+                    {
+                        tab.Button.ForeColor = Color.DimGray;
+                        // TODO: Disable click event in inactive button "Location"
+                    }
+                    else
+                    {
+                        tab.Button.ForeColor = Color.Silver;
+                    }
+                }
+                else
+                {
+                    tab.Button.ForeColor = Color.Silver;
+                }
 
                 if (tab.Name == panelName)
                 {
@@ -73,68 +94,14 @@ namespace EvaJimaCore.Ui
         {
             var button = sender as Button;
 
-            if (button.Tag.ToString() == "Map" && Global.Pilots.Selected == null) return;
+            var panelName = button.Tag.ToString();
 
-
-            foreach (Tab tab in _list.Values)
+            if (panelName == "Map" && Global.Pilots.Selected == null)
             {
-                if (tab.Button != null)
-                {
-                    //tab.Button.BackColor = Color.FromArgb(24, 24, 24);
-                    tab.Button.ForeColor = Color.Silver;
-                }
+                SetColorsForTabs(panelName);
+
+                return;
             }
-
-            //button.BackColor = Color.Black;
-
-            if (button.Tag.ToString() == "Location")
-            {
-                if (Global.Pilots.Selected == null)
-                {
-                    //button.IsActive = false;
-                    return;
-                }
-
-                if (Global.Pilots.Selected.Location.Name == "unknown")
-                {
-                    //button.IsActive = false;
-                    return;
-                }
-                else
-                {
-                    //button.IsActive = true;
-                }
-            }
-
-            foreach (Tab tab in _list.Values)
-            {
-                if (tab.Button == null) continue;
-
-                if (tab.Name == "Map")
-                {
-                    if(Global.Pilots.Selected == null)
-                    {
-                        tab.Button.ForeColor = Color.DimGray;
-                        continue;
-                    }
-
-                    if (Global.Pilots.Selected.Location.Id == null)
-                    {
-                        tab.Button.ForeColor = Color.DimGray;
-                        // TODO: Disable click event in inactive button "Location"
-                        //tab.Button.Enabled = false;
-                    }
-                    else
-                    {
-                        tab.Button.ForeColor = Color.Silver;
-                        //tab.Button.Enabled = true;
-                    }
-                }
-            }
-
-            
-
-            button.ForeColor = Color.DarkGoldenrod;
 
             Activate(button.Tag.ToString());
         }
@@ -143,9 +110,7 @@ namespace EvaJimaCore.Ui
         {
             Global.Presenter.ChangeScreen(tabName);
 
-            if(tabName == "Map" && Global.Pilots.Selected == null) return;
-
-            //var map = Global.Pilots.Selected.SpaceMap;
+            if(tabName == "Map" && (Global.Pilots.Selected == null || Global.Pilots.Selected.Location == null || Global.Pilots.Selected.Location.Id == null)) return;
 
             if (activeTab != null)
             {
@@ -179,7 +144,7 @@ namespace EvaJimaCore.Ui
                 Resize();
             }
 
-            SetActivePanel(tabName);
+            SetColorsForTabs(tabName);
         }
 
         public void Resize()
