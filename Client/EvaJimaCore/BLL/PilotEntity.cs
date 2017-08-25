@@ -92,14 +92,39 @@ namespace EveJimaCore.BLL
             Log.Info(message);
         }
 
+        private bool _loadingData;
+
+        public void RefreshLocationInformation()
+        {
+            if(_loadingData) return;
+
+            _loadingData = true;
+
+            try
+            {
+                LoadLocationInfo();
+            }
+            catch
+            {
+                // ignored
+            }
+
+            _loadingData = false;
+        }
+
         private void Event_Refresh(object sender, ElapsedEventArgs e)
+        {
+            RefreshPilotInfo();
+        }
+
+        private void RefreshPilotInfo()
         {
             Task.Run(() =>
             {
                 RefreshInfo();
             });
 
-            if(Global.Pilots.Selected.Name == Name)
+            if (Global.Pilots.Selected.Name == Name)
             {
                 Task.Run(() =>
                 {

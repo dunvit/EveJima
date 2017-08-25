@@ -53,12 +53,14 @@ namespace EveJimaCore.WhlControls
 
         List<PilotEntity> Pilotes { get; set; }
 
-        private bool _isLoadedPilotesFromStorage;
+        private bool _isLoadedPilotesFromStorage = true ;
 
 
 
         public void LoadAllPilotesFromStorage()
         {
+            _isLoadedPilotesFromStorage = false;
+
             if (InvokeRequired)
             {
                 Invoke(new Action(() => LoadAllPilotesFromStorage()));
@@ -109,6 +111,12 @@ namespace EveJimaCore.WhlControls
 
         private void AddPilotToPilotsList(PilotEntity pilot)
         {
+            if (cmbPilots.Visible == false)
+            {
+                cmbPilots.Visible = true;
+                cmbPilots.Refresh();
+            }
+
             var isPilotExist = false;
 
             foreach(var item in cmbPilots.Items)
@@ -119,13 +127,15 @@ namespace EveJimaCore.WhlControls
                 }
             }
 
-            if(isPilotExist == false)
+            if (isPilotExist == false)
             {
                 cmbPilots.Items.Add(pilot.Name.Trim());
                 cmbPilots.Text = pilot.Name.Trim();
+
             }
 
-            
+
+
         }
 
         public void PilotAuthorizeFlow(string code)
@@ -144,6 +154,10 @@ namespace EveJimaCore.WhlControls
                 Global.ApplicationSettings.UpdatePilotInStorage(_currentPilot.Name, _currentPilot.Id.ToString(), _currentPilot.EsiData.RefreshToken, _currentPilot.Key);
 
                 //Global.Pilots.Add(_currentPilot);
+
+                cmbPilots.Visible = true;
+
+                Global.Pilots.SetSelected(_currentPilot);
 
                 AddPilotToPilotsList(_currentPilot);
 

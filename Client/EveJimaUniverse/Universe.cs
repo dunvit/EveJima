@@ -49,6 +49,14 @@ namespace EveJimaUniverse
 
         public System GetSystemByName(string name)
         {
+            foreach(var system in Systems)
+            {
+                if(system.Name == name)
+                {
+                    var a = "";
+                }
+            }
+
             return Systems.FirstOrDefault(system => system.Name.ToUpper() == name.ToUpper());
         }
 

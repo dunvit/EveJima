@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Timers;
 using EvaJimaCore;
 using log4net;
-using log4net.Util;
 
 namespace EveJimaCore.BLL
 {
@@ -20,6 +20,24 @@ namespace EveJimaCore.BLL
 
         public DelegateOnAddPilot OnAddPilot;
         public DelegateActivate OnActivatePilot;
+
+        //private Timer _updateMapTimer;
+
+        //public PilotsEntity()
+        //{
+        //    _updateMapTimer = new Timer();
+        //    _updateMapTimer.Elapsed += Event_Refresh;
+        //    _updateMapTimer.Interval = 5000;
+        //    _updateMapTimer.Enabled = true;
+        //}
+
+        //private void Event_Refresh(object sender, ElapsedEventArgs e)
+        //{
+        //    if (Selected != null && Selected.Location.Name == "unknown")
+        //    {
+        //        Selected.RefreshLocationInformation();
+        //    }
+        //}
 
         public string[] GetPilotsStorageContent()
         {
@@ -44,7 +62,7 @@ namespace EveJimaCore.BLL
             Log.DebugFormat("[PilotsEntity.SetSelected] Before  Global.Presenter.ActivatePilot : {0}", pilot.Name);
             
             Log.InfoFormat("[PilotsEntity.SetSelected] Before  Global.Presenter.ChangeActivePilot : {0}", pilot.Name);
-            //Global.Presenter.GlobalEventsChangeActivePilot(pilot.Name);
+            Global.Presenter.GlobalEventsChangeActivePilot(pilot.Name);
             Log.DebugFormat("[PilotsEntity.SetSelected] End : {0}", pilot.Name);
         }
 
