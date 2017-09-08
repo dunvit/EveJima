@@ -14,6 +14,8 @@ namespace EveJimaUniverse
 
         public List<System> Systems = new List<System>();
 
+        public List<LinkedSystem>  LinkedSystems = new List<LinkedSystem>();
+
         public Dictionary<string, WormholeType> WormholeTypes = new Dictionary<string, WormholeType>();
 
         public Universe()
@@ -25,6 +27,17 @@ namespace EveJimaUniverse
         {
             LoadWormholeTypes();
             LoadSolarSystems();
+            LoadLinkedSystems();
+        }
+
+        private void LoadLinkedSystems()
+        {
+            var dataFile = @"Data/LinkedSystems.dat";
+            var json = File.ReadAllText(dataFile);
+            var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+            var ser = new DataContractJsonSerializer(LinkedSystems.GetType());
+            LinkedSystems = ser.ReadObject(ms) as List<LinkedSystem>;
+            ms.Close();
         }
 
         private void LoadSolarSystems()
@@ -45,6 +58,19 @@ namespace EveJimaUniverse
         public System GetSystemById(string id)
         {
             return Systems.FirstOrDefault(system => system.Id == id);
+        }
+
+        public LinkedSystem GetLinkedSystems(string id)
+        {
+            foreach(var linkedSystem in LinkedSystems)
+            {
+                if(linkedSystem.Id == id)
+                {
+                    return linkedSystem;
+                }
+            }
+
+            return null;
         }
 
         public System GetSystemByName(string name)

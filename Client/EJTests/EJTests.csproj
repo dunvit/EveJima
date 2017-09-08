@@ -76,6 +76,9 @@
     <Compile Include="MapViewTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToolsTests.cs" />
+    <Compile Include="ApiESITests.cs" />
+    <Compile Include="PathFinderTests.cs" />
+    <Compile Include="ZeroHunterTests.cs" />
     <Compile Include="UniverseTests.cs" />
   </ItemGroup>
   <ItemGroup>

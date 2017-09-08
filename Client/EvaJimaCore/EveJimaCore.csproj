@@ -91,6 +91,8 @@
     <Compile Include="BLL\Map\MapUpdateHistory.cs" />
     <Compile Include="BLL\Map\PilotLocation.cs" />
     <Compile Include="BLL\MetricsWriter.cs" />
+    <Compile Include="BLL\Navigator\Path.cs" />
+    <Compile Include="BLL\PathFinder.cs" />
     <Compile Include="BLL\PilotEntity.cs" />
     <Compile Include="BLL\PilotsEntity.cs" />
     <Compile Include="BLL\Router\Waypoint.cs" />
@@ -326,6 +328,9 @@
     <Content Include="Data\Wormholes.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Data\LinkedSystems.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="EvaJimaCore.pfx" />
     <None Include="packages.config" />
   </ItemGroup>

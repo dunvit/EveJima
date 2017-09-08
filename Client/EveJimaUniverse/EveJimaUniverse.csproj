@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bookmark.cs" />
+    <Compile Include="LinkedSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityStatus.cs" />
     <Compile Include="WormholeType.cs" />

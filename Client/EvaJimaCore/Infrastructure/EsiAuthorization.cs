@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
+using EveJimaUniverse;
 using log4net;
 using Newtonsoft.Json.Linq;
 
@@ -199,9 +201,9 @@ namespace EveJimaCore
                 Log.ErrorFormat("Critical error in [EsiAuthorization.GetSolarSystemInfo] systemId = {1} Exception is {0}", ex, systemId);
                 return null;
             }
-
-            return null;
         }
+
+        
 
         public dynamic GetLocation(long pilotId)
         {
@@ -233,11 +235,193 @@ namespace EveJimaCore
             }
             catch(Exception ex)
             {
-                Log.ErrorFormat("Critical error in [EsiAuthorization.Refresh] Exception is {0}", ex);
+                Log.ErrorFormat("Critical error in [EsiAuthorization.GetLocation] Exception is {0}", ex);
                 return null;
             }
 
             
+        }
+
+        public List<string> GetStargates(int systemId)
+        {
+            Log.DebugFormat("[EsiAuthorization.GetStargates] started. systemId = {0}", systemId);
+
+            var stargates = new List<string>();
+
+            try
+            {
+                var url = "https://esi.tech.ccp.is/latest/universe/systems/" + systemId + "/";
+
+                Log.DebugFormat(DateTime.Now.ToLongTimeString() + " Start Get solar system. " + url);
+
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Authorization", "Bearer " + AccessToken);
+                httpWebRequest.ContentType = "application/json";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    Log.DebugFormat("[EsiAuthorization.GetStargates] result = {0}", result);
+
+                    dynamic data = JObject.Parse(result);
+
+                    
+                    var dynamicStargates = data.stargates;
+
+                    foreach (var content in dynamicStargates)
+                    {
+                        var locationId = content.ToString();
+
+                        stargates.Add(locationId);
+                    }
+
+                    return stargates;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Critical error in [EsiAuthorization.GetStargates] systemId = {1} Exception is {0}", ex, systemId);
+                return null;
+            }
+        }
+
+        public List<Bookmark> GetBookmarks(long pilotId, string folderId)
+        {
+            Log.DebugFormat("[EsiAuthorization.GetBookmarks] started. pilotId = {0}", pilotId);
+
+            try
+            {
+                var url = "https://esi.tech.ccp.is/v1/characters/" + pilotId + "/bookmarks/";
+
+                Trace.TraceInformation(DateTime.Now.ToLongTimeString() + " Start Get location. " + url);
+
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Authorization", "Bearer " + AccessToken);
+                httpWebRequest.ContentType = "application/json";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    Log.DebugFormat("[EsiAuthorization.GetBookmarks] result = {0}", result);
+
+                    var retValue = new List<Bookmark>();
+
+                    foreach (var content in JArray.Parse(result).Children<JObject>())
+                    {
+                        try
+                        {
+                            if(content.SelectToken("folder_id") == null) continue;
+
+                            var bookmark = new Bookmark
+                            {
+                                Name = content.SelectToken("memo").ToString(),
+                                SystemId = content.SelectToken("target.location_id").ToString(),
+                                Note = content.SelectToken("note").ToString()
+                            };
+
+                            if (content.SelectToken("folder_id").ToString() == folderId) retValue.Add(bookmark);
+                        }
+                        catch(Exception exinternal)
+                        {
+                            string a = "";
+                        }
+
+                        
+
+                    }
+
+                    return retValue;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Critical error in [EsiAuthorization.GetBookmarks] Exception is {0}", ex);
+                return null;
+            }
+
+
+        }
+
+        public List<Tuple<string,string>> GetBookmarksFolders(long pilotId)
+        {
+            Log.DebugFormat("[EsiAuthorization.GetBookmarksFolders] started. pilotId = {0}", pilotId);
+
+            try
+            {
+                var url = "https://esi.tech.ccp.is/v1/characters/" + pilotId + "/bookmarks/folders/";
+
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Authorization", "Bearer " + AccessToken);
+                httpWebRequest.ContentType = "application/json";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    Log.DebugFormat("[EsiAuthorization.GetBookmarksFolders] result = {0}", result);
+
+                    var retValue = new List<Tuple<string, string>>();
+
+                    foreach (var content in JArray.Parse(result).Children<JObject>())
+                    {
+                        retValue.Add(new Tuple<string, string>(content.SelectToken("name").ToString(), content.SelectToken("folder_id").ToString()));
+                    }
+
+                    return retValue;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Critical error in [EsiAuthorization.GetBookmarksFolders] Exception is {0}", ex);
+                return null;
+            }
+
+
+        }
+
+        public int GetRouteJumps(string origin, string destination)
+        {
+            Log.DebugFormat("[EsiAuthorization.GetRouteJumps] started. origin = {0} destination = {1}", origin, destination);
+
+            try
+            {
+                var url = "https://esi.tech.ccp.is/v1/route/" + origin + "/" + destination + "/";
+
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Authorization", "Bearer " + AccessToken);
+                httpWebRequest.ContentType = "application/json";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    Log.DebugFormat("[EsiAuthorization.GetRouteJumps] result = {0}", result);
+
+                    return JArray.Parse(result).Count - 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Critical error in [EsiAuthorization.GetRouteJumps] Exception is {0}", ex);
+                return -1;
+            }
+
+
         }
 
         public dynamic GetCharacterInfo(long pilotId)
@@ -264,6 +448,91 @@ namespace EveJimaCore
             }
         }
 
+
+        public string GetSolarSystemIdByStargate(string stargateId)
+        {
+            Log.DebugFormat("[EsiAuthorization.GetSolarSystemIdByStargate] started. stargateId = {0}", stargateId);
+
+            try
+            {
+                var url = "https://esi.tech.ccp.is/latest/universe/stargates/" + stargateId + "/";
+
+                Log.DebugFormat("[EsiAuthorization.GetSolarSystemIdByStargate] Start Get solar system. " + url);
+
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Authorization", "Bearer " + AccessToken);
+                httpWebRequest.ContentType = "application/json";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    Log.DebugFormat("[EsiAuthorization.GetSolarSystemIdByStargate] result = {0}", result);
+
+                    dynamic data = JObject.Parse(result);
+
+                    var solarSystemId = data.destination.system_id;
+
+                    return solarSystemId.ToString();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Critical error in [EsiAuthorization.GetSolarSystemIdByStargate] stargateId = {1} Exception is {0}", ex, stargateId);
+                return null;
+            }
+        }
+
+
+        public static Tuple<string, string, string> GetSystemKills(string systemId)
+        {
+            Log.DebugFormat("[EsiAuthorization.GetSystemKills] started. systemId = {0} ", systemId);
+
+            try
+            {
+                var url = "https://esi.tech.ccp.is/v2/universe/system_kills/";
+
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+
+                httpWebRequest.Method = "GET";
+                httpWebRequest.ContentType = "application/json";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    foreach (var content in JArray.Parse(result))
+                    {
+                        var system_id = content.SelectToken("system_id").ToString();
+                        var ship_kills = content.SelectToken("ship_kills").ToString();
+                        var npc_kills = content.SelectToken("npc_kills").ToString();
+                        var pod_kills = content.SelectToken("pod_kills").ToString();
+
+                        if(systemId == system_id)
+                        {
+                            return new Tuple<string, string, string>(ship_kills, npc_kills, pod_kills);
+                        }
+
+                    }
+
+                    Log.DebugFormat("[EsiAuthorization.GetSystemKills] result = {0}", result);
+
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Critical error in [EsiAuthorization.GetSystemKills] Exception is {0}", ex);
+                return null;
+            }
+
+
+        }
 
     }
 }
