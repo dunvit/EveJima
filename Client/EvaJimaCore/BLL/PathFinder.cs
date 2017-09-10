@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using EveJimaCore.BLL.Navigator;
 using EveJimaUniverse;
+using log4net;
 
 namespace EveJimaCore.BLL
 {
     public class PathFinder
     {
+        private static readonly ILog Log = LogManager.GetLogger("All");
         private readonly Universe _universe;
 
         public PathFinder(Universe universe)
@@ -18,12 +21,12 @@ namespace EveJimaCore.BLL
         {
             var solarSystem = _universe.GetSystemByName(locationSystemName);
 
-            var linkedSolarSystems = GetSystems(_universe, solarSystem.Id, range, 0, new List<string> { solarSystem.Id });
+            var linkedSolarSystems = GetSystems(_universe, solarSystem.Id, range, 0, new List<Tuple<string, int>> { new Tuple<string, int>(solarSystem.Id, 0) });
 
             return GetBookmarks(bookmarks, linkedSolarSystems);
         }
 
-        private List<Path> GetBookmarks(IEnumerable<Bookmark> bookmarks, List<string> systems)
+        private List<Path> GetBookmarks(IEnumerable<Bookmark> bookmarks, List<Tuple<string, int>> systems)
         {
             var pathes = new List<Path>();
 
@@ -31,7 +34,10 @@ namespace EveJimaCore.BLL
             {
                 foreach(var system in systems)
                 {
-                    if(bookmark.SystemId != system) continue;
+                    var systemName = system.Item1;
+                    var jumps = system.Item2;
+
+                    if (bookmark.SystemId != systemName) continue;
 
                     try
                     {
@@ -39,13 +45,14 @@ namespace EveJimaCore.BLL
                         {
                             Name = bookmark.Name,
                             Note = bookmark.Note,
-                            SystemName = _universe.GetSystemById(system).Name,
+                            SystemName = _universe.GetSystemById(systemName).Name,
                             ShipKills = "0",
                             NpcKills = "0",
-                            PodKills = "0"
+                            PodKills = "0",
+                            Jumps = jumps
                         };
 
-                        var kills = EsiAuthorization.GetSystemKills(system);
+                        var kills = EsiAuthorization.GetSystemKills(systemName);
 
                         if (kills != null)
                         {
@@ -56,18 +63,17 @@ namespace EveJimaCore.BLL
 
                         pathes.Add(path);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
-                        
+                        Log.ErrorFormat("[PathFinder.GetBookmarks] Critical error. Exception {0}", ex);
                     }
-                    
                 }
             }
 
             return pathes;
         }
 
-        public List<string> GetSystems(Universe universe, string solarSystemId, int range, int currentRange, List<string> systems)
+        public List<Tuple<string, int>> GetSystems(Universe universe, string solarSystemId, int range, int currentRange, List<Tuple<string, int>> systems)
         {
             currentRange = currentRange + 1;
 
@@ -79,12 +85,11 @@ namespace EveJimaCore.BLL
             {
                 var linkedSystem = universe.GetSystemById(system);
 
-                if (systems.Contains(linkedSystem.Id) == false)
-                {
-                    systems.Add(linkedSystem.Id);
+                if(systems.Any(m => m.Item1 == linkedSystem.Id)) continue;
 
-                    GetSystems(universe, linkedSystem.Id, range, currentRange, systems);
-                }
+                systems.Add(new Tuple<string, int>(linkedSystem.Id, currentRange));
+
+                GetSystems(universe, linkedSystem.Id, range, currentRange, systems);
             }
 
             return systems;

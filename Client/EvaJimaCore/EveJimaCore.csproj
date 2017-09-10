@@ -117,6 +117,12 @@
       <DependentUpon>MapControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Logic\MapInformation\Views\IMapInformationControl.cs" />
+    <Compile Include="Logic\MapInformation\Views\InformationMapBookmarks.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Logic\MapInformation\Views\InformationMapBookmarks.Designer.cs">
+      <DependentUpon>InformationMapBookmarks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Logic\MapInformation\Views\InformationMapSettingsView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -337,6 +343,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Logic\MapInformation\MapControl.resx">
       <DependentUpon>MapControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logic\MapInformation\Views\InformationMapBookmarks.resx">
+      <DependentUpon>InformationMapBookmarks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Logic\MapInformation\Views\InformationMapSettingsView.resx">
       <DependentUpon>InformationMapSettingsView.cs</DependentUpon>

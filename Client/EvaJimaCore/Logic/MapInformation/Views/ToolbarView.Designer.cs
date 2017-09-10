@@ -32,6 +32,7 @@
             this.cmdMapSignatures = new System.Windows.Forms.Button();
             this.cmdMapSettings = new System.Windows.Forms.Button();
             this.cmdPilotes = new System.Windows.Forms.Button();
+            this.cmdBookmarks = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdSystemInformation
@@ -84,7 +85,7 @@
             this.cmdMapSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdMapSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdMapSettings.ForeColor = System.Drawing.Color.White;
-            this.cmdMapSettings.Location = new System.Drawing.Point(220, 4);
+            this.cmdMapSettings.Location = new System.Drawing.Point(299, 4);
             this.cmdMapSettings.Name = "cmdMapSettings";
             this.cmdMapSettings.Size = new System.Drawing.Size(67, 23);
             this.cmdMapSettings.TabIndex = 2;
@@ -111,17 +112,38 @@
             this.cmdPilotes.UseVisualStyleBackColor = true;
             this.cmdPilotes.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Event_SelectToolBarElement);
             // 
+            // cmdBookmarks
+            // 
+            this.cmdBookmarks.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmdBookmarks.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.cmdBookmarks.FlatAppearance.BorderSize = 0;
+            this.cmdBookmarks.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.cmdBookmarks.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.cmdBookmarks.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.cmdBookmarks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmdBookmarks.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdBookmarks.ForeColor = System.Drawing.Color.White;
+            this.cmdBookmarks.Location = new System.Drawing.Point(222, 4);
+            this.cmdBookmarks.Name = "cmdBookmarks";
+            this.cmdBookmarks.Size = new System.Drawing.Size(80, 23);
+            this.cmdBookmarks.TabIndex = 4;
+            this.cmdBookmarks.Tag = "Bookmarks";
+            this.cmdBookmarks.Text = "Pathfinder";
+            this.cmdBookmarks.UseVisualStyleBackColor = true;
+            this.cmdBookmarks.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Event_SelectToolBarElement);
+            // 
             // ToolbarView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.Controls.Add(this.cmdBookmarks);
             this.Controls.Add(this.cmdPilotes);
             this.Controls.Add(this.cmdMapSettings);
             this.Controls.Add(this.cmdMapSignatures);
             this.Controls.Add(this.cmdSystemInformation);
             this.Name = "ToolbarView";
-            this.Size = new System.Drawing.Size(358, 35);
+            this.Size = new System.Drawing.Size(576, 35);
             this.Load += new System.EventHandler(this.ToolbarView_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -134,5 +156,6 @@
         private System.Windows.Forms.Button cmdMapSignatures;
         private System.Windows.Forms.Button cmdMapSettings;
         private System.Windows.Forms.Button cmdPilotes;
+        private System.Windows.Forms.Button cmdBookmarks;
     }
 }

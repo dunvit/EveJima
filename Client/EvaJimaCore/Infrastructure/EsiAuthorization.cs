@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
+using EveJimaCore.BLL;
 using EveJimaUniverse;
 using log4net;
 using Newtonsoft.Json.Linq;
@@ -141,6 +142,36 @@ namespace EveJimaCore
             catch (Exception ex)
             {
                 Log.ErrorFormat("Critical error in [EsiAuthorization.Refresh] Exception is {0}", ex);
+            }
+
+        }
+
+        public void SetWaypoint(string addToBeginning, string clearOtherWaypoints, string solarSystemId)
+        {
+            Log.DebugFormat("[EsiAuthorization.SetWaypoint] started for refresh_token = {0}", AccessToken);
+            
+            var url = @"https://esi.tech.ccp.is/latest/ui/autopilot/waypoint/?add_to_beginning=false&clear_other_waypoints=true&datasource=tranquility&destination_id=" + solarSystemId;
+
+            try
+            {
+
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Accept = "application/json";
+                httpWebRequest.Method = "POST";
+                httpWebRequest.Headers.Add("Authorization", "Bearer " + AccessToken);
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    using (HttpWebResponse objResponse = (HttpWebResponse)httpWebRequest.GetResponse())
+                    {
+                        // do something...
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Critical error in [EsiAuthorization.SetWaypoint] Exception is {0}", ex);
             }
 
         }
@@ -298,8 +329,6 @@ namespace EveJimaCore
             {
                 var url = "https://esi.tech.ccp.is/v1/characters/" + pilotId + "/bookmarks/";
 
-                Trace.TraceInformation(DateTime.Now.ToLongTimeString() + " Start Get location. " + url);
-
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
 
                 httpWebRequest.Method = "GET";
@@ -321,12 +350,40 @@ namespace EveJimaCore
                         {
                             if(content.SelectToken("folder_id") == null) continue;
 
+                            
+
                             var bookmark = new Bookmark
                             {
                                 Name = content.SelectToken("memo").ToString(),
                                 SystemId = content.SelectToken("target.location_id").ToString(),
                                 Note = content.SelectToken("note").ToString()
                             };
+
+
+                            foreach(var contentInternal in content.SelectToken("target").Children<JObject>())
+                            {
+                                var a1 = contentInternal.SelectToken("item_id").ToString();
+                            }
+
+
+                            //string distance = content.SelectToken("target[0].item[0].item_id").ToString();
+
+                            //if (content.SelectToken("target.item.item_id").ToString() == "5")
+                            //{
+                            //    bookmark.SystemId = content.SelectToken("target.item.item_id").ToString();
+                            //}
+
+                            if(content.SelectToken("target.item.type_id") != null)
+                            {
+                                if(content.SelectToken("target.item.type_id").ToString() == "5")
+                                {
+                                    // Bookmark of solar system from star map
+                                    if(content.SelectToken("target.item.item_id") != null)
+                                    {
+                                        bookmark.SystemId = content.SelectToken("target.item.item_id").ToString();
+                                    }
+                                }
+                            }
 
                             if (content.SelectToken("folder_id").ToString() == folderId) retValue.Add(bookmark);
                         }

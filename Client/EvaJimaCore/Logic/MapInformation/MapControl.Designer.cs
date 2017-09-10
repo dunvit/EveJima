@@ -39,7 +39,7 @@
             this.containerToolbar.Location = new System.Drawing.Point(3, 3);
             this.containerToolbar.Name = "containerToolbar";
             this.containerToolbar.SelectedTab = "SolarSystem";
-            this.containerToolbar.Size = new System.Drawing.Size(326, 29);
+            this.containerToolbar.Size = new System.Drawing.Size(700, 29);
             this.containerToolbar.TabIndex = 0;
             // 
             // containerInformation
@@ -59,9 +59,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.containerMap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
-            this.containerMap.Location = new System.Drawing.Point(335, 3);
+            this.containerMap.Location = new System.Drawing.Point(335, 35);
             this.containerMap.Name = "containerMap";
-            this.containerMap.Size = new System.Drawing.Size(699, 512);
+            this.containerMap.Size = new System.Drawing.Size(699, 480);
             this.containerMap.TabIndex = 2;
             // 
             // MapControl

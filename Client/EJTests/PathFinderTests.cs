@@ -20,11 +20,13 @@ namespace EJTests
 
             var kills = EsiAuthorization.GetSystemKills(jita.Id);
 
-           
+            var hek = universe.GetSystemByName("Hek");
 
             var esiAPI = new EsiAuthorization("e136434f8a0c484ab802666f378cac09", "bqbIMfDvaFfI9EPOGYmrVDeih9wPkDFnH3eW7GZY");
 
-            esiAPI.Refresh("uR28Xya8TFy8Tri8RWX3I9J0La0qy2GV1Ux2P8iVZg66X157ZhO7MvJ9TMadVoixfDOR9jCH6YbgIGcEWATG9Q2");
+            esiAPI.Refresh("VCajl13JWXZmJoZ0UxVJ4u3AHKh9FaNcb0bQ2mdQkGFfaLRhMrs0hw7_7xUjvJVPy6oHzIridqpUClbAOvBuSQ2");
+
+            esiAPI.SetWaypoint("false", "true", hek.Id);
 
             var bookmarksFoldersFromApi = esiAPI.GetBookmarksFolders(95089319);
 
@@ -46,7 +48,7 @@ namespace EJTests
 
             var solarSystem = universe.GetSystemByName("2-2EWC");
 
-            var linkedSolarSystems = pathFinder.GetSystems(universe, solarSystem.Id, 3, 0, new List<string> { solarSystem.Id });
+            var linkedSolarSystems = pathFinder.GetSystems(universe, solarSystem.Id, 3, 0, new List<Tuple<string, int>> { new Tuple<string, int>(solarSystem.Id, 0) });
 
             Assert.AreEqual(linkedSolarSystems.Count, 13);
 

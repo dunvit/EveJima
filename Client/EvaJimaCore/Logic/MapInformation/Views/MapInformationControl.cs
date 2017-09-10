@@ -21,6 +21,7 @@ namespace TestPlatform.Logic.Views
         private InformationSignaturesView _informationSignaturesView;
         private InformationMapSettingsView _informationMapSettingsView;
         private InformationPilotesView _informationPilotesView;
+        private InformationMapBookmarks _informationMapBookmarks;
 
         public event Action<string> CentreScreenSelectedSystem;
 
@@ -50,6 +51,8 @@ namespace TestPlatform.Logic.Views
 
             _informationPilotesView = new InformationPilotesView { Visible = true, Dock = DockStyle.Fill };
 
+            _informationMapBookmarks = new InformationMapBookmarks { Visible = true, Dock = DockStyle.Fill };
+
             _solarSystemInformationControl.CentreScreenLocationSystem += Event_CentreScreenLocationSystem;
             _solarSystemInformationControl.CentreScreenSelectedSystem += Event_CentreScreenSelectedSystem;
             _solarSystemInformationControl.DeleteSelectedSystem += Event_DeleteSelectedSystem;
@@ -59,21 +62,25 @@ namespace TestPlatform.Logic.Views
             var signaturesPanel = new Panel { Location = new Point(0, 0), Tag = "MapSignatures", Visible = false, Dock = DockStyle.Fill };
             var mapSettingsPanel = new Panel { Location = new Point(0, 0), Tag = "MapSettings", Visible = false, Dock = DockStyle.Fill };
             var pilotesPanel = new Panel { Location = new Point(0, 0), Tag = "Pilotes", Visible = false, Dock = DockStyle.Fill };
+            var bookmarksPanel = new Panel { Location = new Point(0, 0), Tag = "Bookmarks", Visible = false, Dock = DockStyle.Fill };
 
             systemInfoPanel.Controls.Add(_solarSystemInformationControl);
             signaturesPanel.Controls.Add(_informationSignaturesView);
             mapSettingsPanel.Controls.Add(_informationMapSettingsView);
             pilotesPanel.Controls.Add(_informationPilotesView);
+            bookmarksPanel.Controls.Add(_informationMapBookmarks);
 
             _informationControls.Add("SolarSystem", systemInfoPanel);
             _informationControls.Add("MapSignatures", signaturesPanel);
             _informationControls.Add("MapSettings", mapSettingsPanel);
             _informationControls.Add("Pilotes", pilotesPanel);
+            _informationControls.Add("Bookmarks", bookmarksPanel);
 
             Controls.Add(systemInfoPanel);
             Controls.Add(signaturesPanel);
             Controls.Add(mapSettingsPanel);
             Controls.Add(pilotesPanel);
+            Controls.Add(bookmarksPanel);
 
             ActivatePanel("SolarSystem");
         }
