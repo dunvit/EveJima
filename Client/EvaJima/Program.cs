@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using System.Windows.Forms;
 using log4net;
 
@@ -25,7 +24,8 @@ namespace EveJima
 
             EvaJimaCore.Global.Initialization();
 
-            Application.Run(new EveJimaCore.WindowMonitoring());
+            //Application.Run(new EveJimaCore.WindowMonitoring());
+            Application.Run(new EveJimaCore.MainEveJima());
         }
 
     }

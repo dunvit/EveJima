@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Timers;
 using EvaJimaCore;
 using log4net;
 
@@ -14,30 +12,12 @@ namespace EveJimaCore.BLL
 
     public class PilotsEntity : IEnumerable<PilotEntity>
     {
-        private Object _lock = new Object();
+        private readonly object _lock = new object();
         private static readonly ILog Log = LogManager.GetLogger(typeof(PilotsEntity));
         readonly List<PilotEntity> _pilots = new List<PilotEntity>();
 
         public DelegateOnAddPilot OnAddPilot;
         public DelegateActivate OnActivatePilot;
-
-        //private Timer _updateMapTimer;
-
-        //public PilotsEntity()
-        //{
-        //    _updateMapTimer = new Timer();
-        //    _updateMapTimer.Elapsed += Event_Refresh;
-        //    _updateMapTimer.Interval = 5000;
-        //    _updateMapTimer.Enabled = true;
-        //}
-
-        //private void Event_Refresh(object sender, ElapsedEventArgs e)
-        //{
-        //    if (Selected != null && Selected.Location.Name == "unknown")
-        //    {
-        //        Selected.RefreshLocationInformation();
-        //    }
-        //}
 
         public string[] GetPilotsStorageContent()
         {
@@ -45,7 +25,7 @@ namespace EveJimaCore.BLL
             {
                 if (File.Exists(@"Data/Pilots.csv") == false)
                 {
-                    File.Create(@"Data/Pilots.csv").Close(); ;
+                    File.Create(@"Data/Pilots.csv").Close(); 
                 }
 
                 var allLines = File.ReadAllLines(@"Data/Pilots.csv");
@@ -77,6 +57,7 @@ namespace EveJimaCore.BLL
 
             if(_pilots.Count == 1) SetSelected(pilot);
 
+            Global.Presenter.AddPilotToMonitoringList(pilot);
 
             Global.Presenter.GlobalEventsActivatePilot(pilot.Name);
         }

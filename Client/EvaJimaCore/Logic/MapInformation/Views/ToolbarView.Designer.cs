@@ -85,7 +85,7 @@
             this.cmdMapSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdMapSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdMapSettings.ForeColor = System.Drawing.Color.White;
-            this.cmdMapSettings.Location = new System.Drawing.Point(299, 4);
+            this.cmdMapSettings.Location = new System.Drawing.Point(224, 4);
             this.cmdMapSettings.Name = "cmdMapSettings";
             this.cmdMapSettings.Size = new System.Drawing.Size(67, 23);
             this.cmdMapSettings.TabIndex = 2;
@@ -123,13 +123,14 @@
             this.cmdBookmarks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdBookmarks.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdBookmarks.ForeColor = System.Drawing.Color.White;
-            this.cmdBookmarks.Location = new System.Drawing.Point(222, 4);
+            this.cmdBookmarks.Location = new System.Drawing.Point(558, 4);
             this.cmdBookmarks.Name = "cmdBookmarks";
             this.cmdBookmarks.Size = new System.Drawing.Size(80, 23);
             this.cmdBookmarks.TabIndex = 4;
             this.cmdBookmarks.Tag = "Bookmarks";
             this.cmdBookmarks.Text = "Pathfinder";
             this.cmdBookmarks.UseVisualStyleBackColor = true;
+            this.cmdBookmarks.Visible = false;
             this.cmdBookmarks.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Event_SelectToolBarElement);
             // 
             // ToolbarView

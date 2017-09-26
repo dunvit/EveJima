@@ -7,7 +7,7 @@ using System.Text;
 using EveJimaCore;
 using EveJimaUniverse;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 
 namespace EJTests
 {

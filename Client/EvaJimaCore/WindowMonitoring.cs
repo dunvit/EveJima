@@ -330,7 +330,7 @@ namespace EveJimaCore
             #region Events
             _containerSolarSystemOffline = new whlSolarSystemOffline();
             
-            _containerSolarSystemOffline.OnBrowserNavigate += Event_BrowserNavigate;
+            //_containerSolarSystemOffline.OnBrowserNavigate += Event_BrowserNavigate;
             #endregion
 
             _containerMap = new MapControl();

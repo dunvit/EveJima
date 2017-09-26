@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cmdRefreshBookmarks = new EveJimaCore.whlButton();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,14 +41,13 @@
             this.lblUpdateTime = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmdRefreshBookmarks = new EveJimaCore.whlButton();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
             // 
-            this.groupBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.groupBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.groupBox3.Controls.Add(this.cmdRefreshBookmarks);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.label5);
@@ -65,6 +65,21 @@
             this.groupBox3.Size = new System.Drawing.Size(324, 453);
             this.groupBox3.TabIndex = 150;
             this.groupBox3.TabStop = false;
+            // 
+            // cmdRefreshBookmarks
+            // 
+            this.cmdRefreshBookmarks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmdRefreshBookmarks.BackColor = System.Drawing.Color.Black;
+            this.cmdRefreshBookmarks.ForeColor = System.Drawing.Color.LightGray;
+            this.cmdRefreshBookmarks.IsActive = true;
+            this.cmdRefreshBookmarks.IsTabControlButton = false;
+            this.cmdRefreshBookmarks.Location = new System.Drawing.Point(67, 417);
+            this.cmdRefreshBookmarks.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.cmdRefreshBookmarks.Name = "cmdRefreshBookmarks";
+            this.cmdRefreshBookmarks.Size = new System.Drawing.Size(199, 26);
+            this.cmdRefreshBookmarks.TabIndex = 159;
+            this.cmdRefreshBookmarks.Value = "Zkillboard";
+            this.cmdRefreshBookmarks.Click += new System.EventHandler(this.Event_RefreshBookmarks);
             // 
             // label4
             // 
@@ -165,7 +180,7 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
@@ -210,26 +225,11 @@
             this.Column1.HeaderText = "Column1";
             this.Column1.Name = "Column1";
             // 
-            // cmdRefreshBookmarks
-            // 
-            this.cmdRefreshBookmarks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmdRefreshBookmarks.BackColor = System.Drawing.Color.Black;
-            this.cmdRefreshBookmarks.ForeColor = System.Drawing.Color.LightGray;
-            this.cmdRefreshBookmarks.IsActive = true;
-            this.cmdRefreshBookmarks.IsTabControlButton = false;
-            this.cmdRefreshBookmarks.Location = new System.Drawing.Point(67, 417);
-            this.cmdRefreshBookmarks.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.cmdRefreshBookmarks.Name = "cmdRefreshBookmarks";
-            this.cmdRefreshBookmarks.Size = new System.Drawing.Size(199, 26);
-            this.cmdRefreshBookmarks.TabIndex = 159;
-            this.cmdRefreshBookmarks.Value = "Zkillboard";
-            this.cmdRefreshBookmarks.Click += new System.EventHandler(this.Event_RefreshBookmarks);
-            // 
             // InformationMapBookmarks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.Controls.Add(this.groupBox3);
             this.Name = "InformationMapBookmarks";
             this.Size = new System.Drawing.Size(324, 453);

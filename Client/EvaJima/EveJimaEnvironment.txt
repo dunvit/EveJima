@@ -1,0 +1,1 @@
+{"IsShowFavorites":false,"IsPinned":false,"LocationMaximizeX":69,"LocationMaximizeY":153}

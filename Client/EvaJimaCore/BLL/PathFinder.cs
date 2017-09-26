@@ -81,6 +81,8 @@ namespace EveJimaCore.BLL
 
             var linkedSystems = universe.GetLinkedSystems(solarSystemId);
 
+            if(linkedSystems == null) return systems;
+
             foreach (var system in linkedSystems.LinkedSystems)
             {
                 var linkedSystem = universe.GetSystemById(system);

@@ -263,7 +263,7 @@ namespace EveJimaCore
         public static T CloneObject<T>(this T source)
         {
             // Don't serialize a null object, simply return the default for that object
-            if (Object.ReferenceEquals(source, null))
+            if (object.ReferenceEquals(source, null))
             {
                 return default(T);
             }

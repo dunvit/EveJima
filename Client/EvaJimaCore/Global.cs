@@ -1,5 +1,4 @@
-﻿using System;
-using EveJimaCore;
+﻿using EveJimaCore;
 using EveJimaCore.BLL;
 using EveJimaCore.BLL.LostAndFound;
 using EveJimaCore.BLL.Map;
@@ -32,11 +31,8 @@ namespace EvaJimaCore
 
         public static EveJimaPresenter Presenter;
 
-        
-
         public static void Initialization()
         {
-
             Settings = new Settings();
 
             ApplicationSettings = new ApplicationSettings();
@@ -45,10 +41,6 @@ namespace EvaJimaCore
             MapApiFunctions.Initialization(ApplicationSettings.Server_MapAddress);
 
             WorkEnvironment = new WorkEnvironment();
-
-            
-
-            
 
             Metrics = new MetricsWriter();
 
@@ -66,6 +58,12 @@ namespace EvaJimaCore
             LostAndFoundOffice = new LostSolarSystems();
 
             Presenter = new EveJimaPresenter();
+
+        }
+
+        public static void Dispose()
+        {
+            InternalBrowser.Dispose();
         }
     }
 }

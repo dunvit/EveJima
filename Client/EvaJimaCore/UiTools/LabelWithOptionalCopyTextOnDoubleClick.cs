@@ -16,9 +16,9 @@ namespace EveJimaCore.UiTools
 
         protected override void OnDoubleClick(EventArgs e)
         {
-            if (!string.IsNullOrEmpty(clipboardText))
-                Clipboard.SetData(DataFormats.Text, clipboardText);
-            clipboardText = null;
+            //if (!string.IsNullOrEmpty(clipboardText))
+                //Clipboard.SetData(DataFormats.Text, clipboardText);
+            //clipboardText = null;
             base.OnDoubleClick(e);
         }
 

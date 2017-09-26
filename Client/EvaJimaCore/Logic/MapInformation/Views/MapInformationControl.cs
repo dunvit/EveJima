@@ -151,7 +151,7 @@ namespace TestPlatform.Logic.Views
             // 
             // MapInformationControl
             // 
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.Name = "MapInformationControl";
             this.Size = new System.Drawing.Size(269, 304);
             this.Load += new System.EventHandler(this.InformationView_Load);

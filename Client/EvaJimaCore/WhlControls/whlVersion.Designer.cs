@@ -34,14 +34,18 @@
             // 
             // browserTabControl
             // 
+            this.browserTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.browserTabControl.BackColor = System.Drawing.Color.LightGray;
-            this.browserTabControl.Location = new System.Drawing.Point(7, 6);
+            this.browserTabControl.Location = new System.Drawing.Point(13, 8);
             this.browserTabControl.Name = "browserTabControl";
-            this.browserTabControl.Size = new System.Drawing.Size(855, 450);
+            this.browserTabControl.Size = new System.Drawing.Size(858, 450);
             this.browserTabControl.TabIndex = 61;
             // 
             // cmdPasteCosmicSifnatures
             // 
+            this.cmdPasteCosmicSifnatures.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.cmdPasteCosmicSifnatures.BackColor = System.Drawing.Color.Black;
             this.cmdPasteCosmicSifnatures.ForeColor = System.Drawing.Color.LightGray;
             this.cmdPasteCosmicSifnatures.IsActive = true;

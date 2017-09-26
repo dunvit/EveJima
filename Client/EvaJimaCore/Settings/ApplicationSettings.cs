@@ -2,7 +2,6 @@
 using System.IO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using EvaJimaCore;
 using log4net;
 
 namespace EveJimaCore
@@ -28,7 +27,6 @@ namespace EveJimaCore
 
         public string Client_execution_file { set; get; }
 
-
         public bool Browser_IsShowFavorites { get; set; }
 
         public bool Browser_IsPinned { get; set; }
@@ -40,6 +38,15 @@ namespace EveJimaCore
 
 
         public List<Tuple<string, string, string, string>> Pilots { get; set; }
+
+
+        public bool IsUseMap { get; set; }
+
+        public bool IsUseBrowser { get; set; }
+
+        public bool IsSignatureRebuildEnabled { get; set; }
+
+        public bool IsNeedUpdateVersion { get; set; }
 
         public ApplicationSettings()
         {
@@ -84,16 +91,11 @@ namespace EveJimaCore
             Save();
         }
 
-        private static bool IsNeedConvert()
-        {
-            return File.Exists("EveJimaSettings.txt");
-        }
-
         private void Load()
         {
-            var path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "EveJima", "Settings.dat");
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "EveJima", "Settings.dat");
 
-            var settingsContent = "";
+            string settingsContent;
 
             if(File.Exists(path))
             {
@@ -104,8 +106,6 @@ namespace EveJimaCore
             {
                 settingsContent = File.ReadAllText(@"EveJimaSettings.txt");
             }
-
-            
 
             dynamic jsonResponse = JsonConvert.DeserializeObject(settingsContent);
 
@@ -124,6 +124,24 @@ namespace EveJimaCore
             Browser_LocationMaximizeX       = jsonResponse.Browser_LocationMaximizeX;
             Browser_LocationMaximizeY       = jsonResponse.Browser_LocationMaximizeY;
             Server_MapAddress               = jsonResponse.Server_MapAddress;
+
+            IsUseBrowser = jsonResponse.IsUseBrowser == null ? true : jsonResponse.IsUseBrowser;
+            IsUseMap = jsonResponse.IsUseMap == null ? false : jsonResponse.IsUseMap;
+            IsSignatureRebuildEnabled = jsonResponse.IsSignatureRebuildEnabled == null ? true : jsonResponse.IsSignatureRebuildEnabled;
+
+            CurrentVersion = File.ReadAllText(@"Version.txt");
+
+            using (var wc = new System.Net.WebClient())
+                Version = wc.DownloadString(Server_update_uri_version);
+
+            //Version = "3.01";
+
+            if (new Version(Version).CompareTo(new Version(CurrentVersion)) > 0)
+            {
+                IsNeedUpdateVersion = true;
+            }
+
+
 
             var ccPilots = jsonResponse.Pilots;
 
@@ -160,6 +178,9 @@ namespace EveJimaCore
                     Browser_LocationMaximizeY = Browser_LocationMaximizeY,
                     Pilots = Pilots,
                     Server_MapAddress = Server_MapAddress,
+                    IsUseBrowser = IsUseBrowser,
+                    IsUseMap = IsUseMap,
+                    IsSignatureRebuildEnabled = IsSignatureRebuildEnabled,
                 });
 
                 // TODO: ReBuild screens coordinates for one screen { foreach (var screen in Screen.AllScreens) }

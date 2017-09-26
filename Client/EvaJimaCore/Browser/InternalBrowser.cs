@@ -56,6 +56,7 @@ namespace EveJimaCore
 
         public void Dispose()
         {
+            Cef.Shutdown();
             //Cef.Shutdown();
             //Browser.
         }

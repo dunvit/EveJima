@@ -41,17 +41,17 @@
             this.txtSolarSystemClass = new System.Windows.Forms.Label();
             this.txtSolarSystemEffect = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ejButton1 = new EveJimaCore.WhlControls.ejButton();
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.gridPilotes = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.ejButton1 = new EveJimaCore.WhlControls.ejButton();
             this.groupBox3.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPilotes)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lnlSystemText
@@ -201,6 +201,25 @@
             this.groupBox3.TabIndex = 149;
             this.groupBox3.TabStop = false;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lnlSystemText);
+            this.panel1.Controls.Add(this.txtSolarSystemName);
+            this.panel1.Controls.Add(this.txtSolarSystemEffect);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.txtSolarSystemClass);
+            this.panel1.Controls.Add(this.txtSolarSystemRegion);
+            this.panel1.Controls.Add(this.txtSolarSystemStaticII);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.txtSolarSystemStaticI);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Location = new System.Drawing.Point(3, 17);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(306, 129);
+            this.panel1.TabIndex = 155;
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -210,7 +229,7 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.ColumnHeadersVisible = false;
@@ -231,6 +250,26 @@
             this.dataGridView1.TabIndex = 154;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
+            // 
+            // ejButton1
+            // 
+            this.ejButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ejButton1.AutoSize = true;
+            this.ejButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ejButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.ejButton1.FlatAppearance.BorderSize = 0;
+            this.ejButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.ejButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.ejButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ejButton1.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ejButton1.ForeColor = System.Drawing.Color.OliveDrab;
+            this.ejButton1.Location = new System.Drawing.Point(196, 601);
+            this.ejButton1.Name = "ejButton1";
+            this.ejButton1.Size = new System.Drawing.Size(100, 23);
+            this.ejButton1.TabIndex = 153;
+            this.ejButton1.Tag = "MapSignatures";
+            this.ejButton1.Text = "Reload Pilotes";
+            this.ejButton1.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -271,7 +310,7 @@
             this.gridPilotes.AllowUserToResizeRows = false;
             this.gridPilotes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.gridPilotes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.gridPilotes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.gridPilotes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gridPilotes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridPilotes.ColumnHeadersVisible = false;
@@ -290,58 +329,19 @@
             this.gridPilotes.Size = new System.Drawing.Size(298, 447);
             this.gridPilotes.TabIndex = 148;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.lnlSystemText);
-            this.panel1.Controls.Add(this.txtSolarSystemName);
-            this.panel1.Controls.Add(this.txtSolarSystemEffect);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.txtSolarSystemClass);
-            this.panel1.Controls.Add(this.txtSolarSystemRegion);
-            this.panel1.Controls.Add(this.txtSolarSystemStaticII);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.txtSolarSystemStaticI);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(3, 17);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(306, 129);
-            this.panel1.TabIndex = 155;
-            // 
-            // ejButton1
-            // 
-            this.ejButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ejButton1.AutoSize = true;
-            this.ejButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ejButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
-            this.ejButton1.FlatAppearance.BorderSize = 0;
-            this.ejButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
-            this.ejButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
-            this.ejButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ejButton1.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ejButton1.ForeColor = System.Drawing.Color.OliveDrab;
-            this.ejButton1.Location = new System.Drawing.Point(196, 601);
-            this.ejButton1.Name = "ejButton1";
-            this.ejButton1.Size = new System.Drawing.Size(100, 23);
-            this.ejButton1.TabIndex = 153;
-            this.ejButton1.Tag = "MapSignatures";
-            this.ejButton1.Text = "Reload Pilotes";
-            this.ejButton1.UseVisualStyleBackColor = true;
-            // 
             // InformationPilotesView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.Controls.Add(this.groupBox3);
             this.Name = "InformationPilotesView";
             this.Size = new System.Drawing.Size(326, 646);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPilotes)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

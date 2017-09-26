@@ -4,7 +4,6 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Timers;
 using EvaJimaCore;
-using EveJimaUniverse;
 using log4net;
 
 namespace EveJimaCore.BLL
@@ -359,8 +358,8 @@ namespace EveJimaCore.BLL
             try
             {
                 SpaceMap.SelectedSolarSystemName = LocationCurrentSystemName;
-                
-                if(OnChangeSolarSystem != null) OnChangeSolarSystem(this, LocationPreviousSystemName, LocationCurrentSystemName);
+
+                if (OnChangeSolarSystem != null) OnChangeSolarSystem(this, LocationPreviousSystemName, LocationCurrentSystemName);
                 if(OnEnterToSolarSystem != null)  OnEnterToSolarSystem(Name, LocationPreviousSystemName, LocationCurrentSystemName);
             }
             catch (Exception exception)

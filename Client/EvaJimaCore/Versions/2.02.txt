@@ -1,0 +1,50 @@
+﻿EveJima version 2.02 https://github.com/dunvit/EveJima/releases
+
+
+Список изменений в обновлении 2.02
+
+
+Дополнения и изменения:
+
++ Добавлены цвета соответствующие типу безопасности солнечной системы
++ Вкладка "Solar System" переименована в "Information"
++ Добавлена вкладка "Settings" с установками:
+	* "Use Browser" включает использование браузера в прокрамме. По умолчанию включен. 
+	* "Use Wormholes Map" включает использование карты. В выключенном состоянии во вкладке "Location" информация предоставлена вминимальном режиме.
+	* "Short signature rebuild" во включенном состоянии при копировании сигнатуры (crl-c при фокусе на сигнатуре в клиенте Eve) помещает в память текст в формате: Тип_сигнатуры Код_сигнатуры Название_сигнатуры
++ Добавлена вкладка "Pathfinder" для проверки состояния систем в 5 прыжках от текущего местоположения пилота по сохраненным координатам.
+	* Все сохраненные координаты (bookmarks) беруться из личных закладок пилота ("Persinal bookmarks" папка "[EveJima]"). Внимание. ССР кеширует данные на 3600 секунд, поэтому перед первым запуском перенесите все интересующие вас закладки в папку [EveJima]
+	* По координатам находящимся в радиусе 5 прыжков предоставляется информация о числе пилотов, уничтоженных НПС кораблей и кораблей капсулеров за последний час.
+	* При двойном клике на координаты в EveJima устанавливается автопилот в клиенте Eve Online. 
++ Удалена вкладка "Pilots" 
+
+Исправленные ошибки:
+
++ Теперь иконка EvaJima успешно выгружается из списка hidden icons после закрытия программы.
++ Исправлены вылеты программы при чтении csv файлов
++ Исправлены вылеты программы при переключении между вкладками
+
+
+----------------------------------------------------------------------------------------------------
+
+Patch notes for 2.02 Release 
+
+Features & Changes:
+
++ Added colors to solar system info by security status
++ Rename tab from "Solar System" to "Information"
++ Added new tab "Settings":
+	* "Use Browser" Add/remove browser from application. By default is enabled. 
+	* "Use Wormholes Map" Add/remove map in tab "Location". In unselectet mode get only basic location information.
+	* "Short signature rebuild" in enabked mode after ctrl-C in signature rebuild text to format: Signature_type Signature_code Signature_name
++ Added new tab "Pathfinder"for check solar system in range 5 jumps from pilot location.
+	* All bookmarks getting from ("Persinal bookmarks" folder "[EveJima]"). Attention. This route is cached by CCP for up to 3600 seconds. Before start program copy bookmarks in Eve Online to folder [EveJima]
+	* By bookmarks EveJima get the number of ship, pod and NPC kills per solar system within the last hour.
+	* By duoble click on bookmarks in EveJima set autopilot in Eve Online. 
++ Removed tab "Pilots"	
+
+Defect Fixes:
+
++ Now icon EveJima success removed from hiddel icons after terminate programm.
++ Fixed crashes of the program when reading csv files
++ Fixed crashes when switching between tabs

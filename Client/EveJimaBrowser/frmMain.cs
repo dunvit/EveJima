@@ -24,7 +24,7 @@ namespace EveJimaBrowser
             f2.FormBorderStyle = FormBorderStyle.None;
             f2.Visible = true;
             f2.Dock = DockStyle.Fill;
-            this.Controls.Add(f2);
+            Controls.Add(f2);
         }
 
         private void frmMain_Load(object sender, EventArgs e)

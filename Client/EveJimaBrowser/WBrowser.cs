@@ -127,9 +127,9 @@ namespace WBrowser
                 homePage=r.ChildNodes[5].InnerText;
             }
 
-            this.linksBarToolStripMenuItem.Checked = linkBar.Visible;
+            linksBarToolStripMenuItem.Checked = linkBar.Visible;
             
-            this.commandBarToolStripMenuItem.Checked = adrBar.Visible;
+            commandBarToolStripMenuItem.Checked = adrBar.Visible;
             homePage = settings.DocumentElement.ChildNodes[5].InnerText;
         }
         
@@ -702,7 +702,7 @@ namespace WBrowser
         private void linksBarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             linkBar.Visible = !linkBar.Visible;
-            this.linksBarToolStripMenuItem.Checked = linkBar.Visible;
+            linksBarToolStripMenuItem.Checked = linkBar.Visible;
             settings.DocumentElement.ChildNodes[2].Attributes[0].Value = linkBar.Visible.ToString();
         }
         //menu bar
@@ -711,7 +711,7 @@ namespace WBrowser
         private void commandBarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             adrBar.Visible = !adrBar.Visible;
-            this.commandBarToolStripMenuItem.Checked = adrBar.Visible;
+            commandBarToolStripMenuItem.Checked = adrBar.Visible;
             settings.DocumentElement.ChildNodes[1].Attributes[0].Value = adrBar.Visible.ToString();
         }
         #endregion
