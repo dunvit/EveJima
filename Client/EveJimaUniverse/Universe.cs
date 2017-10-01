@@ -32,16 +32,20 @@ namespace EveJimaUniverse
 
         private void LoadLinkedSystems()
         {
+            Log.Debug("[SpaceEntity.LoadLinkedSystems] Read file \"Data/LinkedSystems.dat\". ");
             var dataFile = @"Data/LinkedSystems.dat";
             var json = File.ReadAllText(dataFile);
             var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
             var ser = new DataContractJsonSerializer(LinkedSystems.GetType());
             LinkedSystems = ser.ReadObject(ms) as List<LinkedSystem>;
             ms.Close();
+            Log.Debug("[SpaceEntity.LoadLinkedSystems] Close ");
         }
 
         private void LoadSolarSystems()
         {
+            Log.Debug("[SpaceEntity.LoadSolarSystems] Read file \"Data/Universe.dat\". ");
+
             var dataFile = @"Data/Universe.dat";
 
             var json = File.ReadAllText(dataFile);
@@ -53,6 +57,8 @@ namespace EveJimaUniverse
             ms.Close();
 
             Systems = universeAfterLoad.Systems;
+
+            Log.Debug("[SpaceEntity.LoadSolarSystems] Close ");
         }
 
         public System GetSystemById(string id)
@@ -88,18 +94,22 @@ namespace EveJimaUniverse
 
         private void LoadWormholeTypes()
         {
-            Log.Debug("[SpaceEntity.LoadWormholes] Read csv file \"Data/WSpaceSystemInfo - Wormholes.csv\". ");
+            Log.Debug("[SpaceEntity.LoadWormholes] Read file \"Data/Wormholes.dat\". ");
 
             try
             {
                 var json = File.ReadAllText(@"Data/Wormholes.dat");
+                Log.Debug("[SpaceEntity.LoadWormholes] json = " + json);
                 var WormholeTypesAfterLoad = new Dictionary<string, WormholeType>();
 
                 var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+                Log.Debug("[SpaceEntity.LoadWormholes] MemoryStream ");
                 var ser = new DataContractJsonSerializer(WormholeTypesAfterLoad.GetType());
+                Log.Debug("[SpaceEntity.LoadWormholes] DataContractJsonSerializer ");
                 WormholeTypes = ser.ReadObject(ms) as Dictionary<string, WormholeType>;
+                Log.Debug("[SpaceEntity.LoadWormholes] ReadObject ");
                 ms.Close();
-
+                Log.Debug("[SpaceEntity.LoadWormholes] Close ");
             }
             catch (Exception ex)
             {

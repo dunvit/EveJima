@@ -223,6 +223,8 @@ namespace EveJimaCore
 
             Log.DebugFormat("[MainEveJima.StartPilotAuthorizeFlow] get value: {0}", value);
 
+            _containerAuthorization.PilotAuthorizeFlow(value);
+
             BringApplicationToFront();
 
             Global.Pilots.Selected.Key = Global.Pilots.Selected.Name;
@@ -445,6 +447,11 @@ namespace EveJimaCore
             Global.Pilots.OnAddPilot += GlobalEvent_AddNewPilot;
 
             Text = @"EveJima v" + Global.ApplicationSettings.CurrentVersion;
+
+            if(Global.ApplicationSettings.IsNeedUpdateVersion)
+            {
+                crlToolbar.ActivatePanel("Version");
+            }
         }
 
         private void GlobalEvent_AddNewPilot(PilotEntity pilot)

@@ -26,17 +26,11 @@ namespace EveJimaCore.WhlControls
         {
             try
             {
-                if (Global.Settings.Version.Trim() != Global.Settings.CurrentVersion.Trim())
-                {
-                    cmdPasteCosmicSifnatures.Value = @"Update from version " + Global.Settings.CurrentVersion.Trim() + " to " + Global.Settings.Version;
-                    cmdPasteCosmicSifnatures.Refresh();
+                cmdPasteCosmicSifnatures.Value = @"Update from version " + Global.Settings.CurrentVersion.Trim() + " to " + Global.Settings.Version;
+                cmdPasteCosmicSifnatures.Refresh();
 
-                    cmdPasteCosmicSifnatures.Visible = true;
-                }
-                else
-                {
-                    cmdPasteCosmicSifnatures.Visible = false;
-                }
+                cmdPasteCosmicSifnatures.Visible = true;
+                
             }
             catch (Exception ex)
             {
@@ -50,7 +44,7 @@ namespace EveJimaCore.WhlControls
             {
                 browserTabControl.SuspendLayout();
 
-                var browser = new ChromiumWebBrowser(url);
+                var browser = new WebBrowser();
 
                 // Add it to the form and fill it to the form window.
                 browser.Dock = DockStyle.Fill;
@@ -62,7 +56,9 @@ namespace EveJimaCore.WhlControls
 
                 //This call isn't required for the sample to work. 
                 //It's sole purpose is to demonstrate that #553 has been resolved.
-                browser.CreateControl();
+                // browser.CreateControl();
+
+                browser.Navigate(url);
 
                 browser.Tag = tabPage;
 

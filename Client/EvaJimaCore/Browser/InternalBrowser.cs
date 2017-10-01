@@ -27,6 +27,7 @@ namespace EveJimaCore
         {
             try
             {
+                Log.DebugFormat("[InternalBrowser.InitializeChromium] Start");
                 //Browser= new whlBrowser();
                 //Browser = new ucRichBrowser();
                 Directory.CreateDirectory(cache_dir);
@@ -39,7 +40,11 @@ namespace EveJimaCore
                 //To persist session cookies (cookies without an expiry date or validity interval)
                 settings.CefCommandLineArgs.Add("persist_session_cookies", "1");
 
+                Log.DebugFormat("[InternalBrowser.InitializeChromium] Initialize");
+
                 Cef.Initialize(settings);
+
+                Log.DebugFormat("[InternalBrowser.InitializeChromium] End");
             }
             catch (Exception ex)
             {

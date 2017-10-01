@@ -4,11 +4,14 @@ using EveJimaCore.BLL.LostAndFound;
 using EveJimaCore.BLL.Map;
 using EveJimaSettings;
 using EveJimaUniverse;
+using log4net;
 
 namespace EvaJimaCore
 {
     public static class Global
     {
+        private static readonly ILog Log = LogManager.GetLogger(typeof(Global));
+
         public static WorkEnvironment WorkEnvironment;
 
         public static Settings Settings;
@@ -53,6 +56,7 @@ namespace EvaJimaCore
             Space = new Universe();
             Space.Initialization();
 
+            Log.DebugFormat("[Global.Initialization] InternalBrowser");
             InternalBrowser = new InternalBrowser();
 
             LostAndFoundOffice = new LostSolarSystems();
