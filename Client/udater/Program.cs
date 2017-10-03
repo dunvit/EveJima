@@ -33,11 +33,29 @@ namespace udater
 
             Console.WriteLine("Terminate process \"" + fileName + "\"");
             File.AppendAllText(@"Logs/updater_log.txt", DateTime.Now.ToString("dd'/'MM'/'yyyy HH:mm:ss") + " " + "Terminate process \"" + fileName + "\"" + Environment.NewLine);
-            while (Process.GetProcessesByName(process).Length > 0)
+            while (Process.GetProcessesByName(process).Length > 1000)
             {
+                
                 Process[] myProcesses2 = Process.GetProcessesByName(process);
-                for (int i = 1; i < myProcesses2.Length; i++) { myProcesses2[i].Kill(); }
-                Console.WriteLine("Try kill process \"" + fileName + "\" Please close EveJima application");
+                for(int i = 1; i < myProcesses2.Length; i++)
+                {
+                    try
+                    {
+                        myProcesses2[i].Kill();
+                        Console.WriteLine("Try kill process \"" + myProcesses2[i].ProcessName + "\" Please close EveJima application");
+                        File.AppendAllText(@"Logs\updater_log.txt", DateTime.Now.ToString("dd'/'MM'/'yyyy HH:mm:ss") + " " + "Try kill process \"" + myProcesses2[i].ProcessName + "\" Please close EveJima application" + Environment.NewLine);
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine("Try kill process \"" + myProcesses2[i].ProcessName + "\" Please close EveJima application");
+                        File.AppendAllText(@"Logs\updater_log.txt", DateTime.Now.ToString("dd'/'MM'/'yyyy HH:mm:ss") + " " + "Try kill process \"" + myProcesses2[i].ProcessName + "\" Please close EveJima application" + Environment.NewLine);
+                    }
+                    
+
+                     
+                }
+
+                
                 File.AppendAllText(@"Logs\updater_log.txt", DateTime.Now.ToString("dd'/'MM'/'yyyy HH:mm:ss") + " " + "Try kill process \"" + fileName + "\" Please close EveJima application" + Environment.NewLine);
 
                 Thread.Sleep(300);
