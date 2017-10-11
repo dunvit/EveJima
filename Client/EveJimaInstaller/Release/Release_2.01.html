@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>EveJima documentation</title>
+</head>
+<body>
+    
+    <h1>Version 2.02</h1>
+<h3>Список изменений в обновлении 2.02</h3>
+<p>&nbsp;</p>
+<p><span style="color: #ff6600;"><strong>Важная информация:</strong></span> С версией 2.02 не работает встроенная система обнавления версий. Программу необходимо установить с помощью установщика (<strong>EveJimaInstaller.msi</strong>)</p>
+
+    <h4><br />Дополнения и изменения:</h4>
+    <ul>
+        <li>Добавлены цвета соответствующие типу безопасности солнечной системы. <a href="#section_1"><img border="0" alt="Show more" src="https://user-images.githubusercontent.com/24303086/31423924-2cc91fca-ae60-11e7-9763-10f366794e00.png"></a></li>
+        <li>Вкладка "Solar System" переименована в "Information"</li>
+        <li>
+            Добавлена вкладка "Settings" с установками: <a href="#section_2"><img border="0" alt="Show more" src="https://user-images.githubusercontent.com/24303086/31423924-2cc91fca-ae60-11e7-9763-10f366794e00.png"></a>
+            <ul>
+                <li>"Use Browser" включает использование браузера в прокрамме. По умолчанию включен.</li>
+                <li>"Use Wormholes Map" включает использование карты. В выключенном состоянии во вкладке "Location" информация предоставлена вминимальном режиме.</li>
+                <li>"Short signature rebuild" во включенном состоянии при копировании сигнатуры (crl-c при фокусе на сигнатуре в клиенте Eve) помещает в память текст в формате: Тип_сигнатуры Код_сигнатуры Название_сигнатуры</li>
+            </ul>
+        </li>
+        <li>
+            Добавлена вкладка "Pathfinder" для проверки состояния систем в 5 прыжках от текущего местоположения пилота по сохраненным координатам. <a href="#section_3"><img border="0" alt="Show more" src="https://user-images.githubusercontent.com/24303086/31423924-2cc91fca-ae60-11e7-9763-10f366794e00.png"></a>
+            <ul>
+                <li>Все сохраненные координаты (bookmarks) беруться из личных закладок пилота ("Persinal bookmarks" папка "[EveJima]"). Внимание. ССР кеширует данные на 3600 секунд, поэтому перед первым запуском перенесите все интересующие вас закладки в папку [EveJima]</li>
+                <li>По координатам находящимся в радиусе 5 прыжков предоставляется информация о числе пилотов, уничтоженных НПС кораблей и кораблей капсулеров за последний час.</li>
+                <li>При двойном клике на координаты в EveJima устанавливается автопилот в клиенте Eve Online.&nbsp;</li>
+            </ul>
+        </li>
+        <li>Удалена вкладка "Pilots"</li>
+    </ul>
+    <h4>Исправленные ошибки:</h4>
+    <ul>
+        <li>Теперь иконка EvaJima успешно выгружается из списка "hidden icons" после закрытия программы.</li>
+        <li>Исправлены вылеты программы при чтении csv файлов</li>
+        <li>Исправлены вылеты программы при переключении между вкладками</li>
+    </ul>
+    <h3>&nbsp;</h3>
+    <h3>Patch notes for 2.02 Release&nbsp;</h3>
+    <h4>Features &amp; Changes:</h4>
+    <ul>
+        <li>Added colors to solar system info by security status+ Rename tab from "Solar System" to "Information"</li>
+        <li>
+            Added new tab "Settings":
+            <ul>
+                <li>"Use Browser" Add/remove the browser from an application. By default is enabled.&nbsp;</li>
+                <li>"Use Wormholes Map" Add/remove map in tab "Location". In unselected mode get only basic location information.</li>
+                <li>"Short signature rebuild" in enabked mode after ctrl-C in signature rebuild text to format: Signature_type Signature_code Signature_name</li>
+            </ul>
+        </li>
+        <li>
+            Added new tab "Pathfinder" for check solar system in range 5 jumps from a pilot location.
+            <ul>
+                <li>All bookmarks getting from ("Personal bookmarks" folder "[EveJima]"). Attention. This route is cached by CCP for up to 3600 seconds. Before start program copy bookmarks in Eve Online to folder [EveJima]</li>
+                <li>By bookmarks EveJima gets the number of ships, pod and NPC kills per solar system within the last hour.</li>
+                <li>By double click on bookmarks in EveJima set autopilot in Eve Online.</li>
+            </ul>
+        </li>
+        <li>Removed tab "Pilots"</li>
+    </ul>
+    <h4><br />Defect Fixes:</h4>
+<ul>
+    <li>Now icon EveJima success removed from hidden icons after terminating program.</li>
+    <li>Fixed crashes in read csv files</li>
+    <li>Fixed crashes when switching between tabs</li>
+</ul>
+    
+    <br/><br/>
+    
+<p id="section_1">
+    <br />
+    Добавлены цвета соответствующие типу безопасности солнечной системы.
+    <br/>
+    <img src="https://user-images.githubusercontent.com/24303086/30775501-8dea0740-a09d-11e7-9763-77b76b3e8404.png" alt="" />
+</p>
+
+<p id="section_2">
+    <br />
+    Добавлена вкладка "Settings" с установками
+    <br/>
+    <img src="https://user-images.githubusercontent.com/24303086/31424162-6cb8b3ce-ae61-11e7-8ea0-78d8b12d4884.PNG" alt=""  />
+</p>
+    
+<p id="section_3">
+    <br />
+    Добавлена вкладка "Pathfinder" для проверки bookmarks в близлежащих системах.
+    <br/>
+    <img src="https://user-images.githubusercontent.com/24303086/30775431-33337990-a09c-11e7-8f8a-9edd04bf13f4.png" alt=""  />
+</p>
+    
+<br/><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</body>
+</html>

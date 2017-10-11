@@ -20,7 +20,7 @@ namespace EveJimaCore
             {
                 var web = new HttpListener();
                 const string url = "http://localhost";
-                string port = Global.Settings.CCPSSO_AUTH_PORT;
+                string port = Global.ApplicationSettings.Authorization_Port;
                 var prefix = string.Format("{0}:{1}/", url, port);
                 
                 web.Prefixes.Add(prefix);

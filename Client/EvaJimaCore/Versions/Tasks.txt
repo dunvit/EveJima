@@ -12,24 +12,3 @@ Before release:
 
 - Disable click event in inactive button "Location"
 
-
-
-
-
-
-Migration files:
-
-EveJima.exe
-EveJima.exe.config
-EveJima.vshost.exe
-EveJima.vshost.exe.config
-EveJima.vshost.exe.manifest
-EveJimaCore.dll
-EveJimaEnvironment.txt
-EveJimaServerMap.dll
-EveJimaSettings.dll
-EveJimaSettings.txt
-EveJimaUniverse.dll
-settings.txt
-Version.txt
-WBrowser.exe

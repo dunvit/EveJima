@@ -281,9 +281,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UiTools\VsBorder.cs" />
-    <Compile Include="Ui\Tab.cs" />
-    <Compile Include="Ui\Tabs.cs" />
-    <Compile Include="Ui\TabSize.cs" />
     <Compile Include="WhlControls\baseContainer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -348,23 +345,8 @@
     <Compile Include="WhlControls\whlVersion.Designer.cs">
       <DependentUpon>whlVersion.cs</DependentUpon>
     </Compile>
-    <Compile Include="WindowMonitoring.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WindowMonitoring.Designer.cs">
-      <DependentUpon>WindowMonitoring.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Universe.dat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\Wormholes.dat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="Data\LinkedSystems.dat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="EvaJimaCore.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -473,9 +455,6 @@
     <EmbeddedResource Include="WhlControls\windowMessage.resx">
       <DependentUpon>windowMessage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WindowMonitoring.resx">
-      <DependentUpon>WindowMonitoring.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\book-with-bookmark.png" />
@@ -530,10 +509,6 @@
       <Project>{E67AC071-4E51-4CF3-BA0E-2796BAFA47A5}</Project>
       <Name>EveJimaServerMap</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EvaJimaSettings\EveJimaSettings.csproj">
-      <Project>{6ed83e00-e836-4395-9fbc-7a3878455274}</Project>
-      <Name>EveJimaSettings</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EveJimaBrowser\EveJimaBrowser.csproj">
       <Project>{FC30A198-4213-404F-8526-D7BE5D49E57D}</Project>
       <Name>EveJimaBrowser</Name>
@@ -544,11 +519,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Signatures\Dummy.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="RoadMap\TasksStack.txt" />
-    <Content Include="Versions\2.02.txt" />
+    <Content Include="Versions\202\2.02.txt" />
+    <Content Include="Versions\202\Release.html" />
     <Content Include="Versions\Tasks.txt" />
     <Content Include="Versions\1.35.txt" />
     <Content Include="Versions\1.34.txt" />

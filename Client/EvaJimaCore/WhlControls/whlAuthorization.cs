@@ -99,7 +99,7 @@ namespace EveJimaCore.WhlControls
 
         private void Event_GoToCCPSSO(object sender, EventArgs e)
         {
-            var data = WebUtility.UrlEncode(@"http://localhost:" + Global.Settings.CCPSSO_AUTH_PORT + "/WormholeLocator");
+            var data = WebUtility.UrlEncode(@"http://localhost:" + Global.ApplicationSettings.Authorization_Port + "/WormholeLocator");
 
             var address = "https://login.eveonline.com/oauth/authorize?response_type=code&redirect_uri=" + data +
                           "&client_id=" + Global.ApplicationSettings.Authorization_ClientId +
@@ -252,7 +252,6 @@ namespace EveJimaCore.WhlControls
             }
         }
 
-
         private void cmbPilots_TextChanged(object sender, EventArgs e)
         {
             if (_isLoadedPilotesFromStorage)
@@ -266,30 +265,7 @@ namespace EveJimaCore.WhlControls
 
         public void RefreshAuthorizationStatus()
         {
-            if (Global.Settings.IsAuthorizationEnabled)
-            {
-                lblAuthorizationInfo.Text = TextAuthorizationInfo;
-            }
-            else
-            {
-                lblAuthorizationInfo.Text = TextErrorAuthorizationInfo;
-                btnLogInWithEveOnline.Visible = false;
-            }
-
-            //string[] allLines = Global.Pilots.GetPilotsStorageContent();
-
-            //if (allLines.Count() > 0)
-            //{
-            //    lblAuthorizationInfo.Text = TextPleaseWaitLoadingPilots + Environment.NewLine + Environment.NewLine;
-            //    btnLogInWithEveOnline.Visible = false;
-            //}
-
-            
-        }
-
-        private void cmbPilots_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            lblAuthorizationInfo.Text = TextAuthorizationInfo;
         }
 
         private void cmdLoadPilotes_Click(object sender, EventArgs e)

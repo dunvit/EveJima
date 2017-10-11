@@ -10,8 +10,6 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 using EvaJimaCore;
-using EveJimaCore.BLL;
-using EveJimaSettings;
 using log4net;
 using EveJimaUniverse;
 using Newtonsoft.Json;
@@ -216,49 +214,6 @@ namespace EveJimaCore
             return listToClone.Select(item => (T)item.Clone()).ToList();
         }
 
-        public static void ConvertSettings(ApplicationSettings newSettings, Settings oldSettings, WorkEnvironment workEnvironment)
-        {
-            newSettings.Version = oldSettings.Version;
-            newSettings.CurrentVersion = oldSettings.CurrentVersion;
-
-            newSettings.Authorization_ClientId = oldSettings.CCPSSO_AUTH_CLIENT_ID;
-            newSettings.Authorization_ClientSecret = oldSettings.CCPSSO_AUTH_CLIENT_SECRET;
-            newSettings.Authorization_ClientState = oldSettings.CCPSSO_AUTH_CLIENT_STATE;
-            newSettings.Authorization_Port = oldSettings.CCPSSO_AUTH_PORT;
-            newSettings.Authorization_Scopes = oldSettings.CCPSSO_AUTH_SCOPES;
-            newSettings.Server_update_uri_version = oldSettings.Server_update_uri_version;
-            newSettings.Server_update_content_version = oldSettings.Server_update_content_version;
-            newSettings.Client_execution_file = oldSettings.Client_execution_file;
-
-
-            newSettings.Browser_IsShowFavorites = workEnvironment.IsShowFavorites;
-
-            newSettings.Browser_IsPinned = workEnvironment.IsPinned;
-
-            newSettings.Browser_LocationMaximizeX = workEnvironment.LocationMaximizeX;
-            newSettings.Browser_LocationMaximizeY = workEnvironment.LocationMaximizeY;
-
-            var allLines = Global.Pilots.GetPilotsStorageContent();
-
-            foreach (var allLine in allLines)
-            {
-                try
-                {
-                    if (allLine.Trim() == String.Empty) continue;
-
-                    var pilotDetails = allLine.Split(',');
-
-                    newSettings.Pilots.Add(new Tuple<string, string, string, string>(pilotDetails[0], pilotDetails[1], pilotDetails[2], ""));
-                }
-                catch (Exception ex)
-                {
-                    //Log.ErrorFormat("[whlAuthorization.LoadAllPilotesFromStorage] Critical error. Exception {0}", ex);
-                }
-
-            }
-
-            newSettings.Save();
-        }
 
         public static T CloneObject<T>(this T source)
         {

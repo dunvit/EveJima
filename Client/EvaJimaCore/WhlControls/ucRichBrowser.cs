@@ -59,7 +59,7 @@ namespace EveJimaCore.WhlControls
         private void Event_ShowFavoritesChange(bool isShowFavorites)
         {
             Global.WorkEnvironment.IsShowFavorites = isShowFavorites;
-            Global.WorkEnvironment.SaveChanges();
+            Global.ApplicationSettings.Save();
         }
 
         public bool isMaxMode = false;

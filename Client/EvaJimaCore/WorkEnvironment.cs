@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using EvaJimaCore;
 using log4net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -24,39 +25,12 @@ namespace EveJimaCore
 
             try
             {
-                using (var reader = new StreamReader("EveJimaEnvironment.txt"))
-                {
-                    dynamic data = JObject.Parse(reader.ReadToEnd());
+                IsShowFavorites = Global.ApplicationSettings.Browser_IsShowFavorites;
+                LocationMaximizeX = Global.ApplicationSettings.Browser_LocationMaximizeX;
+                LocationMaximizeY = Global.ApplicationSettings.Browser_LocationMaximizeY;
+                IsPinned = Global.ApplicationSettings.Browser_IsPinned;
 
-                    IsShowFavorites = data.IsShowFavorites != "false";
-
-                    try
-                    {
-                        LocationMaximizeX = data.LocationMaximizeX;
-                        LocationMaximizeY = data.LocationMaximizeY;
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.ErrorFormat("[WorkEnvironment.WorkEnvironment] Critical error. Exception {0}", ex);
-                    }
-
-                    try
-                    {
-                        IsPinned = data.IsPinned;
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.ErrorFormat("[WorkEnvironment.WorkEnvironment] Critical error. Exception {0}", ex);
-                    }
-
-                }
-
-                var screenCounts = 0;
-
-                foreach (var screen in Screen.AllScreens)
-                {
-                    screenCounts++;
-                }
+                var screenCounts = Screen.AllScreens.Length;
 
                 if (screenCounts == 1)
                 {
@@ -74,9 +48,5 @@ namespace EveJimaCore
             }
         }
 
-        public void SaveChanges()
-        {
-            File.WriteAllText(@"EveJimaEnvironment.txt", JsonConvert.SerializeObject(this));
-        }
     }
 }

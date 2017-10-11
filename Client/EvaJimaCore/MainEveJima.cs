@@ -280,7 +280,7 @@ namespace EveJimaCore
             }
 
             Global.WorkEnvironment.IsPinned = Parametrs.IsPinned;
-            Global.WorkEnvironment.SaveChanges();
+            Global.ApplicationSettings.Save();
         }
 
 

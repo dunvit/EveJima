@@ -105,8 +105,6 @@ namespace EveJimaCore.BLL.Map
             
         }
 
-        private bool isGlobalReload;
-
         public void Reload(string key)
         {
             _lastUpdate = new DateTime(2015, 5, 5).Ticks;

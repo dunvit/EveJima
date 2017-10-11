@@ -15,7 +15,7 @@ namespace EveJimaCore.WhlControls
     {
         private static readonly ILog Log = LogManager.GetLogger("All");
         private string _location;
-        private BindingSource gridDataSource = new BindingSource();
+        private BindingSource _gridDataSource = new BindingSource();
 
         public EveCrlPathfinder()
         {
@@ -32,13 +32,13 @@ namespace EveJimaCore.WhlControls
 
         private void FillBookmarksContainer(IEnumerable<Path> pathes)
         {
-            gridDataSource = new BindingSource();
+            _gridDataSource = new BindingSource();
 
             if(pathes != null)
             {
                 foreach (var path in pathes.OrderBy(data => data.Jumps))
                 {
-                    gridDataSource.Add(new Path
+                    _gridDataSource.Add(new Path
                     {
                         SystemName = path.SystemName,
                         Name = path.Name,
@@ -55,71 +55,77 @@ namespace EveJimaCore.WhlControls
 
             dataGridView1.Columns.Clear();
 
-            DataGridViewColumn Jumps = new DataGridViewTextBoxColumn();
-            Jumps.Width = 60;
-            Jumps.DataPropertyName = "Jumps";
-            Jumps.Name = "Jumps";
-            Jumps.DefaultCellStyle.BackColor = Color.Black;
-            dataGridView1.Columns.Add(Jumps);
+            DataGridViewColumn jumps = new DataGridViewTextBoxColumn
+            {
+                Width = 60,
+                DataPropertyName = "Jumps",
+                Name = "Jumps"
+            };
+            jumps.DefaultCellStyle.BackColor = Color.Black;
+            dataGridView1.Columns.Add(jumps);
 
 
 
-            DataGridViewColumn code = new DataGridViewTextBoxColumn();
-            code.Width = 120;
-            code.DataPropertyName = "SystemName";
-            code.Name = "System";
+            DataGridViewColumn code = new DataGridViewTextBoxColumn
+            {
+                Width = 120,
+                DataPropertyName = "SystemName",
+                Name = "System"
+            };
             code.DefaultCellStyle.BackColor = Color.Black;
             dataGridView1.Columns.Add(code);
 
-            DataGridViewColumn column = new DataGridViewTextBoxColumn();
-            column.Width = 280;
-            column.DataPropertyName = "Name";
-            column.Name = "Name";
+            DataGridViewColumn column = new DataGridViewTextBoxColumn
+            {
+                Width = 280,
+                DataPropertyName = "Name",
+                Name = "Name"
+            };
             column.DefaultCellStyle.BackColor = Color.Black;
             dataGridView1.Columns.Add(column);
 
-            DataGridViewColumn Note = new DataGridViewTextBoxColumn();
-            Note.Width = 240;
-            Note.DataPropertyName = "Note";
-            Note.Name = "Note";
-            Note.DefaultCellStyle.BackColor = Color.Black;
-            dataGridView1.Columns.Add(Note);
+            DataGridViewColumn note = new DataGridViewTextBoxColumn
+            {
+                Width = 240,
+                DataPropertyName = "Note",
+                Name = "Note"
+            };
+            note.DefaultCellStyle.BackColor = Color.Black;
+            dataGridView1.Columns.Add(note);
 
 
 
-            DataGridViewColumn Pilotes = new DataGridViewTextBoxColumn();
-            Pilotes.Width = 50;
-            Pilotes.DataPropertyName = "Pilotes";
-            Pilotes.Name = "Pilotes";
-            Pilotes.DefaultCellStyle.BackColor = Color.Black;
-            dataGridView1.Columns.Add(Pilotes);
+            DataGridViewColumn pilots = new DataGridViewTextBoxColumn
+            {
+                Width = 50,
+                DataPropertyName = "Pilotes",
+                Name = "Pilotes"
+            };
+            pilots.DefaultCellStyle.BackColor = Color.Black;
+            dataGridView1.Columns.Add(pilots);
 
-            DataGridViewColumn ShipKills = new DataGridViewTextBoxColumn();
-            ShipKills.Width = 50;
-            ShipKills.DataPropertyName = "ShipKills";
-            ShipKills.Name = "Ship";
-            ShipKills.DefaultCellStyle.BackColor = Color.Black;
-            dataGridView1.Columns.Add(ShipKills);
+            DataGridViewColumn shipsKills = new DataGridViewTextBoxColumn
+            {
+                Width = 50,
+                DataPropertyName = "ShipKills",
+                Name = "Ships"
+            };
+            shipsKills.DefaultCellStyle.BackColor = Color.Black;
+            dataGridView1.Columns.Add(shipsKills);
 
-            DataGridViewColumn NpcKills = new DataGridViewTextBoxColumn();
-            NpcKills.Width = 50;
-            NpcKills.DataPropertyName = "NpcKills";
-            NpcKills.Name = "Npc";
-            NpcKills.DefaultCellStyle.BackColor = Color.Black;
-            dataGridView1.Columns.Add(NpcKills);
-
-
+            DataGridViewColumn npcKills = new DataGridViewTextBoxColumn
+            {
+                Width = 50,
+                DataPropertyName = "NpcKills",
+                Name = "Npc"
+            };
+            npcKills.DefaultCellStyle.BackColor = Color.Black;
+            dataGridView1.Columns.Add(npcKills);
 
             dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.DataSource = gridDataSource;
-
+            dataGridView1.DataSource = _gridDataSource;
 
             dataGridView1.ClearSelection();
-        }
-
-        void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-
         }
 
         private IEnumerable<Path> GetPathes(string location, Universe universe, PilotEntity pilot)
@@ -145,7 +151,6 @@ namespace EveJimaCore.WhlControls
 
                 return null;
             }
-
         }
 
         private void Event_RefreshBookmarks(object sender, EventArgs e)

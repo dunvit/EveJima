@@ -2,6 +2,7 @@
 using System.IO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using EvaJimaCore;
 using log4net;
 
 namespace EveJimaCore
@@ -101,55 +102,70 @@ namespace EveJimaCore
             {
                 settingsContent = File.ReadAllText(path);
                 IsConverted = true;
+
+                // Default value
+                CurrentVersion = "1.0.0";
+
+                dynamic jsonResponse = JsonConvert.DeserializeObject(settingsContent);
+
+                Authorization_ClientId = jsonResponse.Authorization_ClientId;
+                Authorization_ClientSecret = jsonResponse.Authorization_ClientSecret;
+                Authorization_ClientState = jsonResponse.Authorization_ClientState;
+                Authorization_Port = jsonResponse.Authorization_Port;
+                Authorization_Scopes = jsonResponse.Authorization_Scopes;
+                Server_update_uri_version = jsonResponse.Server_update_uri_version;
+                Server_update_content_version = jsonResponse.Server_update_content_version;
+                Client_execution_file = jsonResponse.Client_execution_file;
+                Browser_IsShowFavorites = jsonResponse.Browser_IsShowFavorites;
+                Browser_IsPinned = jsonResponse.Browser_IsPinned;
+                Browser_LocationMaximizeX = jsonResponse.Browser_LocationMaximizeX;
+                Browser_LocationMaximizeY = jsonResponse.Browser_LocationMaximizeY;
+                Server_MapAddress = jsonResponse.Server_MapAddress;
+
+                IsUseBrowser = jsonResponse.IsUseBrowser == null ? true : jsonResponse.IsUseBrowser;
+                IsUseMap = jsonResponse.IsUseMap == null ? false : jsonResponse.IsUseMap;
+                IsSignatureRebuildEnabled = jsonResponse.IsSignatureRebuildEnabled == null ? true : jsonResponse.IsSignatureRebuildEnabled;
+
+                var ccPilots = jsonResponse.Pilots;
+
+                foreach (var ccPilot in ccPilots)
+                {
+                    Pilots.Add(new Tuple<string, string, string, string>(ccPilot.Item1.ToString(), ccPilot.Item2.ToString(), ccPilot.Item3.ToString(), ccPilot.Item4.ToString()));
+                }
             }
             else
             {
-                settingsContent = File.ReadAllText(@"EveJimaSettings.txt");
+                // Set default values for older program versions (without Settings.dat file)
+                Authorization_ClientId = "e136434f8a0c484ab802666f378cac09";
+                Authorization_ClientSecret = "bqbIMfDvaFfI9EPOGYmrVDeih9wPkDFnH3eW7GZY";
+                Authorization_ClientState = "bqbIMfDvaFfI9EPOGYmrVDeih9wPkDFnH3eW7GZY";
+                Authorization_Port = "8080";
+                Authorization_Scopes = "esi-location.read_location.v1 esi-location.read_ship_type.v1 esi-bookmarks.read_character_bookmarks.v1 esi-fleets.read_fleet.v1 esi-ui.open_window.v1 esi-ui.write_waypoint.v1";
+                Server_update_uri_version = @"http://evejima.mikotaj.com/Version.txt";
+                Server_update_content_version = @"http://evejima.mikotaj.com/VersionContent.txt";
+                Client_execution_file = "EveJima.exe";
+                Browser_IsShowFavorites = false;
+                Browser_IsPinned = false;
+                Browser_LocationMaximizeX = 510;
+                Browser_LocationMaximizeY = 254;
+                Server_MapAddress = @"http://www.evajima-maps.somee.com";
+
+                IsUseBrowser = true;
+                IsUseMap = false;
+                IsSignatureRebuildEnabled = true;
+
+                Save();
             }
-
-            dynamic jsonResponse = JsonConvert.DeserializeObject(settingsContent);
-
-            Version                         = jsonResponse.Version;
-            CurrentVersion                  = jsonResponse.CurrentVersion;
-            Authorization_ClientId          = jsonResponse.Authorization_ClientId;
-            Authorization_ClientSecret      = jsonResponse.Authorization_ClientSecret;
-            Authorization_ClientState       = jsonResponse.Authorization_ClientState;
-            Authorization_Port              = jsonResponse.Authorization_Port;
-            Authorization_Scopes            = jsonResponse.Authorization_Scopes;
-            Server_update_uri_version       = jsonResponse.Server_update_uri_version;
-            Server_update_content_version   = jsonResponse.Server_update_content_version;
-            Client_execution_file           = jsonResponse.Client_execution_file;
-            Browser_IsShowFavorites         = jsonResponse.Browser_IsShowFavorites;
-            Browser_IsPinned                = jsonResponse.Browser_IsPinned;
-            Browser_LocationMaximizeX       = jsonResponse.Browser_LocationMaximizeX;
-            Browser_LocationMaximizeY       = jsonResponse.Browser_LocationMaximizeY;
-            Server_MapAddress               = jsonResponse.Server_MapAddress;
-
-            IsUseBrowser = jsonResponse.IsUseBrowser == null ? true : jsonResponse.IsUseBrowser;
-            IsUseMap = jsonResponse.IsUseMap == null ? false : jsonResponse.IsUseMap;
-            IsSignatureRebuildEnabled = jsonResponse.IsSignatureRebuildEnabled == null ? true : jsonResponse.IsSignatureRebuildEnabled;
-
-            CurrentVersion = File.ReadAllText(@"Version.txt");
 
             using (var wc = new System.Net.WebClient())
                 Version = wc.DownloadString(Server_update_uri_version);
 
-            //Version = "3.01";
+            CurrentVersion = File.ReadAllText(@"Version.txt");
 
             if (new Version(Version).CompareTo(new Version(CurrentVersion)) > 0)
             {
                 IsNeedUpdateVersion = true;
             }
-
-
-
-            var ccPilots = jsonResponse.Pilots;
-
-            foreach(var ccPilot in ccPilots)
-            {
-                Pilots.Add(new Tuple<string, string, string, string>(ccPilot.Item1.ToString(), ccPilot.Item2.ToString(), ccPilot.Item3.ToString(), ccPilot.Item4.ToString()));
-            }
-
         }
 
         public void Save()
@@ -157,8 +173,8 @@ namespace EveJimaCore
             var path = "";
             try
             {
-                path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "EveJima");
-                var path2 = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "EveJima", "Settings.dat");
+                path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "EveJima");
+                var path2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "EveJima", "Settings.dat");
 
                 var settingsContent = JsonConvert.SerializeObject(new
                 {
@@ -172,10 +188,10 @@ namespace EveJimaCore
                     Server_update_uri_version = Server_update_uri_version,
                     Server_update_content_version = Server_update_content_version,
                     Client_execution_file = Client_execution_file,
-                    Browser_IsShowFavorites = Browser_IsShowFavorites,
-                    Browser_IsPinned = Browser_IsPinned,
-                    Browser_LocationMaximizeX = Browser_LocationMaximizeX,
-                    Browser_LocationMaximizeY = Browser_LocationMaximizeY,
+                    Browser_IsShowFavorites = Global.WorkEnvironment.IsShowFavorites,
+                    Browser_IsPinned = Global.WorkEnvironment.IsPinned,
+                    Browser_LocationMaximizeX = Global.WorkEnvironment.LocationMaximizeX,
+                    Browser_LocationMaximizeY = Global.WorkEnvironment.LocationMaximizeY,
                     Pilots = Pilots,
                     Server_MapAddress = Server_MapAddress,
                     IsUseBrowser = IsUseBrowser,
@@ -183,17 +199,14 @@ namespace EveJimaCore
                     IsSignatureRebuildEnabled = IsSignatureRebuildEnabled,
                 });
 
-                // TODO: ReBuild screens coordinates for one screen { foreach (var screen in Screen.AllScreens) }
-
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
-                    using (StreamWriter sw = new StreamWriter(path2, true))
+                    using (var sw = new StreamWriter(path2, true))
                     {
                         sw.Write(settingsContent);
                     }
                 }
-
                 else
                 {
                     if (File.Exists(path2))
@@ -201,19 +214,16 @@ namespace EveJimaCore
                         File.Delete(path2);
                     }
 
-                    using (StreamWriter sw = new StreamWriter(path2, true))
+                    using (var sw = new StreamWriter(path2, true))
                     {
                         sw.Write(settingsContent);
                     }
                 }
-
             }
             catch(Exception ex)
             {
                 _commandsLog.Error($"[ApplicationSettings.Save] Critical error on save settingt to file '{path}'. Exception is '{ex}'");
             }
-
-            
         }
     }
 }

@@ -88,7 +88,7 @@ namespace EveJimaCore
             Global.WorkEnvironment.LocationMaximizeX = Location.X;
             Global.WorkEnvironment.LocationMaximizeY = Location.Y;
 
-            Global.WorkEnvironment.SaveChanges();
+            Global.ApplicationSettings.Save();
         }
 
         private void Event_TitleBarDoubleClick(object sender, EventArgs e)

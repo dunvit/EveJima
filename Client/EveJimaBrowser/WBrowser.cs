@@ -671,7 +671,7 @@ namespace WBrowser
                 }
                 catch (Exception ex)
                 {
-                    return Image.FromFile(@"text-html.png");
+                    return null;
                 }
             
            

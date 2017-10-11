@@ -50,7 +50,6 @@
             this.cmbPilots.Size = new System.Drawing.Size(157, 21);
             this.cmbPilots.TabIndex = 14;
             this.cmbPilots.Visible = false;
-            this.cmbPilots.SelectedIndexChanged += new System.EventHandler(this.cmbPilots_SelectedIndexChanged);
             this.cmbPilots.TextChanged += new System.EventHandler(this.cmbPilots_TextChanged);
             // 
             // crlPilotPortrait

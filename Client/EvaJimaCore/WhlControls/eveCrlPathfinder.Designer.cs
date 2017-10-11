@@ -103,7 +103,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(516, 174);
             this.dataGridView1.TabIndex = 148;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
             // 
             // label4
             // 

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
+using System.Net;
 using System.Windows.Forms;
 using EvaJimaCore;
-using CefSharp.WinForms;
 using log4net;
 
 namespace EveJimaCore.WhlControls
@@ -12,12 +11,13 @@ namespace EveJimaCore.WhlControls
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlVersion));
 
-
         public whlVersion()
         {
             InitializeComponent();
 
-            AddTab("https://github.com/dunvit/EveJima/releases");
+            var address = @"http://evejima.mikotaj.com/versions/Release_" + Global.ApplicationSettings.Version +  @".html";
+
+            AddTab(address);
 
             Activate();
         }
@@ -26,11 +26,10 @@ namespace EveJimaCore.WhlControls
         {
             try
             {
-                cmdPasteCosmicSifnatures.Value = @"Update from version " + Global.Settings.CurrentVersion.Trim() + " to " + Global.Settings.Version;
+                cmdPasteCosmicSifnatures.Value = @"Update from version " + Global.ApplicationSettings.CurrentVersion + " to " + Global.ApplicationSettings.Version;
                 cmdPasteCosmicSifnatures.Refresh();
 
                 cmdPasteCosmicSifnatures.Visible = true;
-                
             }
             catch (Exception ex)
             {
@@ -44,21 +43,19 @@ namespace EveJimaCore.WhlControls
             {
                 browserTabControl.SuspendLayout();
 
-                var browser = new WebBrowser();
-
-                // Add it to the form and fill it to the form window.
-                browser.Dock = DockStyle.Fill;
+                var browser = new WebBrowser { Dock = DockStyle.Fill };
 
                 var tabPage = new TabPage(url)
                 {
                     Dock = DockStyle.Fill
                 };
 
-                //This call isn't required for the sample to work. 
-                //It's sole purpose is to demonstrate that #553 has been resolved.
-                // browser.CreateControl();
+                //browser.Navigate(url);
 
-                browser.Navigate(url);
+                var serviceRequest = new WebClient();
+                var response = serviceRequest.DownloadString(new Uri(url));
+
+                browser.DocumentText = response;
 
                 browser.Tag = tabPage;
 
@@ -82,9 +79,7 @@ namespace EveJimaCore.WhlControls
             {
                 Log.ErrorFormat("[whlVersion.DisposeBrowser] Critical error. Exception {0}", ex);
             }
-            
         }
-
 
         private void Event_StartUpdateVersion(object sender, EventArgs e)
         {
@@ -92,19 +87,15 @@ namespace EveJimaCore.WhlControls
             {
                 Log.Debug("[whlVersion.Event_StartUpdateVersion] Start update");
 
-                //string text = File.ReadAllText("settings.txt");
-                //text = text.Replace("VersionContent.txt", "VersionContent_" + Global.Settings.CurrentVersion.Replace(".","") + ".txt");
-                //File.WriteAllText("settings.txt", text);
-
-                Global.ApplicationSettings.Server_update_content_version = Global.ApplicationSettings.Server_update_uri_version.Replace("Version.txt", "" + Global.Settings.CurrentVersion + "/VersionContent.txt");
-                Global.ApplicationSettings.Save();
+                //Global.ApplicationSettings.Server_update_content_version = Global.ApplicationSettings.Server_update_uri_version.Replace("Version.txt", "" + Global.Settings.CurrentVersion + "/VersionContent.txt");
+                //Global.ApplicationSettings.Save();
 
                 try
                 {
                     try
                     {
-                        //Process.Start("https://github.com/dunvit/EveJima/releases/tag/" + Global.Settings.CurrentVersion);
-                        Process.Start(@"updater.exe");
+                        Process.Start("https://github.com/dunvit/EvaJima/releases/tag/" + Global.ApplicationSettings.Version);
+                        //Process.Start(@"updater.exe");
                     }
                     catch (Exception ex2)
                     {
@@ -116,14 +107,14 @@ namespace EveJimaCore.WhlControls
                     Log.ErrorFormat("[whlVersion.Event_StartUpdateVersion] Critical error. Exception {0}", ex1);
                 }
 
+                Global.Presenter.Close();
+
                 Application.Exit();
             }
             catch (Exception ex)
             {
                 Log.ErrorFormat("[whlVersion.Event_StartUpdateVersion] Critical error. Exception {0}", ex);
             }
-
-            
         }
     }
 }

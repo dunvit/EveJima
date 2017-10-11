@@ -2,7 +2,6 @@
 using EveJimaCore.BLL;
 using EveJimaCore.BLL.LostAndFound;
 using EveJimaCore.BLL.Map;
-using EveJimaSettings;
 using EveJimaUniverse;
 using log4net;
 
@@ -13,8 +12,6 @@ namespace EvaJimaCore
         private static readonly ILog Log = LogManager.GetLogger(typeof(Global));
 
         public static WorkEnvironment WorkEnvironment;
-
-        public static Settings Settings;
 
         public static ApplicationSettings ApplicationSettings;
 
@@ -36,8 +33,6 @@ namespace EvaJimaCore
 
         public static void Initialization()
         {
-            Settings = new Settings();
-
             ApplicationSettings = new ApplicationSettings();
 
             MapApiFunctions = new MapApiFunctions();
@@ -48,8 +43,6 @@ namespace EvaJimaCore
             Metrics = new MetricsWriter();
 
             Pilots = new PilotsEntity();
-
-            if (ApplicationSettings.IsConverted == false) Tools.ConvertSettings(ApplicationSettings, Settings, WorkEnvironment);
 
             Infrastructure = new Infrastructure();
 
