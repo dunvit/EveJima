@@ -522,6 +522,7 @@
     <Content Include="RoadMap\TasksStack.txt" />
     <Content Include="Versions\202\2.02.txt" />
     <Content Include="Versions\202\Release.html" />
+    <Content Include="Versions\Release.html" />
     <Content Include="Versions\Tasks.txt" />
     <Content Include="Versions\1.35.txt" />
     <Content Include="Versions\1.34.txt" />

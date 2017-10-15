@@ -90,7 +90,7 @@
     <ApplicationIcon>screenW1.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>4A432AF468AE5CFCA42121407F6E7F4A1BED1BE9</ManifestCertificateThumbprint>
