@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using EvaJimaCore;
 using log4net;
 
 namespace EveJimaCore.WhlControls
@@ -13,7 +14,17 @@ namespace EveJimaCore.WhlControls
         public whlBookmarks()
         {
             InitializeComponent();
+
+            cmdPasteLocationBookmarks.Value = Global.Messages.Get("Tab_Bookmarks_PasteLocationBookmarks");
+            cmdPasteCosmicSifnatures.Value = Global.Messages.Get("Tab_Bookmarks_PasteCosmicSignatures");
+            cmdClearLists.Value = Global.Messages.Get("Tab_Bookmarks_Clear");
+            cmdClear.Value = Global.Messages.Get("Tab_Bookmarks_Analyze");
+
+            label1.Text = Global.Messages.Get("Tab_Bookmarks_Bookmarks");
+            label2.Text = Global.Messages.Get("Tab_Bookmarks_Signatures");
+
         }
+
 
         private void Event_PasteBookmarks(object sender, EventArgs e)
         {

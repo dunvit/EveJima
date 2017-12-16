@@ -344,10 +344,10 @@
             this.whlButton4.ForeColor = System.Drawing.Color.LightGray;
             this.whlButton4.IsActive = true;
             this.whlButton4.IsTabControlButton = false;
-            this.whlButton4.Location = new System.Drawing.Point(243, 81);
+            this.whlButton4.Location = new System.Drawing.Point(261, 81);
             this.whlButton4.Margin = new System.Windows.Forms.Padding(9, 3, 9, 3);
             this.whlButton4.Name = "whlButton4";
-            this.whlButton4.Size = new System.Drawing.Size(44, 26);
+            this.whlButton4.Size = new System.Drawing.Size(37, 26);
             this.whlButton4.TabIndex = 146;
             this.whlButton4.Value = ">>";
             this.whlButton4.Click += new System.EventHandler(this.Click_SendDeathNotice);
@@ -359,10 +359,10 @@
             this.whlButton2.ForeColor = System.Drawing.Color.LightGray;
             this.whlButton2.IsActive = true;
             this.whlButton2.IsTabControlButton = false;
-            this.whlButton2.Location = new System.Drawing.Point(243, 52);
+            this.whlButton2.Location = new System.Drawing.Point(261, 52);
             this.whlButton2.Margin = new System.Windows.Forms.Padding(7, 3, 7, 3);
             this.whlButton2.Name = "whlButton2";
-            this.whlButton2.Size = new System.Drawing.Size(44, 26);
+            this.whlButton2.Size = new System.Drawing.Size(37, 26);
             this.whlButton2.TabIndex = 144;
             this.whlButton2.Value = ">>";
             this.whlButton2.Click += new System.EventHandler(this.Event_CentreLocationSystem);
@@ -374,10 +374,10 @@
             this.whlButton1.ForeColor = System.Drawing.Color.LightGray;
             this.whlButton1.IsActive = true;
             this.whlButton1.IsTabControlButton = false;
-            this.whlButton1.Location = new System.Drawing.Point(243, 23);
+            this.whlButton1.Location = new System.Drawing.Point(261, 23);
             this.whlButton1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.whlButton1.Name = "whlButton1";
-            this.whlButton1.Size = new System.Drawing.Size(44, 26);
+            this.whlButton1.Size = new System.Drawing.Size(37, 26);
             this.whlButton1.TabIndex = 82;
             this.whlButton1.Value = ">>";
             this.whlButton1.Click += new System.EventHandler(this.Event_CentreSelectedSystem);
@@ -395,11 +395,11 @@
             this.cmdDeathNotice.ForeColor = System.Drawing.Color.Red;
             this.cmdDeathNotice.Location = new System.Drawing.Point(15, 81);
             this.cmdDeathNotice.Name = "cmdDeathNotice";
-            this.cmdDeathNotice.Size = new System.Drawing.Size(158, 23);
+            this.cmdDeathNotice.Size = new System.Drawing.Size(234, 23);
             this.cmdDeathNotice.TabIndex = 143;
             this.cmdDeathNotice.Tag = "MapSignatures";
             this.cmdDeathNotice.Text = "Death Notice. I was killed";
-            this.cmdDeathNotice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cmdDeathNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.cmdDeathNotice.UseVisualStyleBackColor = true;
             this.cmdDeathNotice.Click += new System.EventHandler(this.Click_SendDeathNotice);
             // 
@@ -416,11 +416,11 @@
             this.cmdMapSignatures.ForeColor = System.Drawing.Color.LightGray;
             this.cmdMapSignatures.Location = new System.Drawing.Point(14, 55);
             this.cmdMapSignatures.Name = "cmdMapSignatures";
-            this.cmdMapSignatures.Size = new System.Drawing.Size(153, 23);
+            this.cmdMapSignatures.Size = new System.Drawing.Size(235, 23);
             this.cmdMapSignatures.TabIndex = 140;
             this.cmdMapSignatures.Tag = "MapSignatures";
             this.cmdMapSignatures.Text = "Centre Selected System";
-            this.cmdMapSignatures.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cmdMapSignatures.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.cmdMapSignatures.UseVisualStyleBackColor = true;
             this.cmdMapSignatures.Click += new System.EventHandler(this.Event_CentreSelectedSystem);
             // 
@@ -437,11 +437,11 @@
             this.ejButton3.ForeColor = System.Drawing.Color.LightGray;
             this.ejButton3.Location = new System.Drawing.Point(15, 26);
             this.ejButton3.Name = "ejButton3";
-            this.ejButton3.Size = new System.Drawing.Size(152, 23);
+            this.ejButton3.Size = new System.Drawing.Size(234, 23);
             this.ejButton3.TabIndex = 141;
             this.ejButton3.Tag = "MapSignatures";
             this.ejButton3.Text = "Centre Location System";
-            this.ejButton3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ejButton3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ejButton3.UseVisualStyleBackColor = true;
             this.ejButton3.Click += new System.EventHandler(this.Event_CentreLocationSystem);
             // 
@@ -455,7 +455,6 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "SolarSystemInformationControl";
             this.Size = new System.Drawing.Size(324, 646);
-            this.Load += new System.EventHandler(this.SolarSystemInformationControl_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

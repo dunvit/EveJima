@@ -172,6 +172,7 @@ namespace EveJimaCore.WhlControls
             this.cmdShowZkillboard.TabIndex = 64;
             this.cmdShowZkillboard.Value = "Zkillboard";
             this.cmdShowZkillboard.Click += new System.EventHandler(this.cmdShowZkillboard_Click);
+            this.cmdShowZkillboard.Load += new System.EventHandler(this.cmdShowZkillboard_Load);
             // 
             // cmdEverate
             // 

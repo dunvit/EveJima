@@ -81,9 +81,9 @@
             this.cmdReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdReload.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdReload.ForeColor = System.Drawing.Color.OliveDrab;
-            this.cmdReload.Location = new System.Drawing.Point(114, 304);
+            this.cmdReload.Location = new System.Drawing.Point(89, 304);
             this.cmdReload.Name = "cmdReload";
-            this.cmdReload.Size = new System.Drawing.Size(83, 23);
+            this.cmdReload.Size = new System.Drawing.Size(108, 23);
             this.cmdReload.TabIndex = 152;
             this.cmdReload.Tag = "MapSignatures";
             this.cmdReload.Text = "Reload Map";
@@ -105,7 +105,7 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(6, 230);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(151, 23);
+            this.label2.Size = new System.Drawing.Size(232, 23);
             this.label2.TabIndex = 150;
             this.label2.Text = "Server address:";
             // 
@@ -126,9 +126,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(6, 176);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(210, 23);
+            this.label1.Size = new System.Drawing.Size(247, 23);
             this.label1.TabIndex = 148;
-            this.label1.Text = "Member can delete systems:";
+            this.label1.Text = "Is member can delete systems:";
             // 
             // checkBox1
             // 
@@ -153,9 +153,9 @@
             this.cmdUpdateMapSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdUpdateMapSettings.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdUpdateMapSettings.ForeColor = System.Drawing.Color.OliveDrab;
-            this.cmdUpdateMapSettings.Location = new System.Drawing.Point(211, 304);
+            this.cmdUpdateMapSettings.Location = new System.Drawing.Point(203, 304);
             this.cmdUpdateMapSettings.Name = "cmdUpdateMapSettings";
-            this.cmdUpdateMapSettings.Size = new System.Drawing.Size(82, 23);
+            this.cmdUpdateMapSettings.Size = new System.Drawing.Size(90, 23);
             this.cmdUpdateMapSettings.TabIndex = 146;
             this.cmdUpdateMapSettings.Tag = "MapSignatures";
             this.cmdUpdateMapSettings.Text = "Update All";
@@ -185,7 +185,7 @@
             this.lnlSystemText.ForeColor = System.Drawing.Color.White;
             this.lnlSystemText.Location = new System.Drawing.Point(6, 26);
             this.lnlSystemText.Name = "lnlSystemText";
-            this.lnlSystemText.Size = new System.Drawing.Size(151, 23);
+            this.lnlSystemText.Size = new System.Drawing.Size(191, 23);
             this.lnlSystemText.TabIndex = 125;
             this.lnlSystemText.Text = "Map Owner:";
             // 
@@ -195,7 +195,7 @@
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(6, 127);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(162, 23);
+            this.label5.Size = new System.Drawing.Size(257, 23);
             this.label5.TabIndex = 129;
             this.label5.Text = "Save LowSec systems:";
             // 

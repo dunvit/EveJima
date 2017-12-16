@@ -234,7 +234,39 @@ namespace EveJimaCore
             }
         }
 
-        
+        public dynamic GetCorporationInfo(string corporationId)
+        {
+            Log.DebugFormat("[EsiAuthorization.GetCorporationInfo] started. systemId = {0}", corporationId);
+
+            try
+            {
+                var url = "https://esi.tech.ccp.is/latest/corporations/names/?corporation_ids=" + corporationId + "&datasource=tranquility";
+
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Authorization", "Bearer " + AccessToken);
+                httpWebRequest.ContentType = "application/json";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    result = result.Substring(1, result.Length - 2);
+
+                    Log.DebugFormat("[EsiAuthorization.GetCorporationInfo] result = {0}", result);
+
+                    return JObject.Parse(result);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Critical error in [EsiAuthorization.GetCorporationInfo] systemId = {1} Exception is {0}", ex, corporationId);
+                return null;
+            }
+        }
 
         public dynamic GetLocation(long pilotId)
         {

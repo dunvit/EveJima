@@ -121,5 +121,10 @@ namespace EveJimaCore.WhlControls
 
             OnBrowserNavigate("http://everate.ru/userinfo.php?name=" + txtSelectedPilotName.Text.Trim().Replace(" ", "+") + "");
         }
+
+        private void cmdShowZkillboard_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

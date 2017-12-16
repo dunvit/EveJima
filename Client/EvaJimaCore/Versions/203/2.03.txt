@@ -1,0 +1,31 @@
+﻿EveJima version 2.03 https://github.com/dunvit/EveJima/releases
+
+
+Список изменений в обновлении 2.03
+
+
+Дополнения и изменения:
+
+1. Добавлен перевод программы на русский язык.
+2. Вкладка "Authorization" переименована в "Pilots"
+3. Crl-Shift-Z открывает вкладку "Браузер" https://zkillboard.com если в памяти компьютера есть пилот или корпорация
+
+Исправленные ошибки:
+
+* Завершение работы системы при выборе во вкладке "Information" расколотого мира
+* Исправлен адрес с которого берутся обновления на правильный (https://github.com/dunvit/EveJima/releases)
+
+----------------------------------------------------------------------------------------------------
+
+Patch notes for 2.03 Release 
+
+Features & Changes:
+
+1. Added localization for russian language
+2. Tab "Authorization" renamed to "Pilots"
+3. Crl-Shift-Z open tab "Browser" https://zkillboard.com if in Clipboard have pilot or corporation
+
+Defect Fixes:
+
+* Critical error in tab "Information" on get data about shattered system
+* Repair address for updates (https://github.com/dunvit/EveJima/releases)

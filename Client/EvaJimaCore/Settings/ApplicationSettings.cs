@@ -49,6 +49,8 @@ namespace EveJimaCore
 
         public bool IsNeedUpdateVersion { get; set; }
 
+        public int LanguageId { get; set; }
+
         public ApplicationSettings()
         {
             Pilots = new List<Tuple<string, string, string, string>>();
@@ -125,6 +127,8 @@ namespace EveJimaCore
                 IsUseBrowser = jsonResponse.IsUseBrowser == null ? true : jsonResponse.IsUseBrowser;
                 IsUseMap = jsonResponse.IsUseMap == null ? false : jsonResponse.IsUseMap;
                 IsSignatureRebuildEnabled = jsonResponse.IsSignatureRebuildEnabled == null ? true : jsonResponse.IsSignatureRebuildEnabled;
+
+                LanguageId = jsonResponse.LanguageId == null ? 2 : jsonResponse.LanguageId;
 
                 var ccPilots = jsonResponse.Pilots;
 

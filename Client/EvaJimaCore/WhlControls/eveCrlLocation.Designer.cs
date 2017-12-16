@@ -41,14 +41,12 @@
             this.txtSolarSystemStaticII = new System.Windows.Forms.Label();
             this.txtSolarSystemStaticI = new System.Windows.Forms.Label();
             this.txtSolarSystemEffect = new System.Windows.Forms.Label();
-            this.txtSolarSystemClass = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lnlSystemText = new System.Windows.Forms.Label();
+            this.lblClass = new System.Windows.Forms.Label();
             this.txtSolarSystemName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -134,7 +132,7 @@
             // 
             this.txtSolarSystemConstellation.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSolarSystemConstellation.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtSolarSystemConstellation.Location = new System.Drawing.Point(159, 64);
+            this.txtSolarSystemConstellation.Location = new System.Drawing.Point(154, 62);
             this.txtSolarSystemConstellation.Name = "txtSolarSystemConstellation";
             this.txtSolarSystemConstellation.Size = new System.Drawing.Size(100, 23);
             this.txtSolarSystemConstellation.TabIndex = 90;
@@ -144,7 +142,7 @@
             // 
             this.txtSolarSystemRegion.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSolarSystemRegion.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtSolarSystemRegion.Location = new System.Drawing.Point(159, 41);
+            this.txtSolarSystemRegion.Location = new System.Drawing.Point(154, 39);
             this.txtSolarSystemRegion.Name = "txtSolarSystemRegion";
             this.txtSolarSystemRegion.Size = new System.Drawing.Size(100, 23);
             this.txtSolarSystemRegion.TabIndex = 89;
@@ -154,7 +152,7 @@
             // 
             this.txtSolarSystemStaticIIData.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSolarSystemStaticIIData.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtSolarSystemStaticIIData.Location = new System.Drawing.Point(229, 160);
+            this.txtSolarSystemStaticIIData.Location = new System.Drawing.Point(224, 135);
             this.txtSolarSystemStaticIIData.Name = "txtSolarSystemStaticIIData";
             this.txtSolarSystemStaticIIData.Size = new System.Drawing.Size(130, 23);
             this.txtSolarSystemStaticIIData.TabIndex = 88;
@@ -166,7 +164,7 @@
             // 
             this.txtSolarSystemStaticIData.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSolarSystemStaticIData.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtSolarSystemStaticIData.Location = new System.Drawing.Point(229, 137);
+            this.txtSolarSystemStaticIData.Location = new System.Drawing.Point(224, 112);
             this.txtSolarSystemStaticIData.Name = "txtSolarSystemStaticIData";
             this.txtSolarSystemStaticIData.Size = new System.Drawing.Size(130, 23);
             this.txtSolarSystemStaticIData.TabIndex = 87;
@@ -178,7 +176,7 @@
             // 
             this.txtSolarSystemStaticII.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSolarSystemStaticII.ForeColor = System.Drawing.Color.Goldenrod;
-            this.txtSolarSystemStaticII.Location = new System.Drawing.Point(159, 159);
+            this.txtSolarSystemStaticII.Location = new System.Drawing.Point(154, 134);
             this.txtSolarSystemStaticII.Name = "txtSolarSystemStaticII";
             this.txtSolarSystemStaticII.Size = new System.Drawing.Size(64, 23);
             this.txtSolarSystemStaticII.TabIndex = 86;
@@ -190,7 +188,7 @@
             // 
             this.txtSolarSystemStaticI.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSolarSystemStaticI.ForeColor = System.Drawing.Color.Goldenrod;
-            this.txtSolarSystemStaticI.Location = new System.Drawing.Point(159, 136);
+            this.txtSolarSystemStaticI.Location = new System.Drawing.Point(154, 111);
             this.txtSolarSystemStaticI.Name = "txtSolarSystemStaticI";
             this.txtSolarSystemStaticI.Size = new System.Drawing.Size(64, 23);
             this.txtSolarSystemStaticI.TabIndex = 85;
@@ -202,100 +200,87 @@
             // 
             this.txtSolarSystemEffect.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSolarSystemEffect.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtSolarSystemEffect.Location = new System.Drawing.Point(159, 110);
+            this.txtSolarSystemEffect.Location = new System.Drawing.Point(154, 89);
             this.txtSolarSystemEffect.Name = "txtSolarSystemEffect";
             this.txtSolarSystemEffect.Size = new System.Drawing.Size(100, 23);
             this.txtSolarSystemEffect.TabIndex = 84;
             this.txtSolarSystemEffect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtSolarSystemClass
-            // 
-            this.txtSolarSystemClass.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSolarSystemClass.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtSolarSystemClass.Location = new System.Drawing.Point(159, 87);
-            this.txtSolarSystemClass.Name = "txtSolarSystemClass";
-            this.txtSolarSystemClass.Size = new System.Drawing.Size(100, 23);
-            this.txtSolarSystemClass.TabIndex = 83;
-            this.txtSolarSystemClass.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(29, 159);
+            this.label1.Location = new System.Drawing.Point(24, 134);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 23);
             this.label1.TabIndex = 82;
             this.label1.Text = "WH Static II";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(29, 67);
+            this.label8.Location = new System.Drawing.Point(24, 65);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(109, 23);
             this.label8.TabIndex = 81;
             this.label8.Text = "Constellation";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(29, 44);
+            this.label4.Location = new System.Drawing.Point(24, 42);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 23);
             this.label4.TabIndex = 80;
             this.label4.Text = "Region";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(29, 136);
+            this.label7.Location = new System.Drawing.Point(24, 111);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(100, 23);
             this.label7.TabIndex = 79;
             this.label7.Text = "WH Static I";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(29, 113);
+            this.label6.Location = new System.Drawing.Point(24, 88);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(100, 23);
             this.label6.TabIndex = 78;
             this.label6.Text = "WH Effect";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label5
+            // lblClass
             // 
-            this.label5.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(29, 90);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 23);
-            this.label5.TabIndex = 77;
-            this.label5.Text = "Class";
-            // 
-            // lnlSystemText
-            // 
-            this.lnlSystemText.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnlSystemText.ForeColor = System.Drawing.Color.White;
-            this.lnlSystemText.Location = new System.Drawing.Point(29, 21);
-            this.lnlSystemText.Name = "lnlSystemText";
-            this.lnlSystemText.Size = new System.Drawing.Size(100, 23);
-            this.lnlSystemText.TabIndex = 76;
-            this.lnlSystemText.Text = "Solar System";
+            this.lblClass.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.lblClass.ForeColor = System.Drawing.Color.White;
+            this.lblClass.Location = new System.Drawing.Point(116, 6);
+            this.lblClass.Name = "lblClass";
+            this.lblClass.Size = new System.Drawing.Size(112, 23);
+            this.lblClass.TabIndex = 77;
+            this.lblClass.Text = "Class";
+            this.lblClass.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtSolarSystemName
             // 
             this.txtSolarSystemName.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSolarSystemName.ForeColor = System.Drawing.Color.DarkOrange;
-            this.txtSolarSystemName.Location = new System.Drawing.Point(159, 18);
+            this.txtSolarSystemName.Location = new System.Drawing.Point(10, 9);
             this.txtSolarSystemName.Name = "txtSolarSystemName";
             this.txtSolarSystemName.Size = new System.Drawing.Size(100, 23);
             this.txtSolarSystemName.TabIndex = 100;
+            this.txtSolarSystemName.Text = "J100200300";
             this.txtSolarSystemName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // EveCrlLocation
@@ -317,14 +302,12 @@
             this.Controls.Add(this.txtSolarSystemStaticII);
             this.Controls.Add(this.txtSolarSystemStaticI);
             this.Controls.Add(this.txtSolarSystemEffect);
-            this.Controls.Add(this.txtSolarSystemClass);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.lnlSystemText);
+            this.Controls.Add(this.lblClass);
             this.DoubleBuffered = true;
             this.Name = "EveCrlLocation";
             this.Size = new System.Drawing.Size(550, 250);
@@ -347,14 +330,12 @@
         private System.Windows.Forms.Label txtSolarSystemStaticII;
         private System.Windows.Forms.Label txtSolarSystemStaticI;
         private System.Windows.Forms.Label txtSolarSystemEffect;
-        private System.Windows.Forms.Label txtSolarSystemClass;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label lnlSystemText;
+        private System.Windows.Forms.Label lblClass;
         private System.Windows.Forms.Label txtSolarSystemName;
     }
 }

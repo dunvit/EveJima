@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using EvaJimaCore;
+﻿using EvaJimaCore;
 
 namespace EveJimaCore.WhlControls
 {
@@ -9,6 +8,14 @@ namespace EveJimaCore.WhlControls
         {
             InitializeComponent();
 
+            label4.Text = Global.Messages.Get("Tab_Settings_EveJimaVersion");
+            label6.Text = Global.Messages.Get("Tab_Settings_Author");
+            label5.Text = Global.Messages.Get("Tab_Settings_UseBrowser");
+            label3.Text = Global.Messages.Get("Tab_Settings_UseWormholesMap");
+            cmdIsSignatureRebuild.Text = Global.Messages.Get("Tab_Settings_ShortSignatureRebuild");
+            label1.Text = Global.Messages.Get("Tab_Settings_NeedRestart");
+            label2.Text = Global.Messages.Get("Tab_Settings_NeedRestart");
+            cmdSaveSettings.Value = Global.Messages.Get("Tab_Settings_SaveSettings");
         }
 
         public override void ActivateContainer()

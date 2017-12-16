@@ -11,6 +11,8 @@ namespace EvaJimaCore
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(Global));
 
+        public static EveJimaMessages Messages;
+
         public static WorkEnvironment WorkEnvironment;
 
         public static ApplicationSettings ApplicationSettings;
@@ -31,6 +33,8 @@ namespace EvaJimaCore
 
         public static EveJimaPresenter Presenter;
 
+        public static EsiAuthorization EsiTools;
+
         public static void Initialization()
         {
             ApplicationSettings = new ApplicationSettings();
@@ -39,6 +43,8 @@ namespace EvaJimaCore
             MapApiFunctions.Initialization(ApplicationSettings.Server_MapAddress);
 
             WorkEnvironment = new WorkEnvironment();
+
+            Messages = new EveJimaMessages();
 
             Metrics = new MetricsWriter();
 
@@ -55,6 +61,8 @@ namespace EvaJimaCore
             LostAndFoundOffice = new LostSolarSystems();
 
             Presenter = new EveJimaPresenter();
+
+            EsiTools = new EsiAuthorization(ApplicationSettings.Authorization_ClientId, ApplicationSettings.Authorization_ClientSecret);
 
         }
 

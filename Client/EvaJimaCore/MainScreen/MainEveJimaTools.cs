@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using EvaJimaCore;
 
 namespace EveJimaCore
 {
@@ -17,7 +19,23 @@ namespace EveJimaCore
 
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+
+
+        [DllImport("user32.dll")] public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+
+        [DllImport("user32.dll")] public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
+        const int OPENZKILLBOARD_HOTKEY_ID = 1;
         #endregion
+
+
+        private void RegistrHotKeys()
+        {
+            // Modifier keys codes: Alt = 1, Ctrl = 2, Shift = 4, Win = 8
+            // Compute the addition of each combination of the keys you want to be pressed
+            // ALT+CTRL = 1 + 2 = 3 , CTRL+SHIFT = 2 + 4 = 6...
+            RegisterHotKey(Handle, OPENZKILLBOARD_HOTKEY_ID, 6, 'Z');
+        }
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -30,7 +48,39 @@ namespace EveJimaCore
 
         protected override void WndProc(ref Message m)
         {
-            if(Parametrs.MetaData.IsResizeEnabled == false)
+            if (m.Msg == 0x0312 && m.WParam.ToInt32() == OPENZKILLBOARD_HOTKEY_ID)
+            {
+                if(Global.ApplicationSettings.IsUseBrowser)
+                {
+                    // My hotkey has been typed
+                    var key = Clipboard.GetText().Trim();
+                    var characterId = Global.Infrastructure.EveXmlApi.GetPilotIdByName(key);
+                    var corporationId = "0";
+
+                    try
+                    {
+                        if(characterId != "0")
+                        {
+                            var client = new WebClient();
+
+                            corporationId = Global.EsiTools.GetCorporationInfo(characterId).corporation_id.ToString();
+
+                            var value = client.DownloadString("https://zkillboard.com/corporation/" + corporationId + "/");
+
+                            if(corporationId != "0") Event_BrowserNavigate("https://zkillboard.com/corporation/" + corporationId + "/");
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        // This is not corporation
+                        corporationId = "0";
+                    }
+
+                    if(corporationId == "0" && characterId != "0") Event_BrowserNavigate("https://zkillboard.com/character/" + characterId + "/");
+                }
+            }
+
+            if (Parametrs.MetaData.IsResizeEnabled == false)
             {
                 base.WndProc(ref m);
                 return;
@@ -86,5 +136,6 @@ namespace EveJimaCore
         }
 
 
+        
     }
 }

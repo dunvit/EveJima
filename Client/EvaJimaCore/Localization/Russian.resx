@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LoadAllPilotesFromStorage" xml:space="preserve">
+    <value>Загрузка данных с сайта CCP SSO (single sign-on).</value>
+  </data>
+  <data name="Loadpilotesfromcache" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LoadPilotsFromCache" xml:space="preserve">
+    <value>Загрузить пилотов из кэша. Пилотов  {0}</value>
+  </data>
+  <data name="StartAuthorizePilot" xml:space="preserve">
+    <value>Начало авторизации для пилота {0}</value>
+  </data>
+  <data name="Tab_Bookmarks" xml:space="preserve">
+    <value>Закладки</value>
+  </data>
+  <data name="Tab_Bookmarks_Analyze" xml:space="preserve">
+    <value>Анализировать</value>
+  </data>
+  <data name="Tab_Bookmarks_Bookmarks" xml:space="preserve">
+    <value>Закладки</value>
+  </data>
+  <data name="Tab_Bookmarks_Clear" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
+  <data name="Tab_Bookmarks_PasteCosmicSignatures" xml:space="preserve">
+    <value>Вставить космические сигнатуры</value>
+  </data>
+  <data name="Tab_Bookmarks_PasteLocationBookmarks" xml:space="preserve">
+    <value>Вставить закладки координат</value>
+  </data>
+  <data name="Tab_Bookmarks_Signatures" xml:space="preserve">
+    <value>Сигнатуры</value>
+  </data>
+  <data name="Tab_Browser" xml:space="preserve">
+    <value>Браузер</value>
+  </data>
+  <data name="Tab_Information" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="Tab_Information_Class" xml:space="preserve">
+    <value>Класс</value>
+  </data>
+  <data name="Tab_Information_Constellation" xml:space="preserve">
+    <value>Созвездие</value>
+  </data>
+  <data name="Tab_Information_Effect" xml:space="preserve">
+    <value>Эффект</value>
+  </data>
+  <data name="Tab_Information_EllathaWarning" xml:space="preserve">
+    <value>Ellatha показывает информацию только для W-Space систем</value>
+  </data>
+  <data name="Tab_Information_MaxJumpMass" xml:space="preserve">
+    <value>Максимальная пропускная масса</value>
+  </data>
+  <data name="Tab_Information_MaxStableMass" xml:space="preserve">
+    <value>Максимальная масса</value>
+  </data>
+  <data name="Tab_Information_Region" xml:space="preserve">
+    <value>Регион</value>
+  </data>
+  <data name="Tab_Information_SolarSystem" xml:space="preserve">
+    <value>Солнечная система</value>
+  </data>
+  <data name="Tab_Information_Static" xml:space="preserve">
+    <value>Статик</value>
+  </data>
+  <data name="Tab_Location" xml:space="preserve">
+    <value>Местоположение</value>
+  </data>
+  <data name="Tab_Pathfinder" xml:space="preserve">
+    <value>Следопыт</value>
+  </data>
+  <data name="Tab_Pilots" xml:space="preserve">
+    <value>Пилоты</value>
+  </data>
+  <data name="Tab_Settings" xml:space="preserve">
+    <value>Установки</value>
+  </data>
+  <data name="Tab_Settings_Author" xml:space="preserve">
+    <value>Автор:</value>
+  </data>
+  <data name="Tab_Settings_EveJimaVersion" xml:space="preserve">
+    <value>Eve Jima версия:</value>
+  </data>
+  <data name="Tab_Settings_NeedRestart" xml:space="preserve">
+    <value>(перезагрузка)</value>
+  </data>
+  <data name="Tab_Settings_SaveSettings" xml:space="preserve">
+    <value>Сохранить установки</value>
+  </data>
+  <data name="Tab_Settings_ShortSignatureRebuild" xml:space="preserve">
+    <value>Копировать сигнатуры в память:</value>
+  </data>
+  <data name="Tab_Settings_UseBrowser" xml:space="preserve">
+    <value>Браузер включен:</value>
+  </data>
+  <data name="Tab_Settings_UseWormholesMap" xml:space="preserve">
+    <value>Карта червоточен включена:</value>
+  </data>
+  <data name="TextAfterAuthorizationInfo" xml:space="preserve">
+    <value>Вы успешно авторизовались в EveJima. Мы отслеживаем ваше местоположение в космосе.</value>
+  </data>
+  <data name="TextAuthorizationInfo" xml:space="preserve">
+    <value>Для авторизации вы должны нажать кнопку CCP SSO. Все ваши личные данные остаются на сайте CCP</value>
+  </data>
+  <data name="Tab_Map_CentreLocationSystem" xml:space="preserve">
+    <value>Центрировать по местоположению</value>
+  </data>
+  <data name="Tab_Map_CentreSelectedSystem" xml:space="preserve">
+    <value>Центрировать по выбранной системе</value>
+  </data>
+  <data name="Tab_Map_Commands" xml:space="preserve">
+    <value>Команды</value>
+  </data>
+  <data name="Tab_Map_CosmicSignature" xml:space="preserve">
+    <value>Сигнатура</value>
+  </data>
+  <data name="Tab_Map_DeathNotice" xml:space="preserve">
+    <value>Похоронка. Я умер.</value>
+  </data>
+  <data name="Tab_Map_DeleteAll" xml:space="preserve">
+    <value>Удалить все</value>
+  </data>
+  <data name="Tab_Map_Information" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="Tab_Map_InternalResourses" xml:space="preserve">
+    <value>Внешние ссылки</value>
+  </data>
+  <data name="Tab_Map_IsMemberCanDeleteSystem" xml:space="preserve">
+    <value>Может ли участник удалять системы</value>
+  </data>
+  <data name="Tab_Map_MapOwner" xml:space="preserve">
+    <value>Владелец карты</value>
+  </data>
+  <data name="Tab_Map_Map_Key" xml:space="preserve">
+    <value>Ключ карты</value>
+  </data>
+  <data name="Tab_Map_MessageFillMapKey" xml:space="preserve">
+    <value>Пожалуйста введите ключ карты</value>
+  </data>
+  <data name="Tab_Map_PasteSignatures" xml:space="preserve">
+    <value>Вставить сигнатуры</value>
+  </data>
+  <data name="Tab_Map_Pilot" xml:space="preserve">
+    <value>Пилоты</value>
+  </data>
+  <data name="Tab_Map_Reload" xml:space="preserve">
+    <value>Перезагрузить</value>
+  </data>
+  <data name="Tab_Map_SaveLowSec" xml:space="preserve">
+    <value>Сохранять LowSec системы</value>
+  </data>
+  <data name="Tab_Map_ServerAddress" xml:space="preserve">
+    <value>Адрес сервера</value>
+  </data>
+  <data name="Tab_Map_Settings" xml:space="preserve">
+    <value>Установки</value>
+  </data>
+  <data name="Tab_Map_SettingsLabel" xml:space="preserve">
+    <value>Установки карты</value>
+  </data>
+  <data name="Tab_Map_Signatures" xml:space="preserve">
+    <value>Сигнатуры</value>
+  </data>
+  <data name="Tab_Map_SolarSystemInformation" xml:space="preserve">
+    <value>Солнечная система</value>
+  </data>
+  <data name="Tab_Map_UpdateAll" xml:space="preserve">
+    <value>Сохранить все</value>
+  </data>
+</root>

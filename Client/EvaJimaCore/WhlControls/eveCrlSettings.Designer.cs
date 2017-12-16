@@ -47,7 +47,7 @@
             // 
             this.crlIsUseBrowser.AutoSize = true;
             this.crlIsUseBrowser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.crlIsUseBrowser.Location = new System.Drawing.Point(169, 41);
+            this.crlIsUseBrowser.Location = new System.Drawing.Point(275, 53);
             this.crlIsUseBrowser.Name = "crlIsUseBrowser";
             this.crlIsUseBrowser.Size = new System.Drawing.Size(12, 11);
             this.crlIsUseBrowser.TabIndex = 149;
@@ -57,9 +57,9 @@
             // 
             this.label5.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(27, 39);
+            this.label5.Location = new System.Drawing.Point(19, 51);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(136, 13);
+            this.label5.Size = new System.Drawing.Size(250, 13);
             this.label5.TabIndex = 148;
             this.label5.Text = "Use Browser:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -69,7 +69,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Gray;
-            this.label1.Location = new System.Drawing.Point(187, 40);
+            this.label1.Location = new System.Drawing.Point(293, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 12);
             this.label1.TabIndex = 150;
@@ -80,7 +80,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Gray;
-            this.label2.Location = new System.Drawing.Point(187, 65);
+            this.label2.Location = new System.Drawing.Point(293, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 12);
             this.label2.TabIndex = 153;
@@ -90,7 +90,7 @@
             // 
             this.crlIsUseMap.AutoSize = true;
             this.crlIsUseMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.crlIsUseMap.Location = new System.Drawing.Point(169, 66);
+            this.crlIsUseMap.Location = new System.Drawing.Point(275, 78);
             this.crlIsUseMap.Name = "crlIsUseMap";
             this.crlIsUseMap.Size = new System.Drawing.Size(12, 11);
             this.crlIsUseMap.TabIndex = 152;
@@ -100,9 +100,9 @@
             // 
             this.label3.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(11, 64);
+            this.label3.Location = new System.Drawing.Point(22, 76);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(152, 13);
+            this.label3.Size = new System.Drawing.Size(247, 13);
             this.label3.TabIndex = 151;
             this.label3.Text = "Use Wormholes Map:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -113,9 +113,9 @@
             this.cmdSaveSettings.ForeColor = System.Drawing.Color.LightGray;
             this.cmdSaveSettings.IsActive = true;
             this.cmdSaveSettings.IsTabControlButton = false;
-            this.cmdSaveSettings.Location = new System.Drawing.Point(184, 207);
+            this.cmdSaveSettings.Location = new System.Drawing.Point(147, 205);
             this.cmdSaveSettings.Name = "cmdSaveSettings";
-            this.cmdSaveSettings.Size = new System.Drawing.Size(182, 26);
+            this.cmdSaveSettings.Size = new System.Drawing.Size(257, 26);
             this.cmdSaveSettings.TabIndex = 154;
             this.cmdSaveSettings.Value = "Save settings";
             this.cmdSaveSettings.Click += new System.EventHandler(this.cmdSaveSettings_Click);
@@ -124,9 +124,9 @@
             // 
             this.cmdIsSignatureRebuild.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdIsSignatureRebuild.ForeColor = System.Drawing.Color.White;
-            this.cmdIsSignatureRebuild.Location = new System.Drawing.Point(11, 90);
+            this.cmdIsSignatureRebuild.Location = new System.Drawing.Point(22, 102);
             this.cmdIsSignatureRebuild.Name = "cmdIsSignatureRebuild";
-            this.cmdIsSignatureRebuild.Size = new System.Drawing.Size(152, 13);
+            this.cmdIsSignatureRebuild.Size = new System.Drawing.Size(247, 13);
             this.cmdIsSignatureRebuild.TabIndex = 155;
             this.cmdIsSignatureRebuild.Text = "Short signature rebuild:";
             this.cmdIsSignatureRebuild.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -135,7 +135,7 @@
             // 
             this.crlIsSignatureRebuild.AutoSize = true;
             this.crlIsSignatureRebuild.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.crlIsSignatureRebuild.Location = new System.Drawing.Point(169, 92);
+            this.crlIsSignatureRebuild.Location = new System.Drawing.Point(275, 104);
             this.crlIsSignatureRebuild.Name = "crlIsSignatureRebuild";
             this.crlIsSignatureRebuild.Size = new System.Drawing.Size(12, 11);
             this.crlIsSignatureRebuild.TabIndex = 156;

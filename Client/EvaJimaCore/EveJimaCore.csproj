@@ -92,6 +92,7 @@
     <Compile Include="BLL\Map\MapTools.cs" />
     <Compile Include="BLL\Map\MapUpdateHistory.cs" />
     <Compile Include="BLL\Map\PilotLocation.cs" />
+    <Compile Include="BLL\EveJimaMessages.cs" />
     <Compile Include="BLL\MetricsWriter.cs" />
     <Compile Include="BLL\Navigator\Path.cs" />
     <Compile Include="BLL\PathFinder.cs" />
@@ -106,6 +107,16 @@
     <Compile Include="EveJimaPresenter.cs" />
     <Compile Include="Infrastructure\CrestApiFunctions.cs" />
     <Compile Include="Infrastructure\LazyLogger.cs" />
+    <Compile Include="Localization\English.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>English.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Russian.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Russian.resx</DependentUpon>
+    </Compile>
     <Compile Include="Logic\MapInformation\AMapInformationModel.cs" />
     <Compile Include="Logic\MapInformation\AMapInformationPresenter.cs" />
     <Compile Include="Logic\MapInformation\IAMapInformationModel.cs" />
@@ -251,12 +262,6 @@
     <Compile Include="WhlControls\whlRouter.Designer.cs">
       <DependentUpon>whlRouter.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhlControls\windowMapSettings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WhlControls\windowMapSettings.Designer.cs">
-      <DependentUpon>windowMapSettings.cs</DependentUpon>
-    </Compile>
     <Compile Include="WhlControls\windowMessage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -351,6 +356,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Localization\English.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>English.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Russian.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Russian.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Logic\MapInformation\MapControl.resx">
       <DependentUpon>MapControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -449,9 +462,6 @@
     <EmbeddedResource Include="WhlControls\whlVersion.resx">
       <DependentUpon>whlVersion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\windowMapSettings.resx">
-      <DependentUpon>windowMapSettings.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\windowMessage.resx">
       <DependentUpon>windowMessage.cs</DependentUpon>
     </EmbeddedResource>
@@ -519,9 +529,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RoadMap\TasksStack.txt" />
     <Content Include="Versions\202\2.02.txt" />
     <Content Include="Versions\202\Release.html" />
+    <Content Include="Versions\203\2.03.txt" />
+    <Content Include="Versions\203\Release.html" />
     <Content Include="Versions\Release.html" />
     <Content Include="Versions\Tasks.txt" />
     <Content Include="Versions\1.35.txt" />

@@ -178,6 +178,7 @@ namespace EveJimaCore
             this.Name = "MainEveJima";
             this.Text = "EveJima v2.06";
             this.Activated += new System.EventHandler(this.Event_ActivateWindow);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainEveJima_FormClosing);
             this.Load += new System.EventHandler(this.MainEveJima_Load);
             this.ResizeBegin += new System.EventHandler(this.Event_ResizeWindowEnd);
             this.ResizeEnd += new System.EventHandler(this.Event_ResizeWindowEnd);

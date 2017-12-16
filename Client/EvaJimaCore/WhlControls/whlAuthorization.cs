@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
 using EvaJimaCore;
@@ -12,28 +13,18 @@ namespace EveJimaCore.WhlControls
 {
     public partial class whlAuthorization : BaseContainer
     {
-
         public DelegateChangeSelectedPilot OnChangeSelectedPilot { get; set; }
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlAuthorization));
-
-        private const string TextAuthorizationInfo =
-            "To login you will need to press the button and go to the  CCP SSO (single sign-on) site. All your private data will remain on the CCP's website.";
-
-        private const string TextAfterAuthorizationInfo =
-            "You have successfully logged into the system and the EveJima can now keep track of your current position. You can log in again with another character.";
-
-        private const string TextErrorAuthorizationInfo = "It has failed to create a local server. Log in CCP SSO (single sign-on) site is not possible.";
-
-        private const string TextPleaseWaitLoadingPilots = "Loading data from the pilots cache. Please wait. It may take a few seconds.";
 
         public whlAuthorization()
         {
             InitializeComponent();
 
             Pilotes = new List<PilotEntity>();
-        }
 
+            label1.Text = Global.Messages.Get("LoadAllPilotesFromStorage");
+        }
 
         protected override void OnVisibleChanged(EventArgs e)
         {
@@ -43,10 +34,9 @@ namespace EveJimaCore.WhlControls
             {
                 if (Global.ApplicationSettings.Pilots.Count > 0 && Pilotes.Count < 1 )
                 {
-                    cmdLoadPilotes.Value = $"Load {Global.ApplicationSettings.Pilots.Count} pilotes from cache";
+                    cmdLoadPilotes.Value = string.Format(Global.Messages.Get("LoadPilotsFromCache"), Global.ApplicationSettings.Pilots.Count);
                     cmdLoadPilotes.Visible = true;
                     btnLogInWithEveOnline.Visible = false;
-                    
                 }
             }
         }
@@ -63,27 +53,32 @@ namespace EveJimaCore.WhlControls
 
             if (InvokeRequired)
             {
-                Invoke(new Action(() => LoadAllPilotesFromStorage()));
+                Invoke(new Action(LoadAllPilotesFromStorage));
             }
 
-            var screen = new ScreenUpdateToServer { ActionType = "LoadAllPilotesFromStorage", MapKey = "" };
-            screen.AuthorizeAllPilotsInAccount += AuthorizeAllPilotsInAccount;
-            screen.ShowDialog();
+            AuthorizeAllPilotsInAccount();
 
             ShowPilots();
 
             _isLoadedPilotesFromStorage = true;
         }
 
-        public void AuthorizeAllPilotsInAccount(string obj)
+        public void AuthorizeAllPilotsInAccount()
         {
+            lblAuthorizationInfo.Visible = false;
+            lblAuthorizationInfo.Refresh();
+
+            containerScreenUpdate.Location = new Point(100, 21);
+            containerScreenUpdate.Refresh();
+
             Pilotes = new List<PilotEntity>();
 
             foreach (var pilot in Global.ApplicationSettings.Pilots)
             {
                 try
                 {
-                    Messages.GetInstance().PublishMessage($"Start authorize for {pilot.Item1}");
+                    lblUpdateLog.Text = string.Format( Global.Messages.Get("StartAuthorizePilot"), pilot.Item1);
+                    lblUpdateLog.Refresh();
 
                     var currentPilot = new PilotEntity(pilot.Item2, pilot.Item3) { Key = pilot.Item4 };
 
@@ -95,6 +90,10 @@ namespace EveJimaCore.WhlControls
                 }
 
             }
+
+            containerScreenUpdate.Location = new Point(-500, -500);
+            lblAuthorizationInfo.Visible = true;
+            lblAuthorizationInfo.Refresh();
         }
 
         private void Event_GoToCCPSSO(object sender, EventArgs e)
@@ -196,7 +195,7 @@ namespace EveJimaCore.WhlControls
 
             crlPilotPortrait.Visible = true;
 
-            lblAuthorizationInfo.Text = TextAfterAuthorizationInfo + Environment.NewLine + Environment.NewLine + TextAuthorizationInfo;
+            lblAuthorizationInfo.Text = Tools.GetValue("TextAfterAuthorizationInfo", Global.ApplicationSettings.LanguageId) + Environment.NewLine + Environment.NewLine + Tools.GetValue("TextAuthorizationInfo", Global.ApplicationSettings.LanguageId);
             Log.DebugFormat("[whlAuthorization.RefreshPilotInfo] cmbPilots.SelectedIndex");
             if (OnChangeSelectedPilot != null) OnChangeSelectedPilot();
         }
@@ -242,7 +241,7 @@ namespace EveJimaCore.WhlControls
                 crlPilotPortrait.Refresh();
                 crlPilotPortrait.Visible = true;
                 if (OnChangeSelectedPilot != null) OnChangeSelectedPilot();
-                lblAuthorizationInfo.Text = TextAfterAuthorizationInfo + Environment.NewLine + Environment.NewLine + TextAuthorizationInfo;
+                lblAuthorizationInfo.Text = Tools.GetValue("TextAfterAuthorizationInfo", Global.ApplicationSettings.LanguageId) + Environment.NewLine + Environment.NewLine + Tools.GetValue("TextAuthorizationInfo", Global.ApplicationSettings.LanguageId);
             }));
             
 
@@ -265,7 +264,7 @@ namespace EveJimaCore.WhlControls
 
         public void RefreshAuthorizationStatus()
         {
-            lblAuthorizationInfo.Text = TextAuthorizationInfo;
+            lblAuthorizationInfo.Text = Tools.GetValue("TextAuthorizationInfo", Global.ApplicationSettings.LanguageId);
         }
 
         private void cmdLoadPilotes_Click(object sender, EventArgs e)

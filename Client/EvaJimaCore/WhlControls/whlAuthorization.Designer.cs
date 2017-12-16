@@ -33,8 +33,12 @@
             this.lblAuthorizationInfo = new System.Windows.Forms.Label();
             this.btnLogInWithEveOnline = new System.Windows.Forms.PictureBox();
             this.cmdLoadPilotes = new EveJimaCore.whlButton();
+            this.containerScreenUpdate = new System.Windows.Forms.Panel();
+            this.lblUpdateLog = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.crlPilotPortrait)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLogInWithEveOnline)).BeginInit();
+            this.containerScreenUpdate.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmbPilots
@@ -101,20 +105,52 @@
             this.cmdLoadPilotes.Visible = false;
             this.cmdLoadPilotes.Click += new System.EventHandler(this.cmdLoadPilotes_Click);
             // 
+            // containerScreenUpdate
+            // 
+            this.containerScreenUpdate.Controls.Add(this.lblUpdateLog);
+            this.containerScreenUpdate.Controls.Add(this.label1);
+            this.containerScreenUpdate.Location = new System.Drawing.Point(383, 259);
+            this.containerScreenUpdate.Name = "containerScreenUpdate";
+            this.containerScreenUpdate.Size = new System.Drawing.Size(351, 180);
+            this.containerScreenUpdate.TabIndex = 79;
+            // 
+            // lblUpdateLog
+            // 
+            this.lblUpdateLog.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUpdateLog.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblUpdateLog.Location = new System.Drawing.Point(12, 56);
+            this.lblUpdateLog.Name = "lblUpdateLog";
+            this.lblUpdateLog.Size = new System.Drawing.Size(327, 113);
+            this.lblUpdateLog.TabIndex = 3;
+            this.lblUpdateLog.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DarkOrange;
+            this.label1.Location = new System.Drawing.Point(12, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(327, 36);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Update server. Please wait.";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // whlAuthorization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.Controls.Add(this.containerScreenUpdate);
             this.Controls.Add(this.cmdLoadPilotes);
             this.Controls.Add(this.cmbPilots);
             this.Controls.Add(this.crlPilotPortrait);
             this.Controls.Add(this.lblAuthorizationInfo);
             this.Controls.Add(this.btnLogInWithEveOnline);
             this.Name = "whlAuthorization";
-            this.Size = new System.Drawing.Size(542, 224);
+            this.Size = new System.Drawing.Size(980, 557);
             ((System.ComponentModel.ISupportInitialize)(this.crlPilotPortrait)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLogInWithEveOnline)).EndInit();
+            this.containerScreenUpdate.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,5 +163,8 @@
         public System.Windows.Forms.Label lblAuthorizationInfo;
         private System.Windows.Forms.PictureBox btnLogInWithEveOnline;
         private whlButton cmdLoadPilotes;
+        private System.Windows.Forms.Panel containerScreenUpdate;
+        private System.Windows.Forms.Label lblUpdateLog;
+        private System.Windows.Forms.Label label1;
     }
 }

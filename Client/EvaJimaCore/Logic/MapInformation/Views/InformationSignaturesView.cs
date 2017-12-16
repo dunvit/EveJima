@@ -24,6 +24,11 @@ namespace EveJimaCore.Logic.MapInformation
         public InformationSignaturesView()
         {
             InitializeComponent();
+
+            groupBox3.Text = Global.Messages.Get("Tab_Map_Signatures");
+            ejButton2.Text = Global.Messages.Get("Tab_Map_PasteSignatures");
+            cmdUpdateSignatures.Text = Global.Messages.Get("Tab_Map_UpdateAll");
+            ejButton4.Text = Global.Messages.Get("Tab_Map_DeleteAll");
         }
 
         public void ForceRefresh(Map spaceMap)

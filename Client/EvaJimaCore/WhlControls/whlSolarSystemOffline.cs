@@ -17,6 +17,9 @@ namespace EveJimaCore.WhlControls
         private ToolTip toolTip1 = new ToolTip();
         private ToolTip toolTip2 = new ToolTip();
 
+        private string maxStableMass = Global.Messages.Get("Tab_Information_MaxStableMass");
+        private string maxJumpMass = Global.Messages.Get("Tab_Information_MaxJumpMass");
+
         public whlSolarSystemOffline()
         {
             InitializeComponent();
@@ -30,6 +33,14 @@ namespace EveJimaCore.WhlControls
             toolTip2.InitialDelay = 1000;
             toolTip2.ReshowDelay = 500;
             toolTip2.ShowAlways = true;
+
+            lnlSystemText.Text = Global.Messages.Get("Tab_Information_SolarSystem") + @": ";
+            label4.Text = Global.Messages.Get("Tab_Information_Region") + @": ";
+            label8.Text = Global.Messages.Get("Tab_Information_Constellation") + @": ";
+            label5.Text = Global.Messages.Get("Tab_Information_Class") + @": ";
+            label6.Text = Global.Messages.Get("Tab_Information_Effect") + @": ";
+            label7.Text = Global.Messages.Get("Tab_Information_Static") + @": I";
+            label1.Text = Global.Messages.Get("Tab_Information_Static") + @": II";
         }
 
         public void RefreshSolarSystem(EveJimaUniverse.System location)
@@ -38,8 +49,8 @@ namespace EveJimaCore.WhlControls
 
             txtSolarSystemClass.Text = location.Class;
             if (location.Effect != null) txtSolarSystemEffect.Text = location.Effect.Trim();
-            txtSolarSystemRegion.Text = location.Region.Replace(" Unknown (", "").Replace(")", "");
-            txtSolarSystemConstellation.Text = location.Constelation != null ? location.Constelation.Replace(" Unknown (", "").Replace(")", "") : "";
+            if (location.Region!= null) txtSolarSystemRegion.Text = location.Region.Replace(" Unknown (", "").Replace(")", "");
+            if (location.Constelation != null) txtSolarSystemConstellation.Text = location.Constelation != null ? location.Constelation.Replace(" Unknown (", "").Replace(")", "") : "";
 
             txtSolarSystemStaticI.Text = "";
             txtSolarSystemStaticII.Text = "";
@@ -62,7 +73,7 @@ namespace EveJimaCore.WhlControls
                 txtSolarSystemStaticIData.Text = wormholeI.LeadsTo;
                 txtSolarSystemStaticIData.Visible = true;
 
-                toolTip1.SetToolTip(txtSolarSystemStaticI, "Max Stable Mass=" + wormholeI.TotalMass + "\r\nMax Jump  Mass=" + wormholeI.SingleMass);
+                toolTip1.SetToolTip(txtSolarSystemStaticI, maxStableMass + "=" + wormholeI.TotalMass + "\r\n" + maxJumpMass + "=" + wormholeI.SingleMass);
 
             }
 
@@ -77,7 +88,7 @@ namespace EveJimaCore.WhlControls
                 txtSolarSystemStaticIIData.Text = wormholeII.LeadsTo;
                 txtSolarSystemStaticIIData.Visible = true;
 
-                toolTip2.SetToolTip(txtSolarSystemStaticII, "Max Stable Mass=" + wormholeII.TotalMass + "\r\nMax Jump  Mass=" + wormholeII.SingleMass);
+                toolTip2.SetToolTip(txtSolarSystemStaticII, maxStableMass + "=" + wormholeII.TotalMass + "\r\n" + maxJumpMass + "=" + wormholeII.SingleMass);
             }
         }
 
@@ -104,7 +115,7 @@ namespace EveJimaCore.WhlControls
 
             if (txtSolarSystem.Text.Trim().Contains("J") == false)
             {
-                MessageBox.Show(@"Ellatha only for W-Space systems");
+                MessageBox.Show(Global.Messages.Get("Tab_Information_EllathaWarning"));
                 return;
             }
 

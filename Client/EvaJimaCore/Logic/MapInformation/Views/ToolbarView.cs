@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using EvaJimaCore;
 
 namespace TestPlatform.Logic
 {
@@ -59,6 +60,11 @@ namespace TestPlatform.Logic
             _toolbarControls.Add("MapSettings", cmdMapSettings);
             _toolbarControls.Add("Pilotes", cmdPilotes);
             _toolbarControls.Add("Bookmarks", cmdBookmarks);
+
+            cmdSystemInformation.Text = Global.Messages.Get("Tab_Map_Information");
+            cmdMapSignatures.Text = Global.Messages.Get("Tab_Map_Signatures");
+            cmdPilotes.Text = Global.Messages.Get("Tab_Map_Pilot");
+            cmdMapSettings.Text = Global.Messages.Get("Tab_Map_Settings");
 
             ActivatePanel("SolarSystem");
         }

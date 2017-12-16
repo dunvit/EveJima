@@ -68,7 +68,7 @@
             this.cmdMapSignatures.ForeColor = System.Drawing.Color.White;
             this.cmdMapSignatures.Location = new System.Drawing.Point(84, 4);
             this.cmdMapSignatures.Name = "cmdMapSignatures";
-            this.cmdMapSignatures.Size = new System.Drawing.Size(75, 23);
+            this.cmdMapSignatures.Size = new System.Drawing.Size(85, 23);
             this.cmdMapSignatures.TabIndex = 1;
             this.cmdMapSignatures.Text = "Signatures";
             this.cmdMapSignatures.UseVisualStyleBackColor = true;
@@ -85,9 +85,9 @@
             this.cmdMapSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdMapSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdMapSettings.ForeColor = System.Drawing.Color.White;
-            this.cmdMapSettings.Location = new System.Drawing.Point(224, 4);
+            this.cmdMapSettings.Location = new System.Drawing.Point(235, 4);
             this.cmdMapSettings.Name = "cmdMapSettings";
-            this.cmdMapSettings.Size = new System.Drawing.Size(67, 23);
+            this.cmdMapSettings.Size = new System.Drawing.Size(80, 23);
             this.cmdMapSettings.TabIndex = 2;
             this.cmdMapSettings.Text = "Settings";
             this.cmdMapSettings.UseVisualStyleBackColor = true;
@@ -104,9 +104,9 @@
             this.cmdPilotes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdPilotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdPilotes.ForeColor = System.Drawing.Color.White;
-            this.cmdPilotes.Location = new System.Drawing.Point(163, 4);
+            this.cmdPilotes.Location = new System.Drawing.Point(169, 4);
             this.cmdPilotes.Name = "cmdPilotes";
-            this.cmdPilotes.Size = new System.Drawing.Size(56, 23);
+            this.cmdPilotes.Size = new System.Drawing.Size(67, 23);
             this.cmdPilotes.TabIndex = 3;
             this.cmdPilotes.Text = "Pilotes";
             this.cmdPilotes.UseVisualStyleBackColor = true;

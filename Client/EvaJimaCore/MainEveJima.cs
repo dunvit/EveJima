@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using EvaJimaCore;
@@ -18,6 +19,7 @@ namespace EveJimaCore
     public partial class MainEveJima : Form
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(MainEveJima));
+
 
         public LabelWithOptionalCopyTextOnDoubleClick lblSolarSystemName;
 
@@ -52,11 +54,17 @@ namespace EveJimaCore
         #endregion
 
 
+
         public MainEveJima()
         {
             InitializeComponent();
 
+            
+
+
             Parametrs = new WindowParameters();
+
+            
 
             Global.Pilots.OnActivatePilot += GlobalEvent_ActivatePilot;
             Global.InternalBrowser.OnBrowserNavigate += Event_BrowserNavigate;
@@ -72,6 +80,11 @@ namespace EveJimaCore
             crlToolbar.OnSelectTab += Event_Toolbar_SelectTab;
 
             crlToolbar.ActivatePanel("Authorization");
+
+            RegistrHotKeys();
+
+            var webBrowser = new WebBrowser();
+            webBrowser.Navigate("https://github.com/dunvit/EveJima/releases");
         }
 
         private void EventOnEnterToSolarSystem(string obj)
@@ -207,8 +220,17 @@ namespace EveJimaCore
         {
             if(Global.ApplicationSettings.IsUseBrowser)
             {
+                if (Parametrs.IsMinimaze)
+                {
+                    Parametrs.IsMinimaze = false;
+                    cmdMinimazeRestore.Image = Resources.minimize;
+                    Size = new Size(Parametrs.SizeBeforeMinimizate.Width, Parametrs.SizeBeforeMinimizate.Height);
+                }
+
                 _containerBrowser.BrowserUrlExecute(address);
                 crlToolbar.ActivatePanel("Browser");
+
+                Focus();
             }
             
         }
@@ -477,6 +499,11 @@ namespace EveJimaCore
         private void timerRefreshTitleBar_Tick(object sender, EventArgs e)
         {
             //crlToolbar.Refresh();
+        }
+
+        private void MainEveJima_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UnregisterHotKey(Handle, OPENZKILLBOARD_HOTKEY_ID);
         }
     }
 }

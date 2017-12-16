@@ -10,7 +10,7 @@ namespace EveJimaCore.Logic.ToolBar
 {
     public partial class MapToolbarControl : UserControl
     {
-        readonly Dictionary<string, Button> _toolbarControls = new Dictionary<string, Button>();
+        readonly Dictionary<string, Label> _toolbarControls = new Dictionary<string, Label>();
 
         readonly Hashtable _metadata = new Hashtable();
 
@@ -30,6 +30,37 @@ namespace EveJimaCore.Logic.ToolBar
             cmdSolarSystem.Tag = "SolarSystem";
             cmdSettings.Tag = "Settings";
             cmdPathfinder.Tag = "Pathfinder";
+
+            if(IsInDesignMode() == false)
+            {
+                cmdAuthorization.AutoSize = true;
+                cmdAuthorization.Text = Global.Messages.Get("Tab_Pilots");
+
+                cmdLocation.Left = cmdAuthorization.Left + cmdAuthorization.Width;
+                cmdLocation.AutoSize = true;
+                cmdLocation.Text = Global.Messages.Get("Tab_Location");
+
+                cmdSolarSystem.Left = cmdLocation.Left + cmdLocation.Width;
+                cmdSolarSystem.AutoSize = true;
+                cmdSolarSystem.Text = Global.Messages.Get("Tab_Information");
+
+                cmdBookmarks.Left = cmdSolarSystem.Left + cmdSolarSystem.Width;
+                cmdBookmarks.AutoSize = true;
+                cmdBookmarks.Text = Global.Messages.Get("Tab_Bookmarks");
+
+                cmdPathfinder.Left = cmdBookmarks.Left + cmdBookmarks.Width;
+                cmdPathfinder.AutoSize = true;
+                cmdPathfinder.Text = Global.Messages.Get("Tab_Pathfinder");
+
+                cmdBrowser.Left = cmdPathfinder.Left + cmdPathfinder.Width;
+                cmdBrowser.AutoSize = true;
+                cmdBrowser.Text = Global.Messages.Get("Tab_Browser");
+
+                cmdSettings.Left = cmdBrowser.Left + cmdBrowser.Width;
+                cmdSettings.AutoSize = true;
+                cmdSettings.Text = Global.Messages.Get("Tab_Settings");
+            }
+
 
             _toolbarControls.Add("Authorization", cmdAuthorization);
             _toolbarControls.Add("Location", cmdLocation);
@@ -65,6 +96,8 @@ namespace EveJimaCore.Logic.ToolBar
             }
 
             InitializeEvents();
+
+            
         }
 
         public void InitializeEvents()
@@ -169,6 +202,13 @@ namespace EveJimaCore.Logic.ToolBar
         }
 
 
-
+        public bool IsInDesignMode()
+        {
+            if (Application.ExecutablePath.IndexOf("devenv.exe", StringComparison.OrdinalIgnoreCase) > -1)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

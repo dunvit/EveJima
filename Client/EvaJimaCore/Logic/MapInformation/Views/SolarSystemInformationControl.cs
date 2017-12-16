@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using EvaJimaCore;
 using EveJimaCore.BLL.Map;
 using EveJimaCore.Logic.MapInformation.Views;
-using EveJimaUniverse;
 using log4net;
 
 namespace EveJimaCore.Logic.MapInformation
@@ -23,6 +22,24 @@ namespace EveJimaCore.Logic.MapInformation
         public SolarSystemInformationControl()
         {
             InitializeComponent();
+
+            groupBox2.Text = Global.Messages.Get("Tab_Map_SolarSystemInformation");
+
+            lnlSystemText.Text = Global.Messages.Get("Tab_Information_SolarSystem") + @": ";
+            label4.Text = Global.Messages.Get("Tab_Information_Region") + @": ";
+            label5.Text = Global.Messages.Get("Tab_Information_Class") + @": ";
+            label6.Text = Global.Messages.Get("Tab_Information_Effect") + @": ";
+            label7.Text = Global.Messages.Get("Tab_Information_Static") + @": I";
+            label1.Text = Global.Messages.Get("Tab_Information_Static") + @": II";
+
+            groupBox1.Text = Global.Messages.Get("Tab_Map_Commands");
+
+            ejButton3.Text = Global.Messages.Get("Tab_Map_CentreLocationSystem");
+            cmdMapSignatures.Text = Global.Messages.Get("Tab_Map_CentreSelectedSystem");
+            cmdDeathNotice.Text = Global.Messages.Get("Tab_Map_DeathNotice");
+
+            groupBox3.Text = Global.Messages.Get("Tab_Map_InternalResourses");
+
         }
 
         public void ForceRefresh(Map spaceMap)
@@ -64,7 +81,6 @@ namespace EveJimaCore.Logic.MapInformation
                     txtSolarSystemRegion.Text = "";
                 }
 
-
                 txtSolarSystemStaticI.Text = "";
                 txtSolarSystemStaticII.Text = "";
 
@@ -82,8 +98,6 @@ namespace EveJimaCore.Logic.MapInformation
                     txtSolarSystemStaticI.Text = wormholeI.Name + " " + wormholeI.LeadsTo;
                     txtSolarSystemStaticI.Visible = true;
                     txtSolarSystemStaticI.ForeColor = Tools.GetColorBySolarSystem(wormholeI.LeadsTo);
-
-                    //toolTip1.SetToolTip(txtSolarSystemStaticI, "Max Stable Mass=" + wormholeI.TotalMass + "\r\nMax Jump  Mass=" + wormholeI.SingleMass + "\r\nMax Life time =" + wormholeI.Lifetime);
                 }
 
                 if (string.IsNullOrEmpty(solarSystem.Static2) == false)
@@ -94,19 +108,12 @@ namespace EveJimaCore.Logic.MapInformation
                     txtSolarSystemStaticII.Text = wormholeII.Name + " " + wormholeII.LeadsTo;
                     txtSolarSystemStaticII.Visible = true;
                     txtSolarSystemStaticII.ForeColor = Tools.GetColorBySolarSystem(wormholeII.LeadsTo);
-
-                    //toolTip2.SetToolTip(txtSolarSystemStaticII, "Max Stable Mass=" + wormholeII.TotalMass + "\r\nMax Jump  Mass=" + wormholeII.SingleMass + "\r\nMax Life time =" + wormholeII.Lifetime);
                 }
             }
             catch (Exception ex)
             {
                 Log.ErrorFormat("[SolarSystemInformationControl.FillInformationForCurrentSolarSystems] Critical error. Exception {0}", ex);
             }
-        }
-
-        private void SolarSystemInformationControl_Load(object sender, System.EventArgs e)
-        {
-
         }
 
         private void cmdZkillboard_Click(object sender, EventArgs e)
@@ -120,7 +127,7 @@ namespace EveJimaCore.Logic.MapInformation
             {
                 if (Global.Pilots.Selected.Location.Name.Contains("J") == false)
                 {
-                    MessageBox.Show(@"Ellatha only for W-Space systems");
+                    MessageBox.Show(Global.Messages.Get("Tab_Information_EllathaWarning"));
                     return;
                 }
 
@@ -160,11 +167,6 @@ namespace EveJimaCore.Logic.MapInformation
         private void Event_CentreLocationSystem(object sender, EventArgs e)
         {
             CentreScreenLocationSystem(null);
-        }
-
-        private void Event_DeleteSelectedSystem(object sender, EventArgs e)
-        {
-            DeleteSelectedSystem(Global.Pilots.Selected.SpaceMap.SelectedSolarSystemName);
         }
 
         private void Click_SendDeathNotice(object sender, EventArgs e)
