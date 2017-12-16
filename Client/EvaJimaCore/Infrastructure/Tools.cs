@@ -241,10 +241,10 @@ namespace EveJimaCore
 
             switch(language)
             {
-                case 1:
+                case 0:
                     return English.ResourceManager.GetString(key);
  
-                case 2:
+                case 1:
                     return Russian.ResourceManager.GetString(key);
 
                 default:

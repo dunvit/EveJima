@@ -16,6 +16,14 @@ namespace EveJimaCore.WhlControls
             label1.Text = Global.Messages.Get("Tab_Settings_NeedRestart");
             label2.Text = Global.Messages.Get("Tab_Settings_NeedRestart");
             cmdSaveSettings.Value = Global.Messages.Get("Tab_Settings_SaveSettings");
+
+            lblLanguage.Text = Global.Messages.Get("Tab_Settings_Language");
+
+
+            cmdLanguage.Items.Add(new ComboboxItem { Text = "English", Value = 0 });
+            cmdLanguage.Items.Add(new ComboboxItem { Text = "Russian", Value = 1 });
+
+            cmdLanguage.SelectedIndex = Global.ApplicationSettings.LanguageId;
         }
 
         public override void ActivateContainer()
@@ -46,6 +54,13 @@ namespace EveJimaCore.WhlControls
                 isNeedCloseApplication = true;
             }
 
+            if (cmdLanguage.SelectedIndex != Global.ApplicationSettings.LanguageId)
+            {
+                Global.ApplicationSettings.LanguageId = cmdLanguage.SelectedIndex;
+                isNeedCloseApplication = true;
+            }
+
+
             Global.ApplicationSettings.IsSignatureRebuildEnabled = crlIsSignatureRebuild.Checked;
 
             if (isNeedCloseApplication)
@@ -61,6 +76,17 @@ namespace EveJimaCore.WhlControls
         private void EveCrlSettings_Load(object sender, System.EventArgs e)
         {
             label7.Text = Global.ApplicationSettings.CurrentVersion;
+        }
+    }
+
+    public class ComboboxItem
+    {
+        public string Text { get; set; }
+        public object Value { get; set; }
+
+        public override string ToString()
+        {
+            return Text;
         }
     }
 }

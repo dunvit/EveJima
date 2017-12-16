@@ -288,4 +288,7 @@
   <data name="Tab_Map_UpdateAll" xml:space="preserve">
     <value>Update All</value>
   </data>
+  <data name="Tab_Settings_Language" xml:space="preserve">
+    <value>Language:</value>
+  </data>
 </root>

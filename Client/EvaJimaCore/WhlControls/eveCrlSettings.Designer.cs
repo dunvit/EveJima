@@ -41,6 +41,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.lblLanguage = new System.Windows.Forms.Label();
+            this.cmdLanguage = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // crlIsUseBrowser
@@ -184,11 +186,34 @@
             this.label8.TabIndex = 160;
             this.label8.Text = "Dunkan Su-Sushiloff";
             // 
+            // lblLanguage
+            // 
+            this.lblLanguage.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLanguage.ForeColor = System.Drawing.Color.White;
+            this.lblLanguage.Location = new System.Drawing.Point(19, 133);
+            this.lblLanguage.Name = "lblLanguage";
+            this.lblLanguage.Size = new System.Drawing.Size(247, 13);
+            this.lblLanguage.TabIndex = 161;
+            this.lblLanguage.Text = "Language:";
+            this.lblLanguage.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // cmdLanguage
+            // 
+            this.cmdLanguage.BackColor = System.Drawing.Color.Gray;
+            this.cmdLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmdLanguage.FormattingEnabled = true;
+            this.cmdLanguage.Location = new System.Drawing.Point(275, 130);
+            this.cmdLanguage.Name = "cmdLanguage";
+            this.cmdLanguage.Size = new System.Drawing.Size(121, 21);
+            this.cmdLanguage.TabIndex = 162;
+            // 
             // EveCrlSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.Controls.Add(this.cmdLanguage);
+            this.Controls.Add(this.lblLanguage);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -226,5 +251,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblLanguage;
+        private System.Windows.Forms.ComboBox cmdLanguage;
     }
 }

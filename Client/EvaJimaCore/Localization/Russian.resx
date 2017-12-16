@@ -288,4 +288,7 @@
   <data name="Tab_Map_UpdateAll" xml:space="preserve">
     <value>Сохранить все</value>
   </data>
+  <data name="Tab_Settings_Language" xml:space="preserve">
+    <value>Язык:</value>
+  </data>
 </root>

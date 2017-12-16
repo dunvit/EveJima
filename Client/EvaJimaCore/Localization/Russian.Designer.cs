@@ -511,6 +511,15 @@ namespace EveJimaCore.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Язык:.
+        /// </summary>
+        internal static string Tab_Settings_Language {
+            get {
+                return ResourceManager.GetString("Tab_Settings_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (перезагрузка).
         /// </summary>
         internal static string Tab_Settings_NeedRestart {

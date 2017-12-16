@@ -128,7 +128,7 @@ namespace EveJimaCore
                 IsUseMap = jsonResponse.IsUseMap == null ? false : jsonResponse.IsUseMap;
                 IsSignatureRebuildEnabled = jsonResponse.IsSignatureRebuildEnabled == null ? true : jsonResponse.IsSignatureRebuildEnabled;
 
-                LanguageId = jsonResponse.LanguageId == null ? 2 : jsonResponse.LanguageId;
+                LanguageId = jsonResponse.LanguageId == null ? 0 : jsonResponse.LanguageId;
 
                 var ccPilots = jsonResponse.Pilots;
 
@@ -201,6 +201,7 @@ namespace EveJimaCore
                     IsUseBrowser = IsUseBrowser,
                     IsUseMap = IsUseMap,
                     IsSignatureRebuildEnabled = IsSignatureRebuildEnabled,
+                    LanguageId = LanguageId
                 });
 
                 if (!Directory.Exists(path))

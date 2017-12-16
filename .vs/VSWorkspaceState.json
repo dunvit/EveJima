@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Client",
+    "\\Client\\EvaJima",
+    "\\Client\\EvaJimaCore",
+    "\\Client\\EvaJimaCore\\MainScreen",
+    "\\Client\\EvaJimaCore\\WhlControls"
+  ],
+  "SelectedNode": "\\Client\\EvaJima\\Program.cs",
+  "PreviewInSolutionExplorer": false
+}
