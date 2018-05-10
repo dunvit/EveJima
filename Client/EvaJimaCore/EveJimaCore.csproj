@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.props" Condition="Exists('..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.props')" />
-  <Import Project="..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.props" Condition="Exists('..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.props')" />
+  <Import Project="..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props')" />
+  <Import Project="..\packages\cef.redist.x64.3.3239.1723\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.3.3239.1723\build\cef.redist.x64.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -85,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\Browser\Interceptor.cs" />
     <Compile Include="BLL\LostAndFound\LostSolarSystem.cs" />
     <Compile Include="BLL\LostAndFound\LostSolarSystems.cs" />
     <Compile Include="BLL\Map\Map.cs" />
@@ -104,9 +107,12 @@
     <Compile Include="Browser\Bookmarks.cs" />
     <Compile Include="Browser\History.cs" />
     <Compile Include="Browser\InternalBrowser.cs" />
+    <Compile Include="EjEnvironment\ClipboardEntity.cs" />
     <Compile Include="EveJimaPresenter.cs" />
+    <Compile Include="Infrastructure\BrowserEmulationVersioncs.cs" />
     <Compile Include="Infrastructure\CrestApiFunctions.cs" />
     <Compile Include="Infrastructure\LazyLogger.cs" />
+    <Compile Include="Infrastructure\ZKillboardApi.cs" />
     <Compile Include="Localization\English.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -208,7 +214,18 @@
     </Compile>
     <Compile Include="MainScreen\WindowParameters.cs" />
     <Compile Include="Messages.cs" />
+    <Compile Include="Monitoring\RegistryMonitoring.cs" />
+    <Compile Include="ScheduledTasks\UserCounter.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />
+    <Compile Include="UiTools\ejcComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UiTools\ejcComboBox.Designer.cs">
+      <DependentUpon>ejcComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UiTools\FlattenCombo.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UiTools\MessageBoxLoader.cs" />
     <Compile Include="UiTools\SystemLine.cs" />
     <Compile Include="WhlControls\ejButton.cs">
@@ -262,6 +279,12 @@
     <Compile Include="WhlControls\whlRouter.Designer.cs">
       <DependentUpon>whlRouter.cs</DependentUpon>
     </Compile>
+    <Compile Include="WhlControls\whlNeedLoadPilot.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\whlNeedLoadPilot.Designer.cs">
+      <DependentUpon>whlNeedLoadPilot.cs</DependentUpon>
+    </Compile>
     <Compile Include="WhlControls\windowMessage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -307,12 +330,6 @@
     </Compile>
     <Compile Include="WhlControls\whlBookmarks.Designer.cs">
       <DependentUpon>whlBookmarks.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WhlControls\whlBrowser.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WhlControls\whlBrowser.Designer.cs">
-      <DependentUpon>whlBrowser.cs</DependentUpon>
     </Compile>
     <Compile Include="WhlControls\whlButton.cs">
       <SubType>UserControl</SubType>
@@ -405,6 +422,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UiTools\ejcComboBox.resx">
+      <DependentUpon>ejcComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UiTools\FlattenCombo.resx">
+      <DependentUpon>FlattenCombo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\baseContainer.resx">
       <DependentUpon>baseContainer.cs</DependentUpon>
     </EmbeddedResource>
@@ -435,9 +458,6 @@
     <EmbeddedResource Include="WhlControls\whlBookmarks.resx">
       <DependentUpon>whlBookmarks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\whlBrowser.resx">
-      <DependentUpon>whlBrowser.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\whlButton.resx">
       <DependentUpon>whlButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -449,6 +469,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\whlRouter.resx">
       <DependentUpon>whlRouter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\whlNeedLoadPilot.resx">
+      <DependentUpon>whlNeedLoadPilot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\whlSolarSystem.resx">
       <DependentUpon>whlSolarSystem.cs</DependentUpon>
@@ -515,13 +538,13 @@
     <None Include="Resources\url.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\EveJimaIGB\EveJimaIGB\EveInternalBrowser\EveInternalBrowser.csproj">
+      <Project>{c23fded6-0d07-42c6-ba3a-f0e9b5c1d592}</Project>
+      <Name>EveInternalBrowser</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Server\EveJimaServerMap\EveJimaServerMap.csproj">
       <Project>{E67AC071-4E51-4CF3-BA0E-2796BAFA47A5}</Project>
       <Name>EveJimaServerMap</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EveJimaBrowser\EveJimaBrowser.csproj">
-      <Project>{FC30A198-4213-404F-8526-D7BE5D49E57D}</Project>
-      <Name>EveJimaBrowser</Name>
     </ProjectReference>
     <ProjectReference Include="..\EveJimaUniverse\EveJimaUniverse.csproj">
       <Project>{7ccc5a5f-14c3-4ba3-998b-d4177085bfeb}</Project>
@@ -533,6 +556,8 @@
     <Content Include="Versions\202\Release.html" />
     <Content Include="Versions\203\2.03.txt" />
     <Content Include="Versions\203\Release.html" />
+    <Content Include="Versions\204\2.04.txt" />
+    <Content Include="Versions\204\Release.html" />
     <Content Include="Versions\Release.html" />
     <Content Include="Versions\Tasks.txt" />
     <Content Include="Versions\1.35.txt" />
@@ -550,21 +575,19 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\cef.redist.x64.3.2987.1601\build\cef.redist.x64.targets" Condition="Exists('..\packages\cef.redist.x64.3.2987.1601\build\cef.redist.x64.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\cef.redist.x64.3.2987.1601\build\cef.redist.x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.3.2987.1601\build\cef.redist.x64.targets'))" />
-    <Error Condition="!Exists('..\packages\cef.redist.x86.3.2987.1601\build\cef.redist.x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.3.2987.1601\build\cef.redist.x86.targets'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.targets'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.targets'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x64.3.3239.1723\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.3.3239.1723\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets'))" />
   </Target>
-  <Import Project="..\packages\cef.redist.x86.3.2987.1601\build\cef.redist.x86.targets" Condition="Exists('..\packages\cef.redist.x86.3.2987.1601\build\cef.redist.x86.targets')" />
-  <Import Project="..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.targets')" />
-  <Import Project="..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.targets')" />
+  <Import Project="..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets')" />
+  <Import Project="..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

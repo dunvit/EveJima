@@ -28,6 +28,7 @@ namespace EveJimaCore
 
         [DllImport("user32.dll")]
         static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+
         #endregion
 
         public static string GetActiveWindowTitle()

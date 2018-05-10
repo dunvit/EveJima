@@ -1,0 +1,32 @@
+﻿EveJima version 2.04 https://github.com/dunvit/EveJima/releases
+
+
+Список изменений в обновлении 2.04
+
+
+Дополнения и изменения:
+
+* EveJima полностью переведена на систему API ESI (В связи окончания поддержки ССР системы API CREST)
+* Добавлена возможность перехватывать ссылки из клиента Eve Online и открывать их в EveJima. Работает только для компьютеров с Chrome или Firefox браузерами по умолчанию. Эта опция по умолчанию выключина. Вы можете включить ее во вкладке "Установки". Предупреждение - включение этой опции производят временный изменения в Regestry и иногда негативно воспринимаются антивирусами.
+* Добавлена возможность открывать zkillboard при копировании имени пилота в клиенте Eve Online (можно копировать имя в списке чата установив на него фокус и нажав Crl+C)
+* Возвращена вкладка с возможностью задать автопилот для выбранного пилота. Данные о звездных системах берутся из файла.
+* Добавлена возможность открывать все информативные линки только в одном браузере EveJima.
+
+Исправленные ошибки:
+
+
+
+----------------------------------------------------------------------------------------------------
+
+Patch notes for 2.03 Release 
+
+Features & Changes:
+
+* EveJima moved to use API ESI (ССР end support API CREST)
+* IGB option - now we open links from Eve Online in EveJima. Works only for default browsers Chrome or Firefox. This option is unselected. For enable this option use tab "Settings". EveJima change registry and some antivirus programs can issue warnings.
+* Added opportunity open zkillboard when copying the pilot name in the client Eve Online (You can copy the name in the chat list by setting focus to it and pressing Crl+C)
+* Added tab with the ability to set the autopilot for the selected pilot. Data on stellar systems are taken from the file.
+* Added ability to open all informative links only in one EveJima browser.
+
+Defect Fixes:
+

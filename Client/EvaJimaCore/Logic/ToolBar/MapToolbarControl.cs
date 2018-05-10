@@ -5,12 +5,13 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using EvaJimaCore;
+using EveJimaCore.WhlControls;
 
 namespace EveJimaCore.Logic.ToolBar
 {
     public partial class MapToolbarControl : UserControl
     {
-        readonly Dictionary<string, Label> _toolbarControls = new Dictionary<string, Label>();
+        readonly Dictionary<string, Control> _toolbarControls = new Dictionary<string, Control>();
 
         readonly Hashtable _metadata = new Hashtable();
 
@@ -23,6 +24,14 @@ namespace EveJimaCore.Logic.ToolBar
         {
             InitializeComponent();
 
+            cmdSolarSystem.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_Information"), Value = "SolarSystem" });
+            cmdSolarSystem.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_Location"), Value = "Location" });
+            cmdSolarSystem.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_Router"), Value = "Router" });
+
+            cmdSolarSystem.ElementChanged += elementChanged_Event;
+
+
+
             cmdAuthorization.Tag = "Authorization";
             cmdLocation.Tag = "Location";
             cmdBrowser.Tag = "Browser";
@@ -31,35 +40,14 @@ namespace EveJimaCore.Logic.ToolBar
             cmdSettings.Tag = "Settings";
             cmdPathfinder.Tag = "Pathfinder";
 
-            if(IsInDesignMode() == false)
-            {
-                cmdAuthorization.AutoSize = true;
-                cmdAuthorization.Text = Global.Messages.Get("Tab_Pilots");
+            cmdAuthorization.Text = Global.Messages.Get("Tab_Pilots");
+            cmdSolarSystem.Text = Global.Messages.Get("Tab_Information");
+            cmdBookmarks.Text = Global.Messages.Get("Tab_Bookmarks");
+            cmdPathfinder.Text = Global.Messages.Get("Tab_Pathfinder");
+            cmdBrowser.Text = Global.Messages.Get("Tab_Browser");
+            cmdSettings.Text = Global.Messages.Get("Tab_Settings");
 
-                cmdLocation.Left = cmdAuthorization.Left + cmdAuthorization.Width;
-                cmdLocation.AutoSize = true;
-                cmdLocation.Text = Global.Messages.Get("Tab_Location");
-
-                cmdSolarSystem.Left = cmdLocation.Left + cmdLocation.Width;
-                cmdSolarSystem.AutoSize = true;
-                cmdSolarSystem.Text = Global.Messages.Get("Tab_Information");
-
-                cmdBookmarks.Left = cmdSolarSystem.Left + cmdSolarSystem.Width;
-                cmdBookmarks.AutoSize = true;
-                cmdBookmarks.Text = Global.Messages.Get("Tab_Bookmarks");
-
-                cmdPathfinder.Left = cmdBookmarks.Left + cmdBookmarks.Width;
-                cmdPathfinder.AutoSize = true;
-                cmdPathfinder.Text = Global.Messages.Get("Tab_Pathfinder");
-
-                cmdBrowser.Left = cmdPathfinder.Left + cmdPathfinder.Width;
-                cmdBrowser.AutoSize = true;
-                cmdBrowser.Text = Global.Messages.Get("Tab_Browser");
-
-                cmdSettings.Left = cmdBrowser.Left + cmdBrowser.Width;
-                cmdSettings.AutoSize = true;
-                cmdSettings.Text = Global.Messages.Get("Tab_Settings");
-            }
+            RelocateToolbarButtons();
 
 
             _toolbarControls.Add("Authorization", cmdAuthorization);
@@ -89,6 +77,9 @@ namespace EveJimaCore.Logic.ToolBar
             _metadata.Add("Settings", new PanelMetaData { Size = new Size(564, 325), IsResizeEnabled = false, Enabled = true });
             _metadata.Add("Pathfinder", new PanelMetaData { Size = new Size(900, 450), IsResizeEnabled = false, Enabled = false });
             _metadata.Add("Version", new PanelMetaData { Size = new Size(900, 500), IsResizeEnabled = false, Enabled = true });
+            _metadata.Add("Router", new PanelMetaData { Size = new Size(564, 325), IsResizeEnabled = false, Enabled = false });
+
+            _metadata.Add("NeedLoadPilot", new PanelMetaData { Size = new Size(564, 325), IsResizeEnabled = false, Enabled = true });
 
             if (LicenseManager.UsageMode == LicenseUsageMode.Runtime)
             {
@@ -96,6 +87,62 @@ namespace EveJimaCore.Logic.ToolBar
             }
 
             InitializeEvents();
+
+            
+        }
+
+        private void RelocateToolbarButtons()
+        {
+            if (IsInDesignMode() == false)
+            {
+                
+
+                cmdAuthorization.AutoSize = true;
+                
+
+                //cmdLocation.Left = cmdAuthorization.Left + cmdAuthorization.Width;
+                //cmdLocation.AutoSize = true;
+                //cmdLocation.Text = Global.Messages.Get("Tab_Location");
+
+                cmdSolarSystem.Left = cmdAuthorization.Left + cmdAuthorization.Width;
+                cmdSolarSystem.AutoSize = true;
+                
+
+                cmdBookmarks.Left = cmdSolarSystem.Left + cmdSolarSystem.Width;
+                cmdBookmarks.AutoSize = true;
+                
+
+                cmdPathfinder.Left = cmdBookmarks.Left + cmdBookmarks.Width;
+                cmdPathfinder.AutoSize = true;
+                
+
+                cmdBrowser.Left = cmdPathfinder.Left + cmdPathfinder.Width;
+                cmdBrowser.AutoSize = true;
+                
+
+                cmdSettings.Left = cmdBrowser.Left + cmdBrowser.Width;
+                cmdSettings.AutoSize = true;
+                
+            }
+        }
+
+        private void elementChanged_Event(object sender, EventArgs e)
+        {
+            var element = cmdSolarSystem.Value;
+
+            var panelMetaData = (PanelMetaData)_metadata[element];
+
+            RelocateToolbarButtons();
+
+            if(panelMetaData.Enabled == false)
+            {
+                ActivatePanel("NeedLoadPilot");
+                return;
+            }
+
+            ActivatePanel(element);
+
+            cmdSolarSystem.Refresh();
 
             
         }
@@ -210,5 +257,6 @@ namespace EveJimaCore.Logic.ToolBar
             }
             return false;
         }
+
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Drawing;
+using System.ComponentModel;
 using System.Windows.Forms;
-using EvaJimaCore;
 using log4net;
+using Global = EvaJimaCore.Global;
 
 namespace EveJimaCore.WhlControls
 {
@@ -11,36 +11,37 @@ namespace EveJimaCore.WhlControls
     public partial class ucRichBrowser : BaseContainer
     {
         public Form ParentWindow;
-
+        public event Action OnForceResize;
         public DelegateChangeBrowserMode ChangeViewMode;
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(ucRichBrowser));
 
-        WBrowser.WBrowser richBrowser = new WBrowser.WBrowser();
+        
 
         public OpenWebBrowser OnOpenWebBrowser;
 
         public ucRichBrowser()
         {
             InitializeComponent();
-            richBrowser.TopLevel = false;
-            richBrowser.Location = new Point(5, 5);
-            richBrowser.Size = new Size(800, 900);
-            richBrowser.FormBorderStyle = FormBorderStyle.None;
-            richBrowser.Visible = true;
-            richBrowser.Dock = DockStyle.Fill;
 
-            richBrowser.OnChangeShowFavorites += Event_ShowFavoritesChange;
-            richBrowser.OnBrowserAfterShowDialog += Event_BrowserAfterBeforeShowDialog;
-            richBrowser.OnBrowserBeforeShowDialog += Event_BrowserBeforeShowDialog;
+            igBrowser1.Initialization();
+            igBrowser1.OnForceResize += Event_ForceResize;
+            igBrowser1.OnBrowserBeforeShowDialog += Event_BrowserBeforeShowDialog;
+            igBrowser1.OnBrowserAfterShowDialog += Event_BrowserAfterBeforeShowDialog;
 
-            if (Global.WorkEnvironment.IsShowFavorites == false)
+            igBrowser1.IsOpenKillBoardInNewTab = Global.ApplicationSettings.Browser_IsOpenKillboardInNewTab;
+
+            if(LicenseManager.UsageMode == LicenseUsageMode.Runtime)
             {
-                richBrowser.HideFavorites();
+                igBrowser1.OpenNewTab("https://github.com/dunvit/EveJima/releases");
             }
-
-            Controls.Add(richBrowser);
         }
+
+        private void Event_ForceResize()
+        {
+            OnForceResize?.Invoke();
+        }
+
 
         private bool parentIsTopMost = false;
 
@@ -58,8 +59,8 @@ namespace EveJimaCore.WhlControls
 
         private void Event_ShowFavoritesChange(bool isShowFavorites)
         {
-            Global.WorkEnvironment.IsShowFavorites = isShowFavorites;
-            Global.ApplicationSettings.Save();
+            //Global.WorkEnvironment.IsShowFavorites = isShowFavorites;
+            //Global.ApplicationSettings.Save();
         }
 
         public bool isMaxMode = false;
@@ -78,28 +79,33 @@ namespace EveJimaCore.WhlControls
                 }
             }
 
-            richBrowser.OpenNewTab(url);
+            igBrowser1.OpenNewTab(url);
         }
 
-        public bool IsShowFavorites
-        {
-            get 
-            {
-                return richBrowser.IsShowFavorites;
-            }
-        }
+        //public bool IsShowFavorites
+        //{
+        //    get 
+        //    {
+        //        return richBrowser.IsShowFavorites;
+        //    }
+        //}
 
         public void FixSize(bool ismax)
         {
 
-            richBrowser.Size = new Size(Width,Height);
+            //richBrowser.Size = new Size(Width,Height);
 
-            richBrowser.FixSize(ismax);
+            //richBrowser.FixSize(ismax);
         }
 
         public void DisposeBrowser()
         {
-            richBrowser.DisposeBrowser();
+            //richBrowser.DisposeBrowser();
+        }
+
+        private void ucRichBrowser_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

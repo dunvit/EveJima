@@ -214,17 +214,24 @@ namespace EveJimaCore.BLL
         {
             Log.DebugFormat("[Pilot.LoadCharacterInfo] starting for Id = {0}", Id);
 
-            dynamic characterInfo = EsiData.GetCharacterInfo(Id);
-
-            var portraitAddress = characterInfo.SelectToken("portrait.64x64.href").Value;
-
-            var request = WebRequest.Create(portraitAddress);
-
-            using (var response = request.GetResponse())
-            using (var stream = response.GetResponseStream())
+            try
             {
-                Portrait = Image.FromStream(stream);
+                var portraitAddress = EsiData.GetCharacterInfo(Id)["64x64"].ToString();
+
+                var request = WebRequest.Create(portraitAddress);
+
+                using (var response = request.GetResponse())
+                using (var stream = response.GetResponseStream())
+                {
+                    Portrait = Image.FromStream(stream);
+                }
             }
+            catch(Exception ex)
+            {
+                Log.ErrorFormat("[PilotEntity.LoadCharacterInfo] Critical error = {0}", ex);
+            }
+
+            
         }
 
         private void LoadLocationInfo()

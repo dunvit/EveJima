@@ -150,7 +150,7 @@ namespace EveJimaCore
         {
             Log.DebugFormat("[EsiAuthorization.SetWaypoint] started for refresh_token = {0}", AccessToken);
             
-            var url = @"https://esi.tech.ccp.is/latest/ui/autopilot/waypoint/?add_to_beginning=false&clear_other_waypoints=true&datasource=tranquility&destination_id=" + solarSystemId;
+            var url = @"https://esi.tech.ccp.is/latest/ui/autopilot/waypoint/?add_to_beginning=false&clear_other_waypoints=" + clearOtherWaypoints  + "&datasource=tranquility&destination_id=" + solarSystemId;
 
             try
             {
@@ -517,13 +517,14 @@ namespace EveJimaCore
         {
             Log.DebugFormat("[CrestAuthorization.GetCharacterInfo] started. pilotId = {0}", pilotId);
 
-            var url = "https://crest-tq.eveonline.com//characters/" + pilotId + "/";
+            
+            var url = "https://esi.tech.ccp.is/v1/characters/" + pilotId + "/portrait/";
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
 
             httpWebRequest.Method = "GET";
             httpWebRequest.Headers.Add("Authorization", "Bearer " + AccessToken);
-            httpWebRequest.Host = "crest-tq.eveonline.com";
+            httpWebRequest.ContentType = "application/json";
 
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))

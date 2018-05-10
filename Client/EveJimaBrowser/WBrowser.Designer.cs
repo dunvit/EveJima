@@ -301,7 +301,8 @@
             this.closeTabToolStripMenuItem1,
             this.duplicateTabToolStripMenuItem1});
             this.closeTabContext.Name = "contextMenuStrip1";
-            this.closeTabContext.Size = new System.Drawing.Size(192, 48);
+            this.closeTabContext.Size = new System.Drawing.Size(192, 70);
+            this.closeTabContext.Opening += new System.ComponentModel.CancelEventHandler(this.closeTabContext_Opening);
             // 
             // closeTabToolStripMenuItem1
             // 

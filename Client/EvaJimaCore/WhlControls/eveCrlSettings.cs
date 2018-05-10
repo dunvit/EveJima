@@ -15,10 +15,15 @@ namespace EveJimaCore.WhlControls
             cmdIsSignatureRebuild.Text = Global.Messages.Get("Tab_Settings_ShortSignatureRebuild");
             label1.Text = Global.Messages.Get("Tab_Settings_NeedRestart");
             label2.Text = Global.Messages.Get("Tab_Settings_NeedRestart");
+            label10.Text = Global.Messages.Get("Tab_Settings_NeedRestart");
+            label11.Text = Global.Messages.Get("Tab_Settings_NeedRestart");
             cmdSaveSettings.Value = Global.Messages.Get("Tab_Settings_SaveSettings");
+
+            label9.Text = Global.Messages.Get("Tab_Settings_Intercept_links_from_EVE") + @":";
 
             lblLanguage.Text = Global.Messages.Get("Tab_Settings_Language");
 
+            label12.Text = Global.Messages.Get("Tab_Settings_IsOpenZkillboardInNewTab");
 
             cmdLanguage.Items.Add(new ComboboxItem { Text = "English", Value = 0 });
             cmdLanguage.Items.Add(new ComboboxItem { Text = "Russian", Value = 1 });
@@ -36,6 +41,8 @@ namespace EveJimaCore.WhlControls
             crlIsUseMap.Checked = applicationSettings.IsUseMap;
             crlIsUseBrowser.Checked = applicationSettings.IsUseBrowser;
             crlIsSignatureRebuild.Checked = applicationSettings.IsSignatureRebuildEnabled;
+            crlIsInterceptLinksFromEVE.Checked = applicationSettings.IsInterceptLinksFromEVE;
+            chkIsOpenNewTabForZkillboard.Checked = applicationSettings.Browser_IsOpenKillboardInNewTab;
         }
 
         private void cmdSaveSettings_Click(object sender, System.EventArgs e)
@@ -62,6 +69,20 @@ namespace EveJimaCore.WhlControls
 
 
             Global.ApplicationSettings.IsSignatureRebuildEnabled = crlIsSignatureRebuild.Checked;
+            
+
+            if (Global.ApplicationSettings.Browser_IsOpenKillboardInNewTab != chkIsOpenNewTabForZkillboard.Checked)
+            {
+                Global.ApplicationSettings.Browser_IsOpenKillboardInNewTab = chkIsOpenNewTabForZkillboard.Checked;
+                isNeedCloseApplication = true;
+            }
+
+
+            if (crlIsInterceptLinksFromEVE.Checked != Global.ApplicationSettings.IsInterceptLinksFromEVE)
+            {
+                Global.ApplicationSettings.IsInterceptLinksFromEVE = crlIsInterceptLinksFromEVE.Checked;
+                isNeedCloseApplication = true;
+            }
 
             if (isNeedCloseApplication)
             {
@@ -76,6 +97,11 @@ namespace EveJimaCore.WhlControls
         private void EveCrlSettings_Load(object sender, System.EventArgs e)
         {
             label7.Text = Global.ApplicationSettings.CurrentVersion;
+        }
+
+        private void cmdSaveSettings_Load(object sender, System.EventArgs e)
+        {
+
         }
     }
 

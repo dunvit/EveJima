@@ -28,19 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            EveJimaIGB.Bookmarks.Favorites favorites1 = new EveJimaIGB.Bookmarks.Favorites();
+            this.igBrowser1 = new EveJimaIGB.IGBrowser();
             this.SuspendLayout();
+            // 
+            // igBrowser1
+            // 
+            this.igBrowser1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.igBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.igBrowser1.Favorites = favorites1;
+            this.igBrowser1.IsShowFavorites = false;
+            this.igBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.igBrowser1.Name = "igBrowser1";
+            this.igBrowser1.Size = new System.Drawing.Size(907, 435);
+            this.igBrowser1.TabIndex = 0;
             // 
             // ucRichBrowser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.igBrowser1);
             this.DoubleBuffered = true;
             this.Name = "ucRichBrowser";
             this.Size = new System.Drawing.Size(907, 435);
+            this.Load += new System.EventHandler(this.ucRichBrowser_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private EveJimaIGB.IGBrowser igBrowser1;
     }
 }

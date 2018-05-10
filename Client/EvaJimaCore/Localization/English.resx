@@ -291,4 +291,25 @@
   <data name="Tab_Settings_Language" xml:space="preserve">
     <value>Language:</value>
   </data>
+  <data name="TextNeedAuthorization" xml:space="preserve">
+    <value>This module requires the authorization of the pilot. Go to the "Pilots" tab for authorization in CCP SSO (single sign-on) site.</value>
+  </data>
+  <data name="Tab_Router" xml:space="preserve">
+    <value>Router</value>
+  </data>
+  <data name="Tab_Settings_Intercept_links_from_EVE" xml:space="preserve">
+    <value>Intercept links from EVE</value>
+  </data>
+  <data name="Tab_Router_CreateRoute" xml:space="preserve">
+    <value>Create route for pilot:</value>
+  </data>
+  <data name="Tab_Router_LoadFromFile" xml:space="preserve">
+    <value>Load from file</value>
+  </data>
+  <data name="Tab_Router_SetDestination" xml:space="preserve">
+    <value>Set route destination</value>
+  </data>
+  <data name="Tab_Settings_IsOpenZkillboardInNewTab" xml:space="preserve">
+    <value>Open zkillboard in new tab:</value>
+  </data>
 </root>

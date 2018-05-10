@@ -162,30 +162,39 @@ namespace EveJimaCore.BLL.Map
                 return "A";
             }
 
-            var systemPrevious = map.GetSystem(system);
-
-            var isNeedAddSolarSystemToMap = false;
-
-            foreach (var connected in systemPrevious.ConnectedSolarSystems)
+            try
             {
-                if (IsWSpaceSystem(connected))
-                {
-                    return "B";
-                }
-            }
+                var systemPrevious = map.GetSystem(system);
 
-            foreach (var connected in systemPrevious.ConnectedSolarSystems)
-            {
-                var connectedSystem = map.GetSystem(connected);
+                var isNeedAddSolarSystemToMap = false;
 
-                foreach (var connectedOfConnected in connectedSystem.ConnectedSolarSystems)
+                foreach (var connected in systemPrevious.ConnectedSolarSystems)
                 {
-                    if (IsWSpaceSystem(connectedOfConnected))
+                    if (IsWSpaceSystem(connected))
                     {
-                        return "C";
+                        return "B";
+                    }
+                }
+
+                foreach (var connected in systemPrevious.ConnectedSolarSystems)
+                {
+                    var connectedSystem = map.GetSystem(connected);
+
+                    foreach (var connectedOfConnected in connectedSystem.ConnectedSolarSystems)
+                    {
+                        if (IsWSpaceSystem(connectedOfConnected))
+                        {
+                            return "C";
+                        }
                     }
                 }
             }
+            catch
+            {
+                
+            }
+
+            
 
             return "D";
         }

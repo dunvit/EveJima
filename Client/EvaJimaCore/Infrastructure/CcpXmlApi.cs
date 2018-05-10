@@ -14,23 +14,26 @@ namespace EveJimaCore
 
         public string GetPilotIdByName(string name)
         {
-            var data = ReadFile("https://api.eveonline.com/eve/CharacterID.xml.aspx?names=" + WebUtility.UrlEncode(name));
+            var characterId = "0";
+            var url = "";
 
-            var characterId="0";
-
-            var dataParts = data.Split(new[] { "characterID=" }, StringSplitOptions.None)[1].Split(new[] { "/>" }, StringSplitOptions.None)[0];
-
-            dataParts = dataParts.Replace("\"", "<a>");
-            
-
-            var m1 = Regex.Matches(dataParts, @"(<a.*?>.*?<a>)", RegexOptions.Singleline);
-
-            foreach (var value in from Match m in m1 select m.Groups[1].Value)
+            try
             {
-                characterId = Regex.Replace(value, @"\s*<.*?>\s*", "", RegexOptions.Singleline);
-            }
+                url = "https://esi.tech.ccp.is/latest/search/?search=" + WebUtility.UrlEncode(name) + "&categories=character&language=en-us&strict=true&datasource=tranquility";
 
-            return characterId;
+                Log.DebugFormat("[Zkillboard.GetZkillboardUrlByName] Read url {0} ", url);
+
+                var data = ReadFile(url);
+
+                characterId = data.Split(new[] { "[" }, StringSplitOptions.None)[1].Split(new[] { "]" }, StringSplitOptions.None)[0];
+
+                return characterId;
+            }
+            catch(Exception e)
+            {
+                Log.ErrorFormat("[Pilot.GetPilotIdByName] Read url {0} is failed. Exception = {1} ", url, e);
+                return characterId;
+            }
         }
 
         private static string ReadFile(string urlAddress)

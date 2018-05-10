@@ -291,4 +291,25 @@
   <data name="Tab_Settings_Language" xml:space="preserve">
     <value>Язык:</value>
   </data>
+  <data name="TextNeedAuthorization" xml:space="preserve">
+    <value>Для работы этого модуля необходима авторизация пилота. Пройдите на вкладку  "Пилоты".</value>
+  </data>
+  <data name="Tab_Router" xml:space="preserve">
+    <value>Маршрутизатор</value>
+  </data>
+  <data name="Tab_Settings_Intercept_links_from_EVE" xml:space="preserve">
+    <value>Открывать линки из клиента Евы</value>
+  </data>
+  <data name="Tab_Router_CreateRoute" xml:space="preserve">
+    <value>Создать маршрут для пилота:</value>
+  </data>
+  <data name="Tab_Router_LoadFromFile" xml:space="preserve">
+    <value>Загрузить из файла</value>
+  </data>
+  <data name="Tab_Router_SetDestination" xml:space="preserve">
+    <value>Задать маршрут</value>
+  </data>
+  <data name="Tab_Settings_IsOpenZkillboardInNewTab" xml:space="preserve">
+    <value>Открывать zkillboard в новой вкладке:</value>
+  </data>
 </root>

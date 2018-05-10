@@ -1,10 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Windows.Forms;
 using EvaJimaCore;
 using log4net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace EveJimaCore
 {

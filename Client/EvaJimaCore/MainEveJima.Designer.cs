@@ -160,7 +160,7 @@ namespace EveJimaCore
             this.crlToolbar.Location = new System.Drawing.Point(7, 39);
             this.crlToolbar.Name = "crlToolbar";
             this.crlToolbar.SelectedTab = null;
-            this.crlToolbar.Size = new System.Drawing.Size(512, 16);
+            this.crlToolbar.Size = new System.Drawing.Size(545, 16);
             this.crlToolbar.TabIndex = 50;
             // 
             // MainEveJima

@@ -432,6 +432,14 @@ namespace WBrowser
  
         private void addNewTab(string url = "about:blank")
         {
+            if(InvokeRequired)
+            {
+                Invoke(new Action(() => addNewTab(url)));
+                return;
+            }
+
+
+
             browserTabControl.SuspendLayout();
 
             var browser = new ChromiumWebBrowser(url) { Dock = DockStyle.Fill };
@@ -988,7 +996,13 @@ namespace WBrowser
         {
             deleteHistory();
         }
- //add to favorites
+
+        private void closeTabContext_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        //add to favorites
 
 
         #endregion
@@ -1045,7 +1059,6 @@ namespace WBrowser
                 name = e.Node.Text;
             }
             else
-                if (e.Node != favTreeView.Nodes[0])
                     Navigate(e.Node.ToolTipText);
 
         }

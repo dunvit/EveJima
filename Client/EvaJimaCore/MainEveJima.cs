@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.InteropServices;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using EvaJimaCore;
@@ -10,6 +11,7 @@ using EveJimaCore.Logic.MapInformation;
 using EveJimaCore.Logic.ToolBar;
 using EveJimaCore.MainScreen;
 using EveJimaCore.Properties;
+using EveJimaCore.ScheduledTasks;
 using EveJimaCore.UiTools;
 using EveJimaCore.WhlControls;
 using log4net;
@@ -20,6 +22,13 @@ namespace EveJimaCore
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(MainEveJima));
 
+        #region Timers
+
+        private System.Windows.Forms.Timer _updateRegistryTimer;
+
+        private System.Windows.Forms.Timer _htmlRunnerTimer;
+
+        #endregion
 
         public LabelWithOptionalCopyTextOnDoubleClick lblSolarSystemName;
 
@@ -39,6 +48,10 @@ namespace EveJimaCore
 
         private whlBookmarks _containerBookmarks;
 
+        private whlNeedLoadPilot _containerNeedLoadPilot;
+
+        private whlRouter _containerRouter;
+
         private MapControl _containerMap;
 
         private EveCrlLocation _containerLocation;
@@ -51,20 +64,19 @@ namespace EveJimaCore
 
         private whlVersion _containerVersion;
 
+        private UserCounter _taskUserCounter;
+
+        private WebBrowser browserUserCounter = new WebBrowser();
+
         #endregion
-
-
 
         public MainEveJima()
         {
             InitializeComponent();
 
-            
-
+            InitializaTimers();
 
             Parametrs = new WindowParameters();
-
-            
 
             Global.Pilots.OnActivatePilot += GlobalEvent_ActivatePilot;
             Global.InternalBrowser.OnBrowserNavigate += Event_BrowserNavigate;
@@ -83,8 +95,171 @@ namespace EveJimaCore
 
             RegistrHotKeys();
 
-            var webBrowser = new WebBrowser();
-            webBrowser.Navigate("https://github.com/dunvit/EveJima/releases");
+            browserUserCounter.ScriptErrorsSuppressed = true;
+
+            _taskUserCounter = new UserCounter();
+
+            _taskUserCounter.OnNavigate += EventNavigateInternalBrowser;
+        }
+
+        private void EventNavigateInternalBrowser(string address)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<string>(EventNavigateInternalBrowser), address);
+                return;
+            }
+
+            try
+            {
+                browserUserCounter = new WebBrowser{ ScriptErrorsSuppressed  = true};
+
+                if (browserUserCounter.IsBusy == false)
+                {
+                    browserUserCounter.Navigate(address);
+                }
+                else
+                {
+                    var a = "";
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Error("[MainEveJima.EventNavigateInternalBrowser] Critical error on updated user counter in address " + address + " Exception is " + exception.Message);
+            }
+
+        }
+
+        private void InitializaTimers()
+        {
+            _updateRegistryTimer = new System.Windows.Forms.Timer { Interval = 100, Enabled = Global.ApplicationSettings.IsInterceptLinksFromEVE };
+            _updateRegistryTimer.Tick += timerUpdateRegistry_Tick;
+
+            isNeedCheckActiveWindow = true;
+
+            _htmlRunnerTimer = new System.Windows.Forms.Timer { Interval = 100, Enabled = true };
+            _htmlRunnerTimer.Tick += timerUpdateHtmlRunner_Tick;
+
+            isNeedCheckRunHtml = true;
+        }
+
+        private bool isNeedCheckRunHtml;
+
+        private void timerUpdateHtmlRunner_Tick(object sender, EventArgs e)
+        {
+            if (isNeedCheckRunHtml == false) return;
+
+            isNeedCheckRunHtml = false;
+
+            var path = AppDomain.CurrentDomain.BaseDirectory + @"Browser\History\";
+
+            var directory = new DirectoryInfo(path);
+
+            if(directory.Exists == false)
+            {
+                Directory.CreateDirectory(path);
+                directory = new DirectoryInfo(path);
+            }
+
+            var links = new List<string>();
+
+            foreach (var file in directory.GetFiles())
+            {
+                var text = File.ReadAllText(file.FullName).Replace(@"\r", "").Replace(@"\n", "").Trim();
+
+                Log.Error("[Interceptor.CheckIsNeedRunHtml] Found link '" + text + "'");
+
+                links.Add(text);
+
+                file.Delete();
+            }
+
+            foreach (var link in links)
+            {
+                Log.Error("[Interceptor.CheckIsNeedRunHtml] Execute link '" + link + "'");
+                Global.InternalBrowser.OnBrowserNavigate(link);
+                Thread.Sleep(100);
+            }
+
+            isNeedCheckRunHtml = true;
+        }
+
+        private bool isNeedCheckActiveWindow;
+
+        private void timerUpdateRegistry_Tick(object sender, EventArgs e)
+        {
+            //Log.Error("[MainEveJima.timerUpdateRegistry_Tick] Start checking");
+
+            try
+            {
+                if(isNeedCheckActiveWindow == false)
+                {
+                    //Log.Error("[MainEveJima.timerUpdateRegistry_Tick] isNeedCheckActiveWindow false");
+                    return;
+                }
+
+                if(Global.LinkInterceptor == null)
+                {
+                    //Log.Error("[MainEveJima.timerUpdateRegistry_Tick] webBrowserInterceptor null");
+                    return;
+                }
+
+                if(Log == null)
+                {
+                    //Log.Error("[MainEveJima.timerUpdateRegistry_Tick] Log null");
+                    return;
+                }
+
+                //Log.Error("[MainEveJima.timerUpdateRegistry_Tick] Start checking");
+
+                isNeedCheckActiveWindow = false;
+
+                var activeProgramName = Tools.GetActiveWindowTitle();
+
+                Log.Debug("[MainEveJima.timerUpdateRegistry_Tick] activeProgramName is '" + activeProgramName + "'");
+
+                if (activeProgramName == null && Global.LinkInterceptor.IsStarted)
+                {
+                    Log.Info("[MainEveJima.timerUpdateRegistry_Tick] StopIntercepting for activeProgramName is '" + activeProgramName + "'");
+                    Global.LinkInterceptor.StopIntercepting();
+                    isNeedCheckActiveWindow = true;
+                    return;
+                }
+
+                //Log.DebugFormat("[MainEveJima.Event_RefreshActivePilot] Active title {0}", activeProgramName);
+
+                if (activeProgramName.StartsWith("EVE - "))
+                {
+                    if (Global.LinkInterceptor.IsStarted == false)
+                    {
+                        Log.Info("[MainEveJima.timerUpdateRegistry_Tick] StartIntercepting for activeProgramName is '" + activeProgramName + "'");
+                        Global.LinkInterceptor.StartIntercepting();
+                    }
+                    else
+                    {
+                        Log.Info("[MainEveJima.timerUpdateRegistry_Tick] No need start intercepting for activeProgramName is '" + activeProgramName + "'");
+                    }
+
+                    isNeedCheckActiveWindow = true;
+                }
+                else
+                {
+                    if (Global.LinkInterceptor.IsStarted)
+                    {
+                        Log.Error("[MainEveJima.timerUpdateRegistry_Tick] StopIntercepting for activeProgramName is '" + activeProgramName + "'");
+                        Global.LinkInterceptor.StopIntercepting();
+                    }
+
+                    isNeedCheckActiveWindow = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("[MainEveJima.timerUpdateRegistry_Tick] Critical error " + ex + "");
+                isNeedCheckActiveWindow = true;
+            }
+
+            
         }
 
         private void EventOnEnterToSolarSystem(string obj)
@@ -133,7 +308,11 @@ namespace EveJimaCore
                 ParentWindow = this
             };
 
+            _containerBrowser.OnForceResize += Event_ForceResize;
+
             _containerBookmarks = new whlBookmarks { Visible = false, Dock = DockStyle.Fill };
+
+            _containerNeedLoadPilot = new whlNeedLoadPilot { Visible = false, Dock = DockStyle.Fill };
 
             _containerSettings = new EveCrlSettings { Visible = false, Dock = DockStyle.Fill };
 
@@ -147,18 +326,44 @@ namespace EveJimaCore
 
             _containerLocation = new EveCrlLocation { Visible = false, Dock = DockStyle.Fill };
 
+            _containerRouter = new whlRouter { Visible = false, Dock = DockStyle.Fill };
+
             _containerSolarSystemOffline = new whlSolarSystemOffline { Visible = false, Dock = DockStyle.Fill };
 
             pnlContainers.Controls.Add(_containerAuthorization);
             pnlContainers.Controls.Add(_containerBrowser);
             pnlContainers.Controls.Add(_containerBookmarks);
+            pnlContainers.Controls.Add(_containerNeedLoadPilot);
+            
             pnlContainers.Controls.Add(_containerMap);
             pnlContainers.Controls.Add(_containerLocation);
+            pnlContainers.Controls.Add(_containerRouter);
             pnlContainers.Controls.Add(_containerSolarSystemOffline);
             pnlContainers.Controls.Add(_containerSettings);
             pnlContainers.Controls.Add(_containerPathfinder);
             pnlContainers.Controls.Add(_containerVersion);
 
+            
+        }
+
+        private void Event_ForceResize()
+        {
+            crlToolbar.ActivatePanel("Browser");
+            // Открыть окно в полный размер браузера
+
+
+            if (Parametrs.IsMinimaze)
+            {
+                Parametrs.IsMinimaze = false;
+                cmdMinimazeRestore.Image = Resources.minimize;
+                Size = new Size(Parametrs.SizeBeforeMinimizate.Width, Parametrs.SizeBeforeMinimizate.Height);
+            }
+
+            if (TopMost == false)
+            {
+                TopMost = true;
+                TopMost = false;
+            }
         }
 
         private string _selectedContainer = "Authorization";
@@ -209,6 +414,14 @@ namespace EveJimaCore
 
                 case "SolarSystem":
                     _containerSolarSystemOffline.Visible = true;
+                    break;
+
+                case "Router":
+                    _containerRouter.Visible = true;
+                    break;
+
+                case "NeedLoadPilot":
+                    _containerNeedLoadPilot.Visible = true;
                     break;
             }
 
@@ -262,9 +475,12 @@ namespace EveJimaCore
             ContainerEvent_ChangeSolarSystemInfo(Global.Space.GetTitle(pilot.Location));
             Log.DebugFormat("[MainEveJima.GlobalEvent_ActivatePilot] Before ActivateLocationTab : {0}", pilot.Name);
 
+            _containerRouter.ActivateContainer();
+
             crlToolbar.EnablePanel("Location");
             crlToolbar.EnablePanel("Pathfinder");
-            
+            crlToolbar.EnablePanel("Router");
+
             Log.DebugFormat("[MainEveJima.GlobalEvent_ActivatePilot] End : {0}", pilot.Name);
         }
 
@@ -385,51 +601,76 @@ namespace EveJimaCore
         {
             if(!Global.ApplicationSettings.IsSignatureRebuildEnabled) return;
 
-            var txtInClip = Clipboard.GetText();
-
-            var parts = txtInClip.Split('\t');
-
-            if (parts.Length == 6)
+            try
             {
-                #region Solo signature
-                var signatureCode = parts[0];
-                var signatureType = parts[2];
-                var signatureName = parts[3];
+                var txtInClip = Clipboard.GetText();
 
-                var label = "";
+                var parts = txtInClip.Split('\t');
 
-                label = "[" + signatureCode + "]";
-
-                if (signatureType.ToUpper().IndexOf("ЧЕРВОТОЧИНА") > -1 || signatureType.ToUpper().IndexOf("WORMHOLE") > -1)
+                if (parts.Length == 6)
                 {
-                    label = "WH " + label + "";
-                }
+                    #region Solo signature
+                    var signatureCode = parts[0];
+                    var signatureType = parts[2];
+                    var signatureName = parts[3];
 
-                if (signatureType.ToUpper().IndexOf("ГАЗ") > -1 || signatureType.ToUpper().IndexOf("GAS SITE") > -1)
-                {
-                    label = "Gas " + label + " " + signatureName;
-                }
+                    var label = "";
 
-                if (signatureType.ToUpper().IndexOf("ДАННЫЕ") > -1 || signatureType.ToUpper().IndexOf("DATA SITE") > -1)
-                {
-                    label = "Data " + label + " " + signatureName;
-                }
+                    bool isDetected = false;
 
-                if (signatureType.ToUpper().IndexOf("АРТЕФАКТЫ") > -1 || signatureType.ToUpper().IndexOf("RELIC SITE") > -1)
-                {
-                    label = "Relic " + label + " " + signatureName;
-                }
-                try
-                {
-                    Clipboard.SetText(label);
-                }
-                catch (Exception)
-                {
+                    label = "[" + signatureCode + "]";
 
-                    //throw;
+                    if (signatureType.ToUpper().IndexOf("ЧЕРВОТОЧИНА") > -1 || signatureType.ToUpper().IndexOf("WORMHOLE") > -1)
+                    {
+                        label = "WH " + label + "";
+                        isDetected = true;
+                    }
+
+                    if (signatureType.ToUpper().IndexOf("ГАЗ") > -1 || signatureType.ToUpper().IndexOf("GAS SITE") > -1)
+                    {
+                        label = "Gas " + label + " " + signatureName;
+                        isDetected = true;
+                    }
+
+                    if (signatureType.ToUpper().IndexOf("ДАННЫЕ") > -1 || signatureType.ToUpper().IndexOf("DATA SITE") > -1 || signatureType.ToUpper().IndexOf("ИНФОРМАЦИОН") > -1)
+                    {
+                        label = "Data " + label + " " + signatureName;
+                        isDetected = true;
+                    }
+
+                    if (signatureType.ToUpper().IndexOf("АРТЕФАКТЫ") > -1 || signatureType.ToUpper().IndexOf("RELIC SITE") > -1 || signatureType.ToUpper().IndexOf("АРХЕОЛОГИЧ") > -1)
+                    {
+                        label = "Relic " + label + " " + signatureName;
+                        isDetected = true;
+                    }
+
+
+
+                    try
+                    {
+                        if (isDetected == false)
+                        {
+                            label = label + " " + signatureName;
+                        }
+
+                        Clipboard.SetText(label);
+                    }
+                    catch (Exception ex)
+                    {
+                        var a = ex.Message;
+                        //throw;
+                    }
+                    #endregion
                 }
-                #endregion
             }
+            catch(Exception exception)
+            {
+                Log.ErrorFormat("[MainEveJima.timerCheckClipboard_Tick] Critical error = {0}", exception.Message);
+
+
+            }
+
+            
         }
 
         private void RefreshActivePilot_Tick(object sender, EventArgs e)

@@ -150,7 +150,7 @@
             this.Controls.Add(this.listLocationBookmarks);
             this.DoubleBuffered = true;
             this.Name = "whlBookmarks";
-            this.Size = new System.Drawing.Size(757, 480);
+            this.Size = new System.Drawing.Size(547, 256);
             this.ResumeLayout(false);
 
         }

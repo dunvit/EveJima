@@ -28,26 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cmdSolarSystem = new System.Windows.Forms.Label();
             this.cmdLocation = new System.Windows.Forms.Label();
             this.cmdBookmarks = new System.Windows.Forms.Label();
             this.cmdAuthorization = new System.Windows.Forms.Label();
             this.cmdPathfinder = new System.Windows.Forms.Label();
             this.cmdBrowser = new System.Windows.Forms.Label();
             this.cmdSettings = new System.Windows.Forms.Label();
+            this.cmdSolarSystem = new EveJimaCore.WhlControls.ejcComboBox();
             this.SuspendLayout();
-            // 
-            // cmdSolarSystem
-            // 
-            this.cmdSolarSystem.AutoSize = true;
-            this.cmdSolarSystem.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmdSolarSystem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.cmdSolarSystem.ForeColor = System.Drawing.Color.White;
-            this.cmdSolarSystem.Location = new System.Drawing.Point(105, -1);
-            this.cmdSolarSystem.Name = "cmdSolarSystem";
-            this.cmdSolarSystem.Size = new System.Drawing.Size(70, 13);
-            this.cmdSolarSystem.TabIndex = 10;
-            this.cmdSolarSystem.Text = "Information";
             // 
             // cmdLocation
             // 
@@ -103,7 +91,7 @@
             this.cmdBrowser.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmdBrowser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.cmdBrowser.ForeColor = System.Drawing.Color.White;
-            this.cmdBrowser.Location = new System.Drawing.Point(327, 0);
+            this.cmdBrowser.Location = new System.Drawing.Point(327, -1);
             this.cmdBrowser.Name = "cmdBrowser";
             this.cmdBrowser.Size = new System.Drawing.Size(52, 13);
             this.cmdBrowser.TabIndex = 15;
@@ -115,39 +103,48 @@
             this.cmdSettings.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmdSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.cmdSettings.ForeColor = System.Drawing.Color.White;
-            this.cmdSettings.Location = new System.Drawing.Point(516, 0);
+            this.cmdSettings.Location = new System.Drawing.Point(516, -1);
             this.cmdSettings.Name = "cmdSettings";
             this.cmdSettings.Size = new System.Drawing.Size(53, 13);
             this.cmdSettings.TabIndex = 16;
             this.cmdSettings.Text = "Settings";
+            // 
+            // cmdSolarSystem
+            // 
+            this.cmdSolarSystem.BackColor = System.Drawing.Color.Black;
+            this.cmdSolarSystem.Location = new System.Drawing.Point(105, -6);
+            this.cmdSolarSystem.Name = "cmdSolarSystem";
+            this.cmdSolarSystem.Size = new System.Drawing.Size(70, 26);
+            this.cmdSolarSystem.TabIndex = 17;
+            this.cmdSolarSystem.Text = "Information";
             // 
             // MapToolbarControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.Controls.Add(this.cmdSolarSystem);
             this.Controls.Add(this.cmdSettings);
             this.Controls.Add(this.cmdBrowser);
             this.Controls.Add(this.cmdPathfinder);
             this.Controls.Add(this.cmdAuthorization);
             this.Controls.Add(this.cmdBookmarks);
             this.Controls.Add(this.cmdLocation);
-            this.Controls.Add(this.cmdSolarSystem);
             this.DoubleBuffered = true;
             this.Name = "MapToolbarControl";
-            this.Size = new System.Drawing.Size(568, 333);
+            this.Size = new System.Drawing.Size(614, 333);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label cmdSolarSystem;
         private System.Windows.Forms.Label cmdLocation;
         private System.Windows.Forms.Label cmdBookmarks;
         private System.Windows.Forms.Label cmdAuthorization;
         private System.Windows.Forms.Label cmdPathfinder;
         private System.Windows.Forms.Label cmdBrowser;
         private System.Windows.Forms.Label cmdSettings;
+        private WhlControls.ejcComboBox cmdSolarSystem;
     }
 }

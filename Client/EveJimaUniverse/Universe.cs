@@ -4,7 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Threading;
 using log4net;
+using Newtonsoft.Json;
 
 namespace EveJimaUniverse
 {
@@ -25,9 +27,17 @@ namespace EveJimaUniverse
 
         public void Initialization()
         {
-            LoadWormholeTypes();
-            LoadSolarSystems();
-            LoadLinkedSystems();
+            try
+            {
+                LoadWormholeTypes();
+                LoadSolarSystems();
+                LoadLinkedSystems();
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("[SpaceEntity.Initialization] Critical error = {0}", ex);
+            }
+
         }
 
         private void LoadLinkedSystems()
@@ -42,23 +52,58 @@ namespace EveJimaUniverse
             Log.Debug("[SpaceEntity.LoadLinkedSystems] Close ");
         }
 
+        private void LoadLinkedSystemsFromFile()
+        {
+            Log.Debug("[SpaceEntity.LoadLinkedSystemsFromFile] Read file \"Data/LinkedSystems.dat\". ");
+            var dataFile = @"Data/LinkedSystems.dat";
+            var json = File.ReadAllText(dataFile);
+
+            LinkedSystems = JsonConvert.DeserializeObject<List<LinkedSystem>>(json);
+
+            Log.Debug("[SpaceEntity.LoadLinkedSystemsFromFile] Close ");
+        }
+
         private void LoadSolarSystems()
         {
-            Log.Debug("[SpaceEntity.LoadSolarSystems] Read file \"Data/Universe.dat\". ");
+            try
+            {
+                Log.Debug("[SpaceEntity.LoadSolarSystems] Read file \"Data/Universe.dat\". ");
+
+                var dataFile = @"Data/Universe.dat";
+
+                var json = File.ReadAllText(dataFile);
+                var universeAfterLoad = new Universe();
+
+                var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+                var ser = new DataContractJsonSerializer(universeAfterLoad.GetType());
+                universeAfterLoad = ser.ReadObject(ms) as Universe;
+                ms.Close();
+
+                Systems = universeAfterLoad.Systems;
+
+                Log.Debug("[SpaceEntity.LoadSolarSystems] Close ");
+            }
+            catch(Exception ex)
+            {
+                Log.ErrorFormat("[SpaceEntity.LoadSolarSystems] Critical error = {0}", ex.Message);
+                LoadSolarSystemsFromFile();
+            }
+            
+        }
+
+        private void LoadSolarSystemsFromFile()
+        {
+            Log.Debug("[SpaceEntity.LoadSolarSystemsFromFile] Read file \"Data/Universe.dat\". ");
 
             var dataFile = @"Data/Universe.dat";
 
             var json = File.ReadAllText(dataFile);
-            var universeAfterLoad = new Universe();
 
-            var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-            var ser = new DataContractJsonSerializer(universeAfterLoad.GetType());
-            universeAfterLoad = ser.ReadObject(ms) as Universe;
-            ms.Close();
+            var universeAfterLoad = JsonConvert.DeserializeObject<Universe>(json);
 
             Systems = universeAfterLoad.Systems;
 
-            Log.Debug("[SpaceEntity.LoadSolarSystems] Close ");
+            Log.Debug("[SpaceEntity.LoadSolarSystemsFromFile] Close ");
         }
 
         public System GetSystemById(string id)
@@ -94,10 +139,11 @@ namespace EveJimaUniverse
 
         private void LoadWormholeTypes()
         {
-            Log.Debug("[SpaceEntity.LoadWormholes] Read file \"Data/Wormholes.dat\". ");
-
             try
             {
+                Log.Debug("[SpaceEntity.LoadWormholes] Read file \"Data/Wormholes.dat\". ");
+
+
                 var json = File.ReadAllText(@"Data/Wormholes.dat");
                 Log.Debug("[SpaceEntity.LoadWormholes] json = " + json);
                 var WormholeTypesAfterLoad = new Dictionary<string, WormholeType>();
@@ -111,10 +157,30 @@ namespace EveJimaUniverse
                 ms.Close();
                 Log.Debug("[SpaceEntity.LoadWormholes] Close ");
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                Log.ErrorFormat("[SpaceEntity.LoadWormholes] Critical error = {0}", ex);
+                Log.ErrorFormat("[SpaceEntity.LoadWormholeTypes] Critical error = {0}", ex.Message);
+
+                LoadWormholeTypesFromFile();
             }
+
+
+            
+        }
+
+        private void LoadWormholeTypesFromFile()
+        {
+            Log.Debug("[SpaceEntity.LoadWormholeTypesFromFile] Read file \"Data/Wormholes.dat\". ");
+
+
+            var json = File.ReadAllText(@"Data/Wormholes.dat");
+
+            Log.Debug("[SpaceEntity.LoadWormholeTypesFromFile] json = " + json);
+
+            WormholeTypes = JsonConvert.DeserializeObject<Dictionary<string, WormholeType>>(json);
+
+            Log.Debug("[SpaceEntity.LoadWormholeTypesFromFile] Close ");
+
         }
 
         public string GetTitle(System solarSystem)

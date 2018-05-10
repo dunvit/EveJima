@@ -484,6 +484,42 @@ namespace EveJimaCore.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Маршрутизатор.
+        /// </summary>
+        internal static string Tab_Router {
+            get {
+                return ResourceManager.GetString("Tab_Router", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Создать маршрут для пилота:.
+        /// </summary>
+        internal static string Tab_Router_CreateRoute {
+            get {
+                return ResourceManager.GetString("Tab_Router_CreateRoute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузить из файла.
+        /// </summary>
+        internal static string Tab_Router_LoadFromFile {
+            get {
+                return ResourceManager.GetString("Tab_Router_LoadFromFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Задать маршрут.
+        /// </summary>
+        internal static string Tab_Router_SetDestination {
+            get {
+                return ResourceManager.GetString("Tab_Router_SetDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Установки.
         /// </summary>
         internal static string Tab_Settings {
@@ -507,6 +543,24 @@ namespace EveJimaCore.Localization {
         internal static string Tab_Settings_EveJimaVersion {
             get {
                 return ResourceManager.GetString("Tab_Settings_EveJimaVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Открывать линки из клиента Евы.
+        /// </summary>
+        internal static string Tab_Settings_Intercept_links_from_EVE {
+            get {
+                return ResourceManager.GetString("Tab_Settings_Intercept_links_from_EVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Открывать zkillboard в новой вкладке:.
+        /// </summary>
+        internal static string Tab_Settings_IsOpenZkillboardInNewTab {
+            get {
+                return ResourceManager.GetString("Tab_Settings_IsOpenZkillboardInNewTab", resourceCulture);
             }
         }
         
@@ -579,6 +633,15 @@ namespace EveJimaCore.Localization {
         internal static string TextAuthorizationInfo {
             get {
                 return ResourceManager.GetString("TextAuthorizationInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Для работы этого модуля необходима авторизация пилота. Пройдите на вкладку  &quot;Пилоты&quot;..
+        /// </summary>
+        internal static string TextNeedAuthorization {
+            get {
+                return ResourceManager.GetString("TextNeedAuthorization", resourceCulture);
             }
         }
     }

@@ -43,6 +43,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.lblLanguage = new System.Windows.Forms.Label();
             this.cmdLanguage = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.crlIsInterceptLinksFromEVE = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.chkIsOpenNewTabForZkillboard = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // crlIsUseBrowser
@@ -115,12 +121,13 @@
             this.cmdSaveSettings.ForeColor = System.Drawing.Color.LightGray;
             this.cmdSaveSettings.IsActive = true;
             this.cmdSaveSettings.IsTabControlButton = false;
-            this.cmdSaveSettings.Location = new System.Drawing.Point(147, 205);
+            this.cmdSaveSettings.Location = new System.Drawing.Point(147, 212);
             this.cmdSaveSettings.Name = "cmdSaveSettings";
             this.cmdSaveSettings.Size = new System.Drawing.Size(257, 26);
             this.cmdSaveSettings.TabIndex = 154;
             this.cmdSaveSettings.Value = "Save settings";
             this.cmdSaveSettings.Click += new System.EventHandler(this.cmdSaveSettings_Click);
+            this.cmdSaveSettings.Load += new System.EventHandler(this.cmdSaveSettings_Load);
             // 
             // cmdIsSignatureRebuild
             // 
@@ -207,11 +214,81 @@
             this.cmdLanguage.Size = new System.Drawing.Size(121, 21);
             this.cmdLanguage.TabIndex = 162;
             // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(22, 162);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(247, 13);
+            this.label9.TabIndex = 163;
+            this.label9.Text = "Intercept links from EVE:";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // crlIsInterceptLinksFromEVE
+            // 
+            this.crlIsInterceptLinksFromEVE.AutoSize = true;
+            this.crlIsInterceptLinksFromEVE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.crlIsInterceptLinksFromEVE.Location = new System.Drawing.Point(275, 164);
+            this.crlIsInterceptLinksFromEVE.Name = "crlIsInterceptLinksFromEVE";
+            this.crlIsInterceptLinksFromEVE.Size = new System.Drawing.Size(12, 11);
+            this.crlIsInterceptLinksFromEVE.TabIndex = 164;
+            this.crlIsInterceptLinksFromEVE.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Gray;
+            this.label10.Location = new System.Drawing.Point(293, 164);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(83, 12);
+            this.label10.TabIndex = 165;
+            this.label10.Text = "(need restart)";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Gray;
+            this.label11.Location = new System.Drawing.Point(293, 191);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(83, 12);
+            this.label11.TabIndex = 167;
+            this.label11.Text = "(need restart)";
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(22, 189);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(247, 13);
+            this.label12.TabIndex = 166;
+            this.label12.Text = "Open zkillboard in new tab:";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // chkIsOpenNewTabForZkillboard
+            // 
+            this.chkIsOpenNewTabForZkillboard.AutoSize = true;
+            this.chkIsOpenNewTabForZkillboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkIsOpenNewTabForZkillboard.Location = new System.Drawing.Point(275, 191);
+            this.chkIsOpenNewTabForZkillboard.Name = "chkIsOpenNewTabForZkillboard";
+            this.chkIsOpenNewTabForZkillboard.Size = new System.Drawing.Size(12, 11);
+            this.chkIsOpenNewTabForZkillboard.TabIndex = 168;
+            this.chkIsOpenNewTabForZkillboard.UseVisualStyleBackColor = true;
+            // 
             // EveCrlSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.Controls.Add(this.chkIsOpenNewTabForZkillboard);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.crlIsInterceptLinksFromEVE);
             this.Controls.Add(this.cmdLanguage);
             this.Controls.Add(this.lblLanguage);
             this.Controls.Add(this.label8);
@@ -253,5 +330,11 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblLanguage;
         private System.Windows.Forms.ComboBox cmdLanguage;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox crlIsInterceptLinksFromEVE;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox chkIsOpenNewTabForZkillboard;
     }
 }

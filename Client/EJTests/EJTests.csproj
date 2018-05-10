@@ -71,6 +71,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ApiServerTests.cs" />
+    <Compile Include="EjEnvironment\Clipboard_Tests.cs" />
     <Compile Include="InfrastructureTests.cs" />
     <Compile Include="MapTests.cs" />
     <Compile Include="MapViewTests.cs" />
@@ -78,6 +79,9 @@
     <Compile Include="ToolsTests.cs" />
     <Compile Include="ApiESITests.cs" />
     <Compile Include="PathFinderTests.cs" />
+    <Compile Include="ApiZKillboardTests.cs" />
+    <Compile Include="InterceptorTests.cs" />
+    <Compile Include="InternalBrowserTests.cs" />
     <Compile Include="ZeroHunterTests.cs" />
     <Compile Include="UniverseTests.cs" />
   </ItemGroup>
@@ -86,6 +90,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\EveJimaIGB\EveJimaIGB\EveInternalBrowser\EveInternalBrowser.csproj">
+      <Project>{C23FDED6-0D07-42C6-BA3A-F0E9B5C1D592}</Project>
+      <Name>EveInternalBrowser</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EvaJimaCore\EveJimaCore.csproj">
       <Project>{c1410d27-425c-4c35-89e3-1281f95183e2}</Project>
       <Name>EveJimaCore</Name>

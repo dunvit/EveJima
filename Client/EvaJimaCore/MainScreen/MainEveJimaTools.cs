@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Net;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using EvaJimaCore;
@@ -26,8 +25,19 @@ namespace EveJimaCore
         [DllImport("user32.dll")] public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
         const int OPENZKILLBOARD_HOTKEY_ID = 1;
+
+
+        [DllImport("User32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        static public extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
         #endregion
 
+        private bool isNeedGetFromClipboard = false;
 
         private void RegistrHotKeys()
         {
@@ -52,31 +62,7 @@ namespace EveJimaCore
             {
                 if(Global.ApplicationSettings.IsUseBrowser)
                 {
-                    // My hotkey has been typed
-                    var key = Clipboard.GetText().Trim();
-                    var characterId = Global.Infrastructure.EveXmlApi.GetPilotIdByName(key);
-                    var corporationId = "0";
-
-                    try
-                    {
-                        if(characterId != "0")
-                        {
-                            var client = new WebClient();
-
-                            corporationId = Global.EsiTools.GetCorporationInfo(characterId).corporation_id.ToString();
-
-                            var value = client.DownloadString("https://zkillboard.com/corporation/" + corporationId + "/");
-
-                            if(corporationId != "0") Event_BrowserNavigate("https://zkillboard.com/corporation/" + corporationId + "/");
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        // This is not corporation
-                        corporationId = "0";
-                    }
-
-                    if(corporationId == "0" && characterId != "0") Event_BrowserNavigate("https://zkillboard.com/character/" + characterId + "/");
+                    isNeedGetFromClipboard = true;
                 }
             }
 
@@ -134,6 +120,9 @@ namespace EveJimaCore
             if (!handled)
                 base.WndProc(ref m);
         }
+
+        //private string oldClipboardText = "";
+
 
 
         
