@@ -18,6 +18,8 @@ namespace EveJimaCore.WhlControls
             label10.Text = Global.Messages.Get("Tab_Settings_NeedRestart");
             label11.Text = Global.Messages.Get("Tab_Settings_NeedRestart");
             cmdSaveSettings.Value = Global.Messages.Get("Tab_Settings_SaveSettings");
+            label13.Text = Global.Messages.Get("Tab_Settings_UseWhiteColorForSystems");
+            //Use white color for systems
 
             label9.Text = Global.Messages.Get("Tab_Settings_Intercept_links_from_EVE") + @":";
 
@@ -82,6 +84,11 @@ namespace EveJimaCore.WhlControls
             {
                 Global.ApplicationSettings.IsInterceptLinksFromEVE = crlIsInterceptLinksFromEVE.Checked;
                 isNeedCloseApplication = true;
+            }
+
+            if (crlIsUseWhiteColorForSystems.Checked != Global.ApplicationSettings.IsUseWhiteColorForSystems)
+            {
+                Global.ApplicationSettings.IsUseWhiteColorForSystems = crlIsUseWhiteColorForSystems.Checked;
             }
 
             if (isNeedCloseApplication)

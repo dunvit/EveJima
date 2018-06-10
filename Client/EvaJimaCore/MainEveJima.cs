@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Threading;
@@ -20,6 +21,10 @@ namespace EveJimaCore
 {
     public partial class MainEveJima : Form
     {
+        const int ERROR_FILE_NOT_FOUND = 2;
+        const int ERROR_ACCESS_DENIED = 5;
+        const int ERROR_NO_APP_ASSOCIATED = 1155;
+
         private static readonly ILog Log = LogManager.GetLogger(typeof(MainEveJima));
 
         #region Timers
@@ -34,12 +39,6 @@ namespace EveJimaCore
 
         private WindowParameters Parametrs { get;}
 
-        public string SelectedContainer
-        {
-            get { return _selectedContainer; }
-            set { _selectedContainer = value; }
-        }
-
         #region Containers
 
         private whlAuthorization _containerAuthorization;
@@ -51,6 +50,8 @@ namespace EveJimaCore
         private whlNeedLoadPilot _containerNeedLoadPilot;
 
         private whlRouter _containerRouter;
+
+        private eveCrlTravelHistory _containerTravelHistory;
 
         private MapControl _containerMap;
 
@@ -67,6 +68,8 @@ namespace EveJimaCore
         private UserCounter _taskUserCounter;
 
         private WebBrowser browserUserCounter = new WebBrowser();
+
+        private WebBrowser browserMetrics = new WebBrowser();
 
         #endregion
 
@@ -95,11 +98,15 @@ namespace EveJimaCore
 
             RegistrHotKeys();
 
-            browserUserCounter.ScriptErrorsSuppressed = true;
-
             _taskUserCounter = new UserCounter();
 
             _taskUserCounter.OnNavigate += EventNavigateInternalBrowser;
+
+            browserUserCounter.ScriptErrorsSuppressed = true;
+
+            browserUserCounter.Navigate(_taskUserCounter.CounterAddress);
+
+            browserMetrics.ScriptErrorsSuppressed = true;
         }
 
         private void EventNavigateInternalBrowser(string address)
@@ -112,20 +119,56 @@ namespace EveJimaCore
 
             try
             {
-                browserUserCounter = new WebBrowser{ ScriptErrorsSuppressed  = true};
+                if(browserUserCounter.IsBusy) return;
 
-                if (browserUserCounter.IsBusy == false)
+                browserUserCounter.Refresh();
+            }
+            catch (Win32Exception e)
+            {
+                if (e.NativeErrorCode == ERROR_FILE_NOT_FOUND || e.NativeErrorCode == ERROR_ACCESS_DENIED || e.NativeErrorCode == ERROR_NO_APP_ASSOCIATED)
                 {
-                    browserUserCounter.Navigate(address);
-                }
-                else
-                {
-                    var a = "";
+                    Log.Error("[MainEveJima.EventNavigateInternalBrowser] Critical error on updated user counter in address " + address + " Exception is " + e.Message);
                 }
             }
             catch (Exception exception)
             {
                 Log.Error("[MainEveJima.EventNavigateInternalBrowser] Critical error on updated user counter in address " + address + " Exception is " + exception.Message);
+            }
+            catch
+            {
+                Log.Error("[MainEveJima.EventNavigateInternalBrowser] Critical unexcepted error on updated user counter in address " + address + " ");
+            }
+
+        }
+
+        private void EventbAddMetric(string address)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<string>(EventbAddMetric), address);
+                return;
+            }
+
+            try
+            {
+                if (browserMetrics.IsBusy) return;
+
+                browserMetrics.Navigate(address);
+            }
+            catch (Win32Exception e)
+            {
+                if (e.NativeErrorCode == ERROR_FILE_NOT_FOUND || e.NativeErrorCode == ERROR_ACCESS_DENIED || e.NativeErrorCode == ERROR_NO_APP_ASSOCIATED)
+                {
+                    Log.Error("[MainEveJima.EventbAddMetric] Critical error on add metric in address " + address + " Exception is " + e.Message);
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Error("[MainEveJima.EventbAddMetric] Critical error on add metric in address " + address + " Exception is " + exception.Message);
+            }
+            catch
+            {
+                Log.Error("[MainEveJima.EventbAddMetric] Critical unexcepted error on add metric in address " + address + " ");
             }
 
         }
@@ -300,6 +343,7 @@ namespace EveJimaCore
         {
             _containerAuthorization = new whlAuthorization { Visible = false, Dock = DockStyle.Fill };
             _containerAuthorization.RefreshAuthorizationStatus();
+            _containerAuthorization.OnSelectUser += Event_ChangeActivePilot;
 
             _containerBrowser = new ucRichBrowser
             {
@@ -328,6 +372,9 @@ namespace EveJimaCore
 
             _containerRouter = new whlRouter { Visible = false, Dock = DockStyle.Fill };
 
+            _containerTravelHistory = new eveCrlTravelHistory { Visible = false, Dock = DockStyle.Fill };
+            _containerTravelHistory.OnUseModule += EventbAddMetric;
+
             _containerSolarSystemOffline = new whlSolarSystemOffline { Visible = false, Dock = DockStyle.Fill };
 
             pnlContainers.Controls.Add(_containerAuthorization);
@@ -338,12 +385,18 @@ namespace EveJimaCore
             pnlContainers.Controls.Add(_containerMap);
             pnlContainers.Controls.Add(_containerLocation);
             pnlContainers.Controls.Add(_containerRouter);
+            pnlContainers.Controls.Add(_containerTravelHistory);
             pnlContainers.Controls.Add(_containerSolarSystemOffline);
             pnlContainers.Controls.Add(_containerSettings);
             pnlContainers.Controls.Add(_containerPathfinder);
             pnlContainers.Controls.Add(_containerVersion);
 
             
+        }
+
+        private void Event_ChangeActivePilot(string activePilotName)
+        {
+            crlToolbar.ActivatePanel("Location");
         }
 
         private void Event_ForceResize()
@@ -365,8 +418,6 @@ namespace EveJimaCore
                 TopMost = false;
             }
         }
-
-        private string _selectedContainer = "Authorization";
 
         private void Event_Toolbar_SelectTab(string module, PanelMetaData metaData)
         {
@@ -417,7 +468,13 @@ namespace EveJimaCore
                     break;
 
                 case "Router":
+                    _containerRouter.ActivateContainer();
                     _containerRouter.Visible = true;
+                    break;
+
+                case "TravelHistory":
+                    _containerTravelHistory.ActivateContainer();
+                    _containerTravelHistory.Visible = true;
                     break;
 
                 case "NeedLoadPilot":
@@ -462,6 +519,8 @@ namespace EveJimaCore
 
             BringApplicationToFront();
 
+            if (Global.ApplicationSettings.IsUseMap == false) return;
+
             Global.Pilots.Selected.Key = Global.Pilots.Selected.Name;
             Global.Pilots.Selected.SpaceMap.Key = Global.Pilots.Selected.Name;
             Global.Pilots.Selected.SpaceMap.GetUpdates();
@@ -480,6 +539,7 @@ namespace EveJimaCore
             crlToolbar.EnablePanel("Location");
             crlToolbar.EnablePanel("Pathfinder");
             crlToolbar.EnablePanel("Router");
+            crlToolbar.EnablePanel("TravelHistory");
 
             Log.DebugFormat("[MainEveJima.GlobalEvent_ActivatePilot] End : {0}", pilot.Name);
         }
@@ -559,13 +619,20 @@ namespace EveJimaCore
                     drawBrushName = new SolidBrush(Tools.GetColorBySolarSystem("C" + location.Class));
                 }
 
+                if(Global.ApplicationSettings.IsUseWhiteColorForSystems)
+                {
+                    drawBrushName = new SolidBrush(Color.AliceBlue);
+                }
+
                 var stringSize = e.Graphics.MeasureString(systemLabel, drawFont);
 
                 var drawFormat = new StringFormat();
 
                 e.Graphics.DrawString(systemLabel, drawFont, drawBrushName, 30, 6, drawFormat);
 
-                if(Tools.IsWSpaceSystem(location.Name))
+                var allTitleText = systemLabel;
+
+                if (Tools.IsWSpaceSystem(location.Name))
                 {
                     var txtSolarSystemStaticFirst = "";
 
@@ -577,7 +644,14 @@ namespace EveJimaCore
 
                         drawBrushName = new SolidBrush(Tools.GetColorBySolarSystem(wormholeFirst.LeadsTo));
 
+                        if (Global.ApplicationSettings.IsUseWhiteColorForSystems)
+                        {
+                            drawBrushName = new SolidBrush(Color.AliceBlue);
+                        }
+
                         e.Graphics.DrawString(txtSolarSystemStaticFirst, drawFont, drawBrushName, 30 + stringSize.Width + 1, 6, drawFormat);
+
+                        allTitleText = systemLabel + "  " + txtSolarSystemStaticFirst;
                     }
 
                     var stringSizeStaticI = e.Graphics.MeasureString(txtSolarSystemStaticFirst, drawFont);
@@ -591,9 +665,20 @@ namespace EveJimaCore
 
                         drawBrushName = new SolidBrush(Tools.GetColorBySolarSystem(wormholeSecond.LeadsTo));
 
+                        if (Global.ApplicationSettings.IsUseWhiteColorForSystems)
+                        {
+                            drawBrushName = new SolidBrush(Color.AliceBlue);
+                        }
+
                         e.Graphics.DrawString(txtSolarSystemSecondStatic, drawFont, drawBrushName, 30 + stringSize.Width + 1 + stringSizeStaticI.Width + 3, 6, drawFormat);
+
+                        allTitleText = systemLabel + "  " + txtSolarSystemSecondStatic;
                     }
                 }
+
+               // var sizeTitle = e.Graphics.MeasureString(allTitleText, drawFont);
+               // drawBrushName = new SolidBrush(Color.DarkOrange);
+               // e.Graphics.DrawString(Global.Pilots.Selected.Name, drawFont, drawBrushName, 30 + sizeTitle.Width + 3, 6, drawFormat);
             }
         }
 
@@ -716,6 +801,8 @@ namespace EveJimaCore
                 crlToolbar.ActivatePanel("Version");
             }
         }
+
+        
 
         private void GlobalEvent_AddNewPilot(PilotEntity pilot)
         {

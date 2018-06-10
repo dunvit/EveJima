@@ -3,7 +3,7 @@ using EveJimaCore.BLL;
 
 namespace EveJimaCore
 {
-    public delegate void DelegateOnChangeTab(string tabName);
+    public delegate void EventOnChangeSelectedTab(string tabName);
     public delegate void DelegateChangeSolarSystemInfo(string info);
     public delegate void DelegateShowTravelHistory();
     public delegate void DelegateChangeSelectedPilot();

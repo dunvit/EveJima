@@ -6,16 +6,15 @@ using System.Net;
 using System.Windows.Forms;
 using EvaJimaCore;
 using EveJimaCore.BLL;
-using EveJimaCore.Logic;
 using log4net;
 
 namespace EveJimaCore.WhlControls
 {
     public partial class whlAuthorization : BaseContainer
     {
-        public DelegateChangeSelectedPilot OnChangeSelectedPilot { get; set; }
-
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlAuthorization));
+
+        public event Action<string> OnSelectUser; 
 
         public whlAuthorization()
         {
@@ -91,6 +90,8 @@ namespace EveJimaCore.WhlControls
 
             }
 
+            
+
             containerScreenUpdate.Location = new Point(-500, -500);
             lblAuthorizationInfo.Visible = true;
             lblAuthorizationInfo.Refresh();
@@ -141,38 +142,43 @@ namespace EveJimaCore.WhlControls
         {
             Log.DebugFormat("[whlAuthorization.PilotAuthorizeFlow] starting for token = {0}", code);
 
-            var _currentPilot = new PilotEntity(code);
-
-            //_currentPilot.Initialization(code);
-
-            Global.Metrics.PublishOnPilotInitialization(_currentPilot.Id);
-
-            if (Global.Pilots.IsExist(_currentPilot.Id) == false)
+            try
             {
+                var _currentPilot = new PilotEntity(code);
 
-                Global.ApplicationSettings.UpdatePilotInStorage(_currentPilot.Name, _currentPilot.Id.ToString(), _currentPilot.EsiData.RefreshToken, _currentPilot.Key);
+                Global.Metrics.PublishOnPilotInitialization(_currentPilot.Id);
 
-                //Global.Pilots.Add(_currentPilot);
+                if (Global.Pilots.IsExist(_currentPilot.Id) == false)
+                {
+
+                    Global.ApplicationSettings.UpdatePilotInStorage(_currentPilot.Name, _currentPilot.Id.ToString(), _currentPilot.EsiData.RefreshToken, _currentPilot.Key);
+
+                    Global.Pilots.Add(_currentPilot);
+
+                    cmbPilots.Visible = true;
+
+                    Global.Pilots.SetSelected(_currentPilot);
+
+                    AddPilotToPilotsList(_currentPilot);
+
+                    Pilotes.Add(_currentPilot);
+                }
+                else
+                {
+                    // Update token
+                    Global.ApplicationSettings.UpdatePilotInStorage(_currentPilot.Name, _currentPilot.Id.ToString(), _currentPilot.EsiData.RefreshToken, _currentPilot.Key);
+                }
 
                 cmbPilots.Visible = true;
 
                 Global.Pilots.SetSelected(_currentPilot);
 
-                AddPilotToPilotsList(_currentPilot);
-
-                Pilotes.Add(_currentPilot);
+                
             }
-            else
+            catch (Exception ex)
             {
-                // Update token
-                Global.ApplicationSettings.UpdatePilotInStorage(_currentPilot.Name, _currentPilot.Id.ToString(), _currentPilot.EsiData.RefreshToken, _currentPilot.Key);
+                Log.ErrorFormat("[whlAuthorization.PilotAuthorizeFlow] Critical error. Exception {0}", ex);
             }
-
-            cmbPilots.Visible = true;
-
-            Global.Pilots.SetSelected(_currentPilot);
-
-            ShowPilots();
         }
 
 
@@ -197,7 +203,6 @@ namespace EveJimaCore.WhlControls
 
             lblAuthorizationInfo.Text = Tools.GetValue("TextAfterAuthorizationInfo", Global.ApplicationSettings.LanguageId) + Environment.NewLine + Environment.NewLine + Tools.GetValue("TextAuthorizationInfo", Global.ApplicationSettings.LanguageId);
             Log.DebugFormat("[whlAuthorization.RefreshPilotInfo] cmbPilots.SelectedIndex");
-            if (OnChangeSelectedPilot != null) OnChangeSelectedPilot();
         }
 
 
@@ -240,15 +245,15 @@ namespace EveJimaCore.WhlControls
                 crlPilotPortrait.Image = Global.Pilots.Selected.Portrait;
                 crlPilotPortrait.Refresh();
                 crlPilotPortrait.Visible = true;
-                if (OnChangeSelectedPilot != null) OnChangeSelectedPilot();
                 lblAuthorizationInfo.Text = Tools.GetValue("TextAfterAuthorizationInfo", Global.ApplicationSettings.LanguageId) + Environment.NewLine + Environment.NewLine + Tools.GetValue("TextAuthorizationInfo", Global.ApplicationSettings.LanguageId);
             }));
             
-
             if ( Global.Pilots.Selected != null )
             {
                 Global.Pilots.Activate(Global.Pilots.Selected.Name);
             }
+            
+            OnSelectUser?.Invoke(Global.Pilots.Selected.Name);
         }
 
         private void cmbPilots_TextChanged(object sender, EventArgs e)
@@ -257,6 +262,8 @@ namespace EveJimaCore.WhlControls
             {
                 
                 Global.Pilots.Activate(cmbPilots.Text);
+
+                OnSelectUser?.Invoke(Global.Pilots.Selected.Name);
 
                 RefreshPilotInfo();
             }

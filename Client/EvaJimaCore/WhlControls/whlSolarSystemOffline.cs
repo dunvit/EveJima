@@ -106,7 +106,7 @@ namespace EveJimaCore.WhlControls
         {
             if (string.IsNullOrEmpty(txtSolarSystem.Text)) return;
 
-            Global.InternalBrowser.OnBrowserNavigate("http://superpute.com/system/" + txtSolarSystem.Text.Trim() + "");
+            Global.InternalBrowser.OnBrowserNavigate("https://eve-wh.space/" + txtSolarSystem.Text.Trim() + "");
         }
 
         private void Event_ShowEllatha(object sender, EventArgs e)

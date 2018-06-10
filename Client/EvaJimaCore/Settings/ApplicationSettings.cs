@@ -55,6 +55,8 @@ namespace EveJimaCore
 
         public int LanguageId { get; set; }
 
+        public bool IsUseWhiteColorForSystems { get; set; }
+
         public ApplicationSettings()
         {
             Pilots = new List<Tuple<string, string, string, string>>();
@@ -135,6 +137,9 @@ namespace EveJimaCore
 
                     IsUseBrowser = jsonResponse.IsUseBrowser == null ? true : jsonResponse.IsUseBrowser;
                     IsUseMap = jsonResponse.IsUseMap == null ? false : jsonResponse.IsUseMap;
+
+                    IsUseWhiteColorForSystems = jsonResponse.IsUseWhiteColorForSystems == null ? false : jsonResponse.IsUseWhiteColorForSystems;
+
                     IsSignatureRebuildEnabled = jsonResponse.IsSignatureRebuildEnabled == null ? true : jsonResponse.IsSignatureRebuildEnabled;
 
                     IsInterceptLinksFromEVE = jsonResponse.IsInterceptLinksFromEVE == null ? false : jsonResponse.IsInterceptLinksFromEVE;

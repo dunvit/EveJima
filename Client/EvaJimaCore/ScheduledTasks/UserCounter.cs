@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Net;
 using System.Timers;
 using log4net;
-using System.Windows.Forms;
 using Timer = System.Timers.Timer;
 
 namespace EveJimaCore.ScheduledTasks
@@ -15,11 +13,13 @@ namespace EveJimaCore.ScheduledTasks
 
         public event Action<string> OnNavigate;
 
-        private const string CounterAddress = "http://evejima.mikotaj.com/VisitorsCounter.html";
+        public string CounterAddress { get; set; }
 
         public UserCounter()
         {
             _logger.Debug("[UserCounter.UserCounter] Started update user counter in address " + CounterAddress);
+
+            CounterAddress = "http://evejima.mikotaj.com/VisitorsCounter.html";
 
             _workerTimer = new Timer();
             _workerTimer.Elapsed += Event_Refresh;
@@ -35,6 +35,19 @@ namespace EveJimaCore.ScheduledTasks
             _logger.Debug("[UserCounter.Event_Refresh] Updated user counter in address " + CounterAddress);
 
             OnNavigate?.Invoke(CounterAddress);
+
+            _workerTimer.Enabled = true;
+        }
+
+        public void ModuleTravelHistoryUse()
+        {
+            _workerTimer.Enabled = false;
+
+            var address = "http://evejima.mikotaj.com/VisitorsCounterTravelHistory.html";
+
+            _logger.Debug("[UserCounter.ModuleTravelHistoryUse] Updated user counter in address " + address);
+
+            OnNavigate?.Invoke(address);
 
             _workerTimer.Enabled = true;
         }

@@ -64,7 +64,14 @@ namespace EveJimaCore.BLL
             // Pilot not are log in
             if (Location.Name == "unknown") return;
 
-            
+
+            _updateMapTimer = new Timer();
+            _updateMapTimer.Elapsed += Event_Refresh;
+            _updateMapTimer.Interval = 5000;
+            _updateMapTimer.Enabled = true;
+
+            if (Global.ApplicationSettings.IsUseMap == false) return;
+
 
             SpaceMap = new Map.Map { Key = Key, ActivePilot = Name, SelectedSolarSystemName = Location.Name };
             
@@ -80,10 +87,7 @@ namespace EveJimaCore.BLL
 
             if (SpaceMap != null) ChangeLocation();
 
-            _updateMapTimer = new Timer();
-            _updateMapTimer.Elapsed += Event_Refresh;
-            _updateMapTimer.Interval = 5000;
-            _updateMapTimer.Enabled = true;
+            
         }
 
         private void GetMapMessage(string message)
@@ -123,7 +127,7 @@ namespace EveJimaCore.BLL
                 RefreshInfo();
             });
 
-            if (Global.Pilots.Selected.Name == Name)
+            if (Global.Pilots.Selected.Name == Name && Global.ApplicationSettings.IsUseMap)
             {
                 Task.Run(() =>
                 {
@@ -356,7 +360,8 @@ namespace EveJimaCore.BLL
 
             Log.InfoFormat("[Pilot '{3}'] Publish system with key {0} from {1} to {2} ", Name, LocationPreviousSystemName, LocationCurrentSystemName, Name);
 
-            SpaceMap.Publish(Name, LocationPreviousSystemName, LocationCurrentSystemName);
+            if(Global.ApplicationSettings.IsUseMap)
+                SpaceMap.Publish(Name, LocationPreviousSystemName, LocationCurrentSystemName);
 
             if (OnChangeSolarSystem == null) return;
 
@@ -364,7 +369,8 @@ namespace EveJimaCore.BLL
 
             try
             {
-                SpaceMap.SelectedSolarSystemName = LocationCurrentSystemName;
+                if (Global.ApplicationSettings.IsUseMap)
+                    SpaceMap.SelectedSolarSystemName = LocationCurrentSystemName;
 
                 if (OnChangeSolarSystem != null) OnChangeSolarSystem(this, LocationPreviousSystemName, LocationCurrentSystemName);
                 if(OnEnterToSolarSystem != null)  OnEnterToSolarSystem(Name, LocationPreviousSystemName, LocationCurrentSystemName);

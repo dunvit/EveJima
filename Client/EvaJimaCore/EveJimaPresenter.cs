@@ -22,9 +22,11 @@ namespace EveJimaCore
         {
             if(pilotName == Global.Pilots.Selected.Name)
             {
-                
-                OnLocationChange?.Invoke(Global.Pilots.Selected.SpaceMap);
-                OnEnterToSolarSystem?.Invoke(Global.Pilots.Selected.SpaceMap.LocationSolarSystemName);
+                if(Global.ApplicationSettings.IsUseMap)
+                {
+                    OnLocationChange?.Invoke(Global.Pilots.Selected.SpaceMap);
+                    OnEnterToSolarSystem?.Invoke(Global.Pilots.Selected.SpaceMap.LocationSolarSystemName);
+                }
             }
 
             OnActivatePilot?.Invoke(pilotName);
@@ -40,14 +42,19 @@ namespace EveJimaCore
 
         public void GlobalEventsChangeActivePilot(string pilotName)
         {
-            OnChangeActivePilot?.Invoke(Global.Pilots.Selected.SpaceMap);
+            OnEnterToSolarSystem?.Invoke(Global.Pilots.Selected.Location.Name);
 
+            if (Global.ApplicationSettings.IsUseMap == false) return;
+
+            OnChangeActivePilot?.Invoke(Global.Pilots.Selected.SpaceMap);
             OnLocationChange?.Invoke(Global.Pilots.Selected.SpaceMap);
-            OnEnterToSolarSystem?.Invoke(Global.Pilots.Selected.SpaceMap.LocationSolarSystemName);
+            
         }
 
         public void GlobalEventsSelectSolarSystem(string solarSystemName)
         {
+            if (Global.ApplicationSettings.IsUseMap == false) return;
+
             Global.Pilots.Selected.SpaceMap.SelectedSolarSystemName = solarSystemName;
         }
 

@@ -312,4 +312,19 @@
   <data name="Tab_Settings_IsOpenZkillboardInNewTab" xml:space="preserve">
     <value>Open zkillboard in new tab:</value>
   </data>
+  <data name="Tab_Settings_UseWhiteColorForSystems" xml:space="preserve">
+    <value>Use white color for systems</value>
+  </data>
+  <data name="Tab_TravelHistory" xml:space="preserve">
+    <value>Travel History</value>
+  </data>
+  <data name="Tab_TravelHistory_Help" xml:space="preserve">
+    <value>For copy all signatures of current solar system click to signatures in Eve Online, select all (CRL+A) and copy to clipboard (CRL-C). After this click on button "Show new signatures" in this control.</value>
+  </data>
+  <data name="Tab_TravelHistory_NewSignaturesLabel" xml:space="preserve">
+    <value>New signatures from last visit</value>
+  </data>
+  <data name="Tab_TravelHistory_ShowNewSignatures" xml:space="preserve">
+    <value>Show new signatures</value>
+  </data>
 </root>

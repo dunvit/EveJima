@@ -112,7 +112,7 @@
             this.cmdSuperpute.Name = "cmdSuperpute";
             this.cmdSuperpute.Size = new System.Drawing.Size(148, 26);
             this.cmdSuperpute.TabIndex = 92;
-            this.cmdSuperpute.Value = "Superpute";
+            this.cmdSuperpute.Value = "eve-wh.space";
             this.cmdSuperpute.Click += new System.EventHandler(this.Event_ShowSuperpute);
             // 
             // cmdZkillboard

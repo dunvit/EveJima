@@ -312,4 +312,19 @@
   <data name="Tab_Settings_IsOpenZkillboardInNewTab" xml:space="preserve">
     <value>Открывать zkillboard в новой вкладке:</value>
   </data>
+  <data name="Tab_Settings_UseWhiteColorForSystems" xml:space="preserve">
+    <value>Белый цвет для солнечных систем:</value>
+  </data>
+  <data name="Tab_TravelHistory" xml:space="preserve">
+    <value>История посещений</value>
+  </data>
+  <data name="Tab_TravelHistory_Help" xml:space="preserve">
+    <value>Для копирования всех космических сигнатур перейдите в клиент Eve Online, кликните левой кнопкой мыши на списке сигнатур. Выберите все (CRL+A) и скопируйте их в память (CRL-C). После этого вернитесь сюда и нажмите кнопку "Показать новые сигнатуры".</value>
+  </data>
+  <data name="Tab_TravelHistory_NewSignaturesLabel" xml:space="preserve">
+    <value>Новые сигнатуры с последней проверки</value>
+  </data>
+  <data name="Tab_TravelHistory_ShowNewSignatures" xml:space="preserve">
+    <value>Показать новые сигнатуры</value>
+  </data>
 </root>

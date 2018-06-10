@@ -610,11 +610,56 @@ namespace EveJimaCore.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use white color for systems.
+        /// </summary>
+        internal static string Tab_Settings_UseWhiteColorForSystems {
+            get {
+                return ResourceManager.GetString("Tab_Settings_UseWhiteColorForSystems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use Wormholes Map:.
         /// </summary>
         internal static string Tab_Settings_UseWormholesMap {
             get {
                 return ResourceManager.GetString("Tab_Settings_UseWormholesMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Travel History.
+        /// </summary>
+        internal static string Tab_TravelHistory {
+            get {
+                return ResourceManager.GetString("Tab_TravelHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For copy all signatures of current solar system click to signatures in Eve Online, select all (CRL+A) and copy to clipboard (CRL-C). After this click on button &quot;Show new signatures&quot; in this control..
+        /// </summary>
+        internal static string Tab_TravelHistory_Help {
+            get {
+                return ResourceManager.GetString("Tab_TravelHistory_Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New signatures from last visit.
+        /// </summary>
+        internal static string Tab_TravelHistory_NewSignaturesLabel {
+            get {
+                return ResourceManager.GetString("Tab_TravelHistory_NewSignaturesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show new signatures.
+        /// </summary>
+        internal static string Tab_TravelHistory_ShowNewSignatures {
+            get {
+                return ResourceManager.GetString("Tab_TravelHistory_ShowNewSignatures", resourceCulture);
             }
         }
         

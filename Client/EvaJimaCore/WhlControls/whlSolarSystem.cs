@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using EvaJimaCore;
-using EveJimaCore.BLL;
-using EveJimaUniverse;
 using log4net;
 
 namespace EveJimaCore.WhlControls

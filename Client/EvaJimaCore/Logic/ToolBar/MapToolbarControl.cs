@@ -6,11 +6,14 @@ using System.Drawing;
 using System.Windows.Forms;
 using EvaJimaCore;
 using EveJimaCore.WhlControls;
+using log4net;
 
 namespace EveJimaCore.Logic.ToolBar
 {
     public partial class MapToolbarControl : UserControl
     {
+        private static readonly ILog Log = LogManager.GetLogger(string.Empty);
+
         readonly Dictionary<string, Control> _toolbarControls = new Dictionary<string, Control>();
 
         readonly Hashtable _metadata = new Hashtable();
@@ -27,6 +30,8 @@ namespace EveJimaCore.Logic.ToolBar
             cmdSolarSystem.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_Information"), Value = "SolarSystem" });
             cmdSolarSystem.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_Location"), Value = "Location" });
             cmdSolarSystem.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_Router"), Value = "Router" });
+            cmdSolarSystem.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_TravelHistory"), Value = "TravelHistory" });
+            
 
             cmdSolarSystem.ElementChanged += elementChanged_Event;
 
@@ -74,10 +79,11 @@ namespace EveJimaCore.Logic.ToolBar
             _metadata.Add("Browser", panelBrowser);
             _metadata.Add("Bookmarks", new PanelMetaData { Size = new Size(564, 325), IsResizeEnabled = false, Enabled = true });
             _metadata.Add("SolarSystem", new PanelMetaData { Size = new Size(564, 325), IsResizeEnabled = false, Enabled = true });
-            _metadata.Add("Settings", new PanelMetaData { Size = new Size(564, 325), IsResizeEnabled = false, Enabled = true });
+            _metadata.Add("Settings", new PanelMetaData { Size = new Size(675, 325), IsResizeEnabled = false, Enabled = true });
             _metadata.Add("Pathfinder", new PanelMetaData { Size = new Size(900, 450), IsResizeEnabled = false, Enabled = false });
             _metadata.Add("Version", new PanelMetaData { Size = new Size(900, 500), IsResizeEnabled = false, Enabled = true });
             _metadata.Add("Router", new PanelMetaData { Size = new Size(564, 325), IsResizeEnabled = false, Enabled = false });
+            _metadata.Add("TravelHistory", new PanelMetaData { Size = new Size(564, 325), IsResizeEnabled = false, Enabled = false });
 
             _metadata.Add("NeedLoadPilot", new PanelMetaData { Size = new Size(564, 325), IsResizeEnabled = false, Enabled = true });
 
@@ -200,35 +206,50 @@ namespace EveJimaCore.Logic.ToolBar
 
         public void ActivatePanel(string panelName)
         {
-            SelectedTab = panelName;
-
-            foreach (var key in _toolbarControls.Keys)
+            try
             {
-                var panelMetaData = (PanelMetaData)_metadata[key];
+                SelectedTab = panelName;
 
-                var button = _toolbarControls[key];
+                foreach (var key in _toolbarControls.Keys)
+                {
+                    var panelMetaData = (PanelMetaData)_metadata[key];
 
-                if (panelMetaData.Enabled)
-                {
-                    button.ForeColor = Color.Silver;
+                    var button = _toolbarControls[key];
+
+                    if (panelMetaData.Enabled)
+                    {
+                        button.ForeColor = Color.Silver;
+                    }
+                    else
+                    {
+                        button.ForeColor = Color.DimGray;
+                        button.Cursor = DefaultCursor;
+                    }
+
                 }
-                else
+
+                if (_toolbarControls.ContainsKey(panelName)) _toolbarControls[panelName].ForeColor = Color.DarkGoldenrod;
+
+                if(cmdSolarSystem.IsContaintItem(panelName))
                 {
-                    button.ForeColor = Color.DimGray;
-                    button.Cursor = DefaultCursor;
+                    cmdSolarSystem.ActivateItem(panelName);
+                    cmdSolarSystem.ForeColor = Color.DarkGoldenrod;
                 }
+
+                SetOwnerSize(panelName);
+
+                var metaData = (PanelMetaData)_metadata[panelName];
+
+                OnSelectTab?.Invoke(panelName, metaData);
 
             }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("[MapToolbarControl.ActivatePanel] Critical error = {0}", ex);
+            }
 
-            if(_toolbarControls.ContainsKey(panelName)) _toolbarControls[panelName].ForeColor = Color.DarkGoldenrod;
 
-            SetOwnerSize(panelName);
 
-            var metaData = (PanelMetaData)_metadata[panelName];
-
-            OnSelectTab?.Invoke(panelName, metaData);
-
-            
         }
 
         private void SetOwnerSize(string panelName)

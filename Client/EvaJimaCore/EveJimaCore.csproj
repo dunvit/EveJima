@@ -249,6 +249,12 @@
     <Compile Include="WhlControls\eveCrlSettings.Designer.cs">
       <DependentUpon>eveCrlSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="WhlControls\eveCrlTravelHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\eveCrlTravelHistory.Designer.cs">
+      <DependentUpon>eveCrlTravelHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="WhlControls\mapSolarSystem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -355,12 +361,6 @@
     <Compile Include="WhlControls\whlSolarSystemOffline.Designer.cs">
       <DependentUpon>whlSolarSystemOffline.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhlControls\whlTravelHistory.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WhlControls\whlTravelHistory.Designer.cs">
-      <DependentUpon>whlTravelHistory.cs</DependentUpon>
-    </Compile>
     <Compile Include="WhlControls\whlVersion.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -440,6 +440,9 @@
     <EmbeddedResource Include="WhlControls\eveCrlSettings.resx">
       <DependentUpon>eveCrlSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\eveCrlTravelHistory.resx">
+      <DependentUpon>eveCrlTravelHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\mapSolarSystem.resx">
       <DependentUpon>mapSolarSystem.cs</DependentUpon>
     </EmbeddedResource>
@@ -478,9 +481,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\whlSolarSystemOffline.resx">
       <DependentUpon>whlSolarSystemOffline.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\whlTravelHistory.resx">
-      <DependentUpon>whlTravelHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\whlVersion.resx">
       <DependentUpon>whlVersion.cs</DependentUpon>

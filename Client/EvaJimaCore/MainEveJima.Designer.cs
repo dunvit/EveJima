@@ -70,7 +70,7 @@ namespace EveJimaCore
             this.cmdHide.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmdHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdHide.Image = global::EveJimaCore.Properties.Resources.hide;
-            this.cmdHide.Location = new System.Drawing.Point(727, 1);
+            this.cmdHide.Location = new System.Drawing.Point(700, 1);
             this.cmdHide.Name = "cmdHide";
             this.cmdHide.Size = new System.Drawing.Size(22, 22);
             this.cmdHide.TabIndex = 49;

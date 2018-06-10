@@ -85,16 +85,18 @@
             this.comboBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.comboBox1.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid;
             this.comboBox1.ButtonColor = System.Drawing.SystemColors.Control;
+            this.comboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.comboBox1.ForeColor = System.Drawing.Color.White;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.ItemHeight = 15;
+            this.comboBox1.ItemHeight = 28;
             this.comboBox1.Location = new System.Drawing.Point(27, 2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(162, 23);
+            this.comboBox1.Size = new System.Drawing.Size(162, 34);
             this.comboBox1.TabIndex = 16;
             this.comboBox1.Visible = false;
+            this.comboBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBox1_DrawItem);
             this.comboBox1.DropDownClosed += new System.EventHandler(this.comboBox1_DropDownClosed);
             this.comboBox1.SelectedValueChanged += new System.EventHandler(this.comboBox1_SelectedValueChanged_1);
             // 
@@ -110,6 +112,7 @@
             this.DoubleBuffered = true;
             this.Name = "ejcComboBox";
             this.Size = new System.Drawing.Size(192, 26);
+            this.ForeColorChanged += new System.EventHandler(this.ejcComboBox_ForeColorChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

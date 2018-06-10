@@ -610,11 +610,56 @@ namespace EveJimaCore.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Белый цвет для солнечных систем:.
+        /// </summary>
+        internal static string Tab_Settings_UseWhiteColorForSystems {
+            get {
+                return ResourceManager.GetString("Tab_Settings_UseWhiteColorForSystems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Карта червоточен включена:.
         /// </summary>
         internal static string Tab_Settings_UseWormholesMap {
             get {
                 return ResourceManager.GetString("Tab_Settings_UseWormholesMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to История посещений.
+        /// </summary>
+        internal static string Tab_TravelHistory {
+            get {
+                return ResourceManager.GetString("Tab_TravelHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Для копирования всех космических сигнатур перейдите в клиент Eve Online, кликните левой кнопкой мыши на списке сигнатур. Выберите все (CRL+A) и скопируйте их в память (CRL-C). После этого вернитесь сюда и нажмите кнопку &quot;Показать новые сигнатуры&quot;..
+        /// </summary>
+        internal static string Tab_TravelHistory_Help {
+            get {
+                return ResourceManager.GetString("Tab_TravelHistory_Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Новые сигнатуры с последней проверки.
+        /// </summary>
+        internal static string Tab_TravelHistory_NewSignaturesLabel {
+            get {
+                return ResourceManager.GetString("Tab_TravelHistory_NewSignaturesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Показать новые сигнатуры.
+        /// </summary>
+        internal static string Tab_TravelHistory_ShowNewSignatures {
+            get {
+                return ResourceManager.GetString("Tab_TravelHistory_ShowNewSignatures", resourceCulture);
             }
         }
         

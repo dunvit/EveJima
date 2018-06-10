@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace EveJimaCore.WhlControls
@@ -26,7 +27,7 @@ namespace EveJimaCore.WhlControls
                 if (lblSizeOwner.Width > width) width = lblSizeOwner.Width;
             }
 
-            comboBox1.Width = width + 10;
+            comboBox1.Width = width + 30;
             
             comboBox1.Visible = true;
             comboBox1.DroppedDown = true;
@@ -127,6 +128,58 @@ namespace EveJimaCore.WhlControls
 
                 if (ElementChanged != null)
                     ElementChanged(sender, e);
+            }
+        }
+
+        public bool IsContaintItem(string item)
+        {
+
+            foreach(var comboBox1Item in comboBox1.Items)
+            {
+                var element = (ejcComboboxItem)comboBox1Item;
+
+                if(element.Value.ToString().Trim() == item.Trim())
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void comboBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            SolidBrush backgroundBrush = new SolidBrush(Color.FromArgb(15, 15, 15));
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+
+                e.Graphics.FillRectangle(backgroundBrush, e.Bounds);
+
+                e.Graphics.DrawString("   " + comboBox1.Items[e.Index], comboBox1.Font, Brushes.Peru, new Rectangle(e.Bounds.X, e.Bounds.Y + 6, e.Bounds.Width, e.Bounds.Height));
+            }
+            else
+            {
+                e.Graphics.FillRectangle(backgroundBrush, e.Bounds);
+
+                e.Graphics.DrawString("   " + comboBox1.Items[e.Index], comboBox1.Font, Brushes.White, new Rectangle(e.Bounds.X, e.Bounds.Y + 6, e.Bounds.Width, e.Bounds.Height));
+            }
+        }
+
+        private void ejcComboBox_ForeColorChanged(object sender, EventArgs e)
+        {
+            cmdPathfinder.ForeColor = ForeColor;
+        }
+
+        public void ActivateItem(string panelName)
+        {
+            foreach (ejcComboboxItem comboBox1Item in comboBox1.Items)
+            {
+                if(comboBox1Item.Value == panelName)
+                {
+                    cmdPathfinder.Text = comboBox1Item.Text;
+                    comboBox1.SelectedItem = comboBox1Item;
+                }
             }
         }
     }
