@@ -263,8 +263,6 @@ namespace EveJimaCore.WhlControls
                 
                 Global.Pilots.Activate(cmbPilots.Text);
 
-                OnSelectUser?.Invoke(Global.Pilots.Selected.Name);
-
                 RefreshPilotInfo();
             }
         }

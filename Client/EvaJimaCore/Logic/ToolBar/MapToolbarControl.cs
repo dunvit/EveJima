@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 using EvaJimaCore;
@@ -27,26 +28,24 @@ namespace EveJimaCore.Logic.ToolBar
         {
             InitializeComponent();
 
-            cmdSolarSystem.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_Information"), Value = "SolarSystem" });
-            cmdSolarSystem.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_Location"), Value = "Location" });
-            cmdSolarSystem.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_Router"), Value = "Router" });
-            cmdSolarSystem.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_TravelHistory"), Value = "TravelHistory" });
-            
+            cmdMenuElements.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_Information"), Value = "SolarSystem" });
+            cmdMenuElements.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_Location"), Value = "Location" });
+            cmdMenuElements.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_Router"), Value = "Router" });
+            cmdMenuElements.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_TravelHistory"), Value = "TravelHistory" });
+            cmdMenuElements.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_PilotsInfo"), Value = "PilotInfo" });
 
-            cmdSolarSystem.ElementChanged += elementChanged_Event;
-
-
+            cmdMenuElements.ElementChanged += elementChanged_Event;
 
             cmdAuthorization.Tag = "Authorization";
             cmdLocation.Tag = "Location";
             cmdBrowser.Tag = "Browser";
             cmdBookmarks.Tag = "Bookmarks";
-            cmdSolarSystem.Tag = "SolarSystem";
+            cmdMenuElements.Tag = "SolarSystem";
             cmdSettings.Tag = "Settings";
             cmdPathfinder.Tag = "Pathfinder";
 
             cmdAuthorization.Text = Global.Messages.Get("Tab_Pilots");
-            cmdSolarSystem.Text = Global.Messages.Get("Tab_Information");
+            cmdMenuElements.Text = Global.Messages.Get("Tab_Information");
             cmdBookmarks.Text = Global.Messages.Get("Tab_Bookmarks");
             cmdPathfinder.Text = Global.Messages.Get("Tab_Pathfinder");
             cmdBrowser.Text = Global.Messages.Get("Tab_Browser");
@@ -59,9 +58,15 @@ namespace EveJimaCore.Logic.ToolBar
             _toolbarControls.Add("Location", cmdLocation);
             _toolbarControls.Add("Browser", cmdBrowser);
             _toolbarControls.Add("Bookmarks", cmdBookmarks);
-            _toolbarControls.Add("SolarSystem", cmdSolarSystem);
+            _toolbarControls.Add("SolarSystem", cmdMenuElements);
             _toolbarControls.Add("Settings", cmdSettings);
             _toolbarControls.Add("Pathfinder", cmdPathfinder);
+
+
+            var width = int.Parse( GetConfigOptionalStringValue("ClientWidth", "564") );
+            var height = int.Parse(GetConfigOptionalStringValue("ClientHeight", "325"));
+
+            var standardSize = new Size(width, height);
 
             var panelBrowser = new PanelMetaData { Size = new Size(900, 700), IsResizeEnabled = true, Enabled = true };
 
@@ -72,20 +77,20 @@ namespace EveJimaCore.Logic.ToolBar
 
             if (LicenseManager.UsageMode == LicenseUsageMode.Runtime)
             {
-                if (Global.ApplicationSettings.IsUseMap == false) locationControlSize = new Size(564, 325);
+                if (Global.ApplicationSettings.IsUseMap == false) locationControlSize = standardSize;
             }
 
-            _metadata.Add("Location", new PanelMetaData { Size = locationControlSize, IsResizeEnabled = true, Enabled = false });
+            _metadata.Add("Location", new PanelMetaData { Size = locationControlSize, IsResizeEnabled = false, Enabled = false });
             _metadata.Add("Browser", panelBrowser);
-            _metadata.Add("Bookmarks", new PanelMetaData { Size = new Size(564, 325), IsResizeEnabled = false, Enabled = true });
-            _metadata.Add("SolarSystem", new PanelMetaData { Size = new Size(564, 325), IsResizeEnabled = false, Enabled = true });
+            _metadata.Add("Bookmarks", new PanelMetaData { Size = standardSize, IsResizeEnabled = false, Enabled = true });
+            _metadata.Add("SolarSystem", new PanelMetaData { Size = standardSize, IsResizeEnabled = false, Enabled = true });
             _metadata.Add("Settings", new PanelMetaData { Size = new Size(675, 325), IsResizeEnabled = false, Enabled = true });
             _metadata.Add("Pathfinder", new PanelMetaData { Size = new Size(900, 450), IsResizeEnabled = false, Enabled = false });
             _metadata.Add("Version", new PanelMetaData { Size = new Size(900, 500), IsResizeEnabled = false, Enabled = true });
-            _metadata.Add("Router", new PanelMetaData { Size = new Size(564, 325), IsResizeEnabled = false, Enabled = false });
-            _metadata.Add("TravelHistory", new PanelMetaData { Size = new Size(564, 325), IsResizeEnabled = false, Enabled = false });
-
-            _metadata.Add("NeedLoadPilot", new PanelMetaData { Size = new Size(564, 325), IsResizeEnabled = false, Enabled = true });
+            _metadata.Add("Router", new PanelMetaData { Size = standardSize, IsResizeEnabled = false, Enabled = false });
+            _metadata.Add("TravelHistory", new PanelMetaData { Size = standardSize, IsResizeEnabled = false, Enabled = false });
+            _metadata.Add("PilotInfo", new PanelMetaData { Size = standardSize, IsResizeEnabled = false, Enabled = true });
+            _metadata.Add("NeedLoadPilot", new PanelMetaData { Size = standardSize, IsResizeEnabled = false, Enabled = true });
 
             if (LicenseManager.UsageMode == LicenseUsageMode.Runtime)
             {
@@ -97,24 +102,27 @@ namespace EveJimaCore.Logic.ToolBar
             
         }
 
+        private string GetConfigOptionalStringValue(string keyName, string defaultValue = "")
+        {
+            if (string.IsNullOrWhiteSpace(keyName)) return defaultValue;
+
+            if (ConfigurationManager.AppSettings.Get(keyName) != null)
+                return ConfigurationManager.AppSettings.Get(keyName);
+
+            return defaultValue;
+        }
+
         private void RelocateToolbarButtons()
         {
             if (IsInDesignMode() == false)
             {
-                
-
                 cmdAuthorization.AutoSize = true;
+
+                cmdMenuElements.Left = cmdAuthorization.Left + cmdAuthorization.Width;
+                cmdMenuElements.AutoSize = true;
                 
 
-                //cmdLocation.Left = cmdAuthorization.Left + cmdAuthorization.Width;
-                //cmdLocation.AutoSize = true;
-                //cmdLocation.Text = Global.Messages.Get("Tab_Location");
-
-                cmdSolarSystem.Left = cmdAuthorization.Left + cmdAuthorization.Width;
-                cmdSolarSystem.AutoSize = true;
-                
-
-                cmdBookmarks.Left = cmdSolarSystem.Left + cmdSolarSystem.Width;
+                cmdBookmarks.Left = cmdMenuElements.Left + cmdMenuElements.Width;
                 cmdBookmarks.AutoSize = true;
                 
 
@@ -134,7 +142,7 @@ namespace EveJimaCore.Logic.ToolBar
 
         private void elementChanged_Event(object sender, EventArgs e)
         {
-            var element = cmdSolarSystem.Value;
+            var element = cmdMenuElements.Value;
 
             var panelMetaData = (PanelMetaData)_metadata[element];
 
@@ -148,7 +156,7 @@ namespace EveJimaCore.Logic.ToolBar
 
             ActivatePanel(element);
 
-            cmdSolarSystem.Refresh();
+            cmdMenuElements.Refresh();
 
             
         }
@@ -230,10 +238,10 @@ namespace EveJimaCore.Logic.ToolBar
 
                 if (_toolbarControls.ContainsKey(panelName)) _toolbarControls[panelName].ForeColor = Color.DarkGoldenrod;
 
-                if(cmdSolarSystem.IsContaintItem(panelName))
+                if(cmdMenuElements.IsContaintItem(panelName))
                 {
-                    cmdSolarSystem.ActivateItem(panelName);
-                    cmdSolarSystem.ForeColor = Color.DarkGoldenrod;
+                    cmdMenuElements.ActivateItem(panelName);
+                    cmdMenuElements.ForeColor = Color.DarkGoldenrod;
                 }
 
                 SetOwnerSize(panelName);

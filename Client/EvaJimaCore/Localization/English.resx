@@ -327,4 +327,28 @@
   <data name="Tab_TravelHistory_ShowNewSignatures" xml:space="preserve">
     <value>Show new signatures</value>
   </data>
+  <data name="Tab_PilotInfo_ClearHistory" xml:space="preserve">
+    <value>Clear History</value>
+  </data>
+  <data name="Tab_PilotInfo_CopyPilotsFromClipboard" xml:space="preserve">
+    <value>Copy pilots from Clipboard</value>
+  </data>
+  <data name="Tab_PilotInfo_EnterPilotName" xml:space="preserve">
+    <value>Enter pilot name</value>
+  </data>
+  <data name="Tab_PilotInfo_History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="Tab_PilotInfo_PilotNotFound" xml:space="preserve">
+    <value>Pilot not found</value>
+  </data>
+  <data name="Tab_PilotInfo_Pilots" xml:space="preserve">
+    <value>Pilots (copy from Eve chat)</value>
+  </data>
+  <data name="Tab_PilotInfo_SelectedPilot" xml:space="preserve">
+    <value>Selected Pilot</value>
+  </data>
+  <data name="Tab_PilotsInfo" xml:space="preserve">
+    <value>Information about pilots</value>
+  </data>
 </root>

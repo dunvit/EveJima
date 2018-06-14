@@ -475,11 +475,83 @@ namespace EveJimaCore.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Очистить историю.
+        /// </summary>
+        internal static string Tab_PilotInfo_ClearHistory {
+            get {
+                return ResourceManager.GetString("Tab_PilotInfo_ClearHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Копировать пилотов из памяти.
+        /// </summary>
+        internal static string Tab_PilotInfo_CopyPilotsFromClipboard {
+            get {
+                return ResourceManager.GetString("Tab_PilotInfo_CopyPilotsFromClipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите имя пилота.
+        /// </summary>
+        internal static string Tab_PilotInfo_EnterPilotName {
+            get {
+                return ResourceManager.GetString("Tab_PilotInfo_EnterPilotName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to История.
+        /// </summary>
+        internal static string Tab_PilotInfo_History {
+            get {
+                return ResourceManager.GetString("Tab_PilotInfo_History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пилот не найден.
+        /// </summary>
+        internal static string Tab_PilotInfo_PilotNotFound {
+            get {
+                return ResourceManager.GetString("Tab_PilotInfo_PilotNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пилоты (копировать из чата Евы).
+        /// </summary>
+        internal static string Tab_PilotInfo_Pilots {
+            get {
+                return ResourceManager.GetString("Tab_PilotInfo_Pilots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выбранный пилот.
+        /// </summary>
+        internal static string Tab_PilotInfo_SelectedPilot {
+            get {
+                return ResourceManager.GetString("Tab_PilotInfo_SelectedPilot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пилоты.
         /// </summary>
         internal static string Tab_Pilots {
             get {
                 return ResourceManager.GetString("Tab_Pilots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Информация о пилотах.
+        /// </summary>
+        internal static string Tab_PilotsInfo {
+            get {
+                return ResourceManager.GetString("Tab_PilotsInfo", resourceCulture);
             }
         }
         

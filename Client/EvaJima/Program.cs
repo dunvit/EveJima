@@ -40,7 +40,7 @@ namespace EveJima
 
             try
             {
-                Application.Run(new EveJimaCore.MainEveJima());
+                Application.Run(new MainEveJima());
             }
             catch(Exception e)
             {

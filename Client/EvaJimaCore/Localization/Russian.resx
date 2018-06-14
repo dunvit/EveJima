@@ -327,4 +327,28 @@
   <data name="Tab_TravelHistory_ShowNewSignatures" xml:space="preserve">
     <value>Показать новые сигнатуры</value>
   </data>
+  <data name="Tab_PilotInfo_ClearHistory" xml:space="preserve">
+    <value>Очистить историю</value>
+  </data>
+  <data name="Tab_PilotInfo_CopyPilotsFromClipboard" xml:space="preserve">
+    <value>Копировать пилотов из памяти</value>
+  </data>
+  <data name="Tab_PilotInfo_EnterPilotName" xml:space="preserve">
+    <value>Введите имя пилота</value>
+  </data>
+  <data name="Tab_PilotInfo_History" xml:space="preserve">
+    <value>История</value>
+  </data>
+  <data name="Tab_PilotInfo_PilotNotFound" xml:space="preserve">
+    <value>Пилот не найден</value>
+  </data>
+  <data name="Tab_PilotInfo_Pilots" xml:space="preserve">
+    <value>Пилоты (копировать из чата Евы)</value>
+  </data>
+  <data name="Tab_PilotInfo_SelectedPilot" xml:space="preserve">
+    <value>Выбранный пилот</value>
+  </data>
+  <data name="Tab_PilotsInfo" xml:space="preserve">
+    <value>Информация о пилотах</value>
+  </data>
 </root>

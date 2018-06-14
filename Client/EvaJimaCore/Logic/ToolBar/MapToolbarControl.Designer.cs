@@ -34,7 +34,7 @@
             this.cmdPathfinder = new System.Windows.Forms.Label();
             this.cmdBrowser = new System.Windows.Forms.Label();
             this.cmdSettings = new System.Windows.Forms.Label();
-            this.cmdSolarSystem = new EveJimaCore.WhlControls.ejcComboBox();
+            this.cmdMenuElements = new EveJimaCore.WhlControls.ejcComboBox();
             this.SuspendLayout();
             // 
             // cmdLocation
@@ -109,21 +109,21 @@
             this.cmdSettings.TabIndex = 16;
             this.cmdSettings.Text = "Settings";
             // 
-            // cmdSolarSystem
+            // cmdMenuElements
             // 
-            this.cmdSolarSystem.BackColor = System.Drawing.Color.Black;
-            this.cmdSolarSystem.Location = new System.Drawing.Point(105, -6);
-            this.cmdSolarSystem.Name = "cmdSolarSystem";
-            this.cmdSolarSystem.Size = new System.Drawing.Size(70, 26);
-            this.cmdSolarSystem.TabIndex = 17;
-            this.cmdSolarSystem.Text = "Information";
+            this.cmdMenuElements.BackColor = System.Drawing.Color.Black;
+            this.cmdMenuElements.Location = new System.Drawing.Point(105, -6);
+            this.cmdMenuElements.Name = "cmdMenuElements";
+            this.cmdMenuElements.Size = new System.Drawing.Size(70, 26);
+            this.cmdMenuElements.TabIndex = 17;
+            this.cmdMenuElements.Text = "Information";
             // 
             // MapToolbarControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.Controls.Add(this.cmdSolarSystem);
+            this.Controls.Add(this.cmdMenuElements);
             this.Controls.Add(this.cmdSettings);
             this.Controls.Add(this.cmdBrowser);
             this.Controls.Add(this.cmdPathfinder);
@@ -145,6 +145,6 @@
         private System.Windows.Forms.Label cmdPathfinder;
         private System.Windows.Forms.Label cmdBrowser;
         private System.Windows.Forms.Label cmdSettings;
-        private WhlControls.ejcComboBox cmdSolarSystem;
+        private WhlControls.ejcComboBox cmdMenuElements;
     }
 }

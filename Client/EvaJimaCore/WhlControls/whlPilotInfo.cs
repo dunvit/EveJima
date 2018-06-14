@@ -1,7 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using EvaJimaCore;
+using EveJimaIGB;
+using Global = EvaJimaCore.Global;
 
 namespace EveJimaCore.WhlControls
 {
@@ -12,6 +13,17 @@ namespace EveJimaCore.WhlControls
         public whlPilotInfo()
         {
             InitializeComponent();
+
+            label16.Text = Global.Messages.Get("Tab_PilotInfo_Pilots");
+            label14.Text = Global.Messages.Get("Tab_PilotInfo_SelectedPilot");
+            label17.Text = Global.Messages.Get("Tab_PilotInfo_History");
+            cmdCopyPilotsFromClipboard.Value = Global.Messages.Get("Tab_PilotInfo_CopyPilotsFromClipboard");
+            cmdClearHistory.Value = Global.Messages.Get("Tab_PilotInfo_ClearHistory");
+        }
+
+        public override void ActivateContainer()
+        {
+            EventNavigateInternalBrowser("http://evejima.mikotaj.com/VisitorsCounterPilotInfo.html");
         }
 
         [Description("Pilot name"), Category("Data")]
@@ -30,15 +42,11 @@ namespace EveJimaCore.WhlControls
         {
             if( string.IsNullOrEmpty( txtSelectedPilotName.Text.Trim() ))
             {
-                cmdShowEveHunt.IsActive = false;
                 cmdShowZkillboard.IsActive = false;
-                cmdEverate.IsActive = false;
             }
              else
             {
-                cmdShowEveHunt.IsActive = true;
                 cmdShowZkillboard.IsActive = true;
-                cmdEverate.IsActive = true;
             }
         }
 
@@ -72,30 +80,28 @@ namespace EveJimaCore.WhlControls
 
         private void cmdShowZkillboard_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrEmpty(txtSelectedPilotName.Text.Trim()))
+            {
+                MessageBox.Show(Global.Messages.Get("Tab_PilotInfo_EnterPilotName"));
+                return;
+            }
+
+            var url = Zkillboard.GetZkillboardUrlByName(txtSelectedPilotName.Text.Trim());
+
+            if(string.IsNullOrEmpty(url))
+            {
+                MessageBox.Show(Global.Messages.Get("Tab_PilotInfo_PilotNotFound"));
+                return;
+            }
+
+            Global.InternalBrowser.OnBrowserNavigate(url);
+
             if (crlPilotsHistory.Items.Contains(txtSelectedPilotName.Text.Trim()) == false)
             {
                 crlPilotsHistory.Items.Add(txtSelectedPilotName.Text.Trim());
             }
-
-            var characterId = Global.Infrastructure.EveXmlApi.GetPilotIdByName(txtSelectedPilotName.Text.Trim());
-
-            if (crlPilotsHistory.Items.Contains(txtSelectedPilotName.Text.Trim()) == false)
-            {
-                crlPilotsHistory.Items.Add(txtSelectedPilotName.Text.Trim());
-            }
-
-            OnBrowserNavigate("https://zkillboard.com/character/" + characterId + "/");
         }
 
-        private void cmdShowEveHunt_Click(object sender, EventArgs e)
-        {
-            if (crlPilotsHistory.Items.Contains(txtSelectedPilotName.Text.Trim()) == false)
-            {
-                crlPilotsHistory.Items.Add(txtSelectedPilotName.Text.Trim());
-            }
-
-            OnBrowserNavigate("http://eve-hunt.net/hunt/" + txtSelectedPilotName.Text.Trim() + "/");
-        }
 
         private void cmdClearHistory_Click(object sender, EventArgs e)
         {
@@ -112,15 +118,6 @@ namespace EveJimaCore.WhlControls
             }
         }
 
-        private void Event_ShowEverate(object sender, EventArgs e)
-        {
-            if (crlPilotsHistory.Items.Contains(txtSelectedPilotName.Text.Trim()) == false)
-            {
-                crlPilotsHistory.Items.Add(txtSelectedPilotName.Text.Trim());
-            }
-
-            OnBrowserNavigate("http://everate.ru/userinfo.php?name=" + txtSelectedPilotName.Text.Trim().Replace(" ", "+") + "");
-        }
 
         private void cmdShowZkillboard_Load(object sender, EventArgs e)
         {

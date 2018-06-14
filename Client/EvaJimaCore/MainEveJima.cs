@@ -51,6 +51,8 @@ namespace EveJimaCore
 
         private whlRouter _containerRouter;
 
+        private whlPilotInfo _containerPilotInfo;
+
         private eveCrlTravelHistory _containerTravelHistory;
 
         private MapControl _containerMap;
@@ -372,6 +374,8 @@ namespace EveJimaCore
 
             _containerRouter = new whlRouter { Visible = false, Dock = DockStyle.Fill };
 
+            _containerPilotInfo = new whlPilotInfo { Visible = false, Dock = DockStyle.Fill };
+
             _containerTravelHistory = new eveCrlTravelHistory { Visible = false, Dock = DockStyle.Fill };
             _containerTravelHistory.OnUseModule += EventbAddMetric;
 
@@ -385,6 +389,7 @@ namespace EveJimaCore
             pnlContainers.Controls.Add(_containerMap);
             pnlContainers.Controls.Add(_containerLocation);
             pnlContainers.Controls.Add(_containerRouter);
+            pnlContainers.Controls.Add(_containerPilotInfo);
             pnlContainers.Controls.Add(_containerTravelHistory);
             pnlContainers.Controls.Add(_containerSolarSystemOffline);
             pnlContainers.Controls.Add(_containerSettings);
@@ -465,6 +470,11 @@ namespace EveJimaCore
 
                 case "SolarSystem":
                     _containerSolarSystemOffline.Visible = true;
+                    break;
+
+                case "PilotInfo":
+                    _containerPilotInfo.Visible = true;
+                    _containerPilotInfo.ActivateContainer();
                     break;
 
                 case "Router":
