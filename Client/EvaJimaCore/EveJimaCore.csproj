@@ -539,13 +539,13 @@
     <None Include="Resources\url.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\EveJimaIGB\EveJimaIGB\EveInternalBrowser\EveInternalBrowser.csproj">
-      <Project>{c23fded6-0d07-42c6-ba3a-f0e9b5c1d592}</Project>
-      <Name>EveInternalBrowser</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Server\EveJimaServerMap\EveJimaServerMap.csproj">
       <Project>{E67AC071-4E51-4CF3-BA0E-2796BAFA47A5}</Project>
       <Name>EveJimaServerMap</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EveInternalBrowser\EveInternalBrowser.csproj">
+      <Project>{c23fded6-0d07-42c6-ba3a-f0e9b5c1d592}</Project>
+      <Name>EveInternalBrowser</Name>
     </ProjectReference>
     <ProjectReference Include="..\EveJimaUniverse\EveJimaUniverse.csproj">
       <Project>{7ccc5a5f-14c3-4ba3-998b-d4177085bfeb}</Project>

@@ -90,13 +90,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\EveJimaIGB\EveJimaIGB\EveInternalBrowser\EveInternalBrowser.csproj">
-      <Project>{C23FDED6-0D07-42C6-BA3A-F0E9B5C1D592}</Project>
-      <Name>EveInternalBrowser</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EvaJimaCore\EveJimaCore.csproj">
       <Project>{c1410d27-425c-4c35-89e3-1281f95183e2}</Project>
       <Name>EveJimaCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EveInternalBrowser\EveInternalBrowser.csproj">
+      <Project>{c23fded6-0d07-42c6-ba3a-f0e9b5c1d592}</Project>
+      <Name>EveInternalBrowser</Name>
     </ProjectReference>
     <ProjectReference Include="..\EveJimaUniverse\EveJimaUniverse.csproj">
       <Project>{7ccc5a5f-14c3-4ba3-998b-d4177085bfeb}</Project>
