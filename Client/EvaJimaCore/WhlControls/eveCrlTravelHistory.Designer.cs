@@ -118,6 +118,7 @@
             this.Controls.Add(this.lblHelp);
             this.Name = "eveCrlTravelHistory";
             this.Size = new System.Drawing.Size(550, 250);
+            this.Load += new System.EventHandler(this.eveCrlTravelHistory_Load);
             this.pnlNewSignaturesResults.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

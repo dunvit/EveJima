@@ -56,6 +56,8 @@ namespace EveJimaCore.WhlControls
 
             try
             {
+                var planetraySystem = Global.PlanetarySystemsInfo.GetPlanetarySystemByName(solarSystem.Name);
+
                 txtSolarSystemName.Text = solarSystem.Name;
 
                 txtSolarSystemName.ForeColor = Tools.GetColorBySolarSystem(solarSystem.Security.ToString());
@@ -84,14 +86,8 @@ namespace EveJimaCore.WhlControls
                     txtSolarSystemEffect.Text = "";
                 }
 
-                if (solarSystem.Region != null)
-                {
-                    txtSolarSystemRegion.Text = solarSystem.Region.Replace(" Unknown (", "").Replace(")", "");
-                }
-                else
-                {
-                    txtSolarSystemRegion.Text = "";
-                }
+                txtSolarSystemRegion.Text = planetraySystem.Region;
+                txtSolarSystemConstellation.Text = planetraySystem.Constelation;
 
 
                 txtSolarSystemStaticI.Text = "";

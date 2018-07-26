@@ -14,7 +14,8 @@ namespace EveJimaCore.WhlControls
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(whlAuthorization));
 
-        public event Action<string> OnSelectUser; 
+        public event Action<string> OnSelectUser;
+        public event Action OnStartEditPilots;
 
         public whlAuthorization()
         {
@@ -23,6 +24,7 @@ namespace EveJimaCore.WhlControls
             Pilotes = new List<PilotEntity>();
 
             label1.Text = Global.Messages.Get("LoadAllPilotesFromStorage");
+            btnEditPilots.Text = Global.Messages.Get("Tab_Authorization_EditPilots");
         }
 
         protected override void OnVisibleChanged(EventArgs e)
@@ -94,6 +96,7 @@ namespace EveJimaCore.WhlControls
 
             containerScreenUpdate.Location = new Point(-500, -500);
             lblAuthorizationInfo.Visible = true;
+            btnEditPilots.Visible = true;
             lblAuthorizationInfo.Refresh();
         }
 
@@ -279,6 +282,11 @@ namespace EveJimaCore.WhlControls
             LoadAllPilotesFromStorage();
 
             btnLogInWithEveOnline.Visible = true;
+        }
+
+        private void btnEditPilots_Click(object sender, EventArgs e)
+        {
+            OnStartEditPilots?.Invoke();
         }
     }
 }

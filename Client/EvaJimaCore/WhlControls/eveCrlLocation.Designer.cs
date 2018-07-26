@@ -176,7 +176,7 @@
             // 
             this.txtSolarSystemStaticII.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSolarSystemStaticII.ForeColor = System.Drawing.Color.Goldenrod;
-            this.txtSolarSystemStaticII.Location = new System.Drawing.Point(154, 134);
+            this.txtSolarSystemStaticII.Location = new System.Drawing.Point(154, 136);
             this.txtSolarSystemStaticII.Name = "txtSolarSystemStaticII";
             this.txtSolarSystemStaticII.Size = new System.Drawing.Size(64, 23);
             this.txtSolarSystemStaticII.TabIndex = 86;
@@ -188,7 +188,7 @@
             // 
             this.txtSolarSystemStaticI.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSolarSystemStaticI.ForeColor = System.Drawing.Color.Goldenrod;
-            this.txtSolarSystemStaticI.Location = new System.Drawing.Point(154, 111);
+            this.txtSolarSystemStaticI.Location = new System.Drawing.Point(154, 113);
             this.txtSolarSystemStaticI.Name = "txtSolarSystemStaticI";
             this.txtSolarSystemStaticI.Size = new System.Drawing.Size(64, 23);
             this.txtSolarSystemStaticI.TabIndex = 85;

@@ -128,11 +128,11 @@ namespace EveJimaCore.WhlControls
             dataGridView1.ClearSelection();
         }
 
-        private IEnumerable<Path> GetPathes(string location, Universe universe, PilotEntity pilot)
+        private IEnumerable<Path> GetPathes(string location, EveJimaUniverse.UniverseEntity universeEntity, PilotEntity pilot)
         {
             try
             {
-                var pathFinder = new PathFinder(universe);
+                var pathFinder = new PathFinder(universeEntity);
                 var bookmarksFolderId = "0";
                 var bookmarksFoldersFromApi = pilot.EsiData.GetBookmarksFolders(pilot.Id);
 

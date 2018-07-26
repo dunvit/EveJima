@@ -143,7 +143,7 @@ namespace EveJimaCore
                     stream.Close();
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 //Log exception here
             }
@@ -175,7 +175,7 @@ namespace EveJimaCore
                     read.Close();
                 }
             }
-            catch (Exception ex)
+            catch 
             {
                 //Log exception here
             }

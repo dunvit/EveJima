@@ -10,18 +10,18 @@ namespace EveJimaCore.BLL
     public class PathFinder
     {
         private static readonly ILog Log = LogManager.GetLogger("All");
-        private readonly Universe _universe;
+        private readonly UniverseEntity _universeEntity;
 
-        public PathFinder(Universe universe)
+        public PathFinder(UniverseEntity universeEntity)
         {
-            _universe = universe;
+            _universeEntity = universeEntity;
         }
 
         public List<Path> GetPathes(List<Bookmark> bookmarks, string locationSystemName, int range)
         {
-            var solarSystem = _universe.GetSystemByName(locationSystemName);
+            var solarSystem = _universeEntity.GetSystemByName(locationSystemName);
 
-            var linkedSolarSystems = GetSystems(_universe, solarSystem.Id, range, 0, new List<Tuple<string, int>> { new Tuple<string, int>(solarSystem.Id, 0) });
+            var linkedSolarSystems = GetSystems(_universeEntity, solarSystem.Id, range, 0, new List<Tuple<string, int>> { new Tuple<string, int>(solarSystem.Id, 0) });
 
             return GetBookmarks(bookmarks, linkedSolarSystems);
         }
@@ -45,14 +45,14 @@ namespace EveJimaCore.BLL
                         {
                             Name = bookmark.Name,
                             Note = bookmark.Note,
-                            SystemName = _universe.GetSystemById(systemName).Name,
+                            SystemName = _universeEntity.GetSystemById(systemName).Name,
                             ShipKills = "0",
                             NpcKills = "0",
                             PodKills = "0",
                             Jumps = jumps
                         };
 
-                        var kills = EsiAuthorization.GetSystemKills(systemName);
+                        var kills = EsiApi.GetSystemKills(systemName);
 
                         if (kills != null)
                         {
@@ -73,25 +73,25 @@ namespace EveJimaCore.BLL
             return pathes;
         }
 
-        public List<Tuple<string, int>> GetSystems(Universe universe, string solarSystemId, int range, int currentRange, List<Tuple<string, int>> systems)
+        public List<Tuple<string, int>> GetSystems(EveJimaUniverse.UniverseEntity universeEntity, string solarSystemId, int range, int currentRange, List<Tuple<string, int>> systems)
         {
             currentRange = currentRange + 1;
 
             if (currentRange > range) return systems;
 
-            var linkedSystems = universe.GetLinkedSystems(solarSystemId);
+            var linkedSystems = universeEntity.GetLinkedSystems(solarSystemId);
 
             if(linkedSystems == null) return systems;
 
             foreach (var system in linkedSystems.LinkedSystems)
             {
-                var linkedSystem = universe.GetSystemById(system);
+                var linkedSystem = universeEntity.GetSystemById(system);
 
                 if(systems.Any(m => m.Item1 == linkedSystem.Id)) continue;
 
                 systems.Add(new Tuple<string, int>(linkedSystem.Id, currentRange));
 
-                GetSystems(universe, linkedSystem.Id, range, currentRange, systems);
+                GetSystems(universeEntity, linkedSystem.Id, range, currentRange, systems);
             }
 
             return systems;

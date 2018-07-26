@@ -22,7 +22,7 @@ namespace EJTests
             Global.MapApiFunctions.Initialization(Server_MapAddress);
             Global.ApplicationSettings = new ApplicationSettings();
 
-            Global.Space = new Universe();
+            Global.Space = new UniverseEntity();
             Global.Space.Initialization();
 
             log4net.Config.XmlConfigurator.Configure();

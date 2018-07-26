@@ -59,7 +59,7 @@
     <Compile Include="Signatures\SignatureType.cs" />
     <Compile Include="Wormhole.cs" />
     <Compile Include="System.cs" />
-    <Compile Include="Universe.cs" />
+    <Compile Include="UniverseEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

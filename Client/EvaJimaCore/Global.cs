@@ -4,6 +4,7 @@ using EveJimaCore.BLL.Browser;
 using EveJimaCore.BLL.LostAndFound;
 using EveJimaCore.BLL.Map;
 using EveJimaCore.EjEnvironment;
+using EveJimaCore.Universe;
 using EveJimaUniverse;
 using log4net;
 
@@ -25,7 +26,9 @@ namespace EvaJimaCore
 
         public static Infrastructure Infrastructure;
 
-        public static Universe Space;
+        public static UniverseEntity Space;
+
+        public static PlanetarySystems PlanetarySystemsInfo;
 
         public static InternalBrowser InternalBrowser;
 
@@ -35,7 +38,7 @@ namespace EvaJimaCore
 
         public static EveJimaPresenter Presenter;
 
-        public static EsiAuthorization EsiTools;
+        public static EsiApi EsiTools;
 
         public static Interceptor LinkInterceptor;
 
@@ -63,7 +66,7 @@ namespace EvaJimaCore
 
             Infrastructure = new Infrastructure();
 
-            Space = new Universe();
+            Space = new UniverseEntity();
             Space.Initialization();
 
             Log.DebugFormat("[Global.Initialization] InternalBrowser");
@@ -73,8 +76,9 @@ namespace EvaJimaCore
 
             Presenter = new EveJimaPresenter();
 
-            EsiTools = new EsiAuthorization(ApplicationSettings.Authorization_ClientId, ApplicationSettings.Authorization_ClientSecret);
+            EsiTools = new EsiApi(ApplicationSettings.Authorization_ClientId, ApplicationSettings.Authorization_ClientSecret);
 
+            PlanetarySystemsInfo = new PlanetarySystems(EsiTools, Space);
         }
 
         public static void Dispose()

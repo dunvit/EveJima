@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using CsvHelper;
 using EveJimaCore;
 using EveJimaUniverse;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,7 +13,7 @@ namespace EJTests
         [TestMethod]
         public void Universe_LoadNames()
         {
-            var universe = new Universe();
+            var universe = new UniverseEntity();
 
             var data = Infrastructure.GetSolarSystems();
 
@@ -29,7 +27,7 @@ namespace EJTests
 
             var dataFile = @"C:/Data/Universe.dat";
 
-            var jsonFormatter = new DataContractJsonSerializer(typeof(Universe));
+            var jsonFormatter = new DataContractJsonSerializer(typeof(UniverseEntity));
 
             if (File.Exists(dataFile)) File.Delete(dataFile);
 
@@ -39,11 +37,11 @@ namespace EJTests
             }
 
             var json = File.ReadAllText(dataFile);
-            var universeAfterLoad = new Universe();
+            var universeAfterLoad = new UniverseEntity();
 
             var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
             var ser = new DataContractJsonSerializer(universeAfterLoad.GetType());
-            universeAfterLoad = ser.ReadObject(ms) as Universe;
+            universeAfterLoad = ser.ReadObject(ms) as UniverseEntity;
             ms.Close();
 
             Assert.IsTrue(universe.Systems.Count == universeAfterLoad.Systems.Count);
@@ -51,7 +49,7 @@ namespace EJTests
         }
 
         //WSpaceSystemInfo - Base Solar Systems.csv
-        private static void LoadWSpaceSystemInfoSystems( Universe universe, string fileName)
+        private static void LoadWSpaceSystemInfoSystems( UniverseEntity universeEntity, string fileName)
         {
             //using (var sr = new StreamReader(fileName))
             //{
@@ -106,36 +104,36 @@ namespace EJTests
         [TestMethod]
         public void LoadWormholesData()
         {
-            Dictionary<string, WormholeType> WormholeTypes = new Dictionary<string, WormholeType>();
+            //Dictionary<string, WormholeType> WormholeTypes = new Dictionary<string, WormholeType>();
 
-            using (var sr = new StreamReader(@"C:/Data/WSpaceSystemInfo - Wormholes.csv"))
-            {
-                var records = new CsvReader(sr).GetRecords<WormholeType>();
+            //using (var sr = new StreamReader(@"C:/Data/WSpaceSystemInfo - Wormholes.csv"))
+            //{
+            //    var records = new CsvReader(sr).GetRecords<WormholeType>();
 
-                foreach (var record in records)
-                {
-                    WormholeTypes.Add(record.Name.Trim(), record);
-                }
-            }
+            //    foreach (var record in records)
+            //    {
+            //        WormholeTypes.Add(record.Name.Trim(), record);
+            //    }
+            //}
 
-            var dataFile = @"C:/Data/Wormholes.dat";
+            //var dataFile = @"C:/Data/Wormholes.dat";
 
-            var jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<string, WormholeType>));
+            //var jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<string, WormholeType>));
 
-            if (File.Exists(dataFile)) File.Delete(dataFile);
+            //if (File.Exists(dataFile)) File.Delete(dataFile);
 
-            using (var fs = new FileStream(dataFile, FileMode.Create))
-            {
-                jsonFormatter.WriteObject(fs, WormholeTypes);
-            }
+            //using (var fs = new FileStream(dataFile, FileMode.Create))
+            //{
+            //    jsonFormatter.WriteObject(fs, WormholeTypes);
+            //}
 
-            var json = File.ReadAllText(dataFile);
-            var WormholeTypesAfterLoad = new Dictionary<string, WormholeType>();
+            //var json = File.ReadAllText(dataFile);
+            //var WormholeTypesAfterLoad = new Dictionary<string, WormholeType>();
 
-            var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-            var ser = new DataContractJsonSerializer(WormholeTypesAfterLoad.GetType());
-            WormholeTypesAfterLoad = ser.ReadObject(ms) as Dictionary<string, WormholeType>;
-            ms.Close();
+            //var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+            //var ser = new DataContractJsonSerializer(WormholeTypesAfterLoad.GetType());
+            //WormholeTypesAfterLoad = ser.ReadObject(ms) as Dictionary<string, WormholeType>;
+            //ms.Close();
 
         }
     }

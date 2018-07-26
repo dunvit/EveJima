@@ -351,4 +351,46 @@
   <data name="Tab_PilotsInfo" xml:space="preserve">
     <value>Information about pilots</value>
   </data>
+  <data name="Tab_WormholeInfo" xml:space="preserve">
+    <value>Wormhole Information</value>
+  </data>
+  <data name="Tab_WormholeInfo_Class" xml:space="preserve">
+    <value>Class:</value>
+  </data>
+  <data name="Tab_WormholeInfo_MaxJumpMass" xml:space="preserve">
+    <value>Max Jump Mass:</value>
+  </data>
+  <data name="Tab_WormholeInfo_MaxMassRegeneration" xml:space="preserve">
+    <value>Max Mass Regeneration:</value>
+  </data>
+  <data name="Tab_WormholeInfo_MaxStableMass" xml:space="preserve">
+    <value>Max Stable Mass:</value>
+  </data>
+  <data name="Tab_WormholeInfo_MaxStableTime" xml:space="preserve">
+    <value>Max Stable Time:</value>
+  </data>
+  <data name="Tab_WormholeInfo_Name" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="Tab_WormholeInfo_Type" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="Tab_Authorization_EditPilots" xml:space="preserve">
+    <value>Edit pilots</value>
+  </data>
+  <data name="Tab_EditPilots_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Tab_EditPilots_Message_AfterDelete" xml:space="preserve">
+    <value>* After "Save" you will lost all deleted pilots information and keys</value>
+  </data>
+  <data name="Tab_EditPilots_Message_NeedRestart" xml:space="preserve">
+    <value>* Operation "Save" need restart EveJima client</value>
+  </data>
+  <data name="Tab_EditPilots_Return" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="Tab_EditPilots_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>

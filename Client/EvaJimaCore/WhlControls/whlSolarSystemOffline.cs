@@ -47,10 +47,15 @@ namespace EveJimaCore.WhlControls
         {
             SolarSystem = location.Clone() as EveJimaUniverse.System;
 
+            var planetraySystem = Global.PlanetarySystemsInfo.GetPlanetarySystemByName(SolarSystem.Name);
+
+            txtSolarSystemEffect.Text = "";
+
             txtSolarSystemClass.Text = location.Class;
             if (location.Effect != null) txtSolarSystemEffect.Text = location.Effect.Trim();
-            if (location.Region!= null) txtSolarSystemRegion.Text = location.Region.Replace(" Unknown (", "").Replace(")", "");
-            if (location.Constelation != null) txtSolarSystemConstellation.Text = location.Constelation != null ? location.Constelation.Replace(" Unknown (", "").Replace(")", "") : "";
+
+            txtSolarSystemRegion.Text = planetraySystem.Region;
+            txtSolarSystemConstellation.Text = planetraySystem.Constelation;
 
             txtSolarSystemStaticI.Text = "";
             txtSolarSystemStaticII.Text = "";

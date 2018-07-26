@@ -97,6 +97,15 @@ namespace EveJimaCore.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Редактировать.
+        /// </summary>
+        internal static string Tab_Authorization_EditPilots {
+            get {
+                return ResourceManager.GetString("Tab_Authorization_EditPilots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Закладки.
         /// </summary>
         internal static string Tab_Bookmarks {
@@ -165,6 +174,51 @@ namespace EveJimaCore.Localization {
         internal static string Tab_Browser {
             get {
                 return ResourceManager.GetString("Tab_Browser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удалить.
+        /// </summary>
+        internal static string Tab_EditPilots_Delete {
+            get {
+                return ResourceManager.GetString("Tab_EditPilots_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * После операции &quot;Сохранить&quot; вы потеряете все данные для удаленных пилотов.
+        /// </summary>
+        internal static string Tab_EditPilots_Message_AfterDelete {
+            get {
+                return ResourceManager.GetString("Tab_EditPilots_Message_AfterDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * Операция &quot;Сохранить&quot; требует перезапуска EveJima.
+        /// </summary>
+        internal static string Tab_EditPilots_Message_NeedRestart {
+            get {
+                return ResourceManager.GetString("Tab_EditPilots_Message_NeedRestart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вернуться.
+        /// </summary>
+        internal static string Tab_EditPilots_Return {
+            get {
+                return ResourceManager.GetString("Tab_EditPilots_Return", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить.
+        /// </summary>
+        internal static string Tab_EditPilots_Save {
+            get {
+                return ResourceManager.GetString("Tab_EditPilots_Save", resourceCulture);
             }
         }
         
@@ -732,6 +786,78 @@ namespace EveJimaCore.Localization {
         internal static string Tab_TravelHistory_ShowNewSignatures {
             get {
                 return ResourceManager.GetString("Tab_TravelHistory_ShowNewSignatures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Информация о червоточинах.
+        /// </summary>
+        internal static string Tab_WormholeInfo {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Класс:.
+        /// </summary>
+        internal static string Tab_WormholeInfo_Class {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo_Class", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Максимальная пропускная масса:.
+        /// </summary>
+        internal static string Tab_WormholeInfo_MaxJumpMass {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo_MaxJumpMass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Регенерация:.
+        /// </summary>
+        internal static string Tab_WormholeInfo_MaxMassRegeneration {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo_MaxMassRegeneration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Масса стабильности:.
+        /// </summary>
+        internal static string Tab_WormholeInfo_MaxStableMass {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo_MaxStableMass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Время стабильности:.
+        /// </summary>
+        internal static string Tab_WormholeInfo_MaxStableTime {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo_MaxStableTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Название:.
+        /// </summary>
+        internal static string Tab_WormholeInfo_Name {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тип:.
+        /// </summary>
+        internal static string Tab_WormholeInfo_Type {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo_Type", resourceCulture);
             }
         }
         

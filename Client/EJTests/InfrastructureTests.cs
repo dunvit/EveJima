@@ -33,7 +33,7 @@ namespace EJTests
             var code = "2roGEvWV991_awgiJDqNqRSjKdyzPWoe2XsBeqCFdIRVo90IAvrlH9HKSxk97Sn70";
             var state = "bqbIMfDvaFfI9EPOGYmrVDeih9wPkDFnH3eW7GZY";
 
-            var Esi = new EsiAuthorization(CCPSSO_AUTH_CLIENT_ID, CLIENT_SECRET);
+            var Esi = new EsiApi(CCPSSO_AUTH_CLIENT_ID, CLIENT_SECRET);
 
             Esi.Refresh(refreshToken);
 

@@ -97,6 +97,15 @@ namespace EveJimaCore.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit pilots.
+        /// </summary>
+        internal static string Tab_Authorization_EditPilots {
+            get {
+                return ResourceManager.GetString("Tab_Authorization_EditPilots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bookmarks.
         /// </summary>
         internal static string Tab_Bookmarks {
@@ -165,6 +174,51 @@ namespace EveJimaCore.Localization {
         internal static string Tab_Browser {
             get {
                 return ResourceManager.GetString("Tab_Browser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string Tab_EditPilots_Delete {
+            get {
+                return ResourceManager.GetString("Tab_EditPilots_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * After &quot;Save&quot; you will lost all deleted pilots information and keys.
+        /// </summary>
+        internal static string Tab_EditPilots_Message_AfterDelete {
+            get {
+                return ResourceManager.GetString("Tab_EditPilots_Message_AfterDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * Operation &quot;Save&quot; need restart EveJima client.
+        /// </summary>
+        internal static string Tab_EditPilots_Message_NeedRestart {
+            get {
+                return ResourceManager.GetString("Tab_EditPilots_Message_NeedRestart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return.
+        /// </summary>
+        internal static string Tab_EditPilots_Return {
+            get {
+                return ResourceManager.GetString("Tab_EditPilots_Return", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string Tab_EditPilots_Save {
+            get {
+                return ResourceManager.GetString("Tab_EditPilots_Save", resourceCulture);
             }
         }
         
@@ -732,6 +786,78 @@ namespace EveJimaCore.Localization {
         internal static string Tab_TravelHistory_ShowNewSignatures {
             get {
                 return ResourceManager.GetString("Tab_TravelHistory_ShowNewSignatures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wormhole Information.
+        /// </summary>
+        internal static string Tab_WormholeInfo {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Class:.
+        /// </summary>
+        internal static string Tab_WormholeInfo_Class {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo_Class", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max Jump Mass:.
+        /// </summary>
+        internal static string Tab_WormholeInfo_MaxJumpMass {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo_MaxJumpMass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max Mass Regeneration:.
+        /// </summary>
+        internal static string Tab_WormholeInfo_MaxMassRegeneration {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo_MaxMassRegeneration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max Stable Mass:.
+        /// </summary>
+        internal static string Tab_WormholeInfo_MaxStableMass {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo_MaxStableMass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max Stable Time:.
+        /// </summary>
+        internal static string Tab_WormholeInfo_MaxStableTime {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo_MaxStableTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name:.
+        /// </summary>
+        internal static string Tab_WormholeInfo_Name {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type:.
+        /// </summary>
+        internal static string Tab_WormholeInfo_Type {
+            get {
+                return ResourceManager.GetString("Tab_WormholeInfo_Type", resourceCulture);
             }
         }
         

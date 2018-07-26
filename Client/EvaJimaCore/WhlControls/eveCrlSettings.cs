@@ -69,9 +69,7 @@ namespace EveJimaCore.WhlControls
                 isNeedCloseApplication = true;
             }
 
-
             Global.ApplicationSettings.IsSignatureRebuildEnabled = crlIsSignatureRebuild.Checked;
-            
 
             if (Global.ApplicationSettings.Browser_IsOpenKillboardInNewTab != chkIsOpenNewTabForZkillboard.Checked)
             {

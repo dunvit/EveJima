@@ -35,7 +35,7 @@ namespace EveJimaCore.BLL
         public string SelectedSolarSystem { get; set; }
 
         //public CrestAuthorization CrestData { get; set; }
-        public EsiAuthorization EsiData { get; set; }
+        public EsiApi EsiData { get; set; }
 
         private DateTime _lastTokenUpdate;
 
@@ -161,7 +161,7 @@ namespace EveJimaCore.BLL
 
             //dynamic data = CrestData.ObtainingCharacterData();
 
-            EsiData = new EsiAuthorization(Global.ApplicationSettings.Authorization_ClientId, Global.ApplicationSettings.Authorization_ClientSecret);
+            EsiData = new EsiApi(Global.ApplicationSettings.Authorization_ClientId, Global.ApplicationSettings.Authorization_ClientSecret);
 
             EsiData.Refresh(refreshToken);
 
@@ -181,7 +181,7 @@ namespace EveJimaCore.BLL
         {
             Log.DebugFormat("[Pilot.Initialization] starting for token = {0}", token);
 
-            EsiData = new EsiAuthorization(Global.ApplicationSettings.Authorization_ClientId, Global.ApplicationSettings.Authorization_ClientSecret);
+            EsiData = new EsiApi(Global.ApplicationSettings.Authorization_ClientId, Global.ApplicationSettings.Authorization_ClientSecret);
             EsiData.Authorization(token);
 
             RefreshToken = EsiData.RefreshToken;
@@ -352,7 +352,6 @@ namespace EveJimaCore.BLL
                 LoadLocationInfo();
             }
         }
-
 
         public void ChangeLocation()
         {

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
-using CsvHelper;
-using EvaJimaCore;
 using Newtonsoft.Json.Linq;
 
 namespace EveJimaCore

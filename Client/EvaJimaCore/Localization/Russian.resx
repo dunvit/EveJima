@@ -351,4 +351,46 @@
   <data name="Tab_PilotsInfo" xml:space="preserve">
     <value>Информация о пилотах</value>
   </data>
+  <data name="Tab_WormholeInfo" xml:space="preserve">
+    <value>Информация о червоточинах</value>
+  </data>
+  <data name="Tab_WormholeInfo_Class" xml:space="preserve">
+    <value>Класс:</value>
+  </data>
+  <data name="Tab_WormholeInfo_MaxJumpMass" xml:space="preserve">
+    <value>Максимальная пропускная масса:</value>
+  </data>
+  <data name="Tab_WormholeInfo_MaxMassRegeneration" xml:space="preserve">
+    <value>Регенерация:</value>
+  </data>
+  <data name="Tab_WormholeInfo_MaxStableMass" xml:space="preserve">
+    <value>Масса стабильности:</value>
+  </data>
+  <data name="Tab_WormholeInfo_MaxStableTime" xml:space="preserve">
+    <value>Время стабильности:</value>
+  </data>
+  <data name="Tab_WormholeInfo_Name" xml:space="preserve">
+    <value>Название:</value>
+  </data>
+  <data name="Tab_WormholeInfo_Type" xml:space="preserve">
+    <value>Тип:</value>
+  </data>
+  <data name="Tab_Authorization_EditPilots" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
+  <data name="Tab_EditPilots_Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Tab_EditPilots_Message_AfterDelete" xml:space="preserve">
+    <value>* После операции "Сохранить" вы потеряете все данные для удаленных пилотов</value>
+  </data>
+  <data name="Tab_EditPilots_Message_NeedRestart" xml:space="preserve">
+    <value>* Операция "Сохранить" требует перезапуска EveJima</value>
+  </data>
+  <data name="Tab_EditPilots_Return" xml:space="preserve">
+    <value>Вернуться</value>
+  </data>
+  <data name="Tab_EditPilots_Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
 </root>

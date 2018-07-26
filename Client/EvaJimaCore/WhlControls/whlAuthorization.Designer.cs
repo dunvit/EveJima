@@ -36,6 +36,7 @@
             this.containerScreenUpdate = new System.Windows.Forms.Panel();
             this.lblUpdateLog = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnEditPilots = new EveJimaCore.whlButton();
             ((System.ComponentModel.ISupportInitialize)(this.crlPilotPortrait)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLogInWithEveOnline)).BeginInit();
             this.containerScreenUpdate.SuspendLayout();
@@ -135,11 +136,27 @@
             this.label1.Text = "Update server. Please wait.";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnEditPilots
+            // 
+            this.btnEditPilots.BackColor = System.Drawing.Color.Black;
+            this.btnEditPilots.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btnEditPilots.ForeColor = System.Drawing.Color.LightGray;
+            this.btnEditPilots.IsActive = true;
+            this.btnEditPilots.IsTabControlButton = false;
+            this.btnEditPilots.Location = new System.Drawing.Point(283, 20);
+            this.btnEditPilots.Name = "btnEditPilots";
+            this.btnEditPilots.Size = new System.Drawing.Size(155, 25);
+            this.btnEditPilots.TabIndex = 80;
+            this.btnEditPilots.Value = "Edit";
+            this.btnEditPilots.Visible = false;
+            this.btnEditPilots.Click += new System.EventHandler(this.btnEditPilots_Click);
+            // 
             // whlAuthorization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.Controls.Add(this.btnEditPilots);
             this.Controls.Add(this.containerScreenUpdate);
             this.Controls.Add(this.cmdLoadPilotes);
             this.Controls.Add(this.cmbPilots);
@@ -166,5 +183,6 @@
         private System.Windows.Forms.Panel containerScreenUpdate;
         private System.Windows.Forms.Label lblUpdateLog;
         private System.Windows.Forms.Label label1;
+        private whlButton btnEditPilots;
     }
 }

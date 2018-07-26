@@ -17,11 +17,11 @@ namespace EJTests
         [TestMethod]
         public void LoadAllGates()
         {
-            var esiAPI = new EsiAuthorization("e136434f8a0c484ab802666f378cac09", "bqbIMfDvaFfI9EPOGYmrVDeih9wPkDFnH3eW7GZY");
+            var esiAPI = new EsiApi("e136434f8a0c484ab802666f378cac09", "bqbIMfDvaFfI9EPOGYmrVDeih9wPkDFnH3eW7GZY");
 
             esiAPI.Refresh("VCajl13JWXZmJoZ0UxVJ4u3AHKh9FaNcb0bQ2mdQkGFfaLRhMrs0hw7_7xUjvJVPy6oHzIridqpUClbAOvBuSQ2");
 
-            var universe = new Universe();
+            var universe = new UniverseEntity();
             universe.Initialization();
 
             foreach(var system in universe.Systems)
@@ -86,7 +86,7 @@ namespace EJTests
         [TestMethod]
         public void TestMethod1()
         {
-            var esiAuthorization = new EsiAuthorization("e136434f8a0c484ab802666f378cac09", "bqbIMfDvaFfI9EPOGYmrVDeih9wPkDFnH3eW7GZY");
+            var esiAuthorization = new EsiApi("e136434f8a0c484ab802666f378cac09", "bqbIMfDvaFfI9EPOGYmrVDeih9wPkDFnH3eW7GZY");
 
             esiAuthorization.Refresh("VCajl13JWXZmJoZ0UxVJ4u3AHKh9FaNcb0bQ2mdQkGFfaLRhMrs0hw7_7xUjvJVPy6oHzIridqpUClbAOvBuSQ2");
 
@@ -101,7 +101,7 @@ namespace EJTests
                 var solarSystemId = esiAuthorization.GetSolarSystemIdByStargate(stargate);
             }
 
-            var space = new Universe();
+            var space = new UniverseEntity();
             space.Initialization();
 
             var solarSystemGare = space.GetSystemByName("Gare");
@@ -124,32 +124,32 @@ namespace EJTests
 
 
 
-        private IEnumerable<string> GetSystemsList(Universe universe, string solarSystemId, int range)
+        private IEnumerable<string> GetSystemsList(UniverseEntity universeEntity, string solarSystemId, int range)
         {
             var systems = new List<string>();
 
-            GetSystems(universe, solarSystemId, range, 0, systems);
+            GetSystems(universeEntity, solarSystemId, range, 0, systems);
 
             return systems;
         }
 
-        private void GetSystems(Universe universe, string solarSystemId, int range, int currentRange, List<string> systems)
+        private void GetSystems(UniverseEntity universeEntity, string solarSystemId, int range, int currentRange, List<string> systems)
         {
             currentRange = currentRange + 1;
 
             if(currentRange > range) return;
 
-            var linkedSystems = universe.GetLinkedSystems(solarSystemId);
+            var linkedSystems = universeEntity.GetLinkedSystems(solarSystemId);
 
             foreach (var system in linkedSystems.LinkedSystems)
             {
-                var linkedSystem = universe.GetSystemById(system);
+                var linkedSystem = universeEntity.GetSystemById(system);
 
                 if(systems.Contains(linkedSystem.Id) == false)
                 {
                     systems.Add(linkedSystem.Id);
 
-                    GetSystems(universe, linkedSystem.Id, range, currentRange, systems);
+                    GetSystems(universeEntity, linkedSystem.Id, range, currentRange, systems);
                 }
             }
 

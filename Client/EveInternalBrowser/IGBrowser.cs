@@ -125,21 +125,34 @@ namespace EveJimaIGB
         {
             for(var i = 0; i < browserTabControl.TabPages.Count; i++)
             {
-                var tab = browserTabControl.TabPages[browserTabControl.SelectedIndex].Tag as InternalWebBrowser;
+                if (browserTabControl.TabPages[i] == null) continue;
+
+                if (browserTabControl.TabPages[i].Tag == null) continue;
+
+                var tab = browserTabControl.TabPages[i].Tag as InternalWebBrowser;
+
+                try
+                {
+                    if (tab.Url != url) continue;
+
+                    var index = tab.Id;
+
+                    adrBarTextBox.Text = url;
+
+                    browserTabControl.SelectedTab = browserTabControl.TabPages[index];
+
+                    OnForceResize?.Invoke();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    _logger.ErrorFormat("[IGBrowser.TryOpenUrlInExistTab] Critical error on read tab data. Exception is {0}", ex);
+                }
 
                 if (tab == null) continue;
 
-                if (tab.Url != url) continue;
-
-                var index = tab.Id;
-
-                adrBarTextBox.Text = url;
-
-                browserTabControl.SelectedTab = browserTabControl.TabPages[index];
-
-                OnForceResize?.Invoke();
-
-                return true;
+                
             }
 
             return false;
@@ -148,6 +161,8 @@ namespace EveJimaIGB
         public void OpenNewTab(string url = "about:blank")
         {
             _logger.DebugFormat("[IGBrowser.OpenNewTab] Browser open new tab with url {0}", url);
+
+            if (TryOpenUrlInExistTab(url)) return;
 
             browserTabControl.SuspendLayout();
 

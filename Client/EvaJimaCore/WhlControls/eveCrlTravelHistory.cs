@@ -223,5 +223,10 @@ namespace EveJimaCore.WhlControls
 
             return signatures;
         }
+
+        private void eveCrlTravelHistory_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

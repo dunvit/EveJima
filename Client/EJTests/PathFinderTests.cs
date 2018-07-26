@@ -13,16 +13,16 @@ namespace EJTests
         [TestMethod]
         public void TestFullFlowTest()
         {
-            var universe = new Universe();
+            var universe = new UniverseEntity();
             universe.Initialization();
 
             var jita = universe.GetSystemByName("Jita");
 
-            var kills = EsiAuthorization.GetSystemKills(jita.Id);
+            var kills = EsiApi.GetSystemKills(jita.Id);
 
             var hek = universe.GetSystemByName("Hek");
 
-            var esiAPI = new EsiAuthorization("e136434f8a0c484ab802666f378cac09", "bqbIMfDvaFfI9EPOGYmrVDeih9wPkDFnH3eW7GZY");
+            var esiAPI = new EsiApi("e136434f8a0c484ab802666f378cac09", "bqbIMfDvaFfI9EPOGYmrVDeih9wPkDFnH3eW7GZY");
 
             esiAPI.Refresh("VCajl13JWXZmJoZ0UxVJ4u3AHKh9FaNcb0bQ2mdQkGFfaLRhMrs0hw7_7xUjvJVPy6oHzIridqpUClbAOvBuSQ2");
 

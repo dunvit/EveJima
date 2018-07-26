@@ -55,6 +55,8 @@ namespace EveJimaCore
 
         private eveCrlTravelHistory _containerTravelHistory;
 
+        private eveCrlWormholeInformation _containerWormholeInformation;
+
         private MapControl _containerMap;
 
         private EveCrlLocation _containerLocation;
@@ -64,6 +66,8 @@ namespace EveJimaCore
         private EveCrlSettings _containerSettings;
 
         private EveCrlPathfinder _containerPathfinder;
+
+        private eveCrlEditPilots _containerEditPilots;
 
         private whlVersion _containerVersion;
 
@@ -235,6 +239,8 @@ namespace EveJimaCore
         {
             //Log.Error("[MainEveJima.timerUpdateRegistry_Tick] Start checking");
 
+            var activeProgramName = "";
+
             try
             {
                 if(isNeedCheckActiveWindow == false)
@@ -259,9 +265,9 @@ namespace EveJimaCore
 
                 isNeedCheckActiveWindow = false;
 
-                var activeProgramName = Tools.GetActiveWindowTitle();
+                activeProgramName = Tools.GetActiveWindowTitle();
 
-                Log.Debug("[MainEveJima.timerUpdateRegistry_Tick] activeProgramName is '" + activeProgramName + "'");
+                Log.Info("[MainEveJima.timerUpdateRegistry_Tick] activeProgramName is '" + activeProgramName + "'");
 
                 if (activeProgramName == null && Global.LinkInterceptor.IsStarted)
                 {
@@ -271,9 +277,9 @@ namespace EveJimaCore
                     return;
                 }
 
-                //Log.DebugFormat("[MainEveJima.Event_RefreshActivePilot] Active title {0}", activeProgramName);
+                Log.InfoFormat("[MainEveJima.Event_RefreshActivePilot] Active title {0} and EveOnlineTitle is {1}", activeProgramName, EveJimaIGB.Global.Configuration.EveOnlineTitle);
 
-                if (activeProgramName.StartsWith("EVE - "))
+                if (activeProgramName.StartsWith(EveJimaIGB.Global.Configuration.EveOnlineTitle))
                 {
                     if (Global.LinkInterceptor.IsStarted == false)
                     {
@@ -300,7 +306,7 @@ namespace EveJimaCore
             }
             catch (Exception ex)
             {
-                Log.Error("[MainEveJima.timerUpdateRegistry_Tick] Critical error " + ex + "");
+                Log.Error("[MainEveJima.timerUpdateRegistry_Tick] Critical error. activeProgramName = '" + activeProgramName + "' " + ex + "");
                 isNeedCheckActiveWindow = true;
             }
 
@@ -346,6 +352,7 @@ namespace EveJimaCore
             _containerAuthorization = new whlAuthorization { Visible = false, Dock = DockStyle.Fill };
             _containerAuthorization.RefreshAuthorizationStatus();
             _containerAuthorization.OnSelectUser += Event_ChangeActivePilot;
+            _containerAuthorization.OnStartEditPilots += Event_StartEditPilots;
 
             _containerBrowser = new ucRichBrowser
             {
@@ -366,6 +373,14 @@ namespace EveJimaCore
 
             _containerPathfinder = new EveCrlPathfinder { Visible = false, Dock = DockStyle.Fill };
 
+            _containerEditPilots = new eveCrlEditPilots { Visible = false, Dock = DockStyle.Fill };
+
+            _containerEditPilots.OnClose += delegate
+            {
+                _containerAuthorization.Visible = true;
+                _containerEditPilots.Visible = false;
+            };
+
             _containerVersion = new whlVersion { Visible = false, Dock = DockStyle.Fill };
 
             _containerMap = new MapControl { Visible = false , Dock = DockStyle.Fill };
@@ -379,24 +394,30 @@ namespace EveJimaCore
             _containerTravelHistory = new eveCrlTravelHistory { Visible = false, Dock = DockStyle.Fill };
             _containerTravelHistory.OnUseModule += EventbAddMetric;
 
+            _containerWormholeInformation = new eveCrlWormholeInformation { Visible = false, Dock = DockStyle.Fill };
+
             _containerSolarSystemOffline = new whlSolarSystemOffline { Visible = false, Dock = DockStyle.Fill };
 
             pnlContainers.Controls.Add(_containerAuthorization);
             pnlContainers.Controls.Add(_containerBrowser);
             pnlContainers.Controls.Add(_containerBookmarks);
             pnlContainers.Controls.Add(_containerNeedLoadPilot);
-            
+            pnlContainers.Controls.Add(_containerEditPilots);
             pnlContainers.Controls.Add(_containerMap);
             pnlContainers.Controls.Add(_containerLocation);
             pnlContainers.Controls.Add(_containerRouter);
             pnlContainers.Controls.Add(_containerPilotInfo);
             pnlContainers.Controls.Add(_containerTravelHistory);
+            pnlContainers.Controls.Add(_containerWormholeInformation);
             pnlContainers.Controls.Add(_containerSolarSystemOffline);
             pnlContainers.Controls.Add(_containerSettings);
             pnlContainers.Controls.Add(_containerPathfinder);
             pnlContainers.Controls.Add(_containerVersion);
+        }
 
-            
+        private void Event_StartEditPilots()
+        {
+            crlToolbar.ActivatePanel("EditPilots");
         }
 
         private void Event_ChangeActivePilot(string activePilotName)
@@ -487,8 +508,18 @@ namespace EveJimaCore
                     _containerTravelHistory.Visible = true;
                     break;
 
+                case "WormholeInfo":
+                    _containerWormholeInformation.ActivateContainer();
+                    _containerWormholeInformation.Visible = true;
+                    break;
+
                 case "NeedLoadPilot":
                     _containerNeedLoadPilot.Visible = true;
+                    break;
+
+                case "EditPilots":
+                    _containerEditPilots.ActivateContainer();
+                    _containerEditPilots.Visible = true;
                     break;
             }
 
@@ -511,8 +542,10 @@ namespace EveJimaCore
                 crlToolbar.ActivatePanel("Browser");
 
                 Focus();
+                return;
             }
-            
+
+            System.Diagnostics.Process.Start(address);
         }
 
         public void StartPilotAuthorizeFlow(string value)

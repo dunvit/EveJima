@@ -33,6 +33,7 @@ namespace EveJimaCore.Logic.ToolBar
             cmdMenuElements.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_Router"), Value = "Router" });
             cmdMenuElements.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_TravelHistory"), Value = "TravelHistory" });
             cmdMenuElements.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_PilotsInfo"), Value = "PilotInfo" });
+            cmdMenuElements.AddItem(new ejcComboboxItem { Text = Global.Messages.Get("Tab_WormholeInfo"), Value = "WormholeInfo" });
 
             cmdMenuElements.ElementChanged += elementChanged_Event;
 
@@ -88,9 +89,11 @@ namespace EveJimaCore.Logic.ToolBar
             _metadata.Add("Pathfinder", new PanelMetaData { Size = new Size(900, 450), IsResizeEnabled = false, Enabled = false });
             _metadata.Add("Version", new PanelMetaData { Size = new Size(900, 500), IsResizeEnabled = false, Enabled = true });
             _metadata.Add("Router", new PanelMetaData { Size = standardSize, IsResizeEnabled = false, Enabled = false });
+            _metadata.Add("WormholeInfo", new PanelMetaData { Size = standardSize, IsResizeEnabled = false, Enabled = true });
             _metadata.Add("TravelHistory", new PanelMetaData { Size = standardSize, IsResizeEnabled = false, Enabled = false });
             _metadata.Add("PilotInfo", new PanelMetaData { Size = standardSize, IsResizeEnabled = false, Enabled = true });
             _metadata.Add("NeedLoadPilot", new PanelMetaData { Size = standardSize, IsResizeEnabled = false, Enabled = true });
+            _metadata.Add("EditPilots", new PanelMetaData { Size = standardSize, IsResizeEnabled = false, Enabled = true });
 
             if (LicenseManager.UsageMode == LicenseUsageMode.Runtime)
             {

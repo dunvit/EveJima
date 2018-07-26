@@ -50,7 +50,10 @@ namespace EveJimaCore.BLL.Browser
             }
             catch (Exception e)
             {
-                Log.Error("[Interceptor.StopIntercepting] Critical error " + e + "");
+                if(e.Message != "No value exists with that name.")
+                {
+                    Log.Error("[Interceptor.StopIntercepting] Critical error " + e + "");
+                }
             }
 
             IsStarted = false;

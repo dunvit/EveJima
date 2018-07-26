@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.props" Condition="Exists('..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.props')" />
-  <Import Project="..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.props')" />
-  <Import Project="..\packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props')" />
-  <Import Project="..\packages\cef.redist.x64.3.3239.1723\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.3.3239.1723\build\cef.redist.x64.props')" />
+  <Import Project="..\packages\CefSharp.WinForms.65.0.0-pre01\build\CefSharp.WinForms.props" Condition="Exists('..\packages\CefSharp.WinForms.65.0.0-pre01\build\CefSharp.WinForms.props')" />
+  <Import Project="..\packages\CefSharp.Common.65.0.0-pre01\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.65.0.0-pre01\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\cef.redist.x86.3.3325.1758\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.3.3325.1758\build\cef.redist.x86.props')" />
+  <Import Project="..\packages\cef.redist.x64.3.3325.1758\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.3.3325.1758\build\cef.redist.x64.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -61,10 +61,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
-      <HintPath>..\packages\CsvHelper.2.16.3.0\lib\net45\CsvHelper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="log4net, Version=2.0.7.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.7\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -104,9 +100,9 @@
     <Compile Include="BLL\PilotsEntity.cs" />
     <Compile Include="BLL\Router\Waypoint.cs" />
     <Compile Include="BLL\Router\Waypoints.cs" />
+    <Compile Include="Universe\PlanetarySystems.cs" />
+    <Compile Include="Universe\PlanetarySystem.cs" />
     <Compile Include="Browser\Address.cs" />
-    <Compile Include="Browser\Bookmarks.cs" />
-    <Compile Include="Browser\History.cs" />
     <Compile Include="Browser\InternalBrowser.cs" />
     <Compile Include="EjEnvironment\ClipboardEntity.cs" />
     <Compile Include="EveJimaPresenter.cs" />
@@ -232,6 +228,12 @@
     <Compile Include="WhlControls\ejButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WhlControls\eveCrlEditPilots.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\eveCrlEditPilots.Designer.cs">
+      <DependentUpon>eveCrlEditPilots.cs</DependentUpon>
+    </Compile>
     <Compile Include="WhlControls\eveCrlLocation.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -255,6 +257,12 @@
     </Compile>
     <Compile Include="WhlControls\eveCrlTravelHistory.Designer.cs">
       <DependentUpon>eveCrlTravelHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WhlControls\eveCrlWormholeInformation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\eveCrlWormholeInformation.Designer.cs">
+      <DependentUpon>eveCrlWormholeInformation.cs</DependentUpon>
     </Compile>
     <Compile Include="WhlControls\mapSolarSystem.cs">
       <SubType>UserControl</SubType>
@@ -303,7 +311,7 @@
     <Compile Include="Infrastructure\CcpXmlApi.cs" />
     <Compile Include="Infrastructure\CrestApiListener.cs" />
     <Compile Include="Infrastructure\CrestAuthorization.cs" />
-    <Compile Include="Infrastructure\EsiAuthorization.cs" />
+    <Compile Include="Infrastructure\EsiApi.cs" />
     <Compile Include="Infrastructure\Infrastructure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -432,6 +440,9 @@
     <EmbeddedResource Include="WhlControls\baseContainer.resx">
       <DependentUpon>baseContainer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\eveCrlEditPilots.resx">
+      <DependentUpon>eveCrlEditPilots.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\eveCrlLocation.resx">
       <DependentUpon>eveCrlLocation.cs</DependentUpon>
     </EmbeddedResource>
@@ -443,6 +454,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\eveCrlTravelHistory.resx">
       <DependentUpon>eveCrlTravelHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\eveCrlWormholeInformation.resx">
+      <DependentUpon>eveCrlWormholeInformation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\mapSolarSystem.resx">
       <DependentUpon>mapSolarSystem.cs</DependentUpon>
@@ -580,15 +594,15 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\cef.redist.x64.3.3239.1723\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.3.3239.1723\build\cef.redist.x64.props'))" />
-    <Error Condition="!Exists('..\packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x64.3.3325.1758\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.3.3325.1758\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x86.3.3325.1758\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.3.3325.1758\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.65.0.0-pre01\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.65.0.0-pre01\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.65.0.0-pre01\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.65.0.0-pre01\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.65.0.0-pre01\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.65.0.0-pre01\build\CefSharp.WinForms.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.65.0.0-pre01\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.65.0.0-pre01\build\CefSharp.WinForms.targets'))" />
   </Target>
-  <Import Project="..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets')" />
-  <Import Project="..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets')" />
+  <Import Project="..\packages\CefSharp.Common.65.0.0-pre01\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.65.0.0-pre01\build\CefSharp.Common.targets')" />
+  <Import Project="..\packages\CefSharp.WinForms.65.0.0-pre01\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.65.0.0-pre01\build\CefSharp.WinForms.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

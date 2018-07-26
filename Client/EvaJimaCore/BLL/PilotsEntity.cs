@@ -75,6 +75,16 @@ namespace EveJimaCore.BLL
             }
         }
 
+        public PilotEntity GetPilotInformation(string pilotName)
+        {
+            foreach (var pilot in _pilots.Where(pilot => pilot.Name.Trim() == pilotName.Trim()))
+            {
+                return pilot;
+            }
+
+            return null;
+        }
+
         public bool IsExist(long pilotId)
         {
             return _pilots.Any(pilot => pilot.Id == pilotId);
