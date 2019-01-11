@@ -6,11 +6,10 @@ namespace EveJimaCore
 {
     public class EveJimaPresenter
     {
-        public event Action<BLL.Map.Map> OnLocationChange;
         public event Action<string> OnEnterToSolarSystem;
-        public event Action<BLL.Map.Map> OnChangeActivePilot;
         public event Action<string> OnActivatePilot;
         public event Action<string> OnChangeScreen;
+        public event Action<string> OnRequestSolarSystemInformation;
         public event Action OnCloseApplication;
 
         public void AddPilotToMonitoringList(PilotEntity pilot)
@@ -20,15 +19,6 @@ namespace EveJimaCore
 
         public void GlobalEventsActivatePilot(string pilotName)
         {
-            if(pilotName == Global.Pilots.Selected.Name)
-            {
-                if(Global.ApplicationSettings.IsUseMap)
-                {
-                    OnLocationChange?.Invoke(Global.Pilots.Selected.SpaceMap);
-                    OnEnterToSolarSystem?.Invoke(Global.Pilots.Selected.SpaceMap.LocationSolarSystemName);
-                }
-            }
-
             OnActivatePilot?.Invoke(pilotName);
         }
 
@@ -43,24 +33,16 @@ namespace EveJimaCore
         public void GlobalEventsChangeActivePilot(string pilotName)
         {
             OnEnterToSolarSystem?.Invoke(Global.Pilots.Selected.Location.Name);
-
-            if (Global.ApplicationSettings.IsUseMap == false) return;
-
-            OnChangeActivePilot?.Invoke(Global.Pilots.Selected.SpaceMap);
-            OnLocationChange?.Invoke(Global.Pilots.Selected.SpaceMap);
-            
-        }
-
-        public void GlobalEventsSelectSolarSystem(string solarSystemName)
-        {
-            if (Global.ApplicationSettings.IsUseMap == false) return;
-
-            Global.Pilots.Selected.SpaceMap.SelectedSolarSystemName = solarSystemName;
         }
 
         public void ChangeScreen(string screen)
         {
             OnChangeScreen?.Invoke(screen);
+        }
+
+        public void RequestSolarSystemInformation(string systemName)
+        {
+            OnRequestSolarSystemInformation?.Invoke(systemName);
         }
 
         public void Close()

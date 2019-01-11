@@ -200,10 +200,6 @@
       <Project>{c23fded6-0d07-42c6-ba3a-f0e9b5c1d592}</Project>
       <Name>EveInternalBrowser</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EveJimaBrowserInterceptor\EveJimaBrowserInterceptor.csproj">
-      <Project>{0b762bec-03a3-4acd-ab86-92c970b26722}</Project>
-      <Name>EveJimaBrowserInterceptor</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Browser\dummy.txt">

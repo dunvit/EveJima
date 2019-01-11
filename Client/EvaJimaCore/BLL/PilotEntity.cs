@@ -28,8 +28,6 @@ namespace EveJimaCore.BLL
 
         public Image Portrait { get; set; }
 
-        public Map.Map SpaceMap { get; set; }
-
         public EveJimaUniverse.System Location { get; set; }
 
         public string SelectedSolarSystem { get; set; }
@@ -69,30 +67,7 @@ namespace EveJimaCore.BLL
             _updateMapTimer.Elapsed += Event_Refresh;
             _updateMapTimer.Interval = 5000;
             _updateMapTimer.Enabled = true;
-
-            if (Global.ApplicationSettings.IsUseMap == false) return;
-
-
-            SpaceMap = new Map.Map { Key = Key, ActivePilot = Name, SelectedSolarSystemName = Location.Name };
-            
-            SpaceMap.OnChangeStatus += GetMapMessage;
-
-            
-
-            SpaceMap.Activate(Name, Location.Name);
-
-            SpaceMap.ApiPublishSolarSystem(Name, Key, null, LocationCurrentSystemName);
-
-            OnEnterToSolarSystem += SpaceMap.RelocatePilot;
-
-            if (SpaceMap != null) ChangeLocation();
-
-            
-        }
-
-        private void GetMapMessage(string message)
-        {
-            Log.Info(message);
+           
         }
 
         private bool _loadingData;
@@ -126,24 +101,8 @@ namespace EveJimaCore.BLL
             {
                 RefreshInfo();
             });
-
-            if (Global.Pilots.Selected.Name == Name && Global.ApplicationSettings.IsUseMap)
-            {
-                Task.Run(() =>
-                {
-                    UpdateMap();
-                });
-            }
         }
 
-        private void UpdateMap()
-        {
-            Log.DebugFormat($"[Pilot.UpdateMap] starting update map for pilot for id = {Id} name= {Name} location {Location.Name}");
-
-            if (Location.Name == "unknown") return;
-
-            Global.MapApiFunctions.UpdateMap(SpaceMap);
-        }
 
         public string RefreshToken { get; set; }
 
@@ -194,17 +153,6 @@ namespace EveJimaCore.BLL
             LoadLocationInfo();
 
             if(Key == null) Key = Name + "'s map"; 
-
-            if(Location.Name != "unknown")
-            {
-                SpaceMap = new Map.Map { Key = Key, ActivePilot = Name, SelectedSolarSystemName = Location.Name };
-
-                SpaceMap.Activate(Name, Location.Name);
-
-                SpaceMap.ApiPublishSolarSystem(Name, Key, null, LocationCurrentSystemName);
-
-                OnEnterToSolarSystem += SpaceMap.RelocatePilot;
-            }
 
             LoadCharacterInfo();
 
@@ -359,20 +307,9 @@ namespace EveJimaCore.BLL
 
             Log.InfoFormat("[Pilot '{3}'] Publish system with key {0} from {1} to {2} ", Name, LocationPreviousSystemName, LocationCurrentSystemName, Name);
 
-            if(Global.ApplicationSettings.IsUseMap)
-                SpaceMap.Publish(Name, LocationPreviousSystemName, LocationCurrentSystemName);
-
-            if (OnChangeSolarSystem == null) return;
-
-            Log.InfoFormat("[Pilot '{3}'] Call OnChangeSolarSystem with key after publish {0} from {1} to {2} ", Name, LocationPreviousSystemName, LocationCurrentSystemName, Name);
-
             try
             {
-                if (Global.ApplicationSettings.IsUseMap)
-                    SpaceMap.SelectedSolarSystemName = LocationCurrentSystemName;
-
-                if (OnChangeSolarSystem != null) OnChangeSolarSystem(this, LocationPreviousSystemName, LocationCurrentSystemName);
-                if(OnEnterToSolarSystem != null)  OnEnterToSolarSystem(Name, LocationPreviousSystemName, LocationCurrentSystemName);
+                OnEnterToSolarSystem?.Invoke(Name, LocationPreviousSystemName, LocationCurrentSystemName);
             }
             catch (Exception exception)
             {

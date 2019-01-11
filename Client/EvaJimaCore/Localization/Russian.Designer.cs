@@ -142,7 +142,7 @@ namespace EveJimaCore.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вставить космические сигнатуры.
+        ///   Looks up a localized string similar to Вставить сигнатуры.
         /// </summary>
         internal static string Tab_Bookmarks_PasteCosmicSignatures {
             get {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EveJimaCore.Logic.ToolBar
+namespace EveJimaCore.Main
 {
     class ToolBarView
     {

@@ -1,14 +1,40 @@
-﻿- Update token in new storage (ApplicationSettings) UpdatePilotToStorage(_currentPilot);
-- Add separated task for using (var client = new WebClient())
+﻿
+
+- Add Cef.Shutdown() in InternalBrowser
+- In Browser button [+] show on all EJ surface
+! Bookmarks rebuild system
+
++ Enable all tabs after login pilot
++ Add pilot tracking
++ Repair start EveJima in previous session position
++ Start from Pilots tab, not from Browser
++ Enable Prev Next buttons in Browser (+)
++ Add get solar system from clopboard and open screen "Information"
++ Remove BrowserInterception system
++ Remove button grey border from browser
++ Open zkillboard for pilot in clipboard
++ Fix Internal browser
++ Open version control for new version
++ Hide module "Pathfinder"
++ Add refresh toolbar buttons after load active pilots
++ Fix height of control "Settings"
++ Fix combobox width in control "Wormhole information"
++ Add cursor hand for all controls after activate activate pilot
++ Add control "Edit user" to new base window
++ Block Browser if in settings browser removed
++ Move clipboard monitoring (ClipboardMonitoring) from IGB to baseWindow 
++ Add title text to new base window
++ Add new toolbar
++ Move all WinAPI to baseWindow
++ Rebuild metrics (WebBrowser)
 
 
-Map:
-
-- Add select Solar system and right mouse button (for relocate operation)
-- Rebuild connection after update and hide not connected to map solar systems
 
 
-Before release:
 
-- Disable click event in inactive button "Location"
+
+
+
+
+
 

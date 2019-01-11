@@ -26,7 +26,7 @@ namespace EveJimaIGB
 
         public bool IsShowFavorites { get; set; }
 
-        private ClipboardMonitoring clipboardMonitoring { get;  }
+        
 
         public bool IsOpenKillBoardInNewTab { get; set; }
 
@@ -43,13 +43,6 @@ namespace EveJimaIGB
             IsShowFavorites = false;
 
             Favorites = new Favorites();
-
-            var configuration = new Config();
-
-            clipboardMonitoring = new ClipboardMonitoring(configuration);
-            
-            clipboardMonitoring.GetValueFromClipboard += Event_GetValueFromClipboard;
-            
 
             linkMonitoring = new LinkMonitoring();
             linkMonitoring.GetUrlFromFile += Event_GetUrl;
@@ -84,42 +77,7 @@ namespace EveJimaIGB
         }
 
 
-        private void Event_GetValueFromClipboard(string value)
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new Action(() => Event_GetValueFromClipboard(value)));
-                return;
-            }
-
-            try
-            {
-                var url = Zkillboard.GetZkillboardUrlByName(value);
-
-                if (string.IsNullOrEmpty(url)) return;
-
-                if(TryOpenUrlInExistTab(url)) return;
-
-                adrBarTextBox.Text = url;
-
-                if(IsOpenKillBoardInNewTab)
-                {
-                    OpenNewTab(url);
-                }
-                else
-                {
-                    Navigate(url);
-                }
-
-                OnForceResize?.Invoke();
-            }
-            catch(Exception ex)
-            {
-                _logger.ErrorFormat("[IGBrowser.Event_GetValueFromClipboard] Critical error on open new tab from clipboard with url {0} Exception is {1}", value, ex.Message);
-            }
-
-            
-        }
+        
 
         private bool TryOpenUrlInExistTab(string url)
         {

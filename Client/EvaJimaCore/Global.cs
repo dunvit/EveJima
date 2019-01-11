@@ -1,8 +1,6 @@
 ﻿using EveJimaCore;
 using EveJimaCore.BLL;
-using EveJimaCore.BLL.Browser;
 using EveJimaCore.BLL.LostAndFound;
-using EveJimaCore.BLL.Map;
 using EveJimaCore.EjEnvironment;
 using EveJimaCore.Universe;
 using EveJimaUniverse;
@@ -14,13 +12,9 @@ namespace EvaJimaCore
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(Global));
 
-        public static EveJimaMessages Messages;
-
         public static WorkEnvironment WorkEnvironment;
 
         public static ApplicationSettings ApplicationSettings;
-
-        public static MapApiFunctions MapApiFunctions;
 
         public static PilotsEntity Pilots;
 
@@ -40,8 +34,6 @@ namespace EvaJimaCore
 
         public static EsiApi EsiTools;
 
-        public static Interceptor LinkInterceptor;
-
         public static ClipboardEntity Clipboard;
 
 
@@ -51,14 +43,7 @@ namespace EvaJimaCore
 
             ApplicationSettings = new ApplicationSettings();
 
-            LinkInterceptor = new Interceptor(ApplicationSettings.IsInterceptLinksFromEVE);
-
-            MapApiFunctions = new MapApiFunctions();
-            MapApiFunctions.Initialization(ApplicationSettings.Server_MapAddress);
-
             WorkEnvironment = new WorkEnvironment();
-
-            Messages = new EveJimaMessages();
 
             Metrics = new MetricsWriter();
 

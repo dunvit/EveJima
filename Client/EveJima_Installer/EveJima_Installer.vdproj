@@ -171,12 +171,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5164B759F532908145D582E58FCBF305"
-        "OwnerKey" = "8:_FDA3C4458A6D79AB1AE6197CDD10129C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_52D109C620E25E5732F3559F1B636F20"
         "OwnerKey" = "8:_DBE376F4762F03470E4CEFC807516DB8"
         "MsmSig" = "8:_UNDEFINED"
@@ -191,12 +185,6 @@
         {
         "MsmKey" = "8:_541C38E0465F46E38EB78B0210E66A81"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5BC2EE32EA99E7E6B4C1B3E1AF6621AD"
-        "OwnerKey" = "8:_FDA3C4458A6D79AB1AE6197CDD10129C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -267,32 +255,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_7CF865152F5A7BA83E8EAB3A87E9943B"
-        "OwnerKey" = "8:_347A13FF68F4462786A8F595C59FCED1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_81CF7DCEA66791FB208E772F8BABB4A2"
         "OwnerKey" = "8:_A7E5E1786EF90DA5FC94796E98146C51"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_81CF7DCEA66791FB208E772F8BABB4A2"
-        "OwnerKey" = "8:_BF2F9067BD424B4892A9AA4DD7D667D3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_81CF7DCEA66791FB208E772F8BABB4A2"
-        "OwnerKey" = "8:_7CF865152F5A7BA83E8EAB3A87E9943B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_81CF7DCEA66791FB208E772F8BABB4A2"
-        "OwnerKey" = "8:_347A13FF68F4462786A8F595C59FCED1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -461,12 +425,6 @@
         {
         "MsmKey" = "8:_AB25E222C7C42E8624107C939AF7BE74"
         "OwnerKey" = "8:_A311562574A5C5833F6497D9DE809F42"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_AB25E222C7C42E8624107C939AF7BE74"
-        "OwnerKey" = "8:_FDA3C4458A6D79AB1AE6197CDD10129C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -651,36 +609,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_FDA3C4458A6D79AB1AE6197CDD10129C"
-        "OwnerKey" = "8:_A311562574A5C5833F6497D9DE809F42"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FDA3C4458A6D79AB1AE6197CDD10129C"
-        "OwnerKey" = "8:_87E1030CD2624204B40D539E7E892AAE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BF2F9067BD424B4892A9AA4DD7D667D3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_347A13FF68F4462786A8F595C59FCED1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7CF865152F5A7BA83E8EAB3A87E9943B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_87E1030CD2624204B40D539E7E892AAE"
         "MsmSig" = "8:_UNDEFINED"
@@ -718,12 +646,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FDA3C4458A6D79AB1AE6197CDD10129C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_5BC2EE32EA99E7E6B4C1B3E1AF6621AD"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -747,7 +669,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\EveJima_Installer.msi"
+        "OutputFilename" = "8:v207\\EveJima_Installer.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -811,6 +733,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
     }
@@ -1108,11 +1038,6 @@
             "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess, Version=65.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_347A13FF68F4462786A8F595C59FCED1"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.exe"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:C:\\temp\\AdditionalFiles\\CefSharp.BrowserSubprocess.exe"
             "TargetName" = "8:"
@@ -1605,37 +1530,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7CF865152F5A7BA83E8EAB3A87E9943B"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=65.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_7CF865152F5A7BA83E8EAB3A87E9943B"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.Core.DLL"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:CefSharp.BrowserSubprocess.Core.DLL"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_81CF7DCEA66791FB208E772F8BABB4A2"
             {
             "AssemblyRegister" = "3:1"
@@ -1971,7 +1865,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EveJimaCore, Version=4.3.6778.29228, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:EveJimaCore, Version=4.3.6937.17683, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_A311562574A5C5833F6497D9DE809F42"
@@ -2287,11 +2181,6 @@
             "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=65.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_BF2F9067BD424B4892A9AA4DD7D667D3"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.Core.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:C:\\temp\\AdditionalFiles\\CefSharp.BrowserSubprocess.Core.dll"
             "TargetName" = "8:"
@@ -2682,37 +2571,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FDA3C4458A6D79AB1AE6197CDD10129C"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EveJimaServerMap, Version=4.3.6778.29226, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_FDA3C4458A6D79AB1AE6197CDD10129C"
-                    {
-                    "Name" = "8:EveJimaServerMap.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:EveJimaServerMap.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
         }
         "FileType"
         {
@@ -2780,7 +2638,7 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:EveJima_Installer"
-        "ProductCode" = "8:{C7EFF3A3-218A-47D2-8DA0-9AB5CB8057D2}"
+        "ProductCode" = "8:{E5F07C6D-347D-49C3-9B35-61C0F899B0C3}"
         "PackageCode" = "8:{5B33D305-9C67-44AC-B7F7-B918BD72EC45}"
         "UpgradeCode" = "8:{25761A12-4BE9-47DA-BD21-913362A41414}"
         "AspNetVersion" = "8:4.0.30319.0"
@@ -2788,7 +2646,7 @@
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:2.0.10"
+        "ProductVersion" = "8:2.1.15"
         "Manufacturer" = "8:Vitaly Sushilov"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

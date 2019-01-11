@@ -84,15 +84,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\Browser\Interceptor.cs" />
     <Compile Include="BLL\LostAndFound\LostSolarSystem.cs" />
     <Compile Include="BLL\LostAndFound\LostSolarSystems.cs" />
-    <Compile Include="BLL\Map\Map.cs" />
-    <Compile Include="BLL\Map\MapApiFunctions.cs" />
-    <Compile Include="BLL\Map\MapTools.cs" />
-    <Compile Include="BLL\Map\MapUpdateHistory.cs" />
-    <Compile Include="BLL\Map\PilotLocation.cs" />
-    <Compile Include="BLL\EveJimaMessages.cs" />
+    <Compile Include="EveJimaWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EveJimaWindow.Designer.cs">
+      <DependentUpon>EveJimaWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Events\AbstractMonitor.cs" />
+    <Compile Include="Events\TestMonitor.cs" />
+    <Compile Include="Localization\Messages.cs" />
     <Compile Include="BLL\MetricsWriter.cs" />
     <Compile Include="BLL\Navigator\Path.cs" />
     <Compile Include="BLL\PathFinder.cs" />
@@ -100,6 +102,26 @@
     <Compile Include="BLL\PilotsEntity.cs" />
     <Compile Include="BLL\Router\Waypoint.cs" />
     <Compile Include="BLL\Router\Waypoints.cs" />
+    <Compile Include="Logic\ContainerModel.cs" />
+    <Compile Include="Logic\ControlsMetaData.cs" />
+    <Compile Include="Main\EveJimaTabsMetaData.cs" />
+    <Compile Include="Main\EveJimaTitlebar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Main\EveJimaTitlebar.Designer.cs">
+      <DependentUpon>EveJimaTitlebar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\EveJimaToolbar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Main\EveJimaToolbar.Designer.cs">
+      <DependentUpon>EveJimaToolbar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Events\ChangeActiveWindow\ActiveWindowMonitoring.cs" />
+    <Compile Include="Events\CopyBookmarks\BookmarksMonitoring.cs" />
+    <Compile Include="Events\ChangeClipboard\ClipboardMonitoring.cs" />
+    <Compile Include="Events\EventsMonitoring.cs" />
+    <Compile Include="UiTools\DebugTools.cs" />
     <Compile Include="Universe\PlanetarySystems.cs" />
     <Compile Include="Universe\PlanetarySystem.cs" />
     <Compile Include="Browser\Address.cs" />
@@ -120,98 +142,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Russian.resx</DependentUpon>
     </Compile>
-    <Compile Include="Logic\MapInformation\AMapInformationModel.cs" />
-    <Compile Include="Logic\MapInformation\AMapInformationPresenter.cs" />
-    <Compile Include="Logic\MapInformation\IAMapInformationModel.cs" />
-    <Compile Include="Logic\MapInformation\IAMapInformationView.cs" />
     <Compile Include="Logic\IPresenter.cs" />
     <Compile Include="Logic\IView.cs" />
-    <Compile Include="Logic\MapInformation\MapControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Logic\MapInformation\MapControl.Designer.cs">
-      <DependentUpon>MapControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\IMapInformationControl.cs" />
-    <Compile Include="Logic\MapInformation\Views\InformationMapBookmarks.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\InformationMapBookmarks.Designer.cs">
-      <DependentUpon>InformationMapBookmarks.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\InformationMapSettingsView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\InformationMapSettingsView.Designer.cs">
-      <DependentUpon>InformationMapSettingsView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\InformationPilotesView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\InformationPilotesView.Designer.cs">
-      <DependentUpon>InformationPilotesView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\InformationSignaturesView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\InformationSignaturesView.Designer.cs">
-      <DependentUpon>InformationSignaturesView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\SolarSystemInformationControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\SolarSystemInformationControl.Designer.cs">
-      <DependentUpon>SolarSystemInformationControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\MapInformationControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\MapInformationControl.Designer.cs">
-      <DependentUpon>MapInformationControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\MapView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\MapView.Designer.cs">
-      <DependentUpon>MapView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\ToolbarView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Logic\MapInformation\Views\ToolbarView.Designer.cs">
-      <DependentUpon>ToolbarView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Logic\ScreenUpdateToServer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Logic\ScreenUpdateToServer.Designer.cs">
-      <DependentUpon>ScreenUpdateToServer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Logic\ToolBar\MapToolbarControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Logic\ToolBar\MapToolbarControl.Designer.cs">
-      <DependentUpon>MapToolbarControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Logic\ToolBar\PanelMetaData.cs" />
     <Compile Include="Logic\ToolBar\ToolBarModel.cs" />
     <Compile Include="Logic\ToolBar\ToolBarPresenter.cs" />
     <Compile Include="Logic\ToolBar\ToolBarView.cs" />
-    <Compile Include="MainEveJima.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainEveJima.Designer.cs">
-      <DependentUpon>MainEveJima.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainScreen\MainEveJimaEvents.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainScreen\MainEveJimaTools.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="MainScreen\WindowParameters.cs" />
-    <Compile Include="Messages.cs" />
-    <Compile Include="Monitoring\RegistryMonitoring.cs" />
     <Compile Include="ScheduledTasks\UserCounter.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="UiTools\ejcComboBox.cs">
@@ -223,22 +160,21 @@
     <Compile Include="UiTools\FlattenCombo.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UiTools\MessageBoxLoader.cs" />
     <Compile Include="UiTools\SystemLine.cs" />
     <Compile Include="WhlControls\ejButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WhlControls\eveCrlEditPilots.cs">
+    <Compile Include="WhlControls\ControlEditPilots.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WhlControls\eveCrlEditPilots.Designer.cs">
-      <DependentUpon>eveCrlEditPilots.cs</DependentUpon>
+    <Compile Include="WhlControls\ControlEditPilots.Designer.cs">
+      <DependentUpon>ControlEditPilots.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhlControls\eveCrlLocation.cs">
+    <Compile Include="WhlControls\ControlCurrentLocation.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WhlControls\eveCrlLocation.Designer.cs">
-      <DependentUpon>eveCrlLocation.cs</DependentUpon>
+    <Compile Include="WhlControls\ControlCurrentLocation.Designer.cs">
+      <DependentUpon>ControlCurrentLocation.cs</DependentUpon>
     </Compile>
     <Compile Include="WhlControls\eveCrlPathfinder.cs">
       <SubType>UserControl</SubType>
@@ -246,23 +182,26 @@
     <Compile Include="WhlControls\eveCrlPathfinder.Designer.cs">
       <DependentUpon>eveCrlPathfinder.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhlControls\eveCrlSettings.cs">
+    <Compile Include="WhlControls\ControlSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WhlControls\eveCrlSettings.Designer.cs">
-      <DependentUpon>eveCrlSettings.cs</DependentUpon>
+    <Compile Include="WhlControls\ControlSettings.Designer.cs">
+      <DependentUpon>ControlSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhlControls\eveCrlTravelHistory.cs">
+    <Compile Include="WhlControls\ControlTravelHistory.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WhlControls\eveCrlTravelHistory.Designer.cs">
-      <DependentUpon>eveCrlTravelHistory.cs</DependentUpon>
+    <Compile Include="WhlControls\ControlTravelHistory.Designer.cs">
+      <DependentUpon>ControlTravelHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhlControls\eveCrlWormholeInformation.cs">
+    <Compile Include="WhlControls\ControlWormholeInformation.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WhlControls\eveCrlWormholeInformation.Designer.cs">
-      <DependentUpon>eveCrlWormholeInformation.cs</DependentUpon>
+    <Compile Include="WhlControls\ControlWormholeInformation.Designer.cs">
+      <DependentUpon>ControlWormholeInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WhlControls\EveJimaTabControl.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="WhlControls\mapSolarSystem.cs">
       <SubType>UserControl</SubType>
@@ -282,29 +221,32 @@
     <Compile Include="WhlControls\mapSolarSystemWSpace.Designer.cs">
       <DependentUpon>mapSolarSystemWSpace.cs</DependentUpon>
     </Compile>
+    <Compile Include="Monitoring\MonitoringUsersCounter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Monitoring\MonitoringUsersCounter.Designer.cs">
+      <DependentUpon>MonitoringUsersCounter.cs</DependentUpon>
+    </Compile>
     <Compile Include="WhlControls\whlLostAndFoundOffice.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WhlControls\whlLostAndFoundOffice.Designer.cs">
       <DependentUpon>whlLostAndFoundOffice.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhlControls\whlRouter.cs">
+    <Compile Include="WhlControls\ControlRouter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WhlControls\whlRouter.Designer.cs">
-      <DependentUpon>whlRouter.cs</DependentUpon>
+    <Compile Include="WhlControls\ControlRouter.Designer.cs">
+      <DependentUpon>ControlRouter.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhlControls\whlNeedLoadPilot.cs">
+    <Compile Include="WhlControls\ControlNeedLoadPilot.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WhlControls\whlNeedLoadPilot.Designer.cs">
-      <DependentUpon>whlNeedLoadPilot.cs</DependentUpon>
+    <Compile Include="WhlControls\ControlNeedLoadPilot.Designer.cs">
+      <DependentUpon>ControlNeedLoadPilot.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhlControls\windowMessage.cs">
+    <Compile Include="Window\EveJimaBaseWindow.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WhlControls\windowMessage.Designer.cs">
-      <DependentUpon>windowMessage.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkEnvironment.cs" />
     <Compile Include="Global.cs" />
@@ -328,23 +270,23 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WhlControls\controlsDelegates.cs" />
-    <Compile Include="WhlControls\ucRichBrowser.cs">
+    <Compile Include="WhlControls\ControlRichBrowser.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WhlControls\ucRichBrowser.Designer.cs">
-      <DependentUpon>ucRichBrowser.cs</DependentUpon>
+    <Compile Include="WhlControls\ControlRichBrowser.Designer.cs">
+      <DependentUpon>ControlRichBrowser.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhlControls\whlAuthorization.cs">
+    <Compile Include="WhlControls\ControlAuthorization.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WhlControls\whlAuthorization.Designer.cs">
-      <DependentUpon>whlAuthorization.cs</DependentUpon>
+    <Compile Include="WhlControls\ControlAuthorization.Designer.cs">
+      <DependentUpon>ControlAuthorization.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhlControls\whlBookmarks.cs">
+    <Compile Include="WhlControls\ControlBookmarks.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WhlControls\whlBookmarks.Designer.cs">
-      <DependentUpon>whlBookmarks.cs</DependentUpon>
+    <Compile Include="WhlControls\ControlBookmarks.Designer.cs">
+      <DependentUpon>ControlBookmarks.cs</DependentUpon>
     </Compile>
     <Compile Include="WhlControls\whlButton.cs">
       <SubType>UserControl</SubType>
@@ -352,29 +294,23 @@
     <Compile Include="WhlControls\whlButton.Designer.cs">
       <DependentUpon>whlButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhlControls\whlPilotInfo.cs">
+    <Compile Include="WhlControls\ControlPilotInformation.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WhlControls\whlPilotInfo.Designer.cs">
-      <DependentUpon>whlPilotInfo.cs</DependentUpon>
+    <Compile Include="WhlControls\ControlPilotInformation.Designer.cs">
+      <DependentUpon>ControlPilotInformation.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhlControls\whlSolarSystem.cs">
+    <Compile Include="WhlControls\ControlSolarSystemInformation.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WhlControls\whlSolarSystem.Designer.cs">
-      <DependentUpon>whlSolarSystem.cs</DependentUpon>
+    <Compile Include="WhlControls\ControlSolarSystemInformation.Designer.cs">
+      <DependentUpon>ControlSolarSystemInformation.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhlControls\whlSolarSystemOffline.cs">
+    <Compile Include="WhlControls\ControlGetNewVersion.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WhlControls\whlSolarSystemOffline.Designer.cs">
-      <DependentUpon>whlSolarSystemOffline.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WhlControls\whlVersion.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WhlControls\whlVersion.Designer.cs">
-      <DependentUpon>whlVersion.cs</DependentUpon>
+    <Compile Include="WhlControls\ControlGetNewVersion.Designer.cs">
+      <DependentUpon>ControlGetNewVersion.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -382,6 +318,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="EveJimaWindow.resx">
+      <DependentUpon>EveJimaWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\English.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>English.Designer.cs</LastGenOutput>
@@ -390,41 +329,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Russian.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Logic\MapInformation\MapControl.resx">
-      <DependentUpon>MapControl.cs</DependentUpon>
+    <EmbeddedResource Include="Main\EveJimaTitlebar.resx">
+      <DependentUpon>EveJimaTitlebar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Logic\MapInformation\Views\InformationMapBookmarks.resx">
-      <DependentUpon>InformationMapBookmarks.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Logic\MapInformation\Views\InformationMapSettingsView.resx">
-      <DependentUpon>InformationMapSettingsView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Logic\MapInformation\Views\InformationPilotesView.resx">
-      <DependentUpon>InformationPilotesView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Logic\MapInformation\Views\InformationSignaturesView.resx">
-      <DependentUpon>InformationSignaturesView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Logic\MapInformation\Views\SolarSystemInformationControl.resx">
-      <DependentUpon>SolarSystemInformationControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Logic\MapInformation\Views\MapInformationControl.resx">
-      <DependentUpon>MapInformationControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Logic\MapInformation\Views\MapView.resx">
-      <DependentUpon>MapView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Logic\MapInformation\Views\ToolbarView.resx">
-      <DependentUpon>ToolbarView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Logic\ScreenUpdateToServer.resx">
-      <DependentUpon>ScreenUpdateToServer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Logic\ToolBar\MapToolbarControl.resx">
-      <DependentUpon>MapToolbarControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainEveJima.resx">
-      <DependentUpon>MainEveJima.cs</DependentUpon>
+    <EmbeddedResource Include="Main\EveJimaToolbar.resx">
+      <DependentUpon>EveJimaToolbar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -440,23 +349,23 @@
     <EmbeddedResource Include="WhlControls\baseContainer.resx">
       <DependentUpon>baseContainer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\eveCrlEditPilots.resx">
-      <DependentUpon>eveCrlEditPilots.cs</DependentUpon>
+    <EmbeddedResource Include="WhlControls\ControlEditPilots.resx">
+      <DependentUpon>ControlEditPilots.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\eveCrlLocation.resx">
-      <DependentUpon>eveCrlLocation.cs</DependentUpon>
+    <EmbeddedResource Include="WhlControls\ControlCurrentLocation.resx">
+      <DependentUpon>ControlCurrentLocation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\eveCrlPathfinder.resx">
       <DependentUpon>eveCrlPathfinder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\eveCrlSettings.resx">
-      <DependentUpon>eveCrlSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WhlControls\ControlSettings.resx">
+      <DependentUpon>ControlSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\eveCrlTravelHistory.resx">
-      <DependentUpon>eveCrlTravelHistory.cs</DependentUpon>
+    <EmbeddedResource Include="WhlControls\ControlTravelHistory.resx">
+      <DependentUpon>ControlTravelHistory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\eveCrlWormholeInformation.resx">
-      <DependentUpon>eveCrlWormholeInformation.cs</DependentUpon>
+    <EmbeddedResource Include="WhlControls\ControlWormholeInformation.resx">
+      <DependentUpon>ControlWormholeInformation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\mapSolarSystem.resx">
       <DependentUpon>mapSolarSystem.cs</DependentUpon>
@@ -467,14 +376,17 @@
     <EmbeddedResource Include="WhlControls\mapSolarSystemWSpace.resx">
       <DependentUpon>mapSolarSystemWSpace.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\ucRichBrowser.resx">
-      <DependentUpon>ucRichBrowser.cs</DependentUpon>
+    <EmbeddedResource Include="WhlControls\ControlRichBrowser.resx">
+      <DependentUpon>ControlRichBrowser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\whlAuthorization.resx">
-      <DependentUpon>whlAuthorization.cs</DependentUpon>
+    <EmbeddedResource Include="WhlControls\ControlAuthorization.resx">
+      <DependentUpon>ControlAuthorization.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\whlBookmarks.resx">
-      <DependentUpon>whlBookmarks.cs</DependentUpon>
+    <EmbeddedResource Include="WhlControls\ControlBookmarks.resx">
+      <DependentUpon>ControlBookmarks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Monitoring\MonitoringUsersCounter.resx">
+      <DependentUpon>MonitoringUsersCounter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\whlButton.resx">
       <DependentUpon>whlButton.cs</DependentUpon>
@@ -482,26 +394,20 @@
     <EmbeddedResource Include="WhlControls\whlLostAndFoundOffice.resx">
       <DependentUpon>whlLostAndFoundOffice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\whlPilotInfo.resx">
-      <DependentUpon>whlPilotInfo.cs</DependentUpon>
+    <EmbeddedResource Include="WhlControls\ControlPilotInformation.resx">
+      <DependentUpon>ControlPilotInformation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\whlRouter.resx">
-      <DependentUpon>whlRouter.cs</DependentUpon>
+    <EmbeddedResource Include="WhlControls\ControlRouter.resx">
+      <DependentUpon>ControlRouter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\whlNeedLoadPilot.resx">
-      <DependentUpon>whlNeedLoadPilot.cs</DependentUpon>
+    <EmbeddedResource Include="WhlControls\ControlNeedLoadPilot.resx">
+      <DependentUpon>ControlNeedLoadPilot.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\whlSolarSystem.resx">
-      <DependentUpon>whlSolarSystem.cs</DependentUpon>
+    <EmbeddedResource Include="WhlControls\ControlSolarSystemInformation.resx">
+      <DependentUpon>ControlSolarSystemInformation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\whlSolarSystemOffline.resx">
-      <DependentUpon>whlSolarSystemOffline.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\whlVersion.resx">
-      <DependentUpon>whlVersion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WhlControls\windowMessage.resx">
-      <DependentUpon>windowMessage.cs</DependentUpon>
+    <EmbeddedResource Include="WhlControls\ControlGetNewVersion.resx">
+      <DependentUpon>ControlGetNewVersion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -553,10 +459,6 @@
     <None Include="Resources\url.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Server\EveJimaServerMap\EveJimaServerMap.csproj">
-      <Project>{E67AC071-4E51-4CF3-BA0E-2796BAFA47A5}</Project>
-      <Name>EveJimaServerMap</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EveInternalBrowser\EveInternalBrowser.csproj">
       <Project>{c23fded6-0d07-42c6-ba3a-f0e9b5c1d592}</Project>
       <Name>EveInternalBrowser</Name>

@@ -40,16 +40,14 @@ namespace EveJima
 
             try
             {
-                Application.Run(new MainEveJima());
+                Application.Run(new EveJimaWindow());
+                //Application.Run(new WindowMainContainer());
+                //Application.Run(new MainEveJima());
             }
             catch(Exception e)
             {
-                Global.LinkInterceptor.StopIntercepting();
-
                 log.Error("[Program.Main] Critical error: " + e);
             }
-
-            Global.LinkInterceptor.StopIntercepting();
         }
 
         private static void InitializeBrowserEmulation()

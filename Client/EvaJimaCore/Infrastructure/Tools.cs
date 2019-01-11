@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Reflection;
-using System.Resources;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
-using EvaJimaCore;
-using EveJimaCore.Localization;
 using log4net;
 using EveJimaUniverse;
 using Newtonsoft.Json;
@@ -30,6 +26,11 @@ namespace EveJimaCore
         static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
 
         #endregion
+
+        public static bool IsAppicationModeRuntime()
+        {
+            return LicenseManager.UsageMode == LicenseUsageMode.Runtime;
+        }
 
         public static string GetActiveWindowTitle()
         {
@@ -237,20 +238,6 @@ namespace EveJimaCore
             return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source), deserializeSettings);
         }
 
-        public static string GetValue(string key, int language)
-        {
 
-            switch(language)
-            {
-                case 0:
-                    return English.ResourceManager.GetString(key);
- 
-                case 1:
-                    return Russian.ResourceManager.GetString(key);
-
-                default:
-                    return English.ResourceManager.GetString(key);
-            }
-        }
     }
 }

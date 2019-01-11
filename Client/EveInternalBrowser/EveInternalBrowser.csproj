@@ -96,7 +96,6 @@
     <Compile Include="IGBrowser.Designer.cs">
       <DependentUpon>IGBrowser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Monitoring\ClipboardMonitoring.cs" />
     <Compile Include="Monitoring\LinkMonitoring.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenameLink.cs">
@@ -113,10 +112,6 @@
     <Compile Include="Tools\VisibilityType.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AddFavorites.resx">
-      <DependentUpon>AddFavorites.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="IGBrowser.resx">
       <DependentUpon>IGBrowser.cs</DependentUpon>
     </EmbeddedResource>

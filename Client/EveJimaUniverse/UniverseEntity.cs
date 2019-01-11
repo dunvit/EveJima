@@ -113,27 +113,11 @@ namespace EveJimaUniverse
 
         public LinkedSystem GetLinkedSystems(string id)
         {
-            foreach(var linkedSystem in LinkedSystems)
-            {
-                if(linkedSystem.Id == id)
-                {
-                    return linkedSystem;
-                }
-            }
-
-            return null;
+            return LinkedSystems.FirstOrDefault(linkedSystem => linkedSystem.Id == id);
         }
 
         public System GetSystemByName(string name)
         {
-            foreach(var system in Systems)
-            {
-                if(system.Name == name)
-                {
-                    var a = "";
-                }
-            }
-
             return Systems.FirstOrDefault(system => system.Name.ToUpper() == name.ToUpper());
         }
 
@@ -163,9 +147,6 @@ namespace EveJimaUniverse
 
                 LoadWormholeTypesFromFile();
             }
-
-
-            
         }
 
         private void LoadWormholeTypesFromFile()

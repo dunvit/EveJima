@@ -19,7 +19,7 @@ namespace EveJimaCore
 
             try
             {
-                url = "https://esi.tech.ccp.is/latest/search/?search=" + WebUtility.UrlEncode(name) + "&categories=character&language=en-us&strict=true&datasource=tranquility";
+                url = "https://esi.evetech.net/latest/search/?search=" + WebUtility.UrlEncode(name) + "&categories=character&language=en-us&strict=true&datasource=tranquility";
 
                 Log.DebugFormat("[Zkillboard.GetZkillboardUrlByName] Read url {0} ", url);
 

@@ -20,7 +20,7 @@ namespace EveJimaIGB
 
             try
             {
-                url = "https://esi.tech.ccp.is/latest/search/?search=" + WebUtility.UrlEncode(name) + "&categories=character&language=en-us&strict=true&datasource=tranquility";
+                url = "https://esi.evetech.net/latest/search/?search=" + WebUtility.UrlEncode(name) + "&categories=character&language=en-us&strict=true&datasource=tranquility";
 
                 //url = "https://api.eveonline.com/eve/CharacterID.xml.aspx?names=" + WebUtility.UrlEncode(name);
 

@@ -53,7 +53,7 @@
             this.cmdPathfinder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdPathfinder.BackColor = System.Drawing.Color.Black;
-            this.cmdPathfinder.Cursor = System.Windows.Forms.Cursors.Default;
+            this.cmdPathfinder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmdPathfinder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.cmdPathfinder.ForeColor = System.Drawing.Color.White;
             this.cmdPathfinder.Location = new System.Drawing.Point(24, 5);

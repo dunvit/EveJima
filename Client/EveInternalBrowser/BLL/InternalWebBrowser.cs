@@ -62,7 +62,7 @@ namespace EveJimaIGB.BLL
 
         public InternalWebBrowser(string url) 
         {
-            Url = url;
+            //Url = url;
             Id = (int)DateTime.Now.Ticks;
 
             BuildWebBrowser(Url);
@@ -83,16 +83,20 @@ namespace EveJimaIGB.BLL
         {
             OnDocumentComplete?.Invoke(TabPage, Id, address);
 
-            Url = address;
+            if(Url != address)
+            {
+                _history.Push(address);
+                _currentHistoryUrl = address;
+
+                Url = address;
+            }
         }
 
         public void Navigate(string url)
         {
             if(_currentHistoryUrl != string.Empty && url != "about:blank") ClearStack(_currentHistoryUrl);
-            _history.Push(url);
-            _currentHistoryUrl = url;
-            Url = url;
-            Control.Execute(Url);
+
+            Control.Execute(url);
         }
 
         private void ClearStack(string url)

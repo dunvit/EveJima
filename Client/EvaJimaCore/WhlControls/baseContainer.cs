@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using EveJimaCore.UiTools;
 using log4net;
 
 namespace EveJimaCore.WhlControls
@@ -14,7 +15,11 @@ namespace EveJimaCore.WhlControls
         const int ERROR_ACCESS_DENIED = 5;
         const int ERROR_NO_APP_ASSOCIATED = 1155;
 
+        public event Action<string> OnOpenTab;
+
         private readonly WebBrowser _browserCounter = new WebBrowser();
+
+        public bool IsDebug => DebugTools.IsInDesignMode();
 
         public BaseContainer()
         {
@@ -30,7 +35,12 @@ namespace EveJimaCore.WhlControls
 
         public virtual void ActivateContainer()
         {
-            //var a = "a";
+            
+        }
+
+        public virtual void OpenTab(string tabName)
+        {
+            
         }
 
         public void EventNavigateInternalBrowser(string address)

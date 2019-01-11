@@ -9,7 +9,7 @@ namespace EveJimaCore.WhlControls
     {
         private bool _autoSize;
 
-        public event EventHandler ElementChanged;
+        public event Action<string> OnElementChanged;
 
         public ejcComboBox()
         {
@@ -39,14 +39,20 @@ namespace EveJimaCore.WhlControls
             comboBox1.Visible = false;
             cmdPathfinder.Text = comboBox1.Text;
 
-            if (ElementChanged != null)
-                ElementChanged(sender, e);
+            if (OnElementChanged != null)
+            {
+                var element = ((ejcComboboxItem)comboBox1.SelectedItem).Value.ToString();
+                OnElementChanged(element);
+            }
         }
 
         private void cmdPathfinder_Click(object sender, EventArgs e)
         {
-            if (ElementChanged != null)
-                ElementChanged(sender, e);
+            if (OnElementChanged != null)
+            {
+                var element = ((ejcComboboxItem)comboBox1.SelectedItem).Value.ToString();
+                OnElementChanged(element);
+            }
         }
 
 
@@ -91,24 +97,28 @@ namespace EveJimaCore.WhlControls
             set
             {
                 _autoSize = value;
-
-                int width = 0;
-
-                foreach(ejcComboboxItem comboBox1Item in comboBox1.Items)
-                {
-                    lblSizeOwner.Text = comboBox1Item.Text;
-                    lblSizeOwner.AutoSize = true;
-                    if (lblSizeOwner.Width > width) width = lblSizeOwner.Width;
-                }
-
-                if (_autoSize)
-                {
-                    cmdPathfinder.AutoSize = true;
-                    Width = cmdPathfinder.Left + 2 + cmdPathfinder.Width;
-                }
-
-                Invalidate(); // causes control to be redrawn
+                // causes control to be redrawn
             }
+        }
+
+        public void ResetSize()
+        {
+            int width = 0;
+
+            foreach (ejcComboboxItem comboBox1Item in comboBox1.Items)
+            {
+                lblSizeOwner.Text = comboBox1Item.Text;
+                lblSizeOwner.AutoSize = true;
+                if (lblSizeOwner.Width > width) width = lblSizeOwner.Width;
+            }
+
+            if (_autoSize)
+            {
+                cmdPathfinder.AutoSize = true;
+                Width = cmdPathfinder.Left + 2 + cmdPathfinder.Width;
+            }
+
+            Invalidate();
         }
 
         public void AddItem(ejcComboboxItem item)
@@ -126,8 +136,11 @@ namespace EveJimaCore.WhlControls
                 comboBox1.Visible = false;
                 cmdPathfinder.Text = comboBox1.Text;
 
-                if (ElementChanged != null)
-                    ElementChanged(sender, e);
+                if(OnElementChanged != null)
+                {
+                    var element = ((ejcComboboxItem)comboBox1.SelectedItem).Value.ToString();
+                    OnElementChanged(element);
+                }
             }
         }
 
@@ -149,21 +162,30 @@ namespace EveJimaCore.WhlControls
 
         private void comboBox1_DrawItem(object sender, DrawItemEventArgs e)
         {
-            SolidBrush backgroundBrush = new SolidBrush(Color.FromArgb(15, 15, 15));
+            var backgroundBrush = new SolidBrush(Color.FromArgb(15, 15, 15));
 
-            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            try
             {
 
-                e.Graphics.FillRectangle(backgroundBrush, e.Bounds);
+                if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                {
 
-                e.Graphics.DrawString("   " + comboBox1.Items[e.Index], comboBox1.Font, Brushes.Peru, new Rectangle(e.Bounds.X, e.Bounds.Y + 6, e.Bounds.Width, e.Bounds.Height));
+                    e.Graphics.FillRectangle(backgroundBrush, e.Bounds);
+
+                    e.Graphics.DrawString("   " + comboBox1.Items[e.Index], comboBox1.Font, Brushes.Peru, new Rectangle(e.Bounds.X, e.Bounds.Y + 6, e.Bounds.Width, e.Bounds.Height));
+                }
+                else
+                {
+                    e.Graphics.FillRectangle(backgroundBrush, e.Bounds);
+
+                    e.Graphics.DrawString("   " + comboBox1.Items[e.Index], comboBox1.Font, Brushes.White, new Rectangle(e.Bounds.X, e.Bounds.Y + 6, e.Bounds.Width, e.Bounds.Height));
+                }
             }
-            else
+            catch(Exception exception)
             {
-                e.Graphics.FillRectangle(backgroundBrush, e.Bounds);
-
-                e.Graphics.DrawString("   " + comboBox1.Items[e.Index], comboBox1.Font, Brushes.White, new Rectangle(e.Bounds.X, e.Bounds.Y + 6, e.Bounds.Width, e.Bounds.Height));
+                
             }
+
         }
 
         private void ejcComboBox_ForeColorChanged(object sender, EventArgs e)

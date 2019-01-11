@@ -142,7 +142,7 @@
     <value>Очистить</value>
   </data>
   <data name="Tab_Bookmarks_PasteCosmicSignatures" xml:space="preserve">
-    <value>Вставить космические сигнатуры</value>
+    <value>Вставить сигнатуры</value>
   </data>
   <data name="Tab_Bookmarks_PasteLocationBookmarks" xml:space="preserve">
     <value>Вставить закладки координат</value>

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -50,10 +51,7 @@ namespace EveJimaCore.BLL
         {
             _pilots.Add(pilot);
 
-            if (OnAddPilot != null)
-            {
-                OnAddPilot(pilot);
-            }
+            OnAddPilot?.Invoke(pilot);
 
             if(_pilots.Count == 1) SetSelected(pilot);
 
@@ -71,7 +69,8 @@ namespace EveJimaCore.BLL
                 Log.DebugFormat("[PilotsEntity.Activate] Before Global.Presenter.ActivatePilot. pilot.Name {0}", pilot.Name);
                 Log.DebugFormat("[PilotsEntity.Activate] Before Global.Presenter.ChangeActivePilot. pilot.Name {0}", pilot.Name);
                 Global.Presenter.GlobalEventsChangeActivePilot(pilot.Name);
-                if (OnActivatePilot != null) OnActivatePilot(pilot);
+
+                OnActivatePilot(pilot);
             }
         }
 
@@ -88,6 +87,49 @@ namespace EveJimaCore.BLL
         public bool IsExist(long pilotId)
         {
             return _pilots.Any(pilot => pilot.Id == pilotId);
+        }
+
+        public void Authorize(string code)
+        {
+            Log.DebugFormat("[PilotsEntity.Authorize] starting for token = {0}", code);
+
+            try
+            {
+                var _currentPilot = new PilotEntity(code);
+
+                Global.Metrics.PublishOnPilotInitialization(_currentPilot.Id);
+
+                if (IsExist(_currentPilot.Id) == false)
+                {
+
+                    Global.ApplicationSettings.UpdatePilotInStorage(_currentPilot.Name, _currentPilot.Id.ToString(), _currentPilot.EsiData.RefreshToken, _currentPilot.Key);
+
+                    Add(_currentPilot);
+
+                    //cmbPilots.Visible = true;
+
+                    SetSelected(_currentPilot);
+
+                    //AddPilotToPilotsList(_currentPilot);
+
+                    //Pilotes.Add(_currentPilot);
+                }
+                else
+                {
+                    // Update token
+                    Global.ApplicationSettings.UpdatePilotInStorage(_currentPilot.Name, _currentPilot.Id.ToString(), _currentPilot.EsiData.RefreshToken, _currentPilot.Key);
+                }
+
+                //cmbPilots.Visible = true;
+
+                SetSelected(_currentPilot);
+
+
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("[PilotsEntity.Authorize] Critical error. Exception {0}", ex);
+            }
         }
 
         #region Implementation of IEnumerable
