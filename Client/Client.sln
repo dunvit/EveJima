@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveInternalBrowser", "EveIn
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EveJima_Installer", "EveJima_Installer\EveJima_Installer.vdproj", "{7A7E435D-4681-4A80-ABCA-DE6F1C212EAC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveJimaCoreTests", "EveJimaCoreTests\EveJimaCoreTests.csproj", "{854D764D-0BAD-47AF-940D-23FD0F3E4CA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,18 @@ Global
 		{7A7E435D-4681-4A80-ABCA-DE6F1C212EAC}.Release|Any CPU.ActiveCfg = Release
 		{7A7E435D-4681-4A80-ABCA-DE6F1C212EAC}.Release|x64.ActiveCfg = Release
 		{7A7E435D-4681-4A80-ABCA-DE6F1C212EAC}.Release|x86.ActiveCfg = Release
+		{854D764D-0BAD-47AF-940D-23FD0F3E4CA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{854D764D-0BAD-47AF-940D-23FD0F3E4CA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{854D764D-0BAD-47AF-940D-23FD0F3E4CA7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{854D764D-0BAD-47AF-940D-23FD0F3E4CA7}.Debug|x64.Build.0 = Debug|Any CPU
+		{854D764D-0BAD-47AF-940D-23FD0F3E4CA7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{854D764D-0BAD-47AF-940D-23FD0F3E4CA7}.Debug|x86.Build.0 = Debug|Any CPU
+		{854D764D-0BAD-47AF-940D-23FD0F3E4CA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{854D764D-0BAD-47AF-940D-23FD0F3E4CA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{854D764D-0BAD-47AF-940D-23FD0F3E4CA7}.Release|x64.ActiveCfg = Release|Any CPU
+		{854D764D-0BAD-47AF-940D-23FD0F3E4CA7}.Release|x64.Build.0 = Release|Any CPU
+		{854D764D-0BAD-47AF-940D-23FD0F3E4CA7}.Release|x86.ActiveCfg = Release|Any CPU
+		{854D764D-0BAD-47AF-940D-23FD0F3E4CA7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

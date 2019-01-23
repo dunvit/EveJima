@@ -144,6 +144,7 @@ namespace EveJimaCore.Main
             Add("Version", new PanelMetaData { Name = "Version", Size = new Size(882, 542), IsResizeEnabled = false, Enabled = true});
             Add("NeedLoadPilot", new PanelMetaData { Name = "NeedLoadPilot", Size = standardSize, IsResizeEnabled = false, Enabled = true });
             Add("EditPilots", new PanelMetaData { Name = "EditPilots", Size = standardSize, IsResizeEnabled = false, Enabled = true });
+            Add("Pattern", new PanelMetaData { Name = "Pattern", Size = new Size(705, 320), IsResizeEnabled = false, Enabled = true });
 
             Add("ComboElement", new PanelMetaData{Name = "MenuElements", LabelKey = "Tab_Information", Index = 1, IsCombo = true});
         }

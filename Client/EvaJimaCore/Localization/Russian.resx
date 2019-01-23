@@ -313,7 +313,7 @@
     <value>Открывать zkillboard в новой вкладке:</value>
   </data>
   <data name="Tab_Settings_UseWhiteColorForSystems" xml:space="preserve">
-    <value>Белый цвет для солнечных систем:</value>
+    <value>Белый цвет для звездных систем:</value>
   </data>
   <data name="Tab_TravelHistory" xml:space="preserve">
     <value>История посещений</value>
@@ -392,5 +392,38 @@
   </data>
   <data name="Tab_EditPilots_Save" xml:space="preserve">
     <value>Сохранить</value>
+  </data>
+  <data name="Tab_BookmarkPattern_CodeLetters" xml:space="preserve">
+    <value>Код буквы:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_CodeNumbers" xml:space="preserve">
+    <value>Код цифры:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_DataSites" xml:space="preserve">
+    <value>Тип - Data sites:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_DateTime" xml:space="preserve">
+    <value>Время:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_GasSites" xml:space="preserve">
+    <value>Тип - Gas sites:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_Preview" xml:space="preserve">
+    <value>Предпросмотр:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_RelicSites" xml:space="preserve">
+    <value>Тип - Relic sites:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_Return" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="Tab_BookmarkPattern_Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="Tab_BookmarkPattern_User" xml:space="preserve">
+    <value>Юзер:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_WormholeSites" xml:space="preserve">
+    <value>Тип - Wormhole:</value>
   </data>
 </root>

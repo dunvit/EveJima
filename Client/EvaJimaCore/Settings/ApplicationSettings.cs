@@ -49,6 +49,14 @@ namespace EveJimaCore
 
         public bool IsSignatureRebuildEnabled { get; set; }
 
+        public string SignatureRebuildPattern { get; set; }
+
+        public string SignaturePatternGas { get; set; }
+        public string SignaturePatternData { get; set; }
+        public string SignaturePatternRelic { get; set; }
+        public string SignaturePatternWormhole { get; set; }
+        public string SignaturePatternUnknown { get; set; }
+
         public bool IsNeedUpdateVersion { get; set; }
 
         public bool IsInterceptLinksFromEVE { get; set; }
@@ -146,6 +154,14 @@ namespace EveJimaCore
 
                     LanguageId = jsonResponse.LanguageId == null ? 0 : jsonResponse.LanguageId;
 
+                    SignatureRebuildPattern = jsonResponse.SignatureRebuildPattern == null ? "%Type %ABC-%123 %NAME (%ET)" : jsonResponse.SignatureRebuildPattern;
+
+                    SignaturePatternGas = jsonResponse.SignaturePatternGas == null ? "Gas" : jsonResponse.SignaturePatternGas;
+                    SignaturePatternData = jsonResponse.SignaturePatternData == null ? "Data" : jsonResponse.SignaturePatternData;
+                    SignaturePatternRelic = jsonResponse.SignaturePatternRelic == null ? "Relic" : jsonResponse.SignaturePatternRelic;
+                    SignaturePatternWormhole = jsonResponse.SignaturePatternWormhole == null ? "WH" : jsonResponse.SignaturePatternWormhole;
+                    SignaturePatternUnknown = jsonResponse.SignaturePatternUnknown == null ? "Unknown" : jsonResponse.SignaturePatternUnknown;
+
                     var ccPilots = jsonResponse.Pilots;
 
                     foreach (var ccPilot in ccPilots)
@@ -210,6 +226,14 @@ namespace EveJimaCore
                 IsUseMap = false;
                 IsSignatureRebuildEnabled = true;
                 IsInterceptLinksFromEVE = false;
+
+                SignatureRebuildPattern = "%Type %ABC-%123 %NAME (%ET)";
+
+                SignaturePatternGas = "Gas";
+                SignaturePatternData = "Data";
+                SignaturePatternRelic = "Relic";
+                SignaturePatternWormhole = "WH";
+                SignaturePatternUnknown = "Unknown";
             }
 
             
@@ -252,11 +276,18 @@ namespace EveJimaCore
                     Browser_LocationMaximizeX = Global.WorkEnvironment.LocationMaximizeX,
                     Browser_LocationMaximizeY = Global.WorkEnvironment.LocationMaximizeY,
                     Browser_IsOpenKillboardInNewTab = Browser_IsOpenKillboardInNewTab,
+                    IsUseWhiteColorForSystems = IsUseWhiteColorForSystems,
                     Pilots = Pilots,
                     Server_MapAddress = Server_MapAddress,
                     IsUseBrowser = IsUseBrowser,
                     IsUseMap = IsUseMap,
                     IsSignatureRebuildEnabled = IsSignatureRebuildEnabled,
+                    SignatureRebuildPattern = SignatureRebuildPattern,
+                    SignaturePatternGas = SignaturePatternGas,
+                    SignaturePatternData = SignaturePatternData,
+                    SignaturePatternRelic = SignaturePatternRelic,
+                    SignaturePatternWormhole = SignaturePatternWormhole,
+                    SignaturePatternUnknown = SignaturePatternUnknown,
                     IsInterceptLinksFromEVE = IsInterceptLinksFromEVE,
                     LanguageId = LanguageId
                 });

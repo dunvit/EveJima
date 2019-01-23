@@ -57,6 +57,8 @@
             this.controlEditPilots1 = new EveJimaCore.WhlControls.ControlEditPilots();
             this.Version = new System.Windows.Forms.TabPage();
             this._controlGetNewVersion1 = new EveJimaCore.WhlControls.ControlGetNewVersion();
+            this.Pattern = new System.Windows.Forms.TabPage();
+            this.controlBookmarkPattern1 = new EveJimaCore.WhlControls.ControlBookmarkPattern();
             this.tabControl1.SuspendLayout();
             this.Location.SuspendLayout();
             this.SolarSystem.SuspendLayout();
@@ -72,6 +74,7 @@
             this.tabPage1.SuspendLayout();
             this.EditPilots.SuspendLayout();
             this.Version.SuspendLayout();
+            this.Pattern.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -93,6 +96,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.EditPilots);
             this.tabControl1.Controls.Add(this.Version);
+            this.tabControl1.Controls.Add(this.Pattern);
             this.tabControl1.Location = new System.Drawing.Point(0, 41);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -376,6 +380,25 @@
             this._controlGetNewVersion1.Size = new System.Drawing.Size(880, 502);
             this._controlGetNewVersion1.TabIndex = 0;
             // 
+            // Pattern
+            // 
+            this.Pattern.BackColor = System.Drawing.Color.Black;
+            this.Pattern.Controls.Add(this.controlBookmarkPattern1);
+            this.Pattern.Location = new System.Drawing.Point(4, 22);
+            this.Pattern.Name = "Pattern";
+            this.Pattern.Size = new System.Drawing.Size(1079, 243);
+            this.Pattern.TabIndex = 14;
+            this.Pattern.Tag = "Pattern";
+            this.Pattern.Text = "Pattern";
+            // 
+            // controlBookmarkPattern1
+            // 
+            this.controlBookmarkPattern1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.controlBookmarkPattern1.Location = new System.Drawing.Point(0, 0);
+            this.controlBookmarkPattern1.Name = "controlBookmarkPattern1";
+            this.controlBookmarkPattern1.Size = new System.Drawing.Size(971, 336);
+            this.controlBookmarkPattern1.TabIndex = 0;
+            // 
             // EveJimaToolbar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -399,6 +422,7 @@
             this.tabPage1.ResumeLayout(false);
             this.EditPilots.ResumeLayout(false);
             this.Version.ResumeLayout(false);
+            this.Pattern.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -434,5 +458,7 @@
         private WhlControls.ControlEditPilots controlEditPilots1;
         private System.Windows.Forms.TabPage Version;
         private WhlControls.ControlGetNewVersion _controlGetNewVersion1;
+        private System.Windows.Forms.TabPage Pattern;
+        private WhlControls.ControlBookmarkPattern controlBookmarkPattern1;
     }
 }

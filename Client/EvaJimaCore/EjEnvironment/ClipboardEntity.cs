@@ -16,7 +16,7 @@ namespace EveJimaCore.EjEnvironment
         {
             _startedValue = Clipboard.GetText().Trim();
 
-            Log.ErrorFormat("Started Clipboard value is {0}", _startedValue);
+            Log.DebugFormat("Started Clipboard value is {0}", _startedValue);
         }
 
         public string GetValue()
@@ -28,7 +28,7 @@ namespace EveJimaCore.EjEnvironment
 
             _currentValue = Clipboard.GetText().Trim();
 
-            Log.ErrorFormat("Get Clipboard value is {0}", _currentValue);
+            Log.DebugFormat("Get Clipboard value is {0}", _currentValue);
 
             return _currentValue;
         }

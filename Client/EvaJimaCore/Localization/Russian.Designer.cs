@@ -106,6 +106,105 @@ namespace EveJimaCore.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Код буквы:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_CodeLetters {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_CodeLetters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Код цифры:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_CodeNumbers {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_CodeNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тип - Data sites:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_DataSites {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_DataSites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Время:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_DateTime {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_DateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тип - Gas sites:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_GasSites {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_GasSites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Предпросмотр:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_Preview {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_Preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тип - Relic sites:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_RelicSites {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_RelicSites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Назад.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_Return {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_Return", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_Save {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Юзер:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_User {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тип - Wormhole:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_WormholeSites {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_WormholeSites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Закладки.
         /// </summary>
         internal static string Tab_Bookmarks {
@@ -736,7 +835,7 @@ namespace EveJimaCore.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Белый цвет для солнечных систем:.
+        ///   Looks up a localized string similar to Белый цвет для звездных систем:.
         /// </summary>
         internal static string Tab_Settings_UseWhiteColorForSystems {
             get {

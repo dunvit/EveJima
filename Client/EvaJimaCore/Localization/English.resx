@@ -393,4 +393,37 @@
   <data name="Tab_EditPilots_Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="Tab_BookmarkPattern_CodeLetters" xml:space="preserve">
+    <value>Code Letters:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_CodeNumbers" xml:space="preserve">
+    <value>Code Numbers:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_DataSites" xml:space="preserve">
+    <value>Type - Data sites:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_DateTime" xml:space="preserve">
+    <value>Date Time:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_GasSites" xml:space="preserve">
+    <value>Type - Gas sites:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_Preview" xml:space="preserve">
+    <value>Preview:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_RelicSites" xml:space="preserve">
+    <value>Type - Relic sites:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_Return" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="Tab_BookmarkPattern_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Tab_BookmarkPattern_User" xml:space="preserve">
+    <value>User:</value>
+  </data>
+  <data name="Tab_BookmarkPattern_WormholeSites" xml:space="preserve">
+    <value>Type - Wormhole:</value>
+  </data>
 </root>

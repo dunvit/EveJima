@@ -9,6 +9,8 @@ namespace EveJimaCore.WhlControls
 {
     public class BaseContainer : UserControl
     {
+        public Form ParentWindow;
+
         private static readonly ILog Log = LogManager.GetLogger(string.Empty);
 
         const int ERROR_FILE_NOT_FOUND = 2;

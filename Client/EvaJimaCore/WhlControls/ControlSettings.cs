@@ -115,6 +115,11 @@ namespace EveJimaCore.WhlControls
             if (Global.ApplicationSettings != null)
                 label7.Text = Global.ApplicationSettings.CurrentVersion;
         }
+
+        private void cmdEditSignaturesPattern_Click(object sender, System.EventArgs e)
+        {
+            Global.Presenter.ChangeScreen("Pattern");
+        }
     }
 
     public class ComboboxItem

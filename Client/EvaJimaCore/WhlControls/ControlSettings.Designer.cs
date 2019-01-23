@@ -51,6 +51,7 @@
             this.label_NeedRestart_3 = new System.Windows.Forms.Label();
             this.label_UseWhiteColorForSystems = new System.Windows.Forms.Label();
             this.crlIsUseWhiteColorForSystems = new System.Windows.Forms.CheckBox();
+            this.cmdEditSignaturesPattern = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // crlIsUseBrowser
@@ -63,7 +64,7 @@
             this.crlIsUseBrowser.TabIndex = 149;
             this.crlIsUseBrowser.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // label_UseBrowser
             // 
             this.label_UseBrowser.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_UseBrowser.ForeColor = System.Drawing.Color.White;
@@ -74,7 +75,7 @@
             this.label_UseBrowser.Text = "Use Browser:";
             this.label_UseBrowser.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // label1
+            // label_NeedRestart_1
             // 
             this.label_NeedRestart_1.AutoSize = true;
             this.label_NeedRestart_1.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -85,7 +86,7 @@
             this.label_NeedRestart_1.TabIndex = 150;
             this.label_NeedRestart_1.Text = "(need restart)";
             // 
-            // label2
+            // label_NeedRestart_2
             // 
             this.label_NeedRestart_2.AutoSize = true;
             this.label_NeedRestart_2.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -106,7 +107,7 @@
             this.crlIsUseMap.TabIndex = 152;
             this.crlIsUseMap.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // label_UseWormholesMap
             // 
             this.label_UseWormholesMap.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_UseWormholesMap.ForeColor = System.Drawing.Color.White;
@@ -117,7 +118,7 @@
             this.label_UseWormholesMap.Text = "Use Wormholes Map:";
             this.label_UseWormholesMap.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // cmdSaveSettings
+            // label_SaveSettings
             // 
             this.label_SaveSettings.BackColor = System.Drawing.Color.Black;
             this.label_SaveSettings.ForeColor = System.Drawing.Color.LightGray;
@@ -130,7 +131,7 @@
             this.label_SaveSettings.Value = "Save settings";
             this.label_SaveSettings.Click += new System.EventHandler(this.cmdSaveSettings_Click);
             // 
-            // cmdIsSignatureRebuild
+            // label_ShortSignatureRebuild
             // 
             this.label_ShortSignatureRebuild.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_ShortSignatureRebuild.ForeColor = System.Drawing.Color.White;
@@ -151,7 +152,7 @@
             this.crlIsSignatureRebuild.TabIndex = 156;
             this.crlIsSignatureRebuild.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // label_EveJimaVersion
             // 
             this.label_EveJimaVersion.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_EveJimaVersion.ForeColor = System.Drawing.Color.Tan;
@@ -162,7 +163,7 @@
             this.label_EveJimaVersion.Text = "Eve Jima version:";
             this.label_EveJimaVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // label6
+            // label_Author
             // 
             this.label_Author.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Author.ForeColor = System.Drawing.Color.Tan;
@@ -194,7 +195,7 @@
             this.label8.TabIndex = 160;
             this.label8.Text = "Dunkan Su-Sushiloff";
             // 
-            // lblLanguage
+            // label_Language
             // 
             this.label_Language.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Language.ForeColor = System.Drawing.Color.White;
@@ -215,7 +216,7 @@
             this.cmdLanguage.Size = new System.Drawing.Size(121, 21);
             this.cmdLanguage.TabIndex = 162;
             // 
-            // label9
+            // labelInterceptLinksFromEve
             // 
             this.labelInterceptLinksFromEve.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelInterceptLinksFromEve.ForeColor = System.Drawing.Color.White;
@@ -236,7 +237,7 @@
             this.crlIsInterceptLinksFromEVE.TabIndex = 164;
             this.crlIsInterceptLinksFromEVE.UseVisualStyleBackColor = true;
             // 
-            // label12
+            // label_IsOpenZkillboardInNewTab
             // 
             this.label_IsOpenZkillboardInNewTab.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_IsOpenZkillboardInNewTab.ForeColor = System.Drawing.Color.White;
@@ -257,7 +258,7 @@
             this.chkIsOpenNewTabForZkillboard.TabIndex = 168;
             this.chkIsOpenNewTabForZkillboard.UseVisualStyleBackColor = true;
             // 
-            // label11
+            // label_NeedRestart_4
             // 
             this.label_NeedRestart_4.AutoSize = true;
             this.label_NeedRestart_4.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -268,7 +269,7 @@
             this.label_NeedRestart_4.TabIndex = 167;
             this.label_NeedRestart_4.Text = "(need restart)";
             // 
-            // label10
+            // label_NeedRestart_3
             // 
             this.label_NeedRestart_3.AutoSize = true;
             this.label_NeedRestart_3.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -279,7 +280,7 @@
             this.label_NeedRestart_3.TabIndex = 165;
             this.label_NeedRestart_3.Text = "(need restart)";
             // 
-            // label13
+            // label_UseWhiteColorForSystems
             // 
             this.label_UseWhiteColorForSystems.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_UseWhiteColorForSystems.ForeColor = System.Drawing.Color.White;
@@ -300,11 +301,28 @@
             this.crlIsUseWhiteColorForSystems.TabIndex = 170;
             this.crlIsUseWhiteColorForSystems.UseVisualStyleBackColor = true;
             // 
-            // EveCrlSettings
+            // cmdEditSignaturesPattern
+            // 
+            this.cmdEditSignaturesPattern.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmdEditSignaturesPattern.FlatAppearance.BorderSize = 0;
+            this.cmdEditSignaturesPattern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmdEditSignaturesPattern.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdEditSignaturesPattern.ForeColor = System.Drawing.Color.YellowGreen;
+            this.cmdEditSignaturesPattern.Location = new System.Drawing.Point(221, 102);
+            this.cmdEditSignaturesPattern.Name = "cmdEditSignaturesPattern";
+            this.cmdEditSignaturesPattern.Size = new System.Drawing.Size(115, 23);
+            this.cmdEditSignaturesPattern.TabIndex = 171;
+            this.cmdEditSignaturesPattern.Text = "Edit Pattern";
+            this.cmdEditSignaturesPattern.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cmdEditSignaturesPattern.UseVisualStyleBackColor = true;
+            this.cmdEditSignaturesPattern.Click += new System.EventHandler(this.cmdEditSignaturesPattern_Click);
+            // 
+            // ControlSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.Controls.Add(this.cmdEditSignaturesPattern);
             this.Controls.Add(this.label_UseWhiteColorForSystems);
             this.Controls.Add(this.crlIsUseWhiteColorForSystems);
             this.Controls.Add(this.label_IsOpenZkillboardInNewTab);
@@ -362,5 +380,6 @@
         private System.Windows.Forms.Label label_NeedRestart_3;
         private System.Windows.Forms.Label label_UseWhiteColorForSystems;
         private System.Windows.Forms.CheckBox crlIsUseWhiteColorForSystems;
+        private System.Windows.Forms.Button cmdEditSignaturesPattern;
     }
 }

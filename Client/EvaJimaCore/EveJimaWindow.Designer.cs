@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EveJimaWindow));
-            this.eveJimaToolbar1 = new EveJimaCore.Main.EveJimaToolbar();
+            this.eveJimaToolbar1 = new EveJimaCore.Main.EveJimaToolbar(this);
             this.crlTitlebar = new EveJimaCore.Main.EveJimaTitlebar();
             this.crlNotificay = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();

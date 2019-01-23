@@ -43,6 +43,8 @@ namespace EveJimaCore.WhlControls
             _maxStableMass = Localization.Messages.Get("Tab_Information_MaxStableMass", "MaxStableMass");
             _maxJumpMass = Localization.Messages.Get("Tab_Information_MaxJumpMass", "MaxJumpMass");
 
+            if(IsDebug) return;
+
             if(Tools.IsAppicationModeRuntime())
                 Global.Presenter.OnRequestSolarSystemInformation += Event_ShowLocationInfo;
         }

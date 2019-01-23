@@ -93,7 +93,6 @@
       <DependentUpon>EveJimaWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Events\AbstractMonitor.cs" />
-    <Compile Include="Events\TestMonitor.cs" />
     <Compile Include="Localization\Messages.cs" />
     <Compile Include="BLL\MetricsWriter.cs" />
     <Compile Include="BLL\Navigator\Path.cs" />
@@ -161,6 +160,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UiTools\SystemLine.cs" />
+    <Compile Include="WhlControls\ControlBookmarkPattern.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\ControlBookmarkPattern.Designer.cs">
+      <DependentUpon>ControlBookmarkPattern.cs</DependentUpon>
+    </Compile>
     <Compile Include="WhlControls\ejButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -348,6 +353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\baseContainer.resx">
       <DependentUpon>baseContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\ControlBookmarkPattern.resx">
+      <DependentUpon>ControlBookmarkPattern.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\ControlEditPilots.resx">
       <DependentUpon>ControlEditPilots.cs</DependentUpon>

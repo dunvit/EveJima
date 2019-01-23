@@ -5,11 +5,18 @@ namespace EveJimaCore.Events
 {
     public abstract class AbstractMonitor
     {
-        public readonly ILog _logger = LogManager.GetLogger(string.Empty);
+        public readonly ILog Logger = LogManager.GetLogger(string.Empty);
 
-        private readonly Timer _workerTimer;
+        private Timer _workerTimer;
 
-        protected AbstractMonitor()
+        public ApplicationSettings Settings { get; set; }
+
+        protected AbstractMonitor(ApplicationSettings settings)
+        {
+            Settings = settings;
+        }
+
+        public void Activate()
         {
             _workerTimer = new Timer();
             _workerTimer.Elapsed += Event_Refresh;
@@ -17,9 +24,14 @@ namespace EveJimaCore.Events
             _workerTimer.Enabled = true;
         }
 
+        public void Dispose()
+        {
+            _workerTimer.Enabled = false;
+        }
+
         private void Event_Refresh(object sender, ElapsedEventArgs e)
         {
-            _logger.Debug("[BaseEventMonitor.Event_Refresh] Monitoring.");
+            Logger.Debug("[AbstractMonitor.Event_Refresh] Monitoring.");
 
             _workerTimer.Enabled = false;
 

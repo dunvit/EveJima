@@ -2,95 +2,138 @@
 using System.Threading;
 using System.Windows.Forms;
 using EvaJimaCore;
+using EveJimaUniverse;
 
 namespace EveJimaCore.Monitoring
 {
     public class BookmarksMonitoring : Events.AbstractMonitor
     {
+        public bool IsEnabled { get; set; }
+        public string Pattern { get; set; }
+
+        public BookmarksMonitoring(ApplicationSettings settings) : base(settings)
+        {
+            IsEnabled = Settings.IsSignatureRebuildEnabled;
+            Pattern = Settings.SignatureRebuildPattern;
+        }
+
         public override void EraseEvent()
         {
+            if (!IsEnabled)
+            {
+                Logger.Debug("[BookmarksMonitoring.Event_Refresh] Exit because signatures rebuilder is disabled.");
+                return;
+            }
+
+            var txtInClip = GetClipBoradData().Trim();
+
+            Logger.Debug("[BookmarksMonitoring.Event_Refresh] Get text from clipboard: " + txtInClip);
+
+            Execute(txtInClip);
+        }
+
+        public string Execute(string valueInClipboard)
+        {
+            var label = Pattern;
 
             try
             {
-                if (!Global.ApplicationSettings.IsSignatureRebuildEnabled)
-                {
-                    _logger.Debug("[BookmarksMonitoring.Event_Refresh] Exit because signatures rebuilder is disabled.");
-                    return;
-                }
-
-                var txtInClip = GetClipBoradData().Trim();
-
-                _logger.Debug("[BookmarksMonitoring.Event_Refresh] Get text from clipboard: " + txtInClip);
-
-                var parts = txtInClip.Split('\t');
+                var parts = valueInClipboard.Split('\t');
 
                 if (parts.Length == 6)
                 {
                     #region Solo signature
 
                     var signatureCode = parts[0];
-                    var signatureType = parts[2];
+                    var signatureType = GetSignatureType(parts[2]);
                     var signatureName = parts[3];
 
-                    var isDetected = false;
-
-                    var label = "[" + signatureCode + "]";
-
-                    if (signatureType.ToUpper().IndexOf("ЧЕРВОТОЧИНА", StringComparison.Ordinal) > -1 || signatureType.ToUpper().IndexOf("WORMHOLE", StringComparison.Ordinal) > -1)
+                    switch(signatureType)
                     {
-                        label = "WH " + label + "";
-                        isDetected = true;
+                        case SignatureType.Relic:
+                            label = label.Replace("%Type", Settings.SignaturePatternRelic);
+                            break;
+                        case SignatureType.Data:
+                            label = label.Replace("%Type", Settings.SignaturePatternData);
+                            break;
+                        case SignatureType.Gas:
+                            label = label.Replace("%Type", Settings.SignaturePatternGas);
+                            break;
+                        case SignatureType.Unknown:
+                            label = label.Replace("%Type", Settings.SignaturePatternUnknown);
+                            break;
+                        case SignatureType.WH:
+                            label = label.Replace("%Type", Settings.SignaturePatternWormhole);
+                            break;
+                        default:
+                            label = label.Replace("%Type", Settings.SignaturePatternUnknown);
+                            break;
                     }
 
-                    if (signatureType.ToUpper().IndexOf("ГАЗ", StringComparison.Ordinal) > -1 || signatureType.ToUpper().IndexOf("GAS SITE", StringComparison.Ordinal) > -1)
-                    {
-                        label = "Gas " + label + " " + signatureName;
-                        isDetected = true;
-                    }
+                    label = label.Replace("%ABC", signatureCode.Split('-')[0]);
+                    label = label.Replace("%123", signatureCode.Split('-')[1]);
 
-                    if (signatureType.ToUpper().IndexOf("ДАННЫЕ", StringComparison.Ordinal) > -1 || signatureType.ToUpper().IndexOf("DATA SITE", StringComparison.Ordinal) > -1 || signatureType.ToUpper().IndexOf("ИНФОРМАЦИОН", StringComparison.Ordinal) > -1)
-                    {
-                        label = "Data " + label + " " + signatureName;
-                        isDetected = true;
-                    }
+                    var utcDate = DateTime.UtcNow;
 
-                    if (signatureType.ToUpper().IndexOf("АРТЕФАКТЫ", StringComparison.Ordinal) > -1 || signatureType.ToUpper().IndexOf("RELIC SITE", StringComparison.Ordinal) > -1 || signatureType.ToUpper().IndexOf("АРХЕОЛОГИЧ", StringComparison.Ordinal) > -1)
+                    label = label.Replace("%ET", utcDate.Hour.ToString("00") + ":" + utcDate.Minute.ToString("00"));
+
+                    label = label.Replace("%NAME", signatureName);
+
+                    if(Global.Pilots != null && Global.Pilots.Selected != null)
                     {
-                        label = "Relic " + label + " " + signatureName;
-                        isDetected = true;
+                        label = label.Replace("%USER", Global.Pilots.Selected.Name);
                     }
 
                     try
                     {
-                        if (isDetected == false)
-                        {
-                            label = label + " " + signatureName;
-                        }
-
-                        _logger.Debug("[BookmarksMonitoring.Event_Refresh] label: " + label);
+                        Logger.Debug("[BookmarksMonitoring.Event_Refresh] label: " + label);
 
                         Thread.CurrentThread.ApartmentState = ApartmentState.STA;
 
-                        _logger.Debug("[BookmarksMonitoring.Event_Refresh] ApartmentState.STA: " + label);
+                        Logger.Debug("[BookmarksMonitoring.Event_Refresh] ApartmentState.STA: " + label);
 
                         clipboardSetText(label);
 
-                        _logger.Debug("[BookmarksMonitoring.Event_Refresh] SetClipBoradData: " + GetClipBoradData().Trim());
+                        Logger.Debug("[BookmarksMonitoring.Event_Refresh] SetClipBoradData: " + GetClipBoradData().Trim());
                     }
                     catch (Exception ex)
                     {
-                        var a = ex.Message;
-                        _logger.ErrorFormat("[BookmarksMonitoring.Event_Refresh] Set text to clipboard error = {0}", ex.Message);
+                        Logger.ErrorFormat("[BookmarksMonitoring.Event_Refresh] Set text to clipboard error = {0}", ex.Message);
                     }
                     #endregion
                 }
             }
             catch (Exception exception)
             {
-                _logger.ErrorFormat("[BookmarksMonitoring.Event_Refresh] Critical error = {0}", exception.Message);
-
-
+                Logger.ErrorFormat("[BookmarksMonitoring.Event_Refresh] Critical error = {0}", exception.Message);
             }
+
+            return label;
+        }
+
+        private SignatureType GetSignatureType(string signature)
+        {
+            if (signature.ToUpper().IndexOf("ЧЕРВОТОЧИНА", StringComparison.Ordinal) > -1 || signature.ToUpper().IndexOf("WORMHOLE", StringComparison.Ordinal) > -1)
+            {
+                return SignatureType.WH;
+            }
+
+            if (signature.ToUpper().IndexOf("ГАЗ", StringComparison.Ordinal) > -1 || signature.ToUpper().IndexOf("GAS SITE", StringComparison.Ordinal) > -1)
+            {
+                return SignatureType.Gas;
+            }
+
+            if (signature.ToUpper().IndexOf("ДАННЫЕ", StringComparison.Ordinal) > -1 || signature.ToUpper().IndexOf("DATA SITE", StringComparison.Ordinal) > -1 || signature.ToUpper().IndexOf("ИНФОРМАЦИОН", StringComparison.Ordinal) > -1)
+            {
+                return SignatureType.Data;
+            }
+
+            if (signature.ToUpper().IndexOf("АРТЕФАКТЫ", StringComparison.Ordinal) > -1 || signature.ToUpper().IndexOf("RELIC SITE", StringComparison.Ordinal) > -1 || signature.ToUpper().IndexOf("АРХЕОЛОГИЧ", StringComparison.Ordinal) > -1)
+            {
+                return SignatureType.Relic;
+            }
+
+            return SignatureType.Unknown;
         }
 
         private static string GetClipBoradData()
@@ -120,14 +163,6 @@ namespace EveJimaCore.Monitoring
             }
         }
 
-        //protected string clipboardGetText()
-        //{
-        //    var clipboardThread = new Thread(() => clipBoardThreadWorkerGet);
-        //    clipboardThread.SetApartmentState(ApartmentState.STA);
-        //    clipboardThread.IsBackground = false;
-        //    clipboardThread.Start();
-        //}
-
         protected void clipboardSetText(string inTextToCopy)
         {
             var clipboardThread = new Thread(() => clipBoardThreadWorkerSet(inTextToCopy));
@@ -138,12 +173,15 @@ namespace EveJimaCore.Monitoring
 
         private void clipBoardThreadWorkerSet(string inTextToCopy)
         {
-            Clipboard.SetText(inTextToCopy);
-        }
+            try
+            {
+                Clipboard.SetText(inTextToCopy);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorFormat("[BookmarksMonitoring.clipBoardThreadWorkerSet] Set text to clipboard error = {0}", ex.Message);
+            }
 
-        private string clipBoardThreadWorkerGet()
-        {
-            return Clipboard.GetText();
         }
     }
 }

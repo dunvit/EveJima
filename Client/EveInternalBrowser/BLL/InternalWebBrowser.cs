@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using CefSharp;
 
 namespace EveJimaIGB.BLL
 {
@@ -18,8 +20,6 @@ namespace EveJimaIGB.BLL
         public DelegateOnBrowserTitleChanged OnTitleChanged;
 
         public IWebBrowserControl Control { get; set; }
-
-        
 
         public TabPage TabPage { get; set; }
 
@@ -57,6 +57,8 @@ namespace EveJimaIGB.BLL
 
         public InternalWebBrowser() : this(string.Empty)
         {
+
+            
             
         }
 

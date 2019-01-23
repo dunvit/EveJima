@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 using log4net;
 using Global = EvaJimaCore.Global;
@@ -10,12 +9,11 @@ namespace EveJimaCore.WhlControls
 
     public partial class ControlRichBrowser : BaseContainer
     {
-        public Form ParentWindow;
         public event Action OnForceResize;
+
         public DelegateChangeBrowserMode ChangeViewMode;
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(ControlRichBrowser));
-
         
 
         public OpenWebBrowser OnOpenWebBrowser;

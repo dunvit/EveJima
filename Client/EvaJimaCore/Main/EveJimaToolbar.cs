@@ -22,7 +22,7 @@ namespace EveJimaCore.Main
         public string ActivePanelName { get; set; }
         public event Action<PanelMetaData> OnSelectElement;
 
-        public EveJimaToolbar()
+        public EveJimaToolbar(Form eveJimaWindow)
         {
             InitializeComponent();
 
@@ -33,9 +33,20 @@ namespace EveJimaCore.Main
             tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
             tabControl1.Appearance = TabAppearance.FlatButtons;
             tabControl1.ItemSize = new Size(0, 1);
-
+            
             Width = 570;
             Height = 295;
+
+            
+
+            foreach(TabPage tabControl1TabPage in tabControl1.TabPages)
+            {
+                var browserControl = tabControl1TabPage.Controls[0] as BaseContainer;
+                if(browserControl!= null)
+                    browserControl.ParentWindow = eveJimaWindow;
+            }
+
+            
         }
 
         public void Initialize(Hashtable tabs)

@@ -1,4 +1,5 @@
-﻿
+﻿using EvaJimaCore;
+
 namespace EveJimaCore.Monitoring
 {
     public class EventsMonitoring
@@ -11,12 +12,21 @@ namespace EveJimaCore.Monitoring
 
         public void Activate()
         {
-            ActiveWindowMonitoring = new ActiveWindowMonitoring();
+            ActiveWindowMonitoring = new ActiveWindowMonitoring(Global.ApplicationSettings);
+            ActiveWindowMonitoring.Activate();
 
-            BookmarksMonitoring = new BookmarksMonitoring();
+            BookmarksMonitoring = new BookmarksMonitoring(Global.ApplicationSettings);
+            BookmarksMonitoring.Activate();
 
-            ClipboardMonitoring = new ClipboardMonitoring();
+            ClipboardMonitoring = new ClipboardMonitoring(Global.ApplicationSettings);
+            ClipboardMonitoring.Activate();
         }
 
+        public void Dispose()
+        {
+            ActiveWindowMonitoring.Dispose();
+            BookmarksMonitoring.Dispose();
+            ClipboardMonitoring.Dispose();
+        }
     }
 }

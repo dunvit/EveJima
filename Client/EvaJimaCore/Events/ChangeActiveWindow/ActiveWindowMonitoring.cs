@@ -8,11 +8,11 @@ namespace EveJimaCore.Monitoring
     {
         public override void EraseEvent()
         {
-            _logger.Debug("[ActiveWindowMonitoring.Event_Refresh] Monitoring.");
+            Logger.Debug("[ActiveWindowMonitoring.Event_Refresh] Monitoring.");
 
             var activeProgramName = Tools.GetActiveWindowTitle();
 
-            _logger.DebugFormat("Active window title is {0}", activeProgramName);
+            Logger.DebugFormat("Active window title is {0}", activeProgramName);
 
             if(activeProgramName == null) return;
 
@@ -20,15 +20,20 @@ namespace EveJimaCore.Monitoring
 
             var pilotName = activeProgramName.Replace("EVE - ", "") + "";
 
-            _logger.DebugFormat("Pilot name is {0}", pilotName);
+            Logger.DebugFormat("Pilot name is {0}", pilotName);
 
             if (Global.Pilots == null || Global.Pilots.Selected == null) return;
 
-            _logger.DebugFormat("Selected pilot name is {0}", Global.Pilots.Selected.Name);
+            Logger.DebugFormat("Selected pilot name is {0}", Global.Pilots.Selected.Name);
 
             if (pilotName == Global.Pilots.Selected.Name) return;
 
             Global.Pilots.Activate(pilotName);
+        }
+
+        public ActiveWindowMonitoring(ApplicationSettings settings) : base(settings)
+        {
+
         }
     }
 }

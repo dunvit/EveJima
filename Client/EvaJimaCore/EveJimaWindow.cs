@@ -30,7 +30,7 @@ namespace EveJimaCore
 
             Text = @"EveJima " + Global.ApplicationSettings.CurrentVersion;
 
-            crlTitlebar.OnCloseApplication += Event_CloseApplication;
+            crlTitlebar.OnCloseApplication += Event_ApplicationClose;
             crlTitlebar.Initialize(this, Parametrs);
             crlTitlebar.MouseDown += Event_TitlebarMouseDown;
             crlTitlebar.OnHideToTray += Event_HideApplicationToTray;
@@ -126,6 +126,7 @@ namespace EveJimaCore
 
         private void Event_ApplicationClose()
         {
+            _eventsMonitoring.Dispose();
             Global.Dispose();
             Close();
         }
@@ -161,10 +162,6 @@ namespace EveJimaCore
             Hide();
         }
 
-        private void Event_CloseApplication()
-        {
-            Application.Exit();
-        }
 
         private void Event_ResizeWindow(PanelMetaData moduleData)
         {

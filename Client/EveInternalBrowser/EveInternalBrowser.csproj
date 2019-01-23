@@ -98,6 +98,11 @@
     </Compile>
     <Compile Include="Monitoring\LinkMonitoring.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RenameLink.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +119,10 @@
   <ItemGroup>
     <EmbeddedResource Include="IGBrowser.resx">
       <DependentUpon>IGBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RenameLink.resx">
       <DependentUpon>RenameLink.cs</DependentUpon>

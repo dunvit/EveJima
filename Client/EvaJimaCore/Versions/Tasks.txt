@@ -1,9 +1,9 @@
-﻿
+﻿- Rebuild copy bookmarks by template
 
 - Add Cef.Shutdown() in InternalBrowser
 - In Browser button [+] show on all EJ surface
-! Bookmarks rebuild system
 
++ Bookmarks rebuild system
 + Enable all tabs after login pilot
 + Add pilot tracking
 + Repair start EveJima in previous session position

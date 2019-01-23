@@ -106,6 +106,105 @@ namespace EveJimaCore.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Code Letters:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_CodeLetters {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_CodeLetters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code Numbers:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_CodeNumbers {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_CodeNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type - Data sites:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_DataSites {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_DataSites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date Time:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_DateTime {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_DateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type - Gas sites:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_GasSites {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_GasSites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preview:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_Preview {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_Preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type - Relic sites:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_RelicSites {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_RelicSites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_Return {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_Return", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_Save {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_User {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type - Wormhole:.
+        /// </summary>
+        internal static string Tab_BookmarkPattern_WormholeSites {
+            get {
+                return ResourceManager.GetString("Tab_BookmarkPattern_WormholeSites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bookmarks.
         /// </summary>
         internal static string Tab_Bookmarks {
