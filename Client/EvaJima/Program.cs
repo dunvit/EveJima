@@ -3,6 +3,7 @@ using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
 using CefSharp;
+using CefSharp.WinForms;
 using EvaJimaCore;
 using EveJimaCore;
 using log4net;

@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Client/.vs/Client/v15
+/Client/EJTests/obj/Debug
+/Client/EveJimaUniverse/obj/Debug
+/Client/packages
+/Server/EveJimaServerMap/bin/Release
