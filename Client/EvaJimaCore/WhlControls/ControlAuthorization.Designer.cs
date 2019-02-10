@@ -102,7 +102,7 @@
             this.cmdLoadPilotes.Name = "cmdLoadPilotes";
             this.cmdLoadPilotes.Size = new System.Drawing.Size(270, 25);
             this.cmdLoadPilotes.TabIndex = 78;
-            this.cmdLoadPilotes.Value = "Create Map";
+            this.cmdLoadPilotes.Value = "Load pilots";
             this.cmdLoadPilotes.Visible = false;
             this.cmdLoadPilotes.Click += new System.EventHandler(this.cmdLoadPilotes_Click);
             // 

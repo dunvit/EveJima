@@ -3,13 +3,16 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using EvaJimaCore;
+using EveJimaCore.Configuration.Department;
 using log4net;
 
 namespace EveJimaCore
 {
     public class ApplicationSettings
     {
-        readonly ILog _commandsLog = LogManager.GetLogger("Errors");
+        private readonly ILog _commandsLog = LogManager.GetLogger(string.Empty);
+
+        public SecuritySettings Security = new SecuritySettings();
 
         public bool IsConverted { private set; get; }
 
@@ -49,7 +52,6 @@ namespace EveJimaCore
 
         public bool IsSignatureRebuildEnabled { get; set; }
 
-        public string SignatureRebuildPattern { get; set; }
 
         public string SignaturePatternGas { get; set; }
         public string SignaturePatternData { get; set; }
@@ -154,8 +156,6 @@ namespace EveJimaCore
 
                     LanguageId = jsonResponse.LanguageId == null ? 0 : jsonResponse.LanguageId;
 
-                    SignatureRebuildPattern = jsonResponse.SignatureRebuildPattern == null ? "%Type %ABC-%123 %NAME (%ET)" : jsonResponse.SignatureRebuildPattern;
-
                     SignaturePatternGas = jsonResponse.SignaturePatternGas == null ? "Gas" : jsonResponse.SignaturePatternGas;
                     SignaturePatternData = jsonResponse.SignaturePatternData == null ? "Data" : jsonResponse.SignaturePatternData;
                     SignaturePatternRelic = jsonResponse.SignaturePatternRelic == null ? "Relic" : jsonResponse.SignaturePatternRelic;
@@ -227,13 +227,11 @@ namespace EveJimaCore
                 IsSignatureRebuildEnabled = true;
                 IsInterceptLinksFromEVE = false;
 
-                SignatureRebuildPattern = "%Type %ABC-%123 %NAME (%ET)";
-
-                SignaturePatternGas = "Gas";
-                SignaturePatternData = "Data";
-                SignaturePatternRelic = "Relic";
-                SignaturePatternWormhole = "WH";
-                SignaturePatternUnknown = "Unknown";
+                SignaturePatternGas = "Gas %ABC-%123 %NAME (%ET)";
+                SignaturePatternData = "Data %ABC-%123 %NAME (%ET)";
+                SignaturePatternRelic = "Relic %ABC-%123 %NAME (%ET)";
+                SignaturePatternWormhole = "WH %ABC-%123 %NAME (%ET)";
+                SignaturePatternUnknown = "Unknown %ABC-%123 %NAME (%ET)";
             }
 
             
@@ -282,7 +280,6 @@ namespace EveJimaCore
                     IsUseBrowser = IsUseBrowser,
                     IsUseMap = IsUseMap,
                     IsSignatureRebuildEnabled = IsSignatureRebuildEnabled,
-                    SignatureRebuildPattern = SignatureRebuildPattern,
                     SignaturePatternGas = SignaturePatternGas,
                     SignaturePatternData = SignaturePatternData,
                     SignaturePatternRelic = SignaturePatternRelic,
@@ -315,7 +312,7 @@ namespace EveJimaCore
             }
             catch(Exception ex)
             {
-                _commandsLog.Error($"[ApplicationSettings.Save] Critical error on save settingt to file '{path}'. Exception is '{ex}'");
+                _commandsLog.Error($"[ApplicationSettings.Save] Critical error on save settings to file '{path}'. Exception is '{ex}'");
             }
         }
     }

@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="BLL\LostAndFound\LostSolarSystem.cs" />
     <Compile Include="BLL\LostAndFound\LostSolarSystems.cs" />
+    <Compile Include="Configuration\Department\SecuritySettings.cs" />
     <Compile Include="EveJimaWindow.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -7,3 +7,14 @@
 /Client/EveJimaUniverse/obj/Debug
 /Client/packages
 /Server/EveJimaServerMap/bin/Release
+/Server/EveJimaServerMap/obj/Release
+/Client/EJTests/bin/Debug
+/Client/EvaJima/bin/x86/2.12
+/Client/EvaJima/obj/x86/Debug
+/Client/EvaJimaCore/bin/x86/Debug
+/Client/EvaJimaCore/obj/x86/Debug
+/Client/EveInternalBrowser/bin/x86/Debug
+/Client/EveInternalBrowser/obj/x86/Debug
+/Client/EveJimaCoreTests/bin/Debug
+/Client/EveJimaUniverse/bin/Debug
+/Client/EvaJima/bin/x86/2.2x

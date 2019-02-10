@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using EvaJimaCore;
 using EveJimaCore.BLL;
@@ -14,13 +16,15 @@ namespace EveJimaCore.WhlControls
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ControlAuthorization));
 
+        delegate void SetTextCallback(string text);
+
         public event Action<string> OnSelectUser;
 
         public ControlAuthorization()
         {
             InitializeComponent();
 
-            Pilotes = new List<PilotEntity>();
+            Pilots = new List<PilotEntity>();
 
             label1.Text = Localization.Messages.Get("LoadAllPilotesFromStorage");
             btnEditPilots.Text = Localization.Messages.Get("Tab_Authorization_EditPilots", "Edit Pilots");
@@ -48,7 +52,7 @@ namespace EveJimaCore.WhlControls
 
             if (Visible && !Disposing)
             {
-                if (Global.ApplicationSettings.Pilots.Count > 0 && Pilotes.Count < 1 )
+                if (Global.ApplicationSettings.Pilots.Count > 0 && Pilots.Count < 1 )
                 {
                     cmdLoadPilotes.Value = string.Format(Localization.Messages.Get("LoadPilotsFromCache"), Global.ApplicationSettings.Pilots.Count);
                     cmdLoadPilotes.Visible = true;
@@ -57,63 +61,9 @@ namespace EveJimaCore.WhlControls
             }
         }
 
-        List<PilotEntity> Pilotes { get; set; }
+        private List<PilotEntity> Pilots { get; set; }
 
-        private bool _isLoadedPilotesFromStorage = true ;
-
-
-
-        public void LoadAllPilotesFromStorage()
-        {
-            _isLoadedPilotesFromStorage = false;
-
-            if (InvokeRequired)
-            {
-                Invoke(new Action(LoadAllPilotesFromStorage));
-            }
-
-            AuthorizeAllPilotsInAccount();
-
-            ShowPilots();
-
-            _isLoadedPilotesFromStorage = true;
-        }
-
-        public void AuthorizeAllPilotsInAccount()
-        {
-            lblAuthorizationInfo.Visible = false;
-            lblAuthorizationInfo.Refresh();
-
-            containerScreenUpdate.Location = new Point(100, 21);
-            containerScreenUpdate.Refresh();
-
-            Pilotes = new List<PilotEntity>();
-
-            foreach (var pilot in Global.ApplicationSettings.Pilots)
-            {
-                try
-                {
-                    lblUpdateLog.Text = string.Format( Localization.Messages.Get("StartAuthorizePilot"), pilot.Item1);
-                    lblUpdateLog.Refresh();
-
-                    var currentPilot = new PilotEntity(pilot.Item2, pilot.Item3) { Key = pilot.Item4 };
-
-                    Pilotes.Add(currentPilot);
-                }
-                catch (Exception ex)
-                {
-                    Log.ErrorFormat("[whlAuthorization.LoadAllPilotesFromStorage] Critical error. Exception {0}", ex);
-                }
-
-            }
-
-            
-
-            containerScreenUpdate.Location = new Point(-500, -500);
-            lblAuthorizationInfo.Visible = true;
-            btnEditPilots.Visible = true;
-            lblAuthorizationInfo.Refresh();
-        }
+        private bool _isLoadedPilotsFromStorage = true ;
 
         private void Event_GoToCCPSSO(object sender, EventArgs e)
         {
@@ -162,6 +112,8 @@ namespace EveJimaCore.WhlControls
                 Invoke(new Action(() => RefreshPilotInfo()));
             }
 
+            if (Global.Pilots == null || Global.Pilots.Selected == null) return;
+
             crlPilotPortrait.Image = Global.Pilots.Selected.Portrait;
             crlPilotPortrait.Refresh();
 
@@ -174,11 +126,11 @@ namespace EveJimaCore.WhlControls
 
         private void ShowPilots()
         {
-            if (Pilotes.Count <= 0) return;
+            if (Pilots.Count <= 0) return;
 
             PilotEntity pilot = null;
 
-            foreach (var pilotEntity in Pilotes)
+            foreach (var pilotEntity in Pilots)
             {
                 var isFirstMapLoad = false;
 
@@ -224,7 +176,7 @@ namespace EveJimaCore.WhlControls
 
         private void cmbPilots_TextChanged(object sender, EventArgs e)
         {
-            if (_isLoadedPilotesFromStorage)
+            if (_isLoadedPilotsFromStorage)
             {
                 
                 Global.Pilots.Activate(cmbPilots.Text);
@@ -233,18 +185,79 @@ namespace EveJimaCore.WhlControls
             }
         }
 
-        public void RefreshAuthorizationStatus()
-        {
-            lblAuthorizationInfo.Text = Localization.Messages.Get("TextAuthorizationInfo");
-        }
-
         private void cmdLoadPilotes_Click(object sender, EventArgs e)
         {
             cmdLoadPilotes.Visible = false;
 
-            LoadAllPilotesFromStorage();
+            LoadPilots();
 
             btnLogInWithEveOnline.Visible = true;
+        }
+
+        private async void LoadPilots()
+        {
+            _isLoadedPilotsFromStorage = false;
+
+            if (InvokeRequired)
+            {
+                Invoke(new Action(LoadPilots));
+            }
+
+            lblAuthorizationInfo.Visible = false;
+            lblAuthorizationInfo.Refresh();
+
+            containerScreenUpdate.Location = new Point(100, 21);
+            containerScreenUpdate.Refresh();
+
+            Pilots = await Task.Run(() => AuthorizePilots());
+
+            containerScreenUpdate.Location = new Point(-500, -500);
+            lblAuthorizationInfo.Visible = true;
+            btnEditPilots.Visible = true;
+
+            lblAuthorizationInfo.Refresh();
+
+            _isLoadedPilotsFromStorage = true;
+
+            ShowPilots();
+        }
+
+        
+
+        private List<PilotEntity> AuthorizePilots()
+        {
+            var pilots = new List<PilotEntity>();
+
+            foreach (var pilot in Global.ApplicationSettings.Pilots)
+            {
+                try
+                {
+                    SetText(string.Format(Localization.Messages.Get("StartAuthorizePilot"), pilot.Item1));
+
+                    var currentPilot = new PilotEntity(pilot.Item2, pilot.Item3) { Key = pilot.Item4 };
+
+                    pilots.Add(currentPilot);
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorFormat("[whlAuthorization.LoadAllPilotesFromStorage] Critical error. Exception {0}", ex);
+                }
+            }
+
+            return pilots;
+        }
+
+        private void SetText(string text)
+        {
+            if (lblUpdateLog.InvokeRequired)
+            {
+                var d = new SetTextCallback(SetText);
+                Invoke(d, text);
+            }
+            else
+            {
+                lblUpdateLog.Text = text;
+            }
         }
 
         private void btnEditPilots_Click(object sender, EventArgs e)

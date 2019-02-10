@@ -26,7 +26,15 @@ namespace EveJimaCore
 
             if (activeProgramName == null)
             {
-                Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", _currentValue, _previousValue, _startedValue);
+                if (EvaJimaCore.Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
+                {
+                    Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. Active Program Name is null. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", "********", "********", "********");
+                }
+                else
+                {
+                    Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. Active Program Name is null. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", _currentValue, _previousValue, _startedValue);
+                }
+
                 return;
             }
 
@@ -39,7 +47,14 @@ namespace EveJimaCore
 
             if (_previousValue == _currentValue)
             {
-                Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", _currentValue, _previousValue, _startedValue);
+                if (EvaJimaCore.Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
+                {
+                    Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. This is old value. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", "******", "******", "******");
+                }
+                else
+                {
+                    Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. This is old value. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", _currentValue, _previousValue, _startedValue);
+                }
                 return;
             }
 
@@ -47,7 +62,15 @@ namespace EveJimaCore
             {
                 if (!activeProgramName.StartsWith(Global.Configuration.EveOnlineTitle))
                 {
-                    Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", _currentValue, _previousValue, _startedValue);
+                    if (EvaJimaCore.Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
+                    {
+                        Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. This is not EVE window. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", "******", "******", "******");
+                    }
+                    else
+                    {
+                        Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. This is not EVE window. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", _currentValue, _previousValue, _startedValue);
+                    }
+
                     return;
                 }
             }
@@ -55,13 +78,28 @@ namespace EveJimaCore
 
             if (_startedValue == _currentValue)
             {
-                Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", _currentValue, _previousValue, _startedValue);
+                if (EvaJimaCore.Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
+                {
+                    Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. This is started value. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", "******", "******", "******");
+                }
+                else
+                {
+                    Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. This is started value. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", _currentValue, _previousValue, _startedValue);
+                }
+
                 return;
             }
 
             if (string.IsNullOrEmpty(_currentValue))
             {
-                Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", _currentValue, _previousValue, _startedValue);
+                if (EvaJimaCore.Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
+                {
+                    Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. This value is empty. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", "******", "******", "******");
+                }
+                else
+                {
+                    Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. This value is empty. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", _currentValue, _previousValue, _startedValue);
+                }
                 return;
             }
 
@@ -75,8 +113,14 @@ namespace EveJimaCore
 
             _startedValue = "[Removed]";
 
-            Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", _currentValue, _previousValue, _startedValue);
-
+            if (EvaJimaCore.Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
+            {
+                Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", "******", "******", "******");
+            }
+            else
+            {
+                Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", _currentValue, _previousValue, _startedValue);
+            }
             var zkbUrl = Zkillboard.GetZkillboardUrlByName(_currentValue);
 
             if(string.IsNullOrEmpty(zkbUrl) == false)

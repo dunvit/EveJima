@@ -39,9 +39,9 @@ namespace EvaJimaCore
 
         public static void Initialization()
         {
-            Clipboard = new ClipboardEntity();
-
             ApplicationSettings = new ApplicationSettings();
+
+            Clipboard = new ClipboardEntity();
 
             WorkEnvironment = new WorkEnvironment();
 

@@ -9,12 +9,10 @@ namespace EveJimaCore.Monitoring
     public class BookmarksMonitoring : Events.AbstractMonitor
     {
         public bool IsEnabled { get; set; }
-        public string Pattern { get; set; }
 
         public BookmarksMonitoring(ApplicationSettings settings) : base(settings)
         {
             IsEnabled = Settings.IsSignatureRebuildEnabled;
-            Pattern = Settings.SignatureRebuildPattern;
         }
 
         public override void EraseEvent()
@@ -34,7 +32,7 @@ namespace EveJimaCore.Monitoring
 
         public string Execute(string valueInClipboard)
         {
-            var label = Pattern;
+            var label = "";
 
             try
             {
@@ -51,22 +49,22 @@ namespace EveJimaCore.Monitoring
                     switch(signatureType)
                     {
                         case SignatureType.Relic:
-                            label = label.Replace("%Type", Settings.SignaturePatternRelic);
+                            label = Settings.SignaturePatternRelic;
                             break;
                         case SignatureType.Data:
-                            label = label.Replace("%Type", Settings.SignaturePatternData);
+                            label = Settings.SignaturePatternData;
                             break;
                         case SignatureType.Gas:
-                            label = label.Replace("%Type", Settings.SignaturePatternGas);
+                            label = Settings.SignaturePatternGas;
                             break;
                         case SignatureType.Unknown:
-                            label = label.Replace("%Type", Settings.SignaturePatternUnknown);
+                            label = Settings.SignaturePatternUnknown;
                             break;
                         case SignatureType.WH:
-                            label = label.Replace("%Type", Settings.SignaturePatternWormhole);
+                            label = Settings.SignaturePatternWormhole;
                             break;
                         default:
-                            label = label.Replace("%Type", Settings.SignaturePatternUnknown);
+                            label = Settings.SignaturePatternUnknown;
                             break;
                     }
 

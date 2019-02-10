@@ -1,5 +1,5 @@
-﻿
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using EvaJimaCore;
 using log4net;
 
 namespace EveJimaCore.EjEnvironment
@@ -16,7 +16,8 @@ namespace EveJimaCore.EjEnvironment
         {
             _startedValue = Clipboard.GetText().Trim();
 
-            Log.DebugFormat("Started Clipboard value is {0}", _startedValue);
+            if(Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
+                Log.DebugFormat("Started Clipboard value is {0}", _startedValue);
         }
 
         public string GetValue()
@@ -28,7 +29,8 @@ namespace EveJimaCore.EjEnvironment
 
             _currentValue = Clipboard.GetText().Trim();
 
-            Log.DebugFormat("Get Clipboard value is {0}", _currentValue);
+            if (Global.ApplicationSettings != null && Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
+                Log.DebugFormat("Get Clipboard value is {0}", _currentValue);
 
             return _currentValue;
         }
