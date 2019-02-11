@@ -57,8 +57,6 @@ namespace EveJima
             try
             {
                 Application.Run(new EveJimaWindow());
-                //Application.Run(new WindowMainContainer());
-                //Application.Run(new MainEveJima());
             }
             catch(Exception e)
             {

@@ -166,15 +166,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="app.manifest" />
-    <None Include="Configurations\EveJima.config">
+    <Content Include="Configurations\EveJima.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="EvaJima.pfx" />
     <None Include="EveJima_TemporaryKey.pfx" />
-    <None Include="Configurations\Logs.config">
+    <Content Include="Configurations\Logs.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
-    </None>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
