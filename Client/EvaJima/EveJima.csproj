@@ -140,7 +140,7 @@
     <Content Include="Data\TravelHistory\dummy.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Release_2.20.html">
+    <Content Include="Release_2.27.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Version.txt">
