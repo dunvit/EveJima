@@ -1,15 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using EveJimaIGB;
+using EvaJimaCore;
+using EveJimaCore.API;
 
 
 namespace EveJimaCore.WhlControls
 {
     public partial class ControlPilotInformation : BaseContainer
     {
-        public BrowserNavigate OnBrowserNavigate;
-
         public ControlPilotInformation()
         {
             InitializeComponent();
@@ -23,7 +22,7 @@ namespace EveJimaCore.WhlControls
 
         public override void ActivateContainer()
         {
-            EventNavigateInternalBrowser("http://evejima.mikotaj.com/VisitorsCounterPilotInfo.html");
+            EventNavigateInternalBrowser(Global.ApplicationSettings.Common.StatisticVisitorsCounterPage);
         }
 
         [Description("Pilot name"), Category("Data")]
@@ -94,14 +93,13 @@ namespace EveJimaCore.WhlControls
                 return;
             }
 
-            EvaJimaCore.Global.InternalBrowser.OnBrowserNavigate(url);
+            Global.InternalBrowser.OnBrowserNavigate(url);
 
             if (crlPilotsHistory.Items.Contains(txtSelectedPilotName.Text.Trim()) == false)
             {
                 crlPilotsHistory.Items.Add(txtSelectedPilotName.Text.Trim());
             }
         }
-
 
         private void cmdClearHistory_Click(object sender, EventArgs e)
         {
@@ -116,12 +114,6 @@ namespace EveJimaCore.WhlControls
             {
                 txtSelectedPilotName.Text = crlPilotsHistory.SelectedItem.ToString();
             }
-        }
-
-
-        private void cmdShowZkillboard_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

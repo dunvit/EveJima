@@ -1,5 +1,5 @@
-﻿using System.Timers;
-using EvaJimaCore;
+﻿using EvaJimaCore;
+using EveJimaCore.Tools;
 using log4net;
 
 namespace EveJimaCore.Monitoring
@@ -10,15 +10,15 @@ namespace EveJimaCore.Monitoring
         {
             Logger.Debug("[ActiveWindowMonitoring.Event_Refresh] Monitoring.");
 
-            var activeProgramName = Tools.GetActiveWindowTitle();
+            var activeProgramName = Common.GetActiveWindowTitle();
 
             Logger.DebugFormat("Active window title is {0}", activeProgramName);
 
             if(activeProgramName == null) return;
 
-            if (!activeProgramName.StartsWith("EVE - ")) return;
+            if (!activeProgramName.StartsWith(Global.ApplicationSettings.Common.EveOnlineTitle)) return;
 
-            var pilotName = activeProgramName.Replace("EVE - ", "") + "";
+            var pilotName = activeProgramName.Replace(Global.ApplicationSettings.Common.EveOnlineTitle, "") + "";
 
             Logger.DebugFormat("Pilot name is {0}", pilotName);
 
@@ -28,12 +28,14 @@ namespace EveJimaCore.Monitoring
 
             if (pilotName == Global.Pilots.Selected.Name) return;
 
+            Logger.InfoFormat("Before activate pilot name is {0}", Global.Pilots.Selected.Name);
+
             Global.Pilots.Activate(pilotName);
         }
 
         public ActiveWindowMonitoring(ApplicationSettings settings) : base(settings)
         {
-
+            Logger = LogManager.GetLogger("ActiveWindowMonitoring");
         }
     }
 }

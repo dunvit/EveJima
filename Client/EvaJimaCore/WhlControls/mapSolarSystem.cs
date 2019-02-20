@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using EvaJimaCore;
 using EveJimaCore.BLL;
+using EveJimaCore.Tools;
 using EveJimaUniverse;
 using log4net;
 
@@ -32,7 +33,7 @@ namespace EveJimaCore.WhlControls
         {
             var graphics = e.Graphics;
             var rectangle = new Rectangle(25, 25, 10, 10);
-            graphics.FillEllipse(new SolidBrush(Tools.GetColorBySolarSystem(_solarSystem.Security.ToString())), rectangle);
+            graphics.FillEllipse(new SolidBrush(Common.GetColorBySolarSystem(_solarSystem.Security.ToString())), rectangle);
             graphics.DrawEllipse(new Pen( Color.DimGray, 1), rectangle);
 
             if (IsCurrentLocation)

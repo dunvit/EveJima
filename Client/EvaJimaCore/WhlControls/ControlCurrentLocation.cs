@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using EvaJimaCore;
+using EveJimaCore.Tools;
 using EveJimaCore.UiTools;
 using EveJimaUniverse;
 using log4net;
@@ -54,11 +55,11 @@ namespace EveJimaCore.WhlControls
 
                 txtSolarSystemName.Text = solarSystem.Name;
 
-                txtSolarSystemName.ForeColor = Tools.GetColorBySolarSystem(solarSystem.Security.ToString());
+                txtSolarSystemName.ForeColor = Common.GetColorBySolarSystem(solarSystem.Security.ToString());
 
                 if(solarSystem.Security == SecurityStatus.WSpace)
                 {
-                    txtSolarSystemName.ForeColor = Tools.GetColorBySolarSystem("C" + solarSystem.Class);
+                    txtSolarSystemName.ForeColor = Common.GetColorBySolarSystem("C" + solarSystem.Class);
                 }
 
                 if(solarSystem.Class != null)
@@ -97,7 +98,7 @@ namespace EveJimaCore.WhlControls
 
                 lbl_StaticII.Visible = false;
 
-                //txtSolarSystemName.ForeColor = Tools.GetColorBySolarSystem(solarSystem.Security.ToString());
+                //txtSolarSystemName.ForeColor = Common.GetColorBySolarSystem(solarSystem.Security.ToString());
 
                 if (string.IsNullOrEmpty(solarSystem.Static) == false)
                 {
@@ -105,7 +106,7 @@ namespace EveJimaCore.WhlControls
 
                     txtSolarSystemStaticI.Text = wormholeI.Name + " " + wormholeI.LeadsTo;
                     txtSolarSystemStaticI.Visible = true;
-                    txtSolarSystemStaticI.ForeColor = Tools.GetColorBySolarSystem(wormholeI.LeadsTo);
+                    txtSolarSystemStaticI.ForeColor = Common.GetColorBySolarSystem(wormholeI.LeadsTo);
 
                     txtSolarSystemStaticIData.Text = wormholeI.LeadsTo;
                     txtSolarSystemStaticIData.Visible = true;
@@ -120,7 +121,7 @@ namespace EveJimaCore.WhlControls
 
                     txtSolarSystemStaticII.Text = wormholeII.Name + " " + wormholeII.LeadsTo;
                     txtSolarSystemStaticII.Visible = true;
-                    txtSolarSystemStaticII.ForeColor = Tools.GetColorBySolarSystem(wormholeII.LeadsTo);
+                    txtSolarSystemStaticII.ForeColor = Common.GetColorBySolarSystem(wormholeII.LeadsTo);
 
                     txtSolarSystemStaticIIData.Text = wormholeII.LeadsTo;
                     txtSolarSystemStaticIIData.Visible = true;

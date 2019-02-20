@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using EvaJimaCore;
 using EveJimaCore.MainScreen;
 using EveJimaCore.Properties;
+using EveJimaCore.Tools;
 using log4net;
 
 namespace EveJimaCore.Main
@@ -17,6 +18,8 @@ namespace EveJimaCore.Main
         private WindowParameters Parametrs { get; set; }
         public event Action OnCloseApplication;
         public event Action OnHideToTray;
+
+        private string lastUserLocationUpdate = string.Empty;
 
         public EveJimaTitlebar()
         {
@@ -103,7 +106,7 @@ namespace EveJimaCore.Main
 
         private void Event_RedrawCurrentLocationInfo(object sender, PaintEventArgs e)
         {
-            if(!Tools.IsAppicationModeRuntime()) return;
+            if(!Common.IsAppicationModeRuntime()) return;
 
             Log.Info("[EveJimaTitlebar.Event_RedrawCurrentLocationInfo] Refresh");
 
@@ -114,6 +117,11 @@ namespace EveJimaCore.Main
 
             if (Global.Pilots.Selected != null)
             {
+
+                if (lastUserLocationUpdate == Global.Pilots.Selected.Name) return;
+
+                lastUserLocationUpdate = Global.Pilots.Selected.Name;
+
                 var textPositionTop = 8;
 
                 var location = Global.Pilots.Selected.Location;
@@ -121,7 +129,7 @@ namespace EveJimaCore.Main
 
                 if (location.Name == "unknown") return;
 
-                if (Tools.IsWSpaceSystem(location.Name))
+                if (Common.IsWSpaceSystem(location.Name))
                 {
                     if (location.Class != null)
                     {
@@ -134,11 +142,11 @@ namespace EveJimaCore.Main
                 }
 
                 var drawFont = new Font("Verdana", 7, FontStyle.Bold);
-                var drawBrushName = new SolidBrush(Tools.GetColorBySolarSystem(location.Security.ToString()));
+                var drawBrushName = new SolidBrush(Common.GetColorBySolarSystem(location.Security.ToString()));
 
-                if (Tools.IsWSpaceSystem(location.Name))
+                if (Common.IsWSpaceSystem(location.Name))
                 {
-                    drawBrushName = new SolidBrush(Tools.GetColorBySolarSystem("C" + location.Class));
+                    drawBrushName = new SolidBrush(Common.GetColorBySolarSystem("C" + location.Class));
                 }
 
                 if (Global.ApplicationSettings.IsUseWhiteColorForSystems)
@@ -154,7 +162,7 @@ namespace EveJimaCore.Main
 
                 var allTitleText = systemLabel;
 
-                if (Tools.IsWSpaceSystem(location.Name))
+                if (Common.IsWSpaceSystem(location.Name))
                 {
                     var txtSolarSystemStaticFirst = "";
 
@@ -164,7 +172,7 @@ namespace EveJimaCore.Main
 
                         txtSolarSystemStaticFirst = wormholeFirst.Name + "[" + wormholeFirst.LeadsTo + "]";
 
-                        drawBrushName = new SolidBrush(Tools.GetColorBySolarSystem(wormholeFirst.LeadsTo));
+                        drawBrushName = new SolidBrush(Common.GetColorBySolarSystem(wormholeFirst.LeadsTo));
 
                         if (Global.ApplicationSettings.IsUseWhiteColorForSystems)
                         {
@@ -185,7 +193,7 @@ namespace EveJimaCore.Main
 
                         txtSolarSystemSecondStatic = wormholeSecond.Name + "[" + wormholeSecond.LeadsTo + "]";
 
-                        drawBrushName = new SolidBrush(Tools.GetColorBySolarSystem(wormholeSecond.LeadsTo));
+                        drawBrushName = new SolidBrush(Common.GetColorBySolarSystem(wormholeSecond.LeadsTo));
 
                         if (Global.ApplicationSettings.IsUseWhiteColorForSystems)
                         {

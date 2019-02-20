@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -14,9 +15,9 @@ using log4net;
 using EveJimaUniverse;
 using Newtonsoft.Json;
 
-namespace EveJimaCore
+namespace EveJimaCore.Tools
 {
-    public static class Tools
+    public static class Common
     {
         #region
         [DllImport("user32.dll")]
@@ -238,6 +239,44 @@ namespace EveJimaCore
             return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source), deserializeSettings);
         }
 
+        public static Encoding GetEncodingFrom(NameValueCollection responseHeaders, Encoding defaultEncoding = null)
+        {
+            if (responseHeaders == null)
+                throw new ArgumentNullException("responseHeaders");
 
+            //Note that key lookup is case-insensitive
+            var contentType = responseHeaders["Content-Type"];
+            if (contentType == null)
+                return defaultEncoding;
+
+            var contentTypeParts = contentType.Split(';');
+            if (contentTypeParts.Length <= 1)
+                return defaultEncoding;
+
+            var charsetPart =
+                contentTypeParts.Skip(1).FirstOrDefault(
+                    p => p.TrimStart().StartsWith("charset", StringComparison.InvariantCultureIgnoreCase));
+            if (charsetPart == null)
+                return defaultEncoding;
+
+            var charsetPartParts = charsetPart.Split('=');
+            if (charsetPartParts.Length != 2)
+                return defaultEncoding;
+
+            var charsetName = charsetPartParts[1].Trim();
+            if (charsetName == "")
+                return defaultEncoding;
+
+            try
+            {
+                return Encoding.GetEncoding(charsetName);
+            }
+            catch (ArgumentException ex)
+            {
+                throw new Exception(
+                    charsetName + "The server returned data in an unknown encoding: " + charsetName);
+            }
+
+        }
     }
 }

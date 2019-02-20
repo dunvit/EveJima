@@ -1154,7 +1154,7 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:EveJima"
-        "ProductCode" = "8:{C5564F74-696E-4348-A4A1-EBA5F3D79338}"
+        "ProductCode" = "8:{3DBDE67B-B92F-4F07-BEAC-101E6916AC43}"
         "PackageCode" = "8:{C37FBDF4-B24A-4938-92BD-E193DCAB0EA2}"
         "UpgradeCode" = "8:{B5574E4F-2E45-438B-A124-860FE70C9495}"
         "AspNetVersion" = "8:4.0.30319.0"
@@ -1162,7 +1162,7 @@
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:2.27"
+        "ProductVersion" = "8:2.28"
         "Manufacturer" = "8:Vitaly Sushilov"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

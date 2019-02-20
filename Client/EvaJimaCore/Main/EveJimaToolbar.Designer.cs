@@ -1,4 +1,6 @@
-﻿namespace EveJimaCore.Main
+﻿using EveJimaCore.Monitoring;
+
+namespace EveJimaCore.Main
 {
     partial class EveJimaToolbar
     {
@@ -52,7 +54,7 @@
             this.WormholeInfo = new System.Windows.Forms.TabPage();
             this.controlWormholeInformation1 = new EveJimaCore.WhlControls.ControlWormholeInformation();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.monitoringUsersCounter1 = new EveJimaCore.WhlControls.MonitoringUsersCounter();
+            this.monitoringUsersCounter1 = new MonitoringUsersCounter();
             this.EditPilots = new System.Windows.Forms.TabPage();
             this.controlEditPilots1 = new EveJimaCore.WhlControls.ControlEditPilots();
             this.Version = new System.Windows.Forms.TabPage();
@@ -453,7 +455,7 @@
         private System.Windows.Forms.TabPage WormholeInfo;
         private WhlControls.ControlWormholeInformation controlWormholeInformation1;
         private System.Windows.Forms.TabPage tabPage1;
-        private WhlControls.MonitoringUsersCounter monitoringUsersCounter1;
+        private MonitoringUsersCounter monitoringUsersCounter1;
         private System.Windows.Forms.TabPage EditPilots;
         private WhlControls.ControlEditPilots controlEditPilots1;
         private System.Windows.Forms.TabPage Version;

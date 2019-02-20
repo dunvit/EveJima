@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using EvaJimaCore;
 using EveJimaCore.BLL;
+using EveJimaCore.Tools;
 using EveJimaUniverse;
 using log4net;
 
@@ -33,7 +34,7 @@ namespace EveJimaCore.WhlControls
                 
                 txtSolarSystemRegion.Text = location.Region.Replace(" Unknown (", "").Replace(")", "");
 
-                txtSolarSystemName.ForeColor = Tools.GetColorBySolarSystem(location.Security.ToString());
+                txtSolarSystemName.ForeColor = Common.GetColorBySolarSystem(location.Security.ToString());
             }
             catch (Exception ex)
             {

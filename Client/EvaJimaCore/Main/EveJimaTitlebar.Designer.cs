@@ -99,6 +99,7 @@
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdMinimazeRestore);
             this.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.DoubleBuffered = true;
             this.Name = "EveJimaTitlebar";
             this.Size = new System.Drawing.Size(801, 27);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Event_RedrawCurrentLocationInfo);

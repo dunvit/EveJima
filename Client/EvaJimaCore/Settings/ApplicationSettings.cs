@@ -14,6 +14,8 @@ namespace EveJimaCore
 
         public SecuritySettings Security = new SecuritySettings();
 
+        public Common Common = new Common();
+
         public bool IsConverted { private set; get; }
 
         public string Version { set; get; }

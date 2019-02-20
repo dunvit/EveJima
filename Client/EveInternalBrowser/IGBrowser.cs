@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using EveJimaIGB.BLL;
@@ -50,7 +49,7 @@ namespace EveJimaIGB
 
         public void Initialization()
         {
-            Global.Configuration = new Config();
+            Common.Configuration = new BrowserConfiguration();
         }
 
         private void Event_GetUrl(string url)

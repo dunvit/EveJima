@@ -1,13 +1,11 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
+using EvaJimaCore;
+using EveJimaCore.Tools;
 using log4net;
-using Newtonsoft.Json.Linq;
 
-namespace EveJimaIGB
+namespace EveJimaCore.API
 {
     public class Zkillboard
     {
@@ -20,13 +18,17 @@ namespace EveJimaIGB
 
             try
             {
-                url = "https://esi.evetech.net/latest/search/?search=" + WebUtility.UrlEncode(name) + "&categories=character&language=en-us&strict=true&datasource=tranquility";
-
-                //url = "https://api.eveonline.com/eve/CharacterID.xml.aspx?names=" + WebUtility.UrlEncode(name);
+                url = Global.ApplicationSettings.Common.EsiAddress + "/latest/search/?search=" + WebUtility.UrlEncode(name) + "&categories=character&language=en-us&strict=true&datasource=tranquility";
 
                 Log.DebugFormat("[Zkillboard.GetZkillboardUrlByName] Read url {0} ", url);
 
                 var data = ReadFile(url);
+
+                if (data == "{}")
+                {
+                    Log.DebugFormat("[Zkillboard.GetZkillboardUrlByName] Url {0} is empty.", url);
+                    return string.Empty;
+                }
 
                 var dataParts = data.Split(new[] { "[" }, StringSplitOptions.None)[1].Split(new[] { "]" }, StringSplitOptions.None)[0];
 
@@ -97,7 +99,7 @@ namespace EveJimaIGB
 
                     var result = webClient.DownloadData(url);
 
-                    var encoding = Tools.GetEncodingFrom(webClient.ResponseHeaders, Encoding.UTF8);
+                    var encoding = Common.GetEncodingFrom(webClient.ResponseHeaders, Encoding.UTF8);
 
                     content = encoding.GetString(result);
 
@@ -107,7 +109,7 @@ namespace EveJimaIGB
 
                 }
             }
-            catch(Exception e)
+            catch
             {
                 Log.ErrorFormat("[Zkillboard.ReadFile] Critical error on download file from '{0}'", url);
 
@@ -115,7 +117,7 @@ namespace EveJimaIGB
             }
         }
 
-        private static bool IsCharacter(string id)
+        public static bool IsCharacter(string id)
         {
             try
             {
@@ -126,7 +128,7 @@ namespace EveJimaIGB
 
                 var content = webClient.DownloadString(url);
 
-                if (content.IndexOf("\"info\":null,") > -1)
+                if (content.IndexOf("is not a valid parameter") > -1)
                 {
                     return false;
                 }
@@ -140,7 +142,7 @@ namespace EveJimaIGB
 
         }
 
-        private static bool IsCorporation(string id)
+        public static bool IsCorporation(string id)
         {
             try
             {
@@ -163,7 +165,7 @@ namespace EveJimaIGB
             }
         }
 
-        private static bool IsSolarSystem(string id)
+        public static bool IsSolarSystem(string id)
         {
             try
             {
@@ -188,7 +190,7 @@ namespace EveJimaIGB
 
         }
 
-        private static bool IsAlliance(string id)
+        public static bool IsAlliance(string id)
         {
             try
             {

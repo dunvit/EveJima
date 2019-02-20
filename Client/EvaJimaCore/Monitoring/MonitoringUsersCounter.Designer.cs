@@ -1,4 +1,4 @@
-﻿namespace EveJimaCore.WhlControls
+﻿namespace EveJimaCore.Monitoring
 {
     partial class MonitoringUsersCounter
     {

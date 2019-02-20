@@ -82,14 +82,13 @@
       <DependentUpon>AddFavorites.cs</DependentUpon>
     </Compile>
     <Compile Include="BLL\ChromiumWebBrowserControl.cs" />
-    <Compile Include="BLL\EveClipboardActions\Zkillboard.cs" />
     <Compile Include="BLL\InternalWebBrowser.cs" />
     <Compile Include="BLL\IWebBrowserControl.cs" />
     <Compile Include="BLL\NetWebBrowserControl.cs" />
     <Compile Include="BLL\WebBrowserFactory.cs" />
     <Compile Include="Bookmarks\Favorites.cs" />
-    <Compile Include="Configuration\Config.cs" />
-    <Compile Include="Global.cs" />
+    <Compile Include="Configuration\BrowserConfiguration.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="IGBrowser.cs">
       <SubType>UserControl</SubType>
     </Compile>

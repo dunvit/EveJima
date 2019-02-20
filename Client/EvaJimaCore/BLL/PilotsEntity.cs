@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using EvaJimaCore;
 using log4net;
@@ -13,27 +12,11 @@ namespace EveJimaCore.BLL
 
     public class PilotsEntity : IEnumerable<PilotEntity>
     {
-        private readonly object _lock = new object();
         private static readonly ILog Log = LogManager.GetLogger(typeof(PilotsEntity));
         readonly List<PilotEntity> _pilots = new List<PilotEntity>();
 
         public DelegateOnAddPilot OnAddPilot;
         public DelegateActivate OnActivatePilot;
-
-        public string[] GetPilotsStorageContent()
-        {
-            lock (_lock)
-            {
-                if (File.Exists(@"Data/Pilots.csv") == false)
-                {
-                    File.Create(@"Data/Pilots.csv").Close(); 
-                }
-
-                var allLines = File.ReadAllLines(@"Data/Pilots.csv");
-
-                return allLines;
-            }
-        }
 
         public PilotEntity Selected { get; private set; }
 

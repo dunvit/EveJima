@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using EveJimaCore.BLL;
 using EveJimaCore.Main;
 using EveJimaCore.Monitoring;
+using EveJimaCore.Tools;
 using EveJimaCore.Window;
 using log4net;
 using Global = EvaJimaCore.Global;
@@ -24,7 +25,7 @@ namespace EveJimaCore
         {
             InitializeComponent();
 
-            if(!Tools.IsAppicationModeRuntime()) return;
+            if(!Common.IsAppicationModeRuntime()) return;
 
             // From here only run time commands ----------------------------------------------------
 
@@ -134,6 +135,8 @@ namespace EveJimaCore
 
         private void GlobalEvent_ActivatePilot(PilotEntity pilot)
         {
+            Log.InfoFormat("[MainEveJima.GlobalEvent_ActivatePilot] Pilot: {0} Location: {1}", pilot.Name, Global.Pilots.Selected.Location.Id);
+
             eveJimaToolbar1.SelectPilotSetAllTabsEnabled();
         }
 

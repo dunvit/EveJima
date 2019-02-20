@@ -1,5 +1,6 @@
 ﻿using System;
 using EveJimaCore;
+using EveJimaCore.API;
 using EveJimaIGB;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

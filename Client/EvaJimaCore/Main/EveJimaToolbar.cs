@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using EvaJimaCore;
-using EveJimaCore.BLL;
 using EveJimaCore.UiTools;
 using EveJimaCore.WhlControls;
 using log4net;
@@ -21,6 +18,8 @@ namespace EveJimaCore.Main
         private Hashtable _tabs = new Hashtable();
         public string ActivePanelName { get; set; }
         public event Action<PanelMetaData> OnSelectElement;
+
+        delegate void EnableControl(Control item);
 
         public EveJimaToolbar(Form eveJimaWindow)
         {
@@ -188,13 +187,26 @@ namespace EveJimaCore.Main
 
         private void EnableControlByTag(string tag)
         {
-            var control = GetElementByTag(tag);
+            EnableControlAction(GetElementByTag(tag));
+        }
 
-            if(control != null)
+        private void EnableControlAction(Control control)
+        {
+            if (control == null) return;
+
+            if (control.InvokeRequired)
             {
-                control.Cursor = Cursors.Hand;
-                control.ForeColor = Color.Silver;
-                control.Refresh();
+                var d = new EnableControl(EnableControlAction);
+                Invoke(d, control);
+            }
+            else
+            {
+                if (control != null)
+                {
+                    control.Cursor = Cursors.Hand;
+                    control.ForeColor = Color.Silver;
+                    control.Refresh();
+                }
             }
         }
 
@@ -304,6 +316,11 @@ namespace EveJimaCore.Main
                 Log.ErrorFormat("[EveJimaToolbar.ActivatePanel] Critical error = {0}", ex);
             }
         }
+
+        //public void ActivatePilot()
+        //{
+        //    var control = tabControl1.TabPages["Authorization"].Controls[0] as ControlAuthorization;
+        //}
 
         public void ActivateTab(PanelMetaData panel)
         {

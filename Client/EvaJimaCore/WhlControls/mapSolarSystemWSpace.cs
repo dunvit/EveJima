@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using EvaJimaCore;
 using EveJimaCore.BLL;
+using EveJimaCore.Tools;
 using EveJimaUniverse;
 using log4net;
 
@@ -51,7 +52,7 @@ namespace EveJimaCore.WhlControls
 
                 label1.Visible = false;
 
-                txtSolarSystemName.ForeColor = Tools.GetColorBySolarSystem(location.Security.ToString());
+                txtSolarSystemName.ForeColor = Common.GetColorBySolarSystem(location.Security.ToString());
 
                 if (string.IsNullOrEmpty(location.Static) == false)
                 {
@@ -59,7 +60,7 @@ namespace EveJimaCore.WhlControls
 
                     txtSolarSystemStaticI.Text = wormholeI.Name + " " + wormholeI.LeadsTo;
                     txtSolarSystemStaticI.Visible = true;
-                    txtSolarSystemStaticI.ForeColor = Tools.GetColorBySolarSystem(wormholeI.LeadsTo);
+                    txtSolarSystemStaticI.ForeColor = Common.GetColorBySolarSystem(wormholeI.LeadsTo);
 
                     //toolTip1.SetToolTip(txtSolarSystemStaticI, "Max Stable Mass=" + wormholeI.TotalMass + "\r\nMax Jump  Mass=" + wormholeI.SingleMass + "\r\nMax Life time =" + wormholeI.Lifetime);
                 }
@@ -71,7 +72,7 @@ namespace EveJimaCore.WhlControls
 
                     txtSolarSystemStaticII.Text = wormholeII.Name + " " + wormholeII.LeadsTo;
                     txtSolarSystemStaticII.Visible = true;
-                    txtSolarSystemStaticII.ForeColor = Tools.GetColorBySolarSystem(wormholeII.LeadsTo);
+                    txtSolarSystemStaticII.ForeColor = Common.GetColorBySolarSystem(wormholeII.LeadsTo);
 
                     //toolTip2.SetToolTip(txtSolarSystemStaticII, "Max Stable Mass=" + wormholeII.TotalMass + "\r\nMax Jump  Mass=" + wormholeII.SingleMass + "\r\nMax Life time =" + wormholeII.Lifetime);
                 }

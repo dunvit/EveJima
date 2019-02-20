@@ -95,7 +95,7 @@ namespace EJTests
 
         //            system.Region = record.Region;
 
-        //            system.Security = Tools.GetStatus(record.SecurityRating);
+        //            system.Security = Common.GetStatus(record.SecurityRating);
         //        }
         //    }
 

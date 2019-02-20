@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
+using EvaJimaCore;
 using log4net;
 
 namespace EveJimaCore
@@ -19,7 +18,7 @@ namespace EveJimaCore
 
             try
             {
-                url = "https://esi.evetech.net/latest/search/?search=" + WebUtility.UrlEncode(name) + "&categories=character&language=en-us&strict=true&datasource=tranquility";
+                url = Global.ApplicationSettings.Common.EsiAddress + "/latest/search/?search=" + WebUtility.UrlEncode(name) + "&categories=character&language=en-us&strict=true&datasource=tranquility";
 
                 Log.DebugFormat("[Zkillboard.GetZkillboardUrlByName] Read url {0} ", url);
 

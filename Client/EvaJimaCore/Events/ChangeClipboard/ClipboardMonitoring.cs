@@ -2,7 +2,11 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
+using EvaJimaCore;
+using EveJimaCore.API;
+using EveJimaCore.Tools;
 using EveJimaIGB;
+using Common = EveJimaCore.Tools.Common;
 
 namespace EveJimaCore
 {
@@ -20,13 +24,13 @@ namespace EveJimaCore
         {
             Logger.Debug("[ClipboardMonitoring.Event_Refresh] Start monitoring.");
 
-            var activeProgramName = Tools.GetActiveWindowTitle();
+            var activeProgramName = Common.GetActiveWindowTitle();
 
             Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] activeProgramName = '{0}'", activeProgramName);
 
             if (activeProgramName == null)
             {
-                if (EvaJimaCore.Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
+                if (Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
                 {
                     Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. Active Program Name is null. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", "********", "********", "********");
                 }
@@ -47,7 +51,7 @@ namespace EveJimaCore
 
             if (_previousValue == _currentValue)
             {
-                if (EvaJimaCore.Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
+                if (Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
                 {
                     Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. This is old value. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", "******", "******", "******");
                 }
@@ -60,9 +64,9 @@ namespace EveJimaCore
 
             if(Debugger.IsAttached == false)
             {
-                if (!activeProgramName.StartsWith(Global.Configuration.EveOnlineTitle))
+                if (!activeProgramName.StartsWith(Global.ApplicationSettings.Common.EveOnlineTitle))
                 {
-                    if (EvaJimaCore.Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
+                    if (Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
                     {
                         Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. This is not EVE window. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", "******", "******", "******");
                     }
@@ -78,7 +82,7 @@ namespace EveJimaCore
 
             if (_startedValue == _currentValue)
             {
-                if (EvaJimaCore.Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
+                if (Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
                 {
                     Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. This is started value. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", "******", "******", "******");
                 }
@@ -92,7 +96,7 @@ namespace EveJimaCore
 
             if (string.IsNullOrEmpty(_currentValue))
             {
-                if (EvaJimaCore.Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
+                if (Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
                 {
                     Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] No need action. This value is empty. Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", "******", "******", "******");
                 }
@@ -105,7 +109,7 @@ namespace EveJimaCore
 
             _previousValue = _currentValue;
 
-            if (Tools.IsWSpaceSystem(_currentValue.Trim()))
+            if (Common.IsWSpaceSystem(_currentValue.Trim()))
             {
                 GetUnknownSpaceSolarSystemFromClipboard?.Invoke(_currentValue.Trim());
                 return;
@@ -113,7 +117,7 @@ namespace EveJimaCore
 
             _startedValue = "[Removed]";
 
-            if (EvaJimaCore.Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
+            if (Global.ApplicationSettings.Security.IsPrintClipboardDataToLog)
             {
                 Logger.DebugFormat("[ClipboardMonitoring.Event_Refresh] Value is '{0}' Previous Value is '{1}' Started Value is '{2}'", "******", "******", "******");
             }

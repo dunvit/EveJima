@@ -3,7 +3,7 @@ using log4net;
 
 namespace EveJimaIGB
 {
-    public class Config
+    public class BrowserConfiguration
     {
         private readonly ILog _logger = LogManager.GetLogger(string.Empty);
 
@@ -11,7 +11,7 @@ namespace EveJimaIGB
 
         public string EveOnlineTitle { get; }
 
-        public Config()
+        public BrowserConfiguration()
         {
             BrowserType = GetConfigOptionalStringValue("BrowserType", "chromiumWebBrowser");
 

@@ -5,7 +5,7 @@ namespace EveJimaCore.Events
 {
     public abstract class AbstractMonitor
     {
-        public readonly ILog Logger = LogManager.GetLogger(string.Empty);
+        public ILog Logger = LogManager.GetLogger(string.Empty);
 
         private Timer _workerTimer;
 

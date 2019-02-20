@@ -76,7 +76,7 @@ namespace EveJimaIGB.BLL
 
         private void BuildWebBrowser(string address)
         {
-            Control = WebBrowserFactory.GetWebBrowserControl(address, Global.Configuration.BrowserType);
+            Control = WebBrowserFactory.GetWebBrowserControl(address, Common.Configuration.BrowserType);
             Control.DocumentComplete += OnBrowserDocumentComplete;
             Control.TitleChanged += OnBrowserTitleChanged;
         }

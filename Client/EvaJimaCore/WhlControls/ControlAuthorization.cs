@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EvaJimaCore;
@@ -16,7 +15,9 @@ namespace EveJimaCore.WhlControls
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ControlAuthorization));
 
-        delegate void SetTextCallback(string text);
+        private delegate void SetTextCallback(string text);
+
+        private delegate void SetSelectedItem(int item);
 
         public event Action<string> OnSelectUser;
 
@@ -38,9 +39,14 @@ namespace EveJimaCore.WhlControls
 
         private void ActivatePilot(PilotEntity pilot)
         {
-            cmbPilots.SelectedIndex = cmbPilots.FindString(pilot.Name);
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => ActivatePilot(pilot)));
+            }
+
+            SetSelected(cmbPilots.FindString(pilot.Name));
+
             Log.DebugFormat("[whlAuthorization.ActivatePilot] cmbPilots.SelectedIndex {0}", cmbPilots.FindString(pilot.Name));
-            RefreshPilotInfo();
         }
 
 
@@ -79,7 +85,7 @@ namespace EveJimaCore.WhlControls
 
         private void AddPilotToPilotsList(PilotEntity pilot)
         {
-            if (cmbPilots.Visible == false)
+            if (cmbPilots.Visible == false && _isLoadedPilotsFromStorage)
             {
                 cmbPilots.Visible = true;
                 cmbPilots.Refresh();
@@ -178,7 +184,6 @@ namespace EveJimaCore.WhlControls
         {
             if (_isLoadedPilotsFromStorage)
             {
-                
                 Global.Pilots.Activate(cmbPilots.Text);
 
                 RefreshPilotInfo();
@@ -189,15 +194,13 @@ namespace EveJimaCore.WhlControls
         {
             cmdLoadPilotes.Visible = false;
 
-            LoadPilots();
+            _isLoadedPilotsFromStorage = false;
 
-            btnLogInWithEveOnline.Visible = true;
+            LoadPilots();
         }
 
         private async void LoadPilots()
         {
-            _isLoadedPilotsFromStorage = false;
-
             if (InvokeRequired)
             {
                 Invoke(new Action(LoadPilots));
@@ -217,9 +220,13 @@ namespace EveJimaCore.WhlControls
 
             lblAuthorizationInfo.Refresh();
 
+            ShowPilots();
+
+            cmbPilots.TextChanged += (cmbPilots_TextChanged);
+
             _isLoadedPilotsFromStorage = true;
 
-            ShowPilots();
+            btnLogInWithEveOnline.Visible = true;
         }
 
         
@@ -260,6 +267,28 @@ namespace EveJimaCore.WhlControls
             }
         }
 
+        private void SetSelected(int index)
+        {
+            if (lblUpdateLog.InvokeRequired)
+            {
+                var d = new SetSelectedItem(SetSelected);
+                Invoke(d, index);
+            }
+            else
+            {
+                cmbPilots.SelectedIndex = index;
+                if (Global.Pilots == null || Global.Pilots.Selected == null) return;
+
+                crlPilotPortrait.Image = Global.Pilots.Selected.Portrait;
+                crlPilotPortrait.Refresh();
+
+                crlPilotPortrait.Visible = true;
+
+                lblAuthorizationInfo.Text = Localization.Messages.Get("TextAfterAuthorizationInfo") + Environment.NewLine + Environment.NewLine + Localization.Messages.Get("TextAuthorizationInfo");
+                Log.DebugFormat("[whlAuthorization.RefreshPilotInfo] cmbPilots.SelectedIndex");
+            }
+        }
+
         private void btnEditPilots_Click(object sender, EventArgs e)
         {
             Global.Presenter.ChangeScreen("EditPilots");
@@ -267,7 +296,7 @@ namespace EveJimaCore.WhlControls
 
         public override void ActivateContainer()
         {
-            var a = "";
+            
         }
 
     }

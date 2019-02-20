@@ -2,10 +2,12 @@
 using System.ComponentModel;
 using System.Timers;
 using System.Windows.Forms;
+using EvaJimaCore;
+using EveJimaCore.Tools;
 using log4net;
 using Timer = System.Timers.Timer;
 
-namespace EveJimaCore.WhlControls
+namespace EveJimaCore.Monitoring
 {
     public partial class MonitoringUsersCounter : UserControl
     {
@@ -17,7 +19,7 @@ namespace EveJimaCore.WhlControls
 
         private readonly Timer _workerTimer;
 
-        private string address = "http://evejima.mikotaj.com/VisitorsCounter.html";
+        private readonly string address = "";
 
         public MonitoringUsersCounter()
         {
@@ -30,7 +32,9 @@ namespace EveJimaCore.WhlControls
             _workerTimer.Interval = 10000;
             _workerTimer.Enabled = false;
 
-            if (!Tools.IsAppicationModeRuntime()) return;
+            if (!Common.IsAppicationModeRuntime()) return;
+
+            address = Global.ApplicationSettings.Common.StatisticVisitorsCounterPage;
 
             _workerTimer.Enabled = true;
             browserUsersCounterMetric.ScriptErrorsSuppressed = true;
@@ -66,7 +70,7 @@ namespace EveJimaCore.WhlControls
             }
             catch
             {
-                _logger.Error("[UsersCounterMonitoring.EventNavigateInternalBrowser] Critical unexcepted error on updated user counter in address " + address + " ");
+                _logger.Error("[UsersCounterMonitoring.EventNavigateInternalBrowser] Critical unexpected error on updated user counter in address " + address + " ");
             }
 
         }

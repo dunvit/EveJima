@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
+using EvaJimaCore;
+using EveJimaCore.Tools;
 using EveJimaUniverse;
 using log4net;
 using Newtonsoft.Json.Linq;
@@ -149,7 +151,7 @@ namespace EveJimaCore
         {
             Log.DebugFormat("[EsiApi.SetWaypoint] started for refresh_token = {0}", AccessToken);
             
-            var url = @"https://esi.evetech.net/latest/ui/autopilot/waypoint/?add_to_beginning=false&clear_other_waypoints=" + clearOtherWaypoints  + "&datasource=tranquility&destination_id=" + solarSystemId;
+            var url = @Global.ApplicationSettings.Common.EsiAddress + "/latest/ui/autopilot/waypoint/?add_to_beginning=false&clear_other_waypoints=" + clearOtherWaypoints  + "&datasource=tranquility&destination_id=" + solarSystemId;
 
             try
             {
@@ -205,7 +207,7 @@ namespace EveJimaCore
 
             try
             {
-                var url = "https://esi.evetech.net/latest/universe/systems/" + systemId + "/";
+                var url = Global.ApplicationSettings.Common.EsiAddress + "/latest/universe/systems/" + systemId + "/";
 
                 Trace.TraceInformation(DateTime.Now.ToLongTimeString() + " Start Get solar system. " + url);
 
@@ -239,7 +241,7 @@ namespace EveJimaCore
 
             try
             {
-                var url = "https://esi.evetech.net/latest/universe/constellations/" + id + "/";
+                var url = Global.ApplicationSettings.Common.EsiAddress + "/latest/universe/constellations/" + id + "/";
 
                 Trace.TraceInformation(DateTime.Now.ToLongTimeString() + " Start Constellation. " + url);
 
@@ -273,7 +275,7 @@ namespace EveJimaCore
 
             try
             {
-                var url = "https://esi.evetech.net/latest/universe/regions/" + id + "/";
+                var url = Global.ApplicationSettings.Common.EsiAddress + "/latest/universe/regions/" + id + "/";
 
                 Trace.TraceInformation(DateTime.Now.ToLongTimeString() + " Start Region. " + url);
 
@@ -310,11 +312,11 @@ namespace EveJimaCore
 
             try
             {
-                url = "https://esi.evetech.net/latest/search/?search=" + WebUtility.UrlEncode(name) + "&categories=solar_system&language=en-us&strict=true&datasource=tranquility";
+                url = Global.ApplicationSettings.Common.EsiAddress + "/latest/search/?search=" + WebUtility.UrlEncode(name) + "&categories=solar_system&language=en-us&strict=true&datasource=tranquility";
 
                 Log.DebugFormat("[EsiApi.GetSolarSystemId] Read url {0} ", url);
 
-                var data = Tools.ReadFile(url, Log);
+                var data = Common.ReadFile(url, Log);
 
                 solarSystemId = data.Split(new[] { "[" }, StringSplitOptions.None)[1].Split(new[] { "]" }, StringSplitOptions.None)[0];
 
@@ -333,7 +335,7 @@ namespace EveJimaCore
 
             try
             {
-                var url = "https://esi.evetech.net/latest/corporations/names/?corporation_ids=" + corporationId + "&datasource=tranquility";
+                var url = Global.ApplicationSettings.Common.EsiAddress + "/latest/corporations/names/?corporation_ids=" + corporationId + "&datasource=tranquility";
 
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
 
@@ -367,7 +369,7 @@ namespace EveJimaCore
 
             try
             {
-                var url = "https://esi.evetech.net/latest/characters/" + pilotId + "/location/";
+                var url = Global.ApplicationSettings.Common.EsiAddress + "/latest/characters/" + pilotId + "/location/";
 
                 Trace.TraceInformation(DateTime.Now.ToLongTimeString() + " Start Get location. " + url);
 
@@ -406,7 +408,7 @@ namespace EveJimaCore
 
             try
             {
-                var url = "https://esi.evetech.net/latest/universe/systems/" + systemId + "/";
+                var url = Global.ApplicationSettings.Common.EsiAddress + "/latest/universe/systems/" + systemId + "/";
 
                 Log.DebugFormat(DateTime.Now.ToLongTimeString() + " Start Get solar system. " + url);
 
@@ -452,7 +454,7 @@ namespace EveJimaCore
 
             try
             {
-                var url = "https://esi.evetech.net/v1/characters/" + pilotId + "/bookmarks/";
+                var url = Global.ApplicationSettings.Common.EsiAddress + "/v1/characters/" + pilotId + "/bookmarks/";
 
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
 
@@ -539,7 +541,7 @@ namespace EveJimaCore
 
             try
             {
-                var url = "https://esi.evetech.net/v1/characters/" + pilotId + "/bookmarks/folders/";
+                var url = Global.ApplicationSettings.Common.EsiAddress + "/v1/characters/" + pilotId + "/bookmarks/folders/";
 
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
 
@@ -579,7 +581,7 @@ namespace EveJimaCore
 
             try
             {
-                var url = "https://esi.evetech.net/v1/route/" + origin + "/" + destination + "/";
+                var url = Global.ApplicationSettings.Common.EsiAddress + "/v1/route/" + origin + "/" + destination + "/";
 
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
 
@@ -611,7 +613,7 @@ namespace EveJimaCore
             Log.DebugFormat("[CrestAuthorization.GetCharacterInfo] started. pilotId = {0}", pilotId);
 
             
-            var url = "https://esi.evetech.net/v1/characters/" + pilotId + "/portrait/";
+            var url = Global.ApplicationSettings.Common.EsiAddress + "/v1/characters/" + pilotId + "/portrait/";
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
 
@@ -638,7 +640,7 @@ namespace EveJimaCore
 
             try
             {
-                var url = "https://esi.evetech.net/latest/universe/stargates/" + stargateId + "/";
+                var url = Global.ApplicationSettings.Common.EsiAddress + "/latest/universe/stargates/" + stargateId + "/";
 
                 Log.DebugFormat("[EsiApi.GetSolarSystemIdByStargate] Start Get solar system. " + url);
 
@@ -677,7 +679,7 @@ namespace EveJimaCore
 
             try
             {
-                var url = "https://esi.evetech.net/v2/universe/system_kills/";
+                var url = Global.ApplicationSettings.Common.EsiAddress + "/v2/universe/system_kills/";
 
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
 

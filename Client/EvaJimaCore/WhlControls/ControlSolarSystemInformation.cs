@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using EvaJimaCore;
+using EveJimaCore.Tools;
 using log4net;
 
 namespace EveJimaCore.WhlControls
@@ -45,7 +46,7 @@ namespace EveJimaCore.WhlControls
 
             if(IsDebug) return;
 
-            if(Tools.IsAppicationModeRuntime())
+            if(Common.IsAppicationModeRuntime())
                 Global.Presenter.OnRequestSolarSystemInformation += Event_ShowLocationInfo;
         }
 
@@ -90,7 +91,7 @@ namespace EveJimaCore.WhlControls
 
                 txtSolarSystemStaticI.Text = wormholeI.Name;
                 txtSolarSystemStaticI.Visible = true;
-                txtSolarSystemStaticI.ForeColor = Tools.GetColorBySolarSystem(wormholeI.LeadsTo);
+                txtSolarSystemStaticI.ForeColor = Common.GetColorBySolarSystem(wormholeI.LeadsTo);
                 txtSolarSystemStaticIData.Text = wormholeI.LeadsTo;
                 txtSolarSystemStaticIData.Visible = true;
 
@@ -105,7 +106,7 @@ namespace EveJimaCore.WhlControls
 
                 txtSolarSystemStaticII.Text = wormholeII.Name;
                 txtSolarSystemStaticII.Visible = true;
-                txtSolarSystemStaticII.ForeColor = Tools.GetColorBySolarSystem(wormholeII.LeadsTo);
+                txtSolarSystemStaticII.ForeColor = Common.GetColorBySolarSystem(wormholeII.LeadsTo);
                 txtSolarSystemStaticIIData.Text = wormholeII.LeadsTo;
                 txtSolarSystemStaticIIData.Visible = true;
 
