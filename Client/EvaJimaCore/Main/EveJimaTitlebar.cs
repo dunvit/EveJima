@@ -19,8 +19,6 @@ namespace EveJimaCore.Main
         public event Action OnCloseApplication;
         public event Action OnHideToTray;
 
-        private string lastUserLocationUpdate = string.Empty;
-
         public EveJimaTitlebar()
         {
             InitializeComponent();
@@ -115,96 +113,90 @@ namespace EveJimaCore.Main
 
             // From here only Runtime code
 
-            if (Global.Pilots.Selected != null)
+            if (Global.Pilots.Selected == null) return;
+
+            var textPositionTop = 8;
+
+            var location = Global.Pilots.Selected.Location;
+            var systemLabel = location.Name;
+
+            if (location.Name == "unknown") return;
+
+            if (Common.IsWSpaceSystem(location.Name))
             {
-
-                if (lastUserLocationUpdate == Global.Pilots.Selected.Name) return;
-
-                lastUserLocationUpdate = Global.Pilots.Selected.Name;
-
-                var textPositionTop = 8;
-
-                var location = Global.Pilots.Selected.Location;
-                var systemLabel = location.Name;
-
-                if (location.Name == "unknown") return;
-
-                if (Common.IsWSpaceSystem(location.Name))
+                if (location.Class != null)
                 {
-                    if (location.Class != null)
+                    systemLabel = systemLabel + "[C" + location.Class + "]";
+                }
+                else
+                {
+                    systemLabel = systemLabel + "[Shattered]";
+                }
+            }
+
+            var drawFont = new Font("Verdana", 7, FontStyle.Bold);
+            var drawBrushName = new SolidBrush(Common.GetColorBySolarSystem(location.Security.ToString()));
+
+            if (Common.IsWSpaceSystem(location.Name))
+            {
+                drawBrushName = new SolidBrush(Common.GetColorBySolarSystem("C" + location.Class));
+            }
+
+            if (Global.ApplicationSettings.IsUseWhiteColorForSystems)
+            {
+                drawBrushName = new SolidBrush(Color.AliceBlue);
+            }
+
+            var stringSize = e.Graphics.MeasureString(systemLabel, drawFont);
+
+            var drawFormat = new StringFormat();
+
+            e.Graphics.DrawString(systemLabel, drawFont, drawBrushName, 30, textPositionTop, drawFormat);
+
+            var allTitleText = systemLabel;
+
+            if (Common.IsWSpaceSystem(location.Name))
+            {
+                var txtSolarSystemStaticFirst = "";
+
+                if (string.IsNullOrEmpty(location.Static) == false)
+                {
+                    var wormholeFirst = Global.Space.WormholeTypes[location.Static.Trim()];
+
+                    txtSolarSystemStaticFirst = wormholeFirst.Name + "[" + wormholeFirst.LeadsTo + "]";
+
+                    drawBrushName = new SolidBrush(Common.GetColorBySolarSystem(wormholeFirst.LeadsTo));
+
+                    if (Global.ApplicationSettings.IsUseWhiteColorForSystems)
                     {
-                        systemLabel = systemLabel + "[C" + location.Class + "]";
+                        drawBrushName = new SolidBrush(Color.AliceBlue);
                     }
-                    else
-                    {
-                        systemLabel = systemLabel + "[Shattered]";
-                    }
+
+                    e.Graphics.DrawString(txtSolarSystemStaticFirst, drawFont, drawBrushName, 30 + stringSize.Width + 1, textPositionTop, drawFormat);
+
+                    allTitleText = systemLabel + "  " + txtSolarSystemStaticFirst;
                 }
 
-                var drawFont = new Font("Verdana", 7, FontStyle.Bold);
-                var drawBrushName = new SolidBrush(Common.GetColorBySolarSystem(location.Security.ToString()));
+                var stringSizeStaticI = e.Graphics.MeasureString(txtSolarSystemStaticFirst, drawFont);
 
-                if (Common.IsWSpaceSystem(location.Name))
+                if (string.IsNullOrEmpty(location.Static2) == false)
                 {
-                    drawBrushName = new SolidBrush(Common.GetColorBySolarSystem("C" + location.Class));
-                }
+                    var txtSolarSystemSecondStatic = "";
+                    var wormholeSecond = Global.Space.WormholeTypes[location.Static2.Trim()];
 
-                if (Global.ApplicationSettings.IsUseWhiteColorForSystems)
-                {
-                    drawBrushName = new SolidBrush(Color.AliceBlue);
-                }
+                    txtSolarSystemSecondStatic = wormholeSecond.Name + "[" + wormholeSecond.LeadsTo + "]";
 
-                var stringSize = e.Graphics.MeasureString(systemLabel, drawFont);
+                    drawBrushName = new SolidBrush(Common.GetColorBySolarSystem(wormholeSecond.LeadsTo));
 
-                var drawFormat = new StringFormat();
-
-                e.Graphics.DrawString(systemLabel, drawFont, drawBrushName, 30, textPositionTop, drawFormat);
-
-                var allTitleText = systemLabel;
-
-                if (Common.IsWSpaceSystem(location.Name))
-                {
-                    var txtSolarSystemStaticFirst = "";
-
-                    if (string.IsNullOrEmpty(location.Static) == false)
+                    if (Global.ApplicationSettings.IsUseWhiteColorForSystems)
                     {
-                        var wormholeFirst = Global.Space.WormholeTypes[location.Static.Trim()];
-
-                        txtSolarSystemStaticFirst = wormholeFirst.Name + "[" + wormholeFirst.LeadsTo + "]";
-
-                        drawBrushName = new SolidBrush(Common.GetColorBySolarSystem(wormholeFirst.LeadsTo));
-
-                        if (Global.ApplicationSettings.IsUseWhiteColorForSystems)
-                        {
-                            drawBrushName = new SolidBrush(Color.AliceBlue);
-                        }
-
-                        e.Graphics.DrawString(txtSolarSystemStaticFirst, drawFont, drawBrushName, 30 + stringSize.Width + 1, textPositionTop, drawFormat);
-
-                        allTitleText = systemLabel + "  " + txtSolarSystemStaticFirst;
+                        drawBrushName = new SolidBrush(Color.AliceBlue);
                     }
 
-                    var stringSizeStaticI = e.Graphics.MeasureString(txtSolarSystemStaticFirst, drawFont);
+                    e.Graphics.DrawString(txtSolarSystemSecondStatic, drawFont, drawBrushName,
+                        30 + stringSize.Width + 1 + stringSizeStaticI.Width + 3, textPositionTop, drawFormat);
 
-                    if (string.IsNullOrEmpty(location.Static2) == false)
-                    {
-                        var txtSolarSystemSecondStatic = "";
-                        var wormholeSecond = Global.Space.WormholeTypes[location.Static2.Trim()];
-
-                        txtSolarSystemSecondStatic = wormholeSecond.Name + "[" + wormholeSecond.LeadsTo + "]";
-
-                        drawBrushName = new SolidBrush(Common.GetColorBySolarSystem(wormholeSecond.LeadsTo));
-
-                        if (Global.ApplicationSettings.IsUseWhiteColorForSystems)
-                        {
-                            drawBrushName = new SolidBrush(Color.AliceBlue);
-                        }
-
-                        e.Graphics.DrawString(txtSolarSystemSecondStatic, drawFont, drawBrushName,
-                            30 + stringSize.Width + 1 + stringSizeStaticI.Width + 3, textPositionTop, drawFormat);
-
-                        allTitleText = systemLabel + "  " + txtSolarSystemSecondStatic;
-                    }
+                    allTitleText = systemLabel + "  " + txtSolarSystemSecondStatic;
                 }
             }
         }
