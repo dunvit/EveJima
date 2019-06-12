@@ -20,7 +20,7 @@ namespace EveJimaCore.Events
         {
             _workerTimer = new Timer();
             _workerTimer.Elapsed += Event_Refresh;
-            _workerTimer.Interval = 100;
+            _workerTimer.Interval = 500;
             _workerTimer.Enabled = true;
         }
 

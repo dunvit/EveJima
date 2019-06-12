@@ -29,7 +29,7 @@ namespace EveJimaCore.Monitoring
 
             _workerTimer = new Timer();
             _workerTimer.Elapsed += Event_Refresh;
-            _workerTimer.Interval = 10000;
+            _workerTimer.Interval = 60000;
             _workerTimer.Enabled = false;
 
             if (!Common.IsAppicationModeRuntime()) return;

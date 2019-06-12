@@ -163,9 +163,6 @@ namespace EveJimaIGB.BLL
                 else
                 {
                     OnTitleChanged(TabPage, title);
-
-                   
-
                 }
             }
             catch (Exception ex)

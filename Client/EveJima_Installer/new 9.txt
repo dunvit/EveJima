@@ -1,0 +1,27 @@
+1157
+866
+
+965, 920
+
+-		MainWindowHandle	0x001407da	System.IntPtr
+
+
+test_fa_logical_mobile_combobox_refill_sid_1650454599057867
+
+
+1697
+138
+
+
+Where get data from RDS?
+	Need change in Common
+
+
+What brokers should I use?
+	Copy from KAFKA_FORWARDER_SERVERS
+	Copy forwarder = ${cage-kafka.default}
+
+Where use cecID data for save to kafka?
+	+ Add parameter to ArchivePackage
+	
+	Add method to case class for check is cecId empty (default return values 0)

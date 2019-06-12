@@ -229,8 +229,6 @@ namespace EveJimaCore.WhlControls
             btnLogInWithEveOnline.Visible = true;
         }
 
-        
-
         private List<PilotEntity> AuthorizePilots()
         {
             var pilots = new List<PilotEntity>();

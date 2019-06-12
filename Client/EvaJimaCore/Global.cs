@@ -1,6 +1,5 @@
 ﻿using EveJimaCore;
 using EveJimaCore.BLL;
-using EveJimaCore.BLL.LostAndFound;
 using EveJimaCore.EjEnvironment;
 using EveJimaCore.Universe;
 using EveJimaUniverse;
@@ -26,10 +25,6 @@ namespace EvaJimaCore
 
         public static InternalBrowser InternalBrowser;
 
-        public static MetricsWriter Metrics;
-
-        public static LostSolarSystems LostAndFoundOffice;
-
         public static EveJimaPresenter Presenter;
 
         public static EsiApi EsiTools;
@@ -45,8 +40,6 @@ namespace EvaJimaCore
 
             WorkEnvironment = new WorkEnvironment();
 
-            Metrics = new MetricsWriter();
-
             Pilots = new PilotsEntity();
 
             Infrastructure = new Infrastructure();
@@ -56,8 +49,6 @@ namespace EvaJimaCore
 
             Log.DebugFormat("[Global.Initialization] InternalBrowser");
             InternalBrowser = new InternalBrowser();
-
-            LostAndFoundOffice = new LostSolarSystems();
 
             Presenter = new EveJimaPresenter();
 

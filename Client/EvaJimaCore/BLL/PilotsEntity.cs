@@ -80,8 +80,6 @@ namespace EveJimaCore.BLL
             {
                 var _currentPilot = new PilotEntity(code);
 
-                Global.Metrics.PublishOnPilotInitialization(_currentPilot.Id);
-
                 if (IsExist(_currentPilot.Id) == false)
                 {
 

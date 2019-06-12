@@ -39,31 +39,55 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0FA1929C23C74D6D82EECB70877C33CC"
+        "MsmKey" = "8:_0BF2199C425E41248B75342D1FC41DF6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_365373E4118D4701A4E1C192D1417FAC"
+        "MsmKey" = "8:_0DE0AD6CBD6F41959E3B5E8D02434E5F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_46CAC0D33C904444A048BC904BD3D748"
+        "MsmKey" = "8:_1A5329E3723E49A91D0D06600816A68B"
+        "OwnerKey" = "8:_6B268B3D9F05EA39EE99D863F04F7E7B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1A5329E3723E49A91D0D06600816A68B"
+        "OwnerKey" = "8:_87E1030CD2624204B40D539E7E892AAE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_29F6D9A55F8A486E9B7DBB835839D7C7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4BFD628B64076A6E213175F52C5A7D99"
-        "OwnerKey" = "8:_F9A1E16B58764F97BC0EE52677A203F3"
+        "MsmKey" = "8:_2A38ACD65E0E45B484E7D1C5B2F57865"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_546F7FE4A9C74FEAB8B3E747D19A4F13"
+        "MsmKey" = "8:_34259593D53E40CA9514584EC094EC62"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_492E403005674BE3B9BD8FC41EF842B2"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_52C7A3CF20BB46EB98CA480A1046DA28"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -93,6 +117,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6620DDA2DD2248579000AE23975BC20B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6964FF222F1056FEF1D3D0CAAF24375C"
         "OwnerKey" = "8:_FC4468B509372244E23EC8A201821FE5"
         "MsmSig" = "8:_UNDEFINED"
@@ -113,6 +143,18 @@
         {
         "MsmKey" = "8:_6B268B3D9F05EA39EE99D863F04F7E7B"
         "OwnerKey" = "8:_87E1030CD2624204B40D539E7E892AAE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_70A85883F184420CAFCE5AB73999B53E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_81D1F89F0D26414FB6FF2919A901190D"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -123,122 +165,80 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_BD94858E87C545338580F7B209AB047A"
+        "MsmKey" = "8:_A1BDEB184A4841C591D56E9C28B53FBC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_BF793CE99FC284ABD70FAB2F3A73B064"
+        "MsmKey" = "8:_A5760A8F79FC42F284C1833EE9B2BCAD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A7DC5161454547E19E69B6E3B654AE34"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AA0599AE1BD543CB87F334928AC312E5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BF870C8CE4F84B888117EA7AA7EB6E04"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_ED4BE1F910F25B8585845776A4387146"
         "OwnerKey" = "8:_6B268B3D9F05EA39EE99D863F04F7E7B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_BF793CE99FC284ABD70FAB2F3A73B064"
+        "MsmKey" = "8:_ED4BE1F910F25B8585845776A4387146"
         "OwnerKey" = "8:_87E1030CD2624204B40D539E7E892AAE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_C02BE53DC9C9C706FB92AFC431B42C22"
-        "OwnerKey" = "8:_BF793CE99FC284ABD70FAB2F3A73B064"
+        "MsmKey" = "8:_ED4BE1F910F25B8585845776A4387146"
+        "OwnerKey" = "8:_1A5329E3723E49A91D0D06600816A68B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_C02BE53DC9C9C706FB92AFC431B42C22"
+        "MsmKey" = "8:_ED4BE1F910F25B8585845776A4387146"
+        "OwnerKey" = "8:_FBC9F8FB017616693B15E16E479B4084"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F22C66AA1D81446EBD873F6571D3E682"
+        "OwnerKey" = "8:_52C7A3CF20BB46EB98CA480A1046DA28"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FA22BC45262F490A883121593FA73BB1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FBC9F8FB017616693B15E16E479B4084"
+        "OwnerKey" = "8:_1A5329E3723E49A91D0D06600816A68B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FBC9F8FB017616693B15E16E479B4084"
         "OwnerKey" = "8:_87E1030CD2624204B40D539E7E892AAE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C1F1FBC5A6344C85A21DA0D4B0B1B57E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C79E315FA77F4D369B90A5F683E11A37"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D08F66B117D54DF1992222360CA1ADCB"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D2AB0442ACE84562B2DF76EFBB0EA732"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D6BFD575B69043FBA65B98789C635AA8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DE56998107B44518A17FF32C8D43EBA6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DF8AC3FFC7D3447596511CC44C47D757"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E40A4CDAE852497C82337AB8251E84BB"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_ED23E90061A844E1AB2A4419ABADD898"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F2D2317D55C748E6B557D2ADC3C15947"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F9A1E16B58764F97BC0EE52677A203F3"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FB691877FA67A60A8429BAE067E663B2"
-        "OwnerKey" = "8:_6B268B3D9F05EA39EE99D863F04F7E7B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FB691877FA67A60A8429BAE067E663B2"
-        "OwnerKey" = "8:_87E1030CD2624204B40D539E7E892AAE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FB691877FA67A60A8429BAE067E663B2"
-        "OwnerKey" = "8:_BF793CE99FC284ABD70FAB2F3A73B064"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FB691877FA67A60A8429BAE067E663B2"
-        "OwnerKey" = "8:_C02BE53DC9C9C706FB92AFC431B42C22"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -256,19 +256,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F9A1E16B58764F97BC0EE52677A203F3"
+        "OwnerKey" = "8:_52C7A3CF20BB46EB98CA480A1046DA28"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4BFD628B64076A6E213175F52C5A7D99"
+        "OwnerKey" = "8:_F22C66AA1D81446EBD873F6571D3E682"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0FA1929C23C74D6D82EECB70877C33CC"
+        "OwnerKey" = "8:_2A38ACD65E0E45B484E7D1C5B2F57865"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -286,19 +286,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BF793CE99FC284ABD70FAB2F3A73B064"
+        "OwnerKey" = "8:_1A5329E3723E49A91D0D06600816A68B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C02BE53DC9C9C706FB92AFC431B42C22"
+        "OwnerKey" = "8:_FBC9F8FB017616693B15E16E479B4084"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FB691877FA67A60A8429BAE067E663B2"
+        "OwnerKey" = "8:_ED4BE1F910F25B8585845776A4387146"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -466,91 +466,60 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0FA1929C23C74D6D82EECB70877C33CC"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0BF2199C425E41248B75342D1FC41DF6"
+            {
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\libGLESv2.dll"
+            "TargetName" = "8:libGLESv2.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0DE0AD6CBD6F41959E3B5E8D02434E5F"
+            {
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\d3dcompiler_47.dll"
+            "TargetName" = "8:d3dcompiler_47.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1A5329E3723E49A91D0D06600816A68B"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=69.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp.WinForms, Version=65.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_0FA1929C23C74D6D82EECB70877C33CC"
+                    "_1A5329E3723E49A91D0D06600816A68B"
                     {
-                    "Name" = "8:CefSharp.BrowserSubprocess.Core.dll"
+                    "Name" = "8:CefSharp.WinForms.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\CefSharp.BrowserSubprocess.Core.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_365373E4118D4701A4E1C192D1417FAC"
-            {
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\devtools_resources.pak"
-            "TargetName" = "8:devtools_resources.pak"
-            "Tag" = "8:"
-            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_46CAC0D33C904444A048BC904BD3D748"
-            {
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\cef_200_percent.pak"
-            "TargetName" = "8:cef_200_percent.pak"
-            "Tag" = "8:"
-            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4BFD628B64076A6E213175F52C5A7D99"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=69.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_4BFD628B64076A6E213175F52C5A7D99"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.Core.DLL"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:CefSharp.BrowserSubprocess.Core.DLL"
+            "SourcePath" = "8:CefSharp.WinForms.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
@@ -568,10 +537,112 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_546F7FE4A9C74FEAB8B3E747D19A4F13"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_29F6D9A55F8A486E9B7DBB835839D7C7"
             {
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\v8_context_snapshot.bin"
-            "TargetName" = "8:v8_context_snapshot.bin"
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\icudtl.dat"
+            "TargetName" = "8:icudtl.dat"
+            "Tag" = "8:"
+            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2A38ACD65E0E45B484E7D1C5B2F57865"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=65.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_2A38ACD65E0E45B484E7D1C5B2F57865"
+                    {
+                    "Name" = "8:CefSharp.BrowserSubprocess.Core.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\CefSharp.BrowserSubprocess.Core.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_34259593D53E40CA9514584EC094EC62"
+            {
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\libcef.dll"
+            "TargetName" = "8:libcef.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_492E403005674BE3B9BD8FC41EF842B2"
+            {
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\libEGL.dll"
+            "TargetName" = "8:libEGL.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_52C7A3CF20BB46EB98CA480A1046DA28"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess, Version=65.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_52C7A3CF20BB46EB98CA480A1046DA28"
+                    {
+                    "Name" = "8:CefSharp.BrowserSubprocess.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\CefSharp.BrowserSubprocess.exe"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
             "Condition" = "8:"
@@ -650,6 +721,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6620DDA2DD2248579000AE23975BC20B"
+            {
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\cef_100_percent.pak"
+            "TargetName" = "8:cef_100_percent.pak"
+            "Tag" = "8:"
+            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6964FF222F1056FEF1D3D0CAAF24375C"
             {
             "AssemblyRegister" = "3:1"
@@ -712,10 +803,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BD94858E87C545338580F7B209AB047A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_70A85883F184420CAFCE5AB73999B53E"
             {
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\libEGL.dll"
-            "TargetName" = "8:libEGL.dll"
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\v8_context_snapshot.bin"
+            "TargetName" = "8:v8_context_snapshot.bin"
             "Tag" = "8:"
             "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
             "Condition" = "8:"
@@ -732,72 +823,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BF793CE99FC284ABD70FAB2F3A73B064"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_81D1F89F0D26414FB6FF2919A901190D"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.WinForms, Version=69.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_BF793CE99FC284ABD70FAB2F3A73B064"
-                    {
-                    "Name" = "8:CefSharp.WinForms.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:CefSharp.WinForms.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C02BE53DC9C9C706FB92AFC431B42C22"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.Core, Version=69.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_C02BE53DC9C9C706FB92AFC431B42C22"
-                    {
-                    "Name" = "8:CefSharp.Core.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:CefSharp.Core.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C1F1FBC5A6344C85A21DA0D4B0B1B57E"
-            {
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\cef_100_percent.pak"
-            "TargetName" = "8:cef_100_percent.pak"
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\devtools_resources.pak"
+            "TargetName" = "8:devtools_resources.pak"
             "Tag" = "8:"
             "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
             "Condition" = "8:"
@@ -814,69 +843,9 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C79E315FA77F4D369B90A5F683E11A37"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A1BDEB184A4841C591D56E9C28B53FBC"
             {
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\libGLESv2.dll"
-            "TargetName" = "8:libGLESv2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D08F66B117D54DF1992222360CA1ADCB"
-            {
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\snapshot_blob.bin"
-            "TargetName" = "8:snapshot_blob.bin"
-            "Tag" = "8:"
-            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D2AB0442ACE84562B2DF76EFBB0EA732"
-            {
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\cef.pak"
-            "TargetName" = "8:cef.pak"
-            "Tag" = "8:"
-            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D6BFD575B69043FBA65B98789C635AA8"
-            {
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\chrome_elf.dll"
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\chrome_elf.dll"
             "TargetName" = "8:chrome_elf.dll"
             "Tag" = "8:"
             "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
@@ -894,9 +863,49 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DE56998107B44518A17FF32C8D43EBA6"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A5760A8F79FC42F284C1833EE9B2BCAD"
             {
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\cef_extensions.pak"
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\snapshot_blob.bin"
+            "TargetName" = "8:snapshot_blob.bin"
+            "Tag" = "8:"
+            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A7DC5161454547E19E69B6E3B654AE34"
+            {
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\cef_200_percent.pak"
+            "TargetName" = "8:cef_200_percent.pak"
+            "Tag" = "8:"
+            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AA0599AE1BD543CB87F334928AC312E5"
+            {
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\cef_extensions.pak"
             "TargetName" = "8:cef_extensions.pak"
             "Tag" = "8:"
             "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
@@ -914,10 +923,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DF8AC3FFC7D3447596511CC44C47D757"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BF870C8CE4F84B888117EA7AA7EB6E04"
             {
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\d3dcompiler_47.dll"
-            "TargetName" = "8:d3dcompiler_47.dll"
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\cef.pak"
+            "TargetName" = "8:cef.pak"
             "Tag" = "8:"
             "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
             "Condition" = "8:"
@@ -934,105 +943,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E40A4CDAE852497C82337AB8251E84BB"
-            {
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\libcef.dll"
-            "TargetName" = "8:libcef.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED23E90061A844E1AB2A4419ABADD898"
-            {
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\icudtl.dat"
-            "TargetName" = "8:icudtl.dat"
-            "Tag" = "8:"
-            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F2D2317D55C748E6B557D2ADC3C15947"
-            {
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\natives_blob.bin"
-            "TargetName" = "8:natives_blob.bin"
-            "Tag" = "8:"
-            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F9A1E16B58764F97BC0EE52677A203F3"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_ED4BE1F910F25B8585845776A4387146"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess, Version=69.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp, Version=65.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_F9A1E16B58764F97BC0EE52677A203F3"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.exe"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:C:\\temp\\AdditionalFilesDelta\\Resources\\cefsharp\\CefSharp.BrowserSubprocess.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FB691877FA67A60A8429BAE067E663B2"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp, Version=69.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_FB691877FA67A60A8429BAE067E663B2"
+                    "_ED4BE1F910F25B8585845776A4387146"
                     {
                     "Name" = "8:CefSharp.dll"
                     "Attributes" = "3:512"
@@ -1056,11 +974,93 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F22C66AA1D81446EBD873F6571D3E682"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=65.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_F22C66AA1D81446EBD873F6571D3E682"
+                    {
+                    "Name" = "8:CefSharp.BrowserSubprocess.Core.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:CefSharp.BrowserSubprocess.Core.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FA22BC45262F490A883121593FA73BB1"
+            {
+            "SourcePath" = "8:C:\\temp\\AdditionalFiles_228\\natives_blob.bin"
+            "TargetName" = "8:natives_blob.bin"
+            "Tag" = "8:"
+            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FBC9F8FB017616693B15E16E479B4084"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CefSharp.Core, Version=65.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_FBC9F8FB017616693B15E16E479B4084"
+                    {
+                    "Name" = "8:CefSharp.Core.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:CefSharp.Core.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_AAA4C6BFB3C6477D8667579D5771F7A5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FC4468B509372244E23EC8A201821FE5"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EveJimaCore, Version=4.3.6981.22565, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:EveJimaCore, Version=4.3.6995.25062, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_FC4468B509372244E23EC8A201821FE5"
@@ -1155,7 +1155,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:EveJima"
         "ProductCode" = "8:{3DBDE67B-B92F-4F07-BEAC-101E6916AC43}"
-        "PackageCode" = "8:{C37FBDF4-B24A-4938-92BD-E193DCAB0EA2}"
+        "PackageCode" = "8:{20AB5F90-81D3-4540-8632-AFEE52AFD596}"
         "UpgradeCode" = "8:{B5574E4F-2E45-438B-A124-860FE70C9495}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

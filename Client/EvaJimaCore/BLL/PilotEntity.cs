@@ -114,12 +114,6 @@ namespace EveJimaCore.BLL
         {
             Log.DebugFormat("[Pilot.ReInitialization] starting for id = {0} refreshToken = {1}", id, refreshToken);
 
-            //CrestData = new CrestAuthorization(refreshToken, Global.Settings.CCPSSO_AUTH_CLIENT_ID, Global.Settings.CCPSSO_AUTH_CLIENT_SECRET);
-
-            //CrestData.Refresh(refreshToken);
-
-            //dynamic data = CrestData.ObtainingCharacterData();
-
             EsiData = new EsiApi(Global.ApplicationSettings.Authorization_ClientId, Global.ApplicationSettings.Authorization_ClientSecret);
 
             EsiData.Refresh(refreshToken);
