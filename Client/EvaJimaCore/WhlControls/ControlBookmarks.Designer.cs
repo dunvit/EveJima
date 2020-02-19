@@ -34,6 +34,8 @@
             this.cmdPasteLocationBookmarks = new EveJimaCore.whlButton();
             this.cmdClear = new EveJimaCore.whlButton();
             this.cmdClearLists = new EveJimaCore.whlButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listCosmicSifnatures
@@ -43,9 +45,9 @@
             this.listCosmicSifnatures.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.listCosmicSifnatures.ForeColor = System.Drawing.Color.LightGray;
             this.listCosmicSifnatures.FormattingEnabled = true;
-            this.listCosmicSifnatures.Location = new System.Drawing.Point(287, 13);
+            this.listCosmicSifnatures.Location = new System.Drawing.Point(287, 39);
             this.listCosmicSifnatures.Name = "listCosmicSifnatures";
-            this.listCosmicSifnatures.Size = new System.Drawing.Size(267, 195);
+            this.listCosmicSifnatures.Size = new System.Drawing.Size(267, 169);
             this.listCosmicSifnatures.TabIndex = 54;
             // 
             // listLocationBookmarks
@@ -55,9 +57,9 @@
             this.listLocationBookmarks.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.listLocationBookmarks.ForeColor = System.Drawing.Color.LightGray;
             this.listLocationBookmarks.FormattingEnabled = true;
-            this.listLocationBookmarks.Location = new System.Drawing.Point(14, 13);
+            this.listLocationBookmarks.Location = new System.Drawing.Point(14, 39);
             this.listLocationBookmarks.Name = "listLocationBookmarks";
-            this.listLocationBookmarks.Size = new System.Drawing.Size(264, 195);
+            this.listLocationBookmarks.Size = new System.Drawing.Size(264, 169);
             this.listLocationBookmarks.TabIndex = 53;
             // 
             // cmdPasteCosmicSifnatures
@@ -112,11 +114,37 @@
             this.cmdClearLists.Value = "Clear";
             this.cmdClearLists.Click += new System.EventHandler(this.Event_ClearLists);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Gold;
+            this.label1.Location = new System.Drawing.Point(11, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(104, 16);
+            this.label1.TabIndex = 61;
+            this.label1.Text = "Need to scan:";
+            this.label1.Visible = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Crimson;
+            this.label2.Location = new System.Drawing.Point(284, 14);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(115, 16);
+            this.label2.TabIndex = 62;
+            this.label2.Text = "Need to delete:";
+            this.label2.Visible = false;
+            // 
             // ControlBookmarks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdClearLists);
             this.Controls.Add(this.cmdPasteCosmicSifnatures);
             this.Controls.Add(this.cmdPasteLocationBookmarks);
@@ -127,6 +155,7 @@
             this.Name = "ControlBookmarks";
             this.Size = new System.Drawing.Size(571, 256);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -138,5 +167,7 @@
         private whlButton cmdPasteLocationBookmarks;
         private whlButton cmdPasteCosmicSifnatures;
         private whlButton cmdClearLists;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

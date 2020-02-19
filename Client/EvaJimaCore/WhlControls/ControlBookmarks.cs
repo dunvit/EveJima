@@ -23,6 +23,9 @@ namespace EveJimaCore.WhlControls
 
         private void Event_PasteBookmarks(object sender, EventArgs e)
         {
+            label1.Visible = false;
+            label2.Visible = false;
+
             listLocationBookmarks.Items.Clear();
 
             var txtInClip = Clipboard.GetText();
@@ -48,7 +51,7 @@ namespace EveJimaCore.WhlControls
                 {
                     var coordinates = line.Replace(tab.ToString(), "[---StarinForReplace---]");
                     var coordinate = coordinates.Split(new[] { @"[---StarinForReplace---]" }, StringSplitOptions.None)[0];
-                    var m1 = Regex.Matches(coordinate, @"\d\d\d", RegexOptions.Singleline);
+                    var m1 = Regex.Matches(coordinate, @"[A-Z]{3}-\d\d\d", RegexOptions.Singleline);
 
                     foreach (Match m in m1)
                     {
@@ -66,6 +69,9 @@ namespace EveJimaCore.WhlControls
 
         private void Event_PasteSignatures(object sender, EventArgs e)
         {
+            label1.Visible = false;
+            label2.Visible = false;
+
             listCosmicSifnatures.Items.Clear();
 
             var txtInClip = Clipboard.GetText();
@@ -91,7 +97,7 @@ namespace EveJimaCore.WhlControls
                 {
                     var coordinates = line.Replace(tab.ToString(), "[---StarinForReplace---]");
                     var coordinate = coordinates.Split(new[] { @"[---StarinForReplace---]" }, StringSplitOptions.None)[0];
-                    var m1 = Regex.Matches(coordinate, @"\d\d\d", RegexOptions.Singleline);
+                    var m1 = Regex.Matches(coordinate, @"[A-Z]{3}-\d\d\d", RegexOptions.Singleline);
 
                     foreach (Match m in m1)
                     {
@@ -169,6 +175,8 @@ namespace EveJimaCore.WhlControls
                 Log.ErrorFormat("[whlBookmarks.cmdClear_Click] Critical error = {0}", ex);
             }
 
+            label1.Visible = true;
+            label2.Visible = true;
         }
 
         private void Event_ClearLists(object sender, EventArgs e)
@@ -176,5 +184,6 @@ namespace EveJimaCore.WhlControls
             listLocationBookmarks.Items.Clear();
             listCosmicSifnatures.Items.Clear();
         }
+
     }
 }
