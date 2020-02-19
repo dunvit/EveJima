@@ -103,7 +103,7 @@ namespace EveJimaCore.WhlControls
                     {
                         var value = m.Groups[0].Value;
 
-                        listCosmicSifnatures.Items.Add("[" + value + "] " + coordinate);
+                        listCosmicSifnatures.Items.Add("ID = [" + value + "] " + coordinate);
                     }
                 }
                 catch (Exception ex)
