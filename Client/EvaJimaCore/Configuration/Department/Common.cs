@@ -8,6 +8,9 @@ namespace EveJimaCore.Configuration.Department
         public string StatisticVisitorsCounterPage => ConfigurationTools.GetConfigOptionalStringValue("Statistic.VisitorsCounterPage", "EVE -");
 
         public string EsiAddress => ConfigurationTools.GetConfigOptionalStringValue("EsiAddress");
+
+        public MonitoringStatus Monitoring = new MonitoringStatus();
+
     }
 
 

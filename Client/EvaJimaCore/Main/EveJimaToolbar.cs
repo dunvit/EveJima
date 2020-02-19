@@ -358,5 +358,10 @@ namespace EveJimaCore.Main
 
             Refresh();
         }
+
+        private void EveJimaToolbar_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }

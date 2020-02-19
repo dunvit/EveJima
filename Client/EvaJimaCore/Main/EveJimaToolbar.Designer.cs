@@ -54,13 +54,15 @@ namespace EveJimaCore.Main
             this.WormholeInfo = new System.Windows.Forms.TabPage();
             this.controlWormholeInformation1 = new EveJimaCore.WhlControls.ControlWormholeInformation();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.monitoringUsersCounter1 = new MonitoringUsersCounter();
+            this.monitoringUsersCounter1 = new EveJimaCore.Monitoring.MonitoringUsersCounter();
             this.EditPilots = new System.Windows.Forms.TabPage();
             this.controlEditPilots1 = new EveJimaCore.WhlControls.ControlEditPilots();
             this.Version = new System.Windows.Forms.TabPage();
             this._controlGetNewVersion1 = new EveJimaCore.WhlControls.ControlGetNewVersion();
             this.Pattern = new System.Windows.Forms.TabPage();
             this.controlBookmarkPattern1 = new EveJimaCore.WhlControls.ControlBookmarkPattern();
+            this.NewSignature = new System.Windows.Forms.TabPage();
+            this.controlNewSignature1 = new EveJimaCore.WhlControls.ControlNewSignature();
             this.tabControl1.SuspendLayout();
             this.Location.SuspendLayout();
             this.SolarSystem.SuspendLayout();
@@ -77,6 +79,7 @@ namespace EveJimaCore.Main
             this.EditPilots.SuspendLayout();
             this.Version.SuspendLayout();
             this.Pattern.SuspendLayout();
+            this.NewSignature.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -99,6 +102,7 @@ namespace EveJimaCore.Main
             this.tabControl1.Controls.Add(this.EditPilots);
             this.tabControl1.Controls.Add(this.Version);
             this.tabControl1.Controls.Add(this.Pattern);
+            this.tabControl1.Controls.Add(this.NewSignature);
             this.tabControl1.Location = new System.Drawing.Point(0, 41);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -401,6 +405,26 @@ namespace EveJimaCore.Main
             this.controlBookmarkPattern1.Size = new System.Drawing.Size(971, 336);
             this.controlBookmarkPattern1.TabIndex = 0;
             // 
+            // NewSignature
+            // 
+            this.NewSignature.Controls.Add(this.controlNewSignature1);
+            this.NewSignature.Location = new System.Drawing.Point(4, 22);
+            this.NewSignature.Name = "NewSignature";
+            this.NewSignature.Padding = new System.Windows.Forms.Padding(3);
+            this.NewSignature.Size = new System.Drawing.Size(1079, 243);
+            this.NewSignature.TabIndex = 15;
+            this.NewSignature.Tag = "NewSignature";
+            this.NewSignature.Text = "NewSignature";
+            this.NewSignature.UseVisualStyleBackColor = true;
+            // 
+            // controlNewSignature1
+            // 
+            this.controlNewSignature1.BackColor = System.Drawing.Color.Black;
+            this.controlNewSignature1.Location = new System.Drawing.Point(-6, -2);
+            this.controlNewSignature1.Name = "controlNewSignature1";
+            this.controlNewSignature1.Size = new System.Drawing.Size(773, 356);
+            this.controlNewSignature1.TabIndex = 0;
+            // 
             // EveJimaToolbar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -409,6 +433,7 @@ namespace EveJimaCore.Main
             this.Controls.Add(this.tabControl1);
             this.Name = "EveJimaToolbar";
             this.Size = new System.Drawing.Size(1090, 310);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EveJimaToolbar_KeyDown);
             this.tabControl1.ResumeLayout(false);
             this.Location.ResumeLayout(false);
             this.SolarSystem.ResumeLayout(false);
@@ -425,6 +450,7 @@ namespace EveJimaCore.Main
             this.EditPilots.ResumeLayout(false);
             this.Version.ResumeLayout(false);
             this.Pattern.ResumeLayout(false);
+            this.NewSignature.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -462,5 +488,7 @@ namespace EveJimaCore.Main
         private WhlControls.ControlGetNewVersion _controlGetNewVersion1;
         private System.Windows.Forms.TabPage Pattern;
         private WhlControls.ControlBookmarkPattern controlBookmarkPattern1;
+        private System.Windows.Forms.TabPage NewSignature;
+        private WhlControls.ControlNewSignature controlNewSignature1;
     }
 }

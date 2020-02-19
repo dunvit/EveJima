@@ -27,6 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,6 +36,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -50,6 +52,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -59,6 +62,13 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -83,8 +93,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clients\Active.cs" />
+    <Compile Include="Clients\Client.cs" />
     <Compile Include="Configuration\ConfigurationTools.cs" />
     <Compile Include="Configuration\Department\Common.cs" />
+    <Compile Include="Configuration\Department\MonitoringStatus.cs" />
     <Compile Include="Configuration\Department\SecuritySettings.cs" />
     <Compile Include="EveJimaWindow.cs">
       <SubType>Form</SubType>
@@ -93,6 +106,8 @@
       <DependentUpon>EveJimaWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Events\AbstractMonitor.cs" />
+    <Compile Include="Sound\MusicPlayer.cs" />
+    <Compile Include="Tools\GraphTools.cs" />
     <Compile Include="Tools\Infrastructure\Zkillboard.cs" />
     <Compile Include="Localization\Messages.cs" />
     <Compile Include="BLL\Navigator\Path.cs" />
@@ -123,6 +138,7 @@
     <Compile Include="Tools\ExtendedWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tools\MessageBoxEx.cs" />
     <Compile Include="UiTools\DebugTools.cs" />
     <Compile Include="Universe\PlanetarySystems.cs" />
     <Compile Include="Universe\PlanetarySystem.cs" />
@@ -166,6 +182,12 @@
     </Compile>
     <Compile Include="WhlControls\ControlBookmarkPattern.Designer.cs">
       <DependentUpon>ControlBookmarkPattern.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WhlControls\ControlNewSignature.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhlControls\ControlNewSignature.Designer.cs">
+      <DependentUpon>ControlNewSignature.cs</DependentUpon>
     </Compile>
     <Compile Include="WhlControls\ejButton.cs">
       <SubType>Component</SubType>
@@ -358,6 +380,9 @@
     <EmbeddedResource Include="WhlControls\ControlCurrentLocation.resx">
       <DependentUpon>ControlCurrentLocation.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WhlControls\ControlNewSignature.resx">
+      <DependentUpon>ControlNewSignature.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WhlControls\eveCrlPathfinder.resx">
       <DependentUpon>eveCrlPathfinder.cs</DependentUpon>
     </EmbeddedResource>
@@ -469,6 +494,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Patterns\Signatures\00.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patterns\Signatures\01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patterns\Signatures\02.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patterns\Signatures\03.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sound\Siren.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Versions\202\2.02.txt" />
     <Content Include="Versions\202\Release.html" />
     <Content Include="Versions\203\2.03.txt" />

@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.KeyPreview = true;
+
+            this.KeyDown += Event_keyPress; 
+
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EveJimaWindow));
             this.eveJimaToolbar1 = new EveJimaCore.Main.EveJimaToolbar(this);
