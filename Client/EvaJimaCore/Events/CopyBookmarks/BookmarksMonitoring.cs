@@ -19,7 +19,7 @@ namespace EveJimaCore.Monitoring
         {
             if (!IsEnabled)
             {
-                Logger.Debug("[BookmarksMonitoring.Event_Refresh] Exit because signatures rebuilder is disabled.");
+                Logger.Debug("[BookmarksMonitoring.Event_Refresh] Exit because signatures re-builder is disabled.");
                 return;
             }
 
