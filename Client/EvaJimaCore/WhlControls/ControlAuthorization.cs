@@ -132,6 +132,8 @@ namespace EveJimaCore.WhlControls
 
         private void ShowPilots()
         {
+            Log.DebugFormat("[whlAuthorization.ShowPilots] Start");
+
             if (Pilots.Count <= 0) return;
 
             PilotEntity pilot = null;
@@ -178,6 +180,8 @@ namespace EveJimaCore.WhlControls
             }
             
             OnSelectUser?.Invoke(Global.Pilots.Selected.Name);
+
+            Log.DebugFormat("[whlAuthorization.ShowPilots] Finish");
         }
 
         private void cmbPilots_TextChanged(object sender, EventArgs e)
@@ -297,5 +301,9 @@ namespace EveJimaCore.WhlControls
             
         }
 
+        private void cmdLoadPilotes_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

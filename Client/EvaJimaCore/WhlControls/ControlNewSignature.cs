@@ -42,5 +42,11 @@ namespace EveJimaCore.WhlControls
                 cmdZkillboard.Value = "Start monitoring";
             }
         }
+
+
+        private void whlButton1_Click(object sender, EventArgs e)
+        {
+            Global.Presenter.DisableSound();
+        }
     }
 }

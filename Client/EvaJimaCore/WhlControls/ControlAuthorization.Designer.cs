@@ -55,7 +55,6 @@
             this.cmbPilots.Size = new System.Drawing.Size(157, 21);
             this.cmbPilots.TabIndex = 14;
             this.cmbPilots.Visible = false;
-            
             // 
             // crlPilotPortrait
             // 
@@ -105,6 +104,7 @@
             this.cmdLoadPilotes.Value = "Load pilots";
             this.cmdLoadPilotes.Visible = false;
             this.cmdLoadPilotes.Click += new System.EventHandler(this.cmdLoadPilotes_Click);
+            this.cmdLoadPilotes.Load += new System.EventHandler(this.cmdLoadPilotes_Load);
             // 
             // containerScreenUpdate
             // 

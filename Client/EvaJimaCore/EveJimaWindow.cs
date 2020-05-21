@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Timers;
@@ -46,7 +47,7 @@ namespace EveJimaCore
             Global.Pilots.OnActivatePilot += GlobalEvent_ActivatePilot;
             Global.Presenter.OnEnterToSolarSystem += Event_EnterToSolarSystem;
             Global.Presenter.OnCloseApplication += Event_ApplicationClose;
-
+            Global.Presenter.OnDisableSound += Event_DisableSound;
             Global.Presenter.OnChangeScreen += Event_ChangeScreen;
 
             eveJimaToolbar1.OnSelectElement += Event_ResizeWindow;
@@ -67,12 +68,21 @@ namespace EveJimaCore
 
             Global.Presenter.ChangeScreen(Global.ApplicationSettings.IsNeedUpdateVersion ? "Version" : "Authorization");
 
+            
+
             _workerTimer = new Timer();
             _workerTimer.Elapsed += Event_Refresh;
             _workerTimer.Interval = 5000;
             _workerTimer.Enabled = false;
 
             _workerTimer.Enabled = true;
+        }
+
+        SoundPlayer simpleSound;
+
+        private void Event_DisableSound()
+        {
+            simpleSound.Stop();
         }
 
         private List<Bitmap> patterns;
@@ -93,41 +103,50 @@ namespace EveJimaCore
                 FillFilesInDirectory(patternFolder, patterns);
             }
 
-            var monitoringPilots = ":" + Global.ApplicationSettings.Common.Monitoring.PilotsList + ":";
+            #region removed prototype
 
-            var clients = Clients.Active.GetList(Global.ApplicationSettings.Common.EveOnlineTitle);
+            //var monitoringPilots = ":" + Global.ApplicationSettings.Common.Monitoring.PilotsList + ":";
 
-            foreach (var client in clients)
-            {
-                var searchPilot = ":" + client.Name.Trim() + ":";
+            //var clients = Clients.Active.GetList(Global.ApplicationSettings.Common.EveOnlineTitle);
 
-                if (monitoringPilots.Contains(searchPilot))
-                {
-                    var screen = (Bitmap) CaptureWindow(client.HWnd);
+            //foreach (var client in clients)
+            //{
+            //    var searchPilot = ":" + client.Name.Trim() + ":";
 
-                    if (GraphTools.FindObjectInScreen(patterns, screen, 0))
-                    {
+            //    if (monitoringPilots.Contains(searchPilot))
+            //    {
+            //        var screen = (Bitmap) CaptureWindow(client.HWnd);
 
-                        if (Parametrs.IsMinimaze)
-                        {
-                            crlTitlebar.ChangeState();
-                        }
+            //        if (GraphTools.FindObjectInScreen(patterns, screen, 0))
+            //        {
 
-                        Thread.Sleep(2000);
+            //            if (Parametrs.IsMinimaze)
+            //            {
+            //                crlTitlebar.ChangeState();
+            //            }
 
-                        SetForegroundWindow(client.HWnd);
+            //            Thread.Sleep(2000);
 
-                        Global.ApplicationSettings.Common.Monitoring.IsMonitoringEnabled = false;
+            //            SetForegroundWindow(client.HWnd);
 
-                        Global.ApplicationSettings.Common.Monitoring.Message = " Alert: " + client.Name.Trim();
+            //            Global.ApplicationSettings.Common.Monitoring.IsMonitoringEnabled = false;
 
-                        Global.Presenter.ChangeScreen("NewSignature");
+            //            Global.ApplicationSettings.Common.Monitoring.Message = " Alert: " + client.Name.Trim();
 
+            //            Global.Presenter.ChangeScreen("NewSignature");
 
-                        //var result = MessageBoxEx.Show(@"Alarm", @"New signature on window " + client.Name.Trim(), MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    }
-                }
-            }
+            //            var soundFolder = Path.Combine(Environment.CurrentDirectory, "Sound") + @"\Siren.wav";
+
+            //            simpleSound = new SoundPlayer(soundFolder);
+
+            //            simpleSound.PlayLooping();
+            //            //var result = MessageBoxEx.Show(@"Alarm", @"New signature on window " + client.Name.Trim(), MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //        }
+            //    }
+            //}
+
+            #endregion
+
         }
 
         [DllImport("user32.dll")]

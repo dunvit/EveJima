@@ -11,6 +11,7 @@ namespace EveJimaCore
         public event Action<string> OnChangeScreen;
         public event Action<string> OnRequestSolarSystemInformation;
         public event Action OnCloseApplication;
+        public event Action OnDisableSound;
 
         public void AddPilotToMonitoringList(PilotEntity pilot)
         {
@@ -48,6 +49,11 @@ namespace EveJimaCore
         public void Close()
         {
             OnCloseApplication?.Invoke();
+        }
+
+        public void DisableSound()
+        {
+            OnDisableSound?.Invoke();
         }
     }
 }

@@ -117,6 +117,9 @@ namespace EveJimaCore
                 httpWebRequest.Headers.Add("Authorization", "Basic " + encoded);
                 httpWebRequest.Host = "login.eveonline.com";
 
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
                     string json = "{\"grant_type\":\"refresh_token\",\"refresh_token\":\"" + RefreshToken + "\"}";

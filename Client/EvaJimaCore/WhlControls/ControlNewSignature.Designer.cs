@@ -30,6 +30,7 @@
         {
             this.cmdZkillboard = new EveJimaCore.whlButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.whlButton1 = new EveJimaCore.whlButton();
             this.SuspendLayout();
             // 
             // cmdZkillboard
@@ -54,10 +55,24 @@
             this.label1.TabIndex = 93;
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // whlButton1
+            // 
+            this.whlButton1.BackColor = System.Drawing.Color.Black;
+            this.whlButton1.ForeColor = System.Drawing.Color.LightGray;
+            this.whlButton1.IsActive = true;
+            this.whlButton1.IsTabControlButton = false;
+            this.whlButton1.Location = new System.Drawing.Point(245, 218);
+            this.whlButton1.Name = "whlButton1";
+            this.whlButton1.Size = new System.Drawing.Size(237, 26);
+            this.whlButton1.TabIndex = 94;
+            this.whlButton1.Value = "Desable alarm";
+            this.whlButton1.Click += new System.EventHandler(this.whlButton1_Click);
+            // 
             // ControlNewSignature
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.whlButton1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdZkillboard);
             this.Name = "ControlNewSignature";
@@ -70,5 +85,6 @@
 
         private whlButton cmdZkillboard;
         private System.Windows.Forms.Label label1;
+        private whlButton whlButton1;
     }
 }

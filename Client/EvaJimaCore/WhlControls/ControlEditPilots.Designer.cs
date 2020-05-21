@@ -123,6 +123,7 @@
             this.cmdDelete.TabIndex = 170;
             this.cmdDelete.Value = "Delete";
             this.cmdDelete.Click += new System.EventHandler(this.Event_DeletePilot);
+            this.cmdDelete.Load += new System.EventHandler(this.cmdDelete_Load);
             // 
             // ControlEditPilots
             // 

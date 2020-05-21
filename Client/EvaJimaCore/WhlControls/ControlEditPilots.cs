@@ -171,5 +171,10 @@ namespace EveJimaCore.WhlControls
         {
             Global.Presenter.ChangeScreen("Authorization");
         }
+
+        private void cmdDelete_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
