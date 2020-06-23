@@ -1,0 +1,9 @@
+G:\EveJima\Client\WormholeNavigator\bin\Debug\WormholeNavigator.dll
+G:\EveJima\Client\WormholeNavigator\bin\Debug\WormholeNavigator.pdb
+G:\EveJima\Client\WormholeNavigator\obj\Debug\WormholeNavigator.dll
+G:\EveJima\Client\WormholeNavigator\obj\Debug\WormholeNavigator.pdb
+G:\EveJima\Client\WormholeNavigator\obj\Debug\WormholeNavigator.csprojAssemblyReference.cache
+G:\EveJima\Client\WormholeNavigator\obj\Debug\WormholeNavigator.FormMainMenu.resources
+G:\EveJima\Client\WormholeNavigator\obj\Debug\WormholeNavigator.csproj.GenerateResource.cache
+G:\EveJima\Client\WormholeNavigator\bin\Debug\FontAwesome.Sharp.dll
+G:\EveJima\Client\WormholeNavigator\obj\Debug\WormholeNavigator.csproj.CopyComplete
