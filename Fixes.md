@@ -25,4 +25,4 @@ __Crash fixes__:
 
 - Remove  `IE11` from your computer
 
-- Open file `EveJima.exe.config` and replace from `<add key="BrowserType" value="chromiumWebBrowser" />' to '<add key="BrowserType" value="netWebBrowser" />`
+- Open file `EveJima.exe.config` and replace from `<add key="BrowserType" value="chromiumWebBrowser" />` to `<add key="BrowserType" value="netWebBrowser" />`
